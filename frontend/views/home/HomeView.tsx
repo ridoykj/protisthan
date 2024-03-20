@@ -191,7 +191,7 @@ export default function HomeView() {
 
   return (
     <>
-      <div className="bg-[#f9fbfe] h-full">
+      <div className="bg-gray-50 h-full">
         <div className="p-6">
           <CardRC contents={placeItems} />
         </div>
