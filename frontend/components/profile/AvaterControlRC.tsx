@@ -1,9 +1,6 @@
-
-import { Menu, Transition } from '@headlessui/react';
-
-import { Fragment } from 'react';
+import { useState } from 'react';
 import { AiOutlineLogout } from "react-icons/ai";
-import { FaBell, FaRegUserCircle } from 'react-icons/fa';
+import { FaBell, FaRegBell, FaRegUserCircle } from 'react-icons/fa';
 import { FaGear } from 'react-icons/fa6';
 import { NavLink } from 'react-router-dom';
 
@@ -20,7 +17,7 @@ function NavLinkItem({ name, icon, route }: { name: string, icon: any, route: st
 
   return (
     <NavLink
-      className="hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700 hover:no-underline " to={route} onClick={handleClick}>
+      className="block rounded-lg px py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 hover:no-underline " to={route} onClick={handleClick}>
       <div>
         <span className="inline-flex justify-center items-center ml-4">
           {icon}
@@ -32,46 +29,40 @@ function NavLinkItem({ name, icon, route }: { name: string, icon: any, route: st
 }
 
 export default function AvatarControlRC() {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   return <>
-    <div className="absolute inset-y right-10 ml-4 flex flex-row items-center md:ml-6">
+    {/* <div className="absolute inset-y right-5 flex flex-row items-center md:ml-6"> */}
+    <div className="absolute inset-y right-5 flex flex-row items-center md:ml-6 space-x-4">
       <button
         type="button"
-        className="relative rounded-full bg-gray-200 p-1 text-gray-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
+        className="relative flex items-center justify-center rounded-full size-8 bg-gray-200 p-1 text-gray-400 hover:text-indigo-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-indigo-50"
       >
-        <span className="absolute -inset-1.5" />
         <span className="sr-only">View notifications</span>
-        <FaBell className="h-6 w-6" size={10} aria-hidden="true" />
+        <FaRegBell className="size-5" aria-hidden="true" />
       </button>
 
-      {/* Profile dropdown */}
-      <Menu as="div" className="relative ml-3">
-        <div>
-          <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
-            <span className="absolute -inset-1.5" />
-            <span className="sr-only">Open user menu</span>
-            <img className="h-8 w-8 rounded-full" src={'icons/icon.png'} alt="" />
-          </Menu.Button>
-        </div>
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
+      <div className="relative">
+        <button
+          type='button'
+          className="relative flex max-w-xs items-center rounded-full bg-gray-200 text-sm focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-indigo-50"
+          onClick={() => setIsProfileOpen(!isProfileOpen)}
         >
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            {userNavigation.map((item, index) => (
-              <Menu.Item key={index}>
-                {() => (
-                  <NavLinkItem name={item.name} icon={item.icon} route={item.href} />
-                )}
-              </Menu.Item>
-            ))}
-          </Menu.Items>
-        </Transition>
-      </Menu>
+          <span className="sr-only">Menu</span>
+          <img className="size-8 rounded-full" src={'icons/icon.png'} alt="" />
+        </button>
+        <div
+          className={`absolute end-0 z-10 mt-2 w-56 rounded-md border border-gray-100 bg-white shadow-lg  duration-300 ${isProfileOpen ? 'visible' : 'hidden'}`}
+        >
+          <div className="p-2">
+            {
+              userNavigation.map((item, index) => (
+                <NavLinkItem key={index} name={item.name} icon={item.icon} route={item.href} />
+              ))
+            }
+          </div>
+        </div>
+      </div>
     </div>
   </>;
 }
