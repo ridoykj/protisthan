@@ -20,5 +20,4 @@ public class ProtisthanApplication implements AppShellConfigurator {
     public static void main(String[] args) {
         SpringApplication.run(ProtisthanApplication.class, args);
     }
-
 }
