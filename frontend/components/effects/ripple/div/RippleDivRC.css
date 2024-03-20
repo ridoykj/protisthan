@@ -13,7 +13,7 @@
   content: "";
   border-radius: 100%;
   opacity: 1;
-  animation: 2000ms ease 1 forwards ripple-effect;
+  animation: 1000ms ease 1 forwards ripple-effect;
 }
 
 @keyframes ripple-effect {
