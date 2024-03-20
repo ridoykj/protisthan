@@ -4,7 +4,7 @@ import { UseFormResult } from "@hilla/react-form";
 import RippleDivRC from "Frontend/components/effects/ripple/div/RippleDivRC";
 import NotificationUtil from "Frontend/util/NotificationUtil";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { FaX } from "react-icons/fa6";
+import { FaX, FaXmark } from "react-icons/fa6";
 
 type SideCrudRCProps = {
     primary: React.ReactNode,
@@ -33,7 +33,7 @@ const SideCrudRC: React.FC<SideCrudRCProps> = (props) => {
                         <div className="flex flex-row space-x-4">
                             <p className="text-lg font-sans font-semibold p-1 m-1 w-full">#{(value as any).id ?? ''} - Coordinator</p>
                             <button type="button" className="right-5 top-5 text-white content-end px-4 hover:bg-blue-700 rounded-full" onClick={() => props.setShowSidebar(false)} title="Close Sidebar">
-                                <FaX />
+                                <FaXmark />
                             </button>
                         </div>
                     </header>
