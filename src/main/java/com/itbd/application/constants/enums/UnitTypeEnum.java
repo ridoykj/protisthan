@@ -119,7 +119,7 @@ public enum UnitTypeEnum {
     MEGABTU_PER_SQUARE_FOOT_SECOND("MBTU/(ft²·s)"),
     GIGABTU_PER_SQUARE_FOOT_SECOND("GBTU/(ft²·s)");
 
-    private String abbreviation;
+    private final String abbreviation;
 
     UnitTypeEnum(String abbreviation) {
         this.abbreviation = abbreviation;

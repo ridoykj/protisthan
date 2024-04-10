@@ -10,9 +10,9 @@ public enum BloodGroupsEnum {
     AB_POSITIVE("AB+"),
     AB_NEGATIVE("AB-");
 
-    private String value;
+    private final String value;
 
-    private BloodGroupsEnum(String value) {
+    BloodGroupsEnum(String value) {
         this.value = value;
     }
 
