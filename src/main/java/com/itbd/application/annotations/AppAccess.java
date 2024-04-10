@@ -12,7 +12,10 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
 public @interface AppAccess {
     AppResourcesEnum resource();
+
     AppPermissionsEnum action();
+
     String name();
+
     String description() default "";
 }
