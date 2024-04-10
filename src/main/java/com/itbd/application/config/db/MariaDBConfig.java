@@ -13,12 +13,15 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 
 @Configuration
-@EntityScan(basePackages = {"com.itbd.application.dao"})
-@EnableJpaRepositories(basePackages = {"com.itbd.application.repos"})
+//@EntityScan(basePackages = {"com.itbd.application.dao"})
+//@EnableJpaRepositories(basePackages = {"com.itbd.application.repos"})
+
+@EntityScan(basePackages = {"com.itbd.application.db.dao"})
+@EnableJpaRepositories(basePackages = {"com.itbd.application.db.repos"})
 @EnableTransactionManagement
 // @EnableJpaAuditing(dateTimeProviderRef = "auditingDateTimeProvider")
 @EnableJpaAuditing(dateTimeProviderRef = "auditingDateTimeProvider", auditorAwareRef = "auditorAware")
-public class CMariadbConfig {
+public class MariaDBConfig {
     @Bean(name = "auditingDateTimeProvider")
     public DateTimeProvider dateTimeProvider() {
         return () -> Optional.of(OffsetDateTime.now());
