@@ -1,0 +1,10 @@
+package com.itbd.application.db.repos;
+
+
+import com.itbd.application.db.dao.dashboardchart.DashboardChartSourceDao;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+
+public interface TabDashboardChartSourceRepository extends JpaRepository<DashboardChartSourceDao, String>, JpaSpecificationExecutor<DashboardChartSourceDao> {
+}
