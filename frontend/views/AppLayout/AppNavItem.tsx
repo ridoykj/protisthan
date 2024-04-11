@@ -33,7 +33,7 @@ function AppNavItem() {
                     <RNavItemRC name='Integrations' icon={<FaPlug />} route='' />
                     <RNavItemRC name='Build' icon={<FaBuffer />} route='' />
                     <RNavItemRC name='Dashboard' icon={<FaChartArea />} route='' />
-                    <RNavItemRC name='Organization' icon={<FaHome />} route='' subItems={[
+                    {/* <RNavItemRC name='Organization' icon={<FaHome />} route='' subItems={[
                         { name: 'Profile', icon: <FaUserGear />, route: 'academic/organization' },
                         // { name: 'Reservation', icon: <FaCalendarDay />, route: '/edu/reservation' }
                     ]} />
@@ -50,7 +50,7 @@ function AppNavItem() {
                         { name: 'Resources', icon: <FaFileShield />, route: 'permission/resources' },
                         { name: 'Role', icon: <FaUserShield />, route: 'permission/roles' },
                         { name: 'Authorization', icon: <FaKey />, route: 'permission/authorization' }
-                    ]} />
+                    ]} /> */}
                 </div>
                 <div className="sticky inset-x-0 bottom-0 border-r border-gray-100">
                     <div className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
