@@ -22,12 +22,12 @@
     "@polymer/polymer": "3.5.1",
     "@types/react": "^18.2.51",
     "@types/react-dom": "^18.2.18",
-    "@vaadin/bundles": "24.3.0",
+    "@vaadin/bundles": "24.3.9",
     "@vaadin/common-frontend": "0.0.19",
     "@vaadin/router": "1.7.5",
     "construct-style-sheets-polyfill": "3.1.0",
     "date-fns": "^3.3.1",
-    "lit": "3.1.0",
+    "lit": "3.1.2",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18.2.0",
@@ -100,7 +100,7 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "4d0c66755d7724322aa8e2f814bfb2f6303de8fd85625a1e9d69dd550b2c2370"
+    "hash": "c5e254586f73490d3ad2f5cd6fc259b564e241962a5a4f53578cfdf895c79459"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
