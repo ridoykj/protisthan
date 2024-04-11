@@ -1,0 +1,71 @@
+package com.itbd.application.db.dao.tasks;
+
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+
+import java.time.LocalDateTime;
+
+
+@Entity
+@Getter
+@Setter
+@Table(name = "t_tax_withholding_category", indexes = {
+        @Index(name = "idx_modified", columnList = "dtt_modified")
+})
+public class TaxWithholdingCategoryDao {
+
+    @Id
+    @Column(name = "tx_name", nullable = false, updatable = false, length = 140)
+    private String name;
+
+    @Column(name = "dtt_creation")
+    private LocalDateTime creation;
+
+    @Column(name = "dtt_modified")
+    private LocalDateTime modified;
+
+    @Column(name = "tx_modified_by", length = 140)
+    private String modifiedBy;
+
+    @Column(name = "tx_owner", length = 140)
+    private String owner;
+
+    @Column(name = "is_doc_status", nullable = false)
+    @ColumnDefault("0")
+    private Boolean isDocStatus;
+
+    @Column(name = "ct_idx", nullable = false)
+    @ColumnDefault("0")
+    private Integer idx;
+
+    @Column(name = "tx_category_name", length = 140)
+    private String categoryName;
+
+    @Column(name = "is_round_off_tax_amount", nullable = false)
+    @ColumnDefault("0")
+    private Boolean roundOffTaxAmount;
+
+    @Column(name = "is_consider_party_ledger_amount", nullable = false)
+    @ColumnDefault("0")
+    private Boolean considerPartyLedgerAmount;
+
+    @Column(name = "is_tax_on_excess_amount", nullable = false)
+    @ColumnDefault("0")
+    private Boolean taxOnExcessAmount;
+
+    @Column(name = "_user_tags", columnDefinition = "text")
+    private String userTags;
+
+    @Column(name = "_comments", columnDefinition = "text")
+    private String comments;
+
+    @Column(name = "_assign", columnDefinition = "text")
+    private String assign;
+
+    @Column(name = "_liked_by", columnDefinition = "text")
+    private String likedBy;
+
+}
