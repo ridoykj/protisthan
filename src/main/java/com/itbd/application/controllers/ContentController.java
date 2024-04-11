@@ -18,8 +18,8 @@ public class ContentController {
         LOW("temp/100", 100),
         MEDIUM("temp/200", 200),
         ORIGINAL("/", 0);
-        private String path;
-        private Integer width;
+        private final String path;
+        private final Integer width;
 
         ThumbnailVariant(String path, Integer width) {
             this.path = path;
