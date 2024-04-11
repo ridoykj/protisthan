@@ -40,7 +40,7 @@ public class WReportBuilder {
     }
 
     private JasperReport templateInit(String templatePath) throws JRException {
-        File templateFile = Path.of(fileSource,  FilePath.ORG_REPORT.get(), templatePath).toFile();
+        File templateFile = Path.of(fileSource, FilePath.ORG_REPORT.get(), templatePath).toFile();
         JasperDesign jasperDesign = JRXmlLoader.load(templateFile);
         JasperReport report = JasperCompileManager.compileReport(jasperDesign);
         return report;
