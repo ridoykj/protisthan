@@ -1,0 +1,98 @@
+-- Group 1: System Tables
+__auth                 -- Authentication data
+__global_search        -- Global search index
+__user_settings        -- User settings
+t__deleted_document    -- Deleted documents log
+
+-- Group 2: About Us
+t_about_us_team_member  -- Team members information for About Us page
+
+-- Group 3: Access and Activity
+t_access_log          -- Log of user access to the system
+t_activity_log        -- Log of user activities
+t_activity_type       -- Types of activities logged
+
+-- Group 4: Accounting
+t_account                        -- Accounts information
+t_account_closing_balance       -- Closing balances for accounts
+t_accounting_dimension           -- Accounting dimensions
+t_accounting_dimension_detail    -- Details of accounting dimensions
+t_accounting_dimension_filter   -- Filters for accounting dimensions
+t_accounting_period              -- Accounting periods
+t_activity_cost                  -- Costs related to activities
+
+-- Group 5: Address and Appointment
+t_address                  -- Address information
+t_address_template         -- Templates for address formats
+t_appointment              -- Appointment details
+t_appointment_booking_slots -- Slots for booking appointments
+
+-- Group 6: Asset Management
+t_asset                              -- Assets information
+t_asset_activity                     -- Activities related to assets
+t_asset_capitalization               -- Capitalization of assets
+t_asset_capitalization_asset_item    -- Asset items involved in capitalization
+t_asset_capitalization_service_item  -- Service items involved in capitalization
+t_asset_capitalization_stock_item    -- Stock items involved in capitalization
+t_asset_category                     -- Categories of assets
+t_asset_category_account             -- Accounts associated with asset categories
+t_asset_depreciation_schedule        -- Depreciation schedule for assets
+t_asset_finance_book                 -- Finance books for assets
+t_asset_maintenance                  -- Maintenance details for assets
+t_asset_maintenance_log              -- Logs of maintenance activities
+t_asset_maintenance_task             -- Tasks related to asset maintenance
+t_asset_maintenance_team             -- Teams assigned to asset maintenance
+t_asset_movement                     -- Movements of assets
+t_asset_movement_item                -- Items involved in asset movements
+t_asset_repair                       -- Repairs of assets
+t_asset_repair_consumed_item        -- Items consumed during asset repairs
+t_asset_shift_allocation             -- Allocation of assets to shifts
+t_asset_shift_factor                 -- Factors for asset shifts
+t_asset_value_adjustment             -- Adjustments to asset values
+
+
+-- Group 7: Assignment and Authorization
+t_assignment_rule          -- Rules for assignment
+t_assignment_rule_day      -- Assignment rule schedules
+t_assignment_rule_user     -- Users assigned by rules
+t_authorization_rule       -- Rules for authorization
+
+-- Group 8: Automation
+t_auto_email_report    -- Reports sent automatically via email
+t_auto_repeat          -- Repeated tasks set to occur automatically
+t_auto_repeat_day      -- Days for automatic repeating tasks
+
+-- Group 9: Availability and Banking
+t_availability_of_slots     -- Availability of time slots
+t_bank                      -- Banks information
+t_bank_account              -- Bank accounts
+t_bank_account_subtype      -- Subtypes of bank accounts
+t_bank_account_type         -- Types of bank accounts
+t_bank_clearance_detail     -- Details of bank clearance
+t_bank_guarantee            -- Guarantees provided by banks
+t_bank_statement_import     -- Imported bank statements
+t_bank_transaction          -- Transactions made through banks
+t_bank_transaction_mapping  -- Mappings for bank transactions
+t_bank_transaction_payments -- Payments made through bank transactions
+
+-- Group 10: Batch and Blanket Order
+t_batch                 -- Batches of items
+t_bin                   -- Bins for storing items
+t_blanket_order         -- Blanket orders
+t_blanket_order_item    -- Items in blanket orders
+t_block_module          -- Modules blocked for certain users
+t_blog_category         -- Categories for blog posts
+t_blog_post             -- Blog posts information
+t_blogger               -- Bloggers information
+t_bom                   -- Bills of materials (BOM)
+t_bom_creator           -- Users who created BOMs
+t_bom_creator_item      -- Items created by BOM creators
+t_bom_explosion_item    -- Items exploded from BOMs
+t_bom_item              -- Items in BOMs
+t_bom_operation         -- Operations in BOMs
+t_bom_scrap_item        -- Scrap items in BOMs
+t_bom_update_batch      -- Batches updated through BOMs
+t_bom_update_log        -- Logs of BOM updates
+t_bom_website_item      -- Items associated with BOMs on websites
+t_bom_website_operation -- Operations associated with BOMs on websites
+

@@ -1,0 +1,614 @@
+-- Group 1: System Tables
+__auth
+__global_search
+__user_settings
+t__deleted_document
+
+-- Group 2: About Us
+t_about_us_team_member
+
+-- Group 3: Access and Activity
+t_access_log
+t_activity_log
+t_activity_type
+
+-- Group 4: Accounting
+t_account
+t_account_closing_balance
+t_accounting_dimension
+t_accounting_dimension_detail
+t_accounting_dimension_filter
+t_accounting_period
+...
+
+-- Group 5: Address and Appointment
+t_address
+t_address_template
+t_appointment
+t_appointment_booking_slots
+
+-- Group 6: Asset Management
+t_asset
+t_asset_activity
+t_asset_capitalization
+t_asset_capitalization_asset_item
+t_asset_capitalization_service_item
+t_asset_capitalization_stock_item
+...
+
+-- Group 7: Assignment and Authorization
+t_assignment_rule
+t_assignment_rule_day
+t_assignment_rule_user
+t_authorization_rule
+
+-- Group 8: Auto Email and Repeat
+t_auto_email_report
+t_auto_repeat
+t_auto_repeat_day
+
+-- Group 9: Availability and Bank
+t_availability_of_slots
+t_bank
+t_bank_account
+t_bank_account_subtype
+t_bank_account_type
+...
+
+-- Group 10: Batch and Blanket Order
+t_batch
+t_blanket_order
+t_blanket_order_item
+
+-- Group 11: Blog and Bom
+t_blog_category
+t_blog_post
+t_blogger
+t_bom
+t_bom_creator
+...
+
+-- Group 12: Branch and Brand
+t_branch
+t_brand
+
+-- Group 13: Budget and Calendar
+t_budget
+t_budget_account
+t_calendar_view
+
+-- Group 14: Call Log and Campaign
+t_call_log
+t_campaign
+t_campaign_email_schedule
+t_campaign_item
+
+...
+
+-- Group 15: Comments and Communication
+t_comment
+t_communication
+t_communication_link
+t_communication_medium
+...
+
+-- Group 16: Company and Competitor
+t_company
+t_company_history
+t_competitor
+t_competitor_detail
+
+-- Group 17: Connected App and Console Log
+t_connected_app
+t_console_log
+
+-- Group 18: Contact and Contract
+t_contact
+t_contact_email
+t_contact_phone
+t_contract
+t_contract_fulfilment_checklist
+...
+
+-- Group 19: Cost Center and Country
+t_cost_center
+t_cost_center_allocation
+t_cost_center_allocation_percentage
+t_country
+
+-- Group 20: Coupon Code and Crm Note
+t_coupon_code
+t_crm_note
+
+...
+
+-- Group 21: Currency and Custom Doc
+t_currency
+t_currency_exchange
+t_currency_exchange_settings_details
+t_currency_exchange_settings_result
+t_custom_doc_perm
+
+...
+
+-- Group 22: Dashboard and Data Import
+t_dashboard
+t_dashboard_chart
+t_dashboard_chart_field
+t_dashboard_chart_link
+t_dashboard_chart_source
+...
+
+-- Group 23: Default Value and Deleted Document
+t_default_value
+t_deleted_document
+
+-- Group 24: Delivery Note and Delivery Stop
+t_delivery_note
+t_delivery_note_item
+t_delivery_stop
+
+...
+
+-- Group 25: Department and Dependent Task
+t_department
+t_dependent_task
+
+...
+
+-- Group 26: Document and Domain
+t_doc_field
+t_doc_perm
+t_doc_share
+t_doc_type
+t_doc_type_action
+...
+
+-- Group 27: Downtime Entry and Driver
+t_downtime_entry
+t_driver
+
+...
+
+-- Group 28: Email Account and Employee
+t_email_account
+t_employee
+t_employee_education
+t_employee_external_work_history
+t_employee_group
+...
+
+-- Group 29: Energy Point and Error Log
+t_energy_point_log
+t_energy_point_rule
+t_error_log
+
+...
+
+-- Group 30: Event and Exchange Rate
+t_event
+t_exchange_rate_revaluation
+t_exchange_rate_revaluation_account
+
+...
+
+-- Group 31: File and Finance Book
+t_file
+t_finance_book
+
+...
+
+-- Group 32: Fiscal Year and Form Tour
+t_fiscal_year
+t_fiscal_year_company
+t_form_tour
+t_form_tour_step
+
+...
+
+-- Group 33: Gender and GL Entry
+t_gender
+t_gl_entry
+
+...
+
+-- Group 34: Global Search Doc and Google Calendar
+t_global_search_doc_type
+t_google_calendar
+t_google_contacts
+
+...
+
+-- Group 35: Has Domain and Help Article
+t_has_domain
+t_help_article
+t_help_category
+
+...
+
+-- Group 36: Holiday and Homepage Section
+t_holiday
+t_holiday_list
+t_homepage_section
+t_homepage_section_card
+
+...
+
+-- Group 37: Imap Folder and Import Supplier Invoice
+t_imap_folder
+t_import_supplier_invoice
+
+...
+
+-- Group 38: Incoming Call and Incoterm
+t_incoming_call_handling_schedule
+t_incoming_call_settings
+t_incoterm
+
+...
+
+-- Group 39: Industry Type and Installation Note
+t_industry_type
+t_installation_note
+t_installation_note_item
+
+...
+
+-- Group 40: Installed Application and Integration Request
+t_installed_application
+t_integration_request
+
+...
+
+-- Group 41: Inventory Dimension and Invoice Discounting
+t_inventory_dimension
+t_invoice_discounting
+
+...
+
+-- Group 42: Issue and Item
+t_issue
+t_issue_priority
+t_item
+t_item_alternative
+...
+
+-- Group 43: Item Attribute and Kanban Board
+t_item_attribute
+t_item_attribute_value
+t_item_barcode
+t_item_customer_detail
+t_item_default
+...
+
+-- Group 44: Landed Cost Item and Landed Cost Voucher
+t_landed_cost_item
+t_landed_cost_purchase_receipt
+t_landed_cost_taxes_and_charges
+t_landed_cost_voucher
+
+...
+
+-- Group 45: Language and LDAP Group Mapping
+t_language
+t_ldap_group_mapping
+
+...
+
+-- Group 46: Lead and Ledger Merge
+t_lead
+t_lead_source
+t_ledger_merge
+t_ledger_merge_accounts
+
+...
+
+-- Group 47: Letter Head and Linked Location
+t_letter_head
+t_linked_location
+
+...
+
+-- Group 48: List Filter and Location
+t_list_filter
+t_location
+
+...
+
+-- Group 49: Log Setting User and Logs To Clear
+t_log_setting_user
+t_logs_to_clear
+
+...
+
+-- Group 50: Lost Reason Detail and Lower Deduction Certificate
+t_lost_reason_detail
+t_lower_deduction_certificate
+
+...
+
+-- Group 51: Loyalty Point Entry and Maintenance Schedule
+t_loyalty_point_entry
+t_loyalty_point_entry_redemption
+t_maintenance_schedule
+t_maintenance_schedule_detail
+...
+
+-- Group 52: Maintenance Visit and Manufacturer
+t_maintenance_visit
+t_maintenance_visit_purpose
+t_manufacturer
+
+...
+
+-- Group 53: Market Segment and Marketing Campaign
+t_market_segment
+t_marketing_campaign
+
+...
+
+-- Group 54: Material Request and Milestone
+t_material_request
+t_material_request_item
+t_milestone
+t_milestone_tracker
+
+...
+
+-- Group 55: Mode of Payment and Module Definition
+t_mode_of_payment
+t_module_def
+
+...
+
+-- Group 56: Monthly Distribution and Navbar Item
+t_monthly_distribution
+t_navbar_item
+
+...
+
+-- Group 57: Network Printer and Newsletter
+t_network_printer_settings
+t_newsletter
+t_newsletter_attachment
+t_newsletter_email_group
+
+...
+
+-- Group 58: Non Conformance and Note
+t_non_conformance
+t_note
+t_note_seen_by
+
+...
+
+-- Group 59: Notification and OAuth Authorization Code
+t_notification
+t_notification_log
+t_notification_recipient
+t_oauth_authorization_code
+...
+
+-- Group 60: OAuth Bearer Token and Onboarding Permission
+t_oauth_bearer_token
+t_onboarding_permission
+
+...
+
+-- Group 61: Onboarding Step and Opening Invoice Creation Tool Item
+t_onboarding_step
+t_opening_invoice_creation_tool_item
+
+...
+
+-- Group 62: Operation and Opportunity
+t_operation
+t_opportunity
+t_opportunity_item
+
+...
+
+-- Group 63: Overdue Payment and Package
+t_overdue_payment
+t_package
+
+...
+
+-- Group 64: Paid and Packing Slip
+t_paid
+t_packing_slip
+
+...
+
+-- Group 65: Party Account and Patch Log
+t_party_account
+t_patch_log
+
+...
+
+-- Group 66: Pause SLA and Payment Entry
+t_pause_sla_on_status
+t_payment_entry
+t_payment_entry_deduction
+
+...
+
+-- Group 67: Payment Gateway Account and Payment Ledger Entry
+t_payment_gateway_account
+t_payment_ledger_entry
+
+...
+
+-- Group 68: Payment Order and Personal Data Deletion Request
+t_payment_order
+t_personal_data_deletion_request
+
+...
+
+-- Group 69: Personal Data Download Request and Pick List
+t_personal_data_download_request
+t_pick_list
+
+...
+
+-- Group 70: Plant Floor and Portal Menu Item
+t_plant_floor
+t_portal_menu_item
+
+...
+
+-- Group 71: Portal User and Pos Closing Entry
+t_portal_user
+t_pos_closing_entry
+
+...
+
+-- Group 72: Pos Field and Price List
+t_pos_field
+t_price_list
+
+...
+
+-- Group 73: Pricing Rule and Print Format
+t_pricing_rule
+t_print_format
+
+...
+
+-- Group 74: Process Def and Purchase Invoice
+t_process_deferred_accounting
+t_purchase_invoice
+
+...
+
+-- Group 75: Purchase Order and Putaway Rule
+t_purchase_order
+t_putaway_rule
+
+...
+
+-- Group 76: Quality Action and Quotation
+t_quality_action
+t_quotation
+
+...
+
+-- Group 77: Rem to Sub and Request for Quotation
+t_reminder
+t_request_for_quotation
+
+...
+
+-- Group 78: Report to Serial No
+t_report
+t_serial_no
+
+...
+
+-- Group 79: Service Day to Shipment Parcel
+t_service_day
+t_shipment_parcel
+
+...
+
+-- Group 80: Shipping Rule to Single
+t_shipping_rule
+t_singles
+
+...
+
+-- Group 81: Sla Fulfilled to Sms Log
+t_sla_fulfilled_on_status
+t_sms_log
+
+...
+
+-- Group 82: Social Link to Stock Entry
+t_social_link_settings
+t_stock_entry
+
+...
+
+-- Group 83: Subcontracting Order to Subscription Plan
+t_subcontracting_order
+t_subscription_plan
+
+...
+
+-- Group 84: Success Action to Supplier Quotation
+t_success_action
+t_supplier_quotation
+
+...
+
+-- Group 85: Support Search Source to Tag
+t_support_search_source
+t_tag
+
+...
+
+-- Group 86: Tally Migration to Target Detail
+t_tally_migration
+t_target_detail
+
+...
+
+-- Group 87: Task to Token Cache
+t_task
+t_token_cache
+
+...
+
+-- Group 88: Top Bar Item to Unreconcile Payment
+t_top_bar_item
+t_unreconcile_payment
+
+...
+
+-- Group 89: Unreconcile Payment Entries to Uom
+t_unreconcile_payment_entries
+t_uom
+
+...
+
+-- Group 90: Uom Category to Vehicle
+t_uom_category
+t_vehicle
+
+...
+
+-- Group 91: Version and Video
+t_version
+t_video
+
+...
+
+-- Group 92: View Log to Voice Call Settings
+t_view_log
+t_voice_call_settings
+
+...
+
+-- Group 93: Warehouse to Webhook
+t_warehouse
+t_webhook
+
+...
+
+-- Group 94: Webhook Data to Website Theme
+t_webhook_data
+t_website_theme
+
+...
+
+-- Group 95: Work Order to Workflow Transition
+t_work_order
+t_workflow_transition
+
+...
+
+-- Group 96: Workspace to Workstation
+t_workspace
+t_workstation
+
+...
