@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.4</version>
     </parent>
 
     <!-- Project from https://start.vaadin.com/project/d9621c7e-c519-40a7-b2cb-b4b76c1564f8 -->
@@ -105,13 +105,6 @@
         <finalName>${project.name}</finalName>
         <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
-            <plugin>
-                <!--                <groupId>org.springframework.boot</groupId>-->
-                <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-            </plugin>
-
             <plugin>
                 <groupId>dev.hilla</groupId>
                 <artifactId>hilla-maven-plugin</artifactId>
