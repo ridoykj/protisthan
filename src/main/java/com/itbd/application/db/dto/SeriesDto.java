@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 
 public record SeriesDto(
         @Id
-
         String name,
         Integer current
 ) {

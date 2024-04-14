@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 public record WebFormListColumnDto(
         @Id
-
         Long name,
         LocalDateTime creation,
         LocalDateTime modified,

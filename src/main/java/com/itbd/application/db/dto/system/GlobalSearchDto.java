@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 
 public record GlobalSearchDto(
         @Id
-
         String docType,
         String name,
         String title,

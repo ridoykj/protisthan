@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 
 public record SinglesDto(
         @Id
-
         Long singlesId,
         String docType,
         String field,

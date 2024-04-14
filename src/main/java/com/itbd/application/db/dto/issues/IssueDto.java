@@ -10,7 +10,6 @@ import java.time.LocalTime;
 
 public record IssueDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

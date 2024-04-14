@@ -2,14 +2,15 @@ package com.itbd.application.db.dto.users;
 
 import com.itbd.application.db.dao.users.UserDao;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record UserDto(
-        @Id
-
-        String name,
+        @Id String name,
         LocalDateTime creation,
         LocalDateTime modified,
         String modifiedBy,
@@ -17,7 +18,13 @@ public record UserDto(
         Boolean isDocStatus,
         Integer idx,
         Boolean enabled,
+
+        @Email(message = "Email should be valid")
+        @NotNull(message = "Email is required")
         String email,
+
+        @NotNull(message = "First name is required")
+        @Size(min = 3, max = 128, message = "First name should be between 3 and 128 characters")
         String firstName,
         String middleName,
         String lastName,

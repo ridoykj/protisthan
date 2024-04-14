@@ -6,8 +6,7 @@ import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 
 public record AccountingDimensionFilterDto(
-        @Id
-        String name,
+        @Id String name,
         LocalDateTime creation,
         LocalDateTime modified,
         String modifiedBy,

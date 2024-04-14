@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 public record PersonalDataDownloadRequestDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

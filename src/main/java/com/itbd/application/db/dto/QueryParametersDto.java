@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 public record QueryParametersDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

@@ -10,7 +10,6 @@ import java.time.LocalTime;
 
 public record PosInvoiceDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

@@ -8,7 +8,6 @@ import java.time.LocalTime;
 
 public record ServiceDayDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 public record WorkstationTypeDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 public record CrmNoteDto(
         @Id
-
         Long name,
         LocalDateTime creation,
         LocalDateTime modified,

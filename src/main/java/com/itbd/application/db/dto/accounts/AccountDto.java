@@ -7,8 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record AccountDto(
-        @Id
-        String name,
+        @Id String name,
         LocalDateTime creation,
         LocalDateTime modified,
         String modifiedBy,

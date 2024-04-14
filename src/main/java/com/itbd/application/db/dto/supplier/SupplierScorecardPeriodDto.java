@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 public record SupplierScorecardPeriodDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

@@ -10,7 +10,6 @@ import java.time.LocalTime;
 
 public record ProjectDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

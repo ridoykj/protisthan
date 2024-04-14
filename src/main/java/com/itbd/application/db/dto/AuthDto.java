@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 
 public record AuthDto(
         @Id
-
         String docType,
         String name,
         String fieldName,

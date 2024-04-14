@@ -9,7 +9,6 @@ import java.time.LocalTime;
 
 public record WorkstationWorkingHourDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

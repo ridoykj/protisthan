@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 public record DiscountedInvoiceDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 public record SubcontractingOrderItemDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

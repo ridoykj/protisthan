@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 public record SalesOrderItemDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

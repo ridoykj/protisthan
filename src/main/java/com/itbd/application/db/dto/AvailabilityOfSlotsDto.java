@@ -8,7 +8,6 @@ import java.time.LocalTime;
 
 public record AvailabilityOfSlotsDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

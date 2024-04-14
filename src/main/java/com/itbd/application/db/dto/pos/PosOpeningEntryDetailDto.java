@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 public record PosOpeningEntryDetailDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

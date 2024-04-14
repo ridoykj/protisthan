@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 public record BomUpdateLogDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

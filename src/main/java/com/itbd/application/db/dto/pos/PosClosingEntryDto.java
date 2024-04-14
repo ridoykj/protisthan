@@ -10,7 +10,6 @@ import java.time.LocalTime;
 
 public record PosClosingEntryDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

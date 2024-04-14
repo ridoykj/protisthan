@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 public record SessionsDto(
         @Id
-
         String user,
         String sid,
         String sessionData,

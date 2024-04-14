@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 public record EmailCampaignDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

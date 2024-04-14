@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 
 public record UserSettingsDto(
         @Id
-
         String user,
         String docType,
         String data

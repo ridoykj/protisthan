@@ -10,7 +10,6 @@ import java.time.LocalTime;
 
 public record StockReconciliationDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,

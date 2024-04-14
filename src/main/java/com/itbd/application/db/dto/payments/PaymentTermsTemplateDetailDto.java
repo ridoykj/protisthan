@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 public record PaymentTermsTemplateDetailDto(
         @Id
-
         String name,
         LocalDateTime creation,
         LocalDateTime modified,
