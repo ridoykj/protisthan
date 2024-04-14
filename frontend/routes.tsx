@@ -2,6 +2,9 @@ import MainLayout from 'Frontend/views/MainLayout.js';
 import { lazy } from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import ShopView from './views/shop/ShopView';
+import UsersView from './views/module/users/UsersView';
+import HomeView from './views/home/HomeView';
+import UserView from './views/module/users/UserView';
 
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
 
@@ -9,12 +12,15 @@ const rootPath = 'ubd-lms';
 
 export const routes: RouteObject[] = [
   {
-    //     path: rootPath,
+    //     path: rootPath,    
     element: <MainLayout />,
     handle: { title: 'Main' },
     children: [
-      { path: '', element: <ShopView />, handle: { title: 'Dashboard' } },
+      { path: '', element: <HomeView />, handle: { title: 'Home' } },
+      { path: 'shops', element: <ShopView />, handle: { title: 'Dashboard' } },
 
+      { path: 'users', element: <UsersView />, handle: { title: 'Users' } },
+      { path: 'users/:userId', element: <UserView />, handle: { title: 'Users' } },
       // { path: 'default', element: <DefaultView />, handle: { title: 'Not Implemented' } },
       // { path: 'shop', element: <ShopView />, handle: { title: 'Shop' } },
       // { path: 'grid', element: <GridView />, handle: { title: 'Grid' } },
