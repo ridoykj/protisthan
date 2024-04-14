@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDocTypeLayoutRepository extends JpaRepository<DocTypeLayoutDao, String>, JpaSpecificationExecutor<DocTypeLayoutDao> {
+public interface DocTypeLayoutRepository extends JpaRepository<DocTypeLayoutDao, String>, JpaSpecificationExecutor<DocTypeLayoutDao> {
 }

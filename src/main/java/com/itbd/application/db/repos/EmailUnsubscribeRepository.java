@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabEmailUnsubscribeRepository extends JpaRepository<EmailUnsubscribeDao, String>, JpaSpecificationExecutor<EmailUnsubscribeDao> {
+public interface EmailUnsubscribeRepository extends JpaRepository<EmailUnsubscribeDao, String>, JpaSpecificationExecutor<EmailUnsubscribeDao> {
 }

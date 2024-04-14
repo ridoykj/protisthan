@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAssignmentRuleRepository extends JpaRepository<AssignmentRuleDao, String>, JpaSpecificationExecutor<AssignmentRuleDao> {
+public interface AssignmentRuleRepository extends JpaRepository<AssignmentRuleDao, String>, JpaSpecificationExecutor<AssignmentRuleDao> {
 }

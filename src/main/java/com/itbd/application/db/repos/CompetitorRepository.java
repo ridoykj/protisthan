@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCompetitorRepository extends JpaRepository<CompetitorDao, String>, JpaSpecificationExecutor<CompetitorDao> {
+public interface CompetitorRepository extends JpaRepository<CompetitorDao, String>, JpaSpecificationExecutor<CompetitorDao> {
 }

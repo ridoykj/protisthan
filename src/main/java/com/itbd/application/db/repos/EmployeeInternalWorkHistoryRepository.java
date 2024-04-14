@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabEmployeeInternalWorkHistoryRepository extends JpaRepository<EmployeeInternalWorkHistoryDao, String>, JpaSpecificationExecutor<EmployeeInternalWorkHistoryDao> {
+public interface EmployeeInternalWorkHistoryRepository extends JpaRepository<EmployeeInternalWorkHistoryDao, String>, JpaSpecificationExecutor<EmployeeInternalWorkHistoryDao> {
 }

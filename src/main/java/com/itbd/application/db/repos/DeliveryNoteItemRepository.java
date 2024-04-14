@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDeliveryNoteItemRepository extends JpaRepository<DeliveryNoteItemDao, String>, JpaSpecificationExecutor<DeliveryNoteItemDao> {
+public interface DeliveryNoteItemRepository extends JpaRepository<DeliveryNoteItemDao, String>, JpaSpecificationExecutor<DeliveryNoteItemDao> {
 }

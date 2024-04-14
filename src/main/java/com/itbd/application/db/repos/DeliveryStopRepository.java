@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDeliveryStopRepository extends JpaRepository<DeliveryStopDao, String>, JpaSpecificationExecutor<DeliveryStopDao> {
+public interface DeliveryStopRepository extends JpaRepository<DeliveryStopDao, String>, JpaSpecificationExecutor<DeliveryStopDao> {
 }

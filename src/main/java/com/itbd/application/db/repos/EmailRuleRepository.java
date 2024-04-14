@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabEmailRuleRepository extends JpaRepository<EmailRuleDao, String>, JpaSpecificationExecutor<EmailRuleDao> {
+public interface EmailRuleRepository extends JpaRepository<EmailRuleDao, String>, JpaSpecificationExecutor<EmailRuleDao> {
 }

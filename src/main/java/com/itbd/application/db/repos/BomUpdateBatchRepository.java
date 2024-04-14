@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabBomUpdateBatchRepository extends JpaRepository<BomUpdateBatchDao, String>, JpaSpecificationExecutor<BomUpdateBatchDao> {
+public interface BomUpdateBatchRepository extends JpaRepository<BomUpdateBatchDao, String>, JpaSpecificationExecutor<BomUpdateBatchDao> {
 }

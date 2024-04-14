@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCustomsTariffNumberRepository extends JpaRepository<CustomsTariffNumberDao, String>, JpaSpecificationExecutor<CustomsTariffNumberDao> {
+public interface CustomsTariffNumberRepository extends JpaRepository<CustomsTariffNumberDao, String>, JpaSpecificationExecutor<CustomsTariffNumberDao> {
 }

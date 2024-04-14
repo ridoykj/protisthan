@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAdvanceTaxRepository extends JpaRepository<AdvanceTaxDao, String>, JpaSpecificationExecutor<AdvanceTaxDao> {
+public interface AdvanceTaxRepository extends JpaRepository<AdvanceTaxDao, String>, JpaSpecificationExecutor<AdvanceTaxDao> {
 }

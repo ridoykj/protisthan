@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabErrorLogRepository extends JpaRepository<ErrorLogDao, String>, JpaSpecificationExecutor<ErrorLogDao> {
+public interface ErrorLogRepository extends JpaRepository<ErrorLogDao, String>, JpaSpecificationExecutor<ErrorLogDao> {
 }

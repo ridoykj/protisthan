@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDashboardChartSourceRepository extends JpaRepository<DashboardChartSourceDao, String>, JpaSpecificationExecutor<DashboardChartSourceDao> {
+public interface DashboardChartSourceRepository extends JpaRepository<DashboardChartSourceDao, String>, JpaSpecificationExecutor<DashboardChartSourceDao> {
 }

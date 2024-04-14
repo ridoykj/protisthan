@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDowntimeEntryRepository extends JpaRepository<DowntimeEntryDao, String>, JpaSpecificationExecutor<DowntimeEntryDao> {
+public interface DowntimeEntryRepository extends JpaRepository<DowntimeEntryDao, String>, JpaSpecificationExecutor<DowntimeEntryDao> {
 }

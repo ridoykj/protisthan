@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCommentRepository extends JpaRepository<CommentDao, String>, JpaSpecificationExecutor<CommentDao> {
+public interface CommentRepository extends JpaRepository<CommentDao, String>, JpaSpecificationExecutor<CommentDao> {
 }

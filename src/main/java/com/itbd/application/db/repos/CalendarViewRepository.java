@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCalendarViewRepository extends JpaRepository<CalendarViewDao, String>, JpaSpecificationExecutor<CalendarViewDao> {
+public interface CalendarViewRepository extends JpaRepository<CalendarViewDao, String>, JpaSpecificationExecutor<CalendarViewDao> {
 }

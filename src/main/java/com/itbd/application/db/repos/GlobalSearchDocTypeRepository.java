@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabGlobalSearchDocTypeRepository extends JpaRepository<GlobalSearchDocTypeDao, String>, JpaSpecificationExecutor<GlobalSearchDocTypeDao> {
+public interface GlobalSearchDocTypeRepository extends JpaRepository<GlobalSearchDocTypeDao, String>, JpaSpecificationExecutor<GlobalSearchDocTypeDao> {
 }

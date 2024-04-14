@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAllowedToTransactWithRepository extends JpaRepository<AllowedToTransactWithDao, String>, JpaSpecificationExecutor<AllowedToTransactWithDao> {
+public interface AllowedToTransactWithRepository extends JpaRepository<AllowedToTransactWithDao, String>, JpaSpecificationExecutor<AllowedToTransactWithDao> {
 }

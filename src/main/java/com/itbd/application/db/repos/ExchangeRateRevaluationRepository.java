@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabExchangeRateRevaluationRepository extends JpaRepository<ExchangeRateRevaluationDao, String>, JpaSpecificationExecutor<ExchangeRateRevaluationDao> {
+public interface ExchangeRateRevaluationRepository extends JpaRepository<ExchangeRateRevaluationDao, String>, JpaSpecificationExecutor<ExchangeRateRevaluationDao> {
 }

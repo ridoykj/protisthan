@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabBlockModuleRepository extends JpaRepository<BlockModuleDao, String>, JpaSpecificationExecutor<BlockModuleDao> {
+public interface BlockModuleRepository extends JpaRepository<BlockModuleDao, String>, JpaSpecificationExecutor<BlockModuleDao> {
 }

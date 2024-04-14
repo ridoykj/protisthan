@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabBomUpdateLogRepository extends JpaRepository<BomUpdateLogDao, String>, JpaSpecificationExecutor<BomUpdateLogDao> {
+public interface BomUpdateLogRepository extends JpaRepository<BomUpdateLogDao, String>, JpaSpecificationExecutor<BomUpdateLogDao> {
 }

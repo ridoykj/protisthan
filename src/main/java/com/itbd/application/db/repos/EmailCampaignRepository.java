@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabEmailCampaignRepository extends JpaRepository<EmailCampaignDao, String>, JpaSpecificationExecutor<EmailCampaignDao> {
+public interface EmailCampaignRepository extends JpaRepository<EmailCampaignDao, String>, JpaSpecificationExecutor<EmailCampaignDao> {
 }

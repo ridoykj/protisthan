@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabConnectedAppRepository extends JpaRepository<ConnectedAppDao, String>, JpaSpecificationExecutor<ConnectedAppDao> {
+public interface ConnectedAppRepository extends JpaRepository<ConnectedAppDao, String>, JpaSpecificationExecutor<ConnectedAppDao> {
 }

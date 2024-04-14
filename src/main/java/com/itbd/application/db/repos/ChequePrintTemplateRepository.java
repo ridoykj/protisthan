@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabChequePrintTemplateRepository extends JpaRepository<ChequePrintTemplateDao, String>, JpaSpecificationExecutor<ChequePrintTemplateDao> {
+public interface ChequePrintTemplateRepository extends JpaRepository<ChequePrintTemplateDao, String>, JpaSpecificationExecutor<ChequePrintTemplateDao> {
 }

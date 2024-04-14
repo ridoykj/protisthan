@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabClosedDocumentRepository extends JpaRepository<ClosedDocumentDao, String>, JpaSpecificationExecutor<ClosedDocumentDao> {
+public interface ClosedDocumentRepository extends JpaRepository<ClosedDocumentDao, String>, JpaSpecificationExecutor<ClosedDocumentDao> {
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDepreciationScheduleRepository extends JpaRepository<DepreciationScheduleDao, String>, JpaSpecificationExecutor<DepreciationScheduleDao> {
+public interface DepreciationScheduleRepository extends JpaRepository<DepreciationScheduleDao, String>, JpaSpecificationExecutor<DepreciationScheduleDao> {
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDataImportRepository extends JpaRepository<DataImportDao, String>, JpaSpecificationExecutor<DataImportDao> {
+public interface DataImportRepository extends JpaRepository<DataImportDao, String>, JpaSpecificationExecutor<DataImportDao> {
 }

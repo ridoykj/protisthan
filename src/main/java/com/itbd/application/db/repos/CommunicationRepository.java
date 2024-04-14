@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCommunicationRepository extends JpaRepository<CommunicationDao, String>, JpaSpecificationExecutor<CommunicationDao> {
+public interface CommunicationRepository extends JpaRepository<CommunicationDao, String>, JpaSpecificationExecutor<CommunicationDao> {
 }

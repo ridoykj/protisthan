@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabBankTransactionMappingRepository extends JpaRepository<BankTransactionMappingDao, String>, JpaSpecificationExecutor<BankTransactionMappingDao> {
+public interface BankTransactionMappingRepository extends JpaRepository<BankTransactionMappingDao, String>, JpaSpecificationExecutor<BankTransactionMappingDao> {
 }

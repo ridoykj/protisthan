@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAutoEmailReportRepository extends JpaRepository<AutoEmailReportDao, String>, JpaSpecificationExecutor<AutoEmailReportDao> {
+public interface AutoEmailReportRepository extends JpaRepository<AutoEmailReportDao, String>, JpaSpecificationExecutor<AutoEmailReportDao> {
 }

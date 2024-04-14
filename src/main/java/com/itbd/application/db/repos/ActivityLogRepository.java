@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabActivityLogRepository extends JpaRepository<ActivityLogDao, String>, JpaSpecificationExecutor<ActivityLogDao> {
+public interface ActivityLogRepository extends JpaRepository<ActivityLogDao, String>, JpaSpecificationExecutor<ActivityLogDao> {
 }

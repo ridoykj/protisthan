@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabHasDomainRepository extends JpaRepository<HasDomainDao, String>, JpaSpecificationExecutor<HasDomainDao> {
+public interface HasDomainRepository extends JpaRepository<HasDomainDao, String>, JpaSpecificationExecutor<HasDomainDao> {
 }

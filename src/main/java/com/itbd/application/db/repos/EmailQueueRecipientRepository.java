@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabEmailQueueRecipientRepository extends JpaRepository<EmailQueueRecipientDao, String>, JpaSpecificationExecutor<EmailQueueRecipientDao> {
+public interface EmailQueueRecipientRepository extends JpaRepository<EmailQueueRecipientDao, String>, JpaSpecificationExecutor<EmailQueueRecipientDao> {
 }

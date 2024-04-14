@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAccountingPeriodRepository extends JpaRepository<AccountingPeriodDao, String>, JpaSpecificationExecutor<AccountingPeriodDao> {
+public interface AccountingPeriodRepository extends JpaRepository<AccountingPeriodDao, String>, JpaSpecificationExecutor<AccountingPeriodDao> {
 }

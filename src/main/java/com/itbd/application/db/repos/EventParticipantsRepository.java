@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabEventParticipantsRepository extends JpaRepository<EventParticipantsDao, String>, JpaSpecificationExecutor<EventParticipantsDao> {
+public interface EventParticipantsRepository extends JpaRepository<EventParticipantsDao, String>, JpaSpecificationExecutor<EventParticipantsDao> {
 }

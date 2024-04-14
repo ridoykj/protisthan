@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAccountRepository extends JpaRepository<AccountDao, String>, JpaSpecificationExecutor<AccountDao> {
+public interface AccountRepository extends JpaRepository<AccountDao, String>, JpaSpecificationExecutor<AccountDao> {
 }

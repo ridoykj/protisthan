@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDocumentFollowRepository extends JpaRepository<DocumentFollowDao, String>, JpaSpecificationExecutor<DocumentFollowDao> {
+public interface DocumentFollowRepository extends JpaRepository<DocumentFollowDao, String>, JpaSpecificationExecutor<DocumentFollowDao> {
 }

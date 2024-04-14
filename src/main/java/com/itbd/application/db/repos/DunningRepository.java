@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDunningRepository extends JpaRepository<DunningDao, String>, JpaSpecificationExecutor<DunningDao> {
+public interface DunningRepository extends JpaRepository<DunningDao, String>, JpaSpecificationExecutor<DunningDao> {
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDocumentShareKeyRepository extends JpaRepository<DocumentShareKeyDao, String>, JpaSpecificationExecutor<DocumentShareKeyDao> {
+public interface DocumentShareKeyRepository extends JpaRepository<DocumentShareKeyDao, String>, JpaSpecificationExecutor<DocumentShareKeyDao> {
 }

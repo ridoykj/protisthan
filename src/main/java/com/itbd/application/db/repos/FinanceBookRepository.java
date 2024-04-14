@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabFinanceBookRepository extends JpaRepository<FinanceBookDao, String>, JpaSpecificationExecutor<FinanceBookDao> {
+public interface FinanceBookRepository extends JpaRepository<FinanceBookDao, String>, JpaSpecificationExecutor<FinanceBookDao> {
 }

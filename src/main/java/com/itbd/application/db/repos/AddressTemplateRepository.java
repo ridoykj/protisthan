@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAddressTemplateRepository extends JpaRepository<AddressTemplateDao, String>, JpaSpecificationExecutor<AddressTemplateDao> {
+public interface AddressTemplateRepository extends JpaRepository<AddressTemplateDao, String>, JpaSpecificationExecutor<AddressTemplateDao> {
 }

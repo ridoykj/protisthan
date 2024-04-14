@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabEmailGroupRepository extends JpaRepository<EmailGroupDao, String>, JpaSpecificationExecutor<EmailGroupDao> {
+public interface EmailGroupRepository extends JpaRepository<EmailGroupDao, String>, JpaSpecificationExecutor<EmailGroupDao> {
 }

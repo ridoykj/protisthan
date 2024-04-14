@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAssetShiftFactorRepository extends JpaRepository<AssetShiftFactorDao, String>, JpaSpecificationExecutor<AssetShiftFactorDao> {
+public interface AssetShiftFactorRepository extends JpaRepository<AssetShiftFactorDao, String>, JpaSpecificationExecutor<AssetShiftFactorDao> {
 }

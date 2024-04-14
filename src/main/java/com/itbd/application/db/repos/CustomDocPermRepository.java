@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCustomDocPermRepository extends JpaRepository<CustomDocPermDao, String>, JpaSpecificationExecutor<CustomDocPermDao> {
+public interface CustomDocPermRepository extends JpaRepository<CustomDocPermDao, String>, JpaSpecificationExecutor<CustomDocPermDao> {
 }

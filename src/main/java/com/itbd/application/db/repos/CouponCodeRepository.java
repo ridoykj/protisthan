@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCouponCodeRepository extends JpaRepository<CouponCodeDao, String>, JpaSpecificationExecutor<CouponCodeDao> {
+public interface CouponCodeRepository extends JpaRepository<CouponCodeDao, String>, JpaSpecificationExecutor<CouponCodeDao> {
 }

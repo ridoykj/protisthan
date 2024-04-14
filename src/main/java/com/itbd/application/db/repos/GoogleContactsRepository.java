@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabGoogleContactsRepository extends JpaRepository<GoogleContactsDao, String>, JpaSpecificationExecutor<GoogleContactsDao> {
+public interface GoogleContactsRepository extends JpaRepository<GoogleContactsDao, String>, JpaSpecificationExecutor<GoogleContactsDao> {
 }

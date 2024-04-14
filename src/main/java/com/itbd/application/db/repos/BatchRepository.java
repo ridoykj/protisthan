@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabBatchRepository extends JpaRepository<BatchDao, String>, JpaSpecificationExecutor<BatchDao> {
+public interface BatchRepository extends JpaRepository<BatchDao, String>, JpaSpecificationExecutor<BatchDao> {
 }

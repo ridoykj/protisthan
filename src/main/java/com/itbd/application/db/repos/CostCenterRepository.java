@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCostCenterRepository extends JpaRepository<CostCenterDao, String>, JpaSpecificationExecutor<CostCenterDao> {
+public interface CostCenterRepository extends JpaRepository<CostCenterDao, String>, JpaSpecificationExecutor<CostCenterDao> {
 }

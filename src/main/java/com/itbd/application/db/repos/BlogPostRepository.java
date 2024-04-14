@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabBlogPostRepository extends JpaRepository<BlogPostDao, String>, JpaSpecificationExecutor<BlogPostDao> {
+public interface BlogPostRepository extends JpaRepository<BlogPostDao, String>, JpaSpecificationExecutor<BlogPostDao> {
 }

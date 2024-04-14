@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabBomWebsiteItemRepository extends JpaRepository<BomWebsiteItemDao, String>, JpaSpecificationExecutor<BomWebsiteItemDao> {
+public interface BomWebsiteItemRepository extends JpaRepository<BomWebsiteItemDao, String>, JpaSpecificationExecutor<BomWebsiteItemDao> {
 }

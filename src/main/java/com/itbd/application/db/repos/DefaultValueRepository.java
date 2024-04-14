@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDefaultValueRepository extends JpaRepository<DefaultValueDao, String>, JpaSpecificationExecutor<DefaultValueDao> {
+public interface DefaultValueRepository extends JpaRepository<DefaultValueDao, String>, JpaSpecificationExecutor<DefaultValueDao> {
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDocTypeLinkRepository extends JpaRepository<DocTypeLinkDao, String>, JpaSpecificationExecutor<DocTypeLinkDao> {
+public interface DocTypeLinkRepository extends JpaRepository<DocTypeLinkDao, String>, JpaSpecificationExecutor<DocTypeLinkDao> {
 }

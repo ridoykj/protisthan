@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDesktopIconRepository extends JpaRepository<DesktopIconDao, String>, JpaSpecificationExecutor<DesktopIconDao> {
+public interface DesktopIconRepository extends JpaRepository<DesktopIconDao, String>, JpaSpecificationExecutor<DesktopIconDao> {
 }

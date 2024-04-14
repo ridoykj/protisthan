@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDataImportLogRepository extends JpaRepository<DataImportLogDao, String>, JpaSpecificationExecutor<DataImportLogDao> {
+public interface DataImportLogRepository extends JpaRepository<DataImportLogDao, String>, JpaSpecificationExecutor<DataImportLogDao> {
 }

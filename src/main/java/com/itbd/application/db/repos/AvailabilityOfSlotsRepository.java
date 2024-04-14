@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAvailabilityOfSlotsRepository extends JpaRepository<AvailabilityOfSlotsDao, String>, JpaSpecificationExecutor<AvailabilityOfSlotsDao> {
+public interface AvailabilityOfSlotsRepository extends JpaRepository<AvailabilityOfSlotsDao, String>, JpaSpecificationExecutor<AvailabilityOfSlotsDao> {
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabContactPhoneRepository extends JpaRepository<ContactPhoneDao, String>, JpaSpecificationExecutor<ContactPhoneDao> {
+public interface ContactPhoneRepository extends JpaRepository<ContactPhoneDao, String>, JpaSpecificationExecutor<ContactPhoneDao> {
 }

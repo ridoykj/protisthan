@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabBlanketOrderRepository extends JpaRepository<BlanketOrderDao, String>, JpaSpecificationExecutor<BlanketOrderDao> {
+public interface BlanketOrderRepository extends JpaRepository<BlanketOrderDao, String>, JpaSpecificationExecutor<BlanketOrderDao> {
 }

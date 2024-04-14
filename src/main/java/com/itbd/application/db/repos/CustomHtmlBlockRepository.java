@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCustomHtmlBlockRepository extends JpaRepository<CustomHtmlBlockDao, String>, JpaSpecificationExecutor<CustomHtmlBlockDao> {
+public interface CustomHtmlBlockRepository extends JpaRepository<CustomHtmlBlockDao, String>, JpaSpecificationExecutor<CustomHtmlBlockDao> {
 }

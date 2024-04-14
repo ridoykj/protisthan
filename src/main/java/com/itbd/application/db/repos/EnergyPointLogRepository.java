@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabEnergyPointLogRepository extends JpaRepository<EnergyPointLogDao, String>, JpaSpecificationExecutor<EnergyPointLogDao> {
+public interface EnergyPointLogRepository extends JpaRepository<EnergyPointLogDao, String>, JpaSpecificationExecutor<EnergyPointLogDao> {
 }

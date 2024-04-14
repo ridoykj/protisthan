@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCrmNoteRepository extends JpaRepository<CrmNoteDao, Long>, JpaSpecificationExecutor<CrmNoteDao> {
+public interface CrmNoteRepository extends JpaRepository<CrmNoteDao, Long>, JpaSpecificationExecutor<CrmNoteDao> {
 }

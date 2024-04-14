@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabEmployeeEducationRepository extends JpaRepository<EmployeeEducationDao, String>, JpaSpecificationExecutor<EmployeeEducationDao> {
+public interface EmployeeEducationRepository extends JpaRepository<EmployeeEducationDao, String>, JpaSpecificationExecutor<EmployeeEducationDao> {
 }

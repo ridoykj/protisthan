@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAccountingDimensionFilterRepository extends JpaRepository<AccountingDimensionFilterDao, String>, JpaSpecificationExecutor<AccountingDimensionFilterDao> {
+public interface AccountingDimensionFilterRepository extends JpaRepository<AccountingDimensionFilterDao, String>, JpaSpecificationExecutor<AccountingDimensionFilterDao> {
 }

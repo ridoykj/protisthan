@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabContractFulfilmentChecklistRepository extends JpaRepository<ContractFulfilmentChecklistDao, String>, JpaSpecificationExecutor<ContractFulfilmentChecklistDao> {
+public interface ContractFulfilmentChecklistRepository extends JpaRepository<ContractFulfilmentChecklistDao, String>, JpaSpecificationExecutor<ContractFulfilmentChecklistDao> {
 }

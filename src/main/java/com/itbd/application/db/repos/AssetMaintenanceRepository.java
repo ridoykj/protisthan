@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAssetMaintenanceRepository extends JpaRepository<AssetMaintenanceDao, String>, JpaSpecificationExecutor<AssetMaintenanceDao> {
+public interface AssetMaintenanceRepository extends JpaRepository<AssetMaintenanceDao, String>, JpaSpecificationExecutor<AssetMaintenanceDao> {
 }

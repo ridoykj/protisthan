@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabFormTourStepRepository extends JpaRepository<FormTourStepDao, String>, JpaSpecificationExecutor<FormTourStepDao> {
+public interface FormTourStepRepository extends JpaRepository<FormTourStepDao, String>, JpaSpecificationExecutor<FormTourStepDao> {
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabEmployeeGroupRepository extends JpaRepository<EmployeeGroupDao, String>, JpaSpecificationExecutor<EmployeeGroupDao> {
+public interface EmployeeGroupRepository extends JpaRepository<EmployeeGroupDao, String>, JpaSpecificationExecutor<EmployeeGroupDao> {
 }

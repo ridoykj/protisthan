@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAssetRepairConsumedItemRepository extends JpaRepository<AssetRepairConsumedItemDao, String>, JpaSpecificationExecutor<AssetRepairConsumedItemDao> {
+public interface AssetRepairConsumedItemRepository extends JpaRepository<AssetRepairConsumedItemDao, String>, JpaSpecificationExecutor<AssetRepairConsumedItemDao> {
 }

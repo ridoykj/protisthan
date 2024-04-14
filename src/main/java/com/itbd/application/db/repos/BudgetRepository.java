@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabBudgetRepository extends JpaRepository<BudgetDao, String>, JpaSpecificationExecutor<BudgetDao> {
+public interface BudgetRepository extends JpaRepository<BudgetDao, String>, JpaSpecificationExecutor<BudgetDao> {
 }

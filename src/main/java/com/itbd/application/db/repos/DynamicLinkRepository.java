@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDynamicLinkRepository extends JpaRepository<DynamicLinkDao, String>, JpaSpecificationExecutor<DynamicLinkDao> {
+public interface DynamicLinkRepository extends JpaRepository<DynamicLinkDao, String>, JpaSpecificationExecutor<DynamicLinkDao> {
 }

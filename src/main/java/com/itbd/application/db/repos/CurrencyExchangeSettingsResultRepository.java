@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCurrencyExchangeSettingsResultRepository extends JpaRepository<CurrencyExchangeSettingsResultDao, String>, JpaSpecificationExecutor<CurrencyExchangeSettingsResultDao> {
+public interface CurrencyExchangeSettingsResultRepository extends JpaRepository<CurrencyExchangeSettingsResultDao, String>, JpaSpecificationExecutor<CurrencyExchangeSettingsResultDao> {
 }

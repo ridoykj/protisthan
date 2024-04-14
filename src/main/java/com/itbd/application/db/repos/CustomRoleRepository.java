@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCustomRoleRepository extends JpaRepository<CustomRoleDao, String>, JpaSpecificationExecutor<CustomRoleDao> {
+public interface CustomRoleRepository extends JpaRepository<CustomRoleDao, String>, JpaSpecificationExecutor<CustomRoleDao> {
 }

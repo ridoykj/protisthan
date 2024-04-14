@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAutoRepeatDayRepository extends JpaRepository<AutoRepeatDayDao, String>, JpaSpecificationExecutor<AutoRepeatDayDao> {
+public interface AutoRepeatDayRepository extends JpaRepository<AutoRepeatDayDao, String>, JpaSpecificationExecutor<AutoRepeatDayDao> {
 }

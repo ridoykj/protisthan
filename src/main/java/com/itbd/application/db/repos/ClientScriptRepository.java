@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabClientScriptRepository extends JpaRepository<ClientScriptDao, String>, JpaSpecificationExecutor<ClientScriptDao> {
+public interface ClientScriptRepository extends JpaRepository<ClientScriptDao, String>, JpaSpecificationExecutor<ClientScriptDao> {
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabBinRepository extends JpaRepository<BinDao, String>, JpaSpecificationExecutor<BinDao> {
+public interface BinRepository extends JpaRepository<BinDao, String>, JpaSpecificationExecutor<BinDao> {
 }

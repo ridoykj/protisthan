@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAccountingDimensionRepository extends JpaRepository<AccountingDimensionDao, String>, JpaSpecificationExecutor<AccountingDimensionDao> {
+public interface AccountingDimensionRepository extends JpaRepository<AccountingDimensionDao, String>, JpaSpecificationExecutor<AccountingDimensionDao> {
 }

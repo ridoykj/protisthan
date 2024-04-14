@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabFiscalYearCompanyRepository extends JpaRepository<FiscalYearCompanyDao, String>, JpaSpecificationExecutor<FiscalYearCompanyDao> {
+public interface FiscalYearCompanyRepository extends JpaRepository<FiscalYearCompanyDao, String>, JpaSpecificationExecutor<FiscalYearCompanyDao> {
 }

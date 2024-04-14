@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDependentTaskRepository extends JpaRepository<DependentTaskDao, String>, JpaSpecificationExecutor<DependentTaskDao> {
+public interface DependentTaskRepository extends JpaRepository<DependentTaskDao, String>, JpaSpecificationExecutor<DependentTaskDao> {
 }

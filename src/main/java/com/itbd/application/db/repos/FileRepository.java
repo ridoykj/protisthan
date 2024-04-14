@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabFileRepository extends JpaRepository<FileDao, String>, JpaSpecificationExecutor<FileDao> {
+public interface FileRepository extends JpaRepository<FileDao, String>, JpaSpecificationExecutor<FileDao> {
 }

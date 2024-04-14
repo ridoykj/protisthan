@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDiscussionReplyRepository extends JpaRepository<DiscussionReplyDao, String>, JpaSpecificationExecutor<DiscussionReplyDao> {
+public interface DiscussionReplyRepository extends JpaRepository<DiscussionReplyDao, String>, JpaSpecificationExecutor<DiscussionReplyDao> {
 }

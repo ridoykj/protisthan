@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TagLinkRepository extends JpaRepository<TagLinkDao, String>, JpaSpecificationExecutor<TagLinkDao> {
+public interface LinkRepository extends JpaRepository<TagLinkDao, String>, JpaSpecificationExecutor<TagLinkDao> {
 }

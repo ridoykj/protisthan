@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabAutoRepeatRepository extends JpaRepository<AutoRepeatDao, String>, JpaSpecificationExecutor<AutoRepeatDao> {
+public interface AutoRepeatRepository extends JpaRepository<AutoRepeatDao, String>, JpaSpecificationExecutor<AutoRepeatDao> {
 }

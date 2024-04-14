@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCustomerCreditLimitRepository extends JpaRepository<CustomerCreditLimitDao, String>, JpaSpecificationExecutor<CustomerCreditLimitDao> {
+public interface CustomerCreditLimitRepository extends JpaRepository<CustomerCreditLimitDao, String>, JpaSpecificationExecutor<CustomerCreditLimitDao> {
 }

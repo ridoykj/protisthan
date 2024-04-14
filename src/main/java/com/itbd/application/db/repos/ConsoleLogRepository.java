@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabConsoleLogRepository extends JpaRepository<ConsoleLogDao, String>, JpaSpecificationExecutor<ConsoleLogDao> {
+public interface ConsoleLogRepository extends JpaRepository<ConsoleLogDao, String>, JpaSpecificationExecutor<ConsoleLogDao> {
 }

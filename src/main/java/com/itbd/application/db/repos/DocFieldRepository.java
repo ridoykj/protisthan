@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabDocFieldRepository extends JpaRepository<DocFieldDao, String>, JpaSpecificationExecutor<DocFieldDao> {
+public interface DocFieldRepository extends JpaRepository<DocFieldDao, String>, JpaSpecificationExecutor<DocFieldDao> {
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 
-public interface TabCompanyHistoryRepository extends JpaRepository<CompanyHistoryDao, String>, JpaSpecificationExecutor<CompanyHistoryDao> {
+public interface CompanyHistoryRepository extends JpaRepository<CompanyHistoryDao, String>, JpaSpecificationExecutor<CompanyHistoryDao> {
 }
