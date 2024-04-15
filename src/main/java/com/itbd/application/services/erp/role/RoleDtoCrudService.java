@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp;
+package com.itbd.application.services.erp.role;
 
 import com.itbd.application.db.dao.RoleDao;
 import com.itbd.application.db.dto.RoleDto;
