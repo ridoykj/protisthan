@@ -1,10 +1,12 @@
 import MainLayout from 'Frontend/views/MainLayout.js';
 import { lazy } from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import ShopView from './views/shop/ShopView';
-import UsersView from './views/module/users/UsersView';
 import HomeView from './views/home/HomeView';
+import RolesView from './views/module/role/RolesView';
+import RoleView from './views/module/role/RoleView';
+import UsersView from './views/module/users/UsersView';
 import UserView from './views/module/users/UserView';
+import ShopView from './views/shop/ShopView';
 
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
 
@@ -12,7 +14,7 @@ const rootPath = 'ubd-lms';
 
 export const routes: RouteObject[] = [
   {
-    //     path: rootPath,    
+    //     path: rootPath,
     element: <MainLayout />,
     handle: { title: 'Main' },
     children: [
@@ -20,7 +22,10 @@ export const routes: RouteObject[] = [
       { path: 'shops', element: <ShopView />, handle: { title: 'Dashboard' } },
 
       { path: 'users', element: <UsersView />, handle: { title: 'Users' } },
-      { path: 'users/:userId', element: <UserView />, handle: { title: 'Users' } },
+      { path: 'users/:userId', element: <UserView />, handle: { title: 'User' } },
+
+      { path: 'roles', element: <RolesView />, handle: { title: 'Roles' } },
+      { path: 'roles/:roleId', element: <RoleView />, handle: { title: 'Roles' } },
       // { path: 'default', element: <DefaultView />, handle: { title: 'Not Implemented' } },
       // { path: 'shop', element: <ShopView />, handle: { title: 'Shop' } },
       // { path: 'grid', element: <GridView />, handle: { title: 'Grid' } },
