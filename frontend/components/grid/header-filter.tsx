@@ -97,7 +97,7 @@ function ComparationSelection({ onMatcherChanged, value }: ComparationSelectionP
   return (
     <Select
       theme="small"
-      className="auto-grid-comparation-selection"
+      className="auto-grid-comparation-selection max-w-14"
       ref={select}
       value={value}
       onValueChanged={({ detail }) => {
