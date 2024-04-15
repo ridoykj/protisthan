@@ -33,6 +33,7 @@ import { AutoGridRowNumberRenderer } from './autogrid-renderers.js';
 import type { ListService } from './crud';
 import { HeaderSorter } from './header-sorter';
 import { ModelInfo, getDefaultProperties, type PropertyInfo } from './model-info.js';
+import { GridSelectionColumn } from '@hilla/react-components/GridSelectionColumn.js';
 
 // registerStylesheet(css);
 
@@ -114,7 +115,12 @@ interface AutoGridOwnProps<TItem> {
    * When enabled, inserts a column with row numbers at the beginning of the
    * grid.
    */
-  rowNumbers?: boolean;  
+  rowNumbers?: boolean;
+  /**
+     * When enabled, inserts a column with row numbers at the beginning of the
+     * grid.
+     */
+  multiSelect?: boolean;
   /**
    * Allows to provide a filter that is applied when fetching data from the
    */
@@ -187,6 +193,7 @@ interface ColumnConfigurationOptions {
   customColumns?: JSX.Element[];
   columnOptions?: Record<string, ColumnOptions>;
   rowNumbers?: boolean;
+  multiSelect?: boolean;
 }
 
 function addCustomColumns(columns: JSX.Element[], options: ColumnConfigurationOptions): JSX.Element[] {
@@ -275,6 +282,13 @@ function useColumns(
 
   columns = addCustomColumns(columns, options);
 
+  if (options.multiSelect) {
+    columns = [
+      <GridSelectionColumn key="multiSelect" />,
+      ...columns,
+    ];
+  }
+
   if (options.rowNumbers) {
     columns = [
       <GridColumn key="rownumbers" width="4em" flexGrow={0} renderer={AutoGridRowNumberRenderer}></GridColumn>,
@@ -296,6 +310,7 @@ function AutoGridInner<TItem>(
     customColumns,
     columnOptions,
     rowNumbers,
+    multiSelect,
     customFilter,
     ...gridProps
   }: AutoGridProps<TItem>,
@@ -349,6 +364,7 @@ function AutoGridInner<TItem>(
     customColumns,
     columnOptions,
     rowNumbers,
+    multiSelect,
   });
 
   useEffect(() => {
