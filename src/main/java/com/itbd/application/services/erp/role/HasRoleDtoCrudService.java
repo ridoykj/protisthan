@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.role;
 
-import com.itbd.application.db.dao.RoleDao;
-import com.itbd.application.db.dto.RoleDto;
-import com.itbd.application.db.repos.RoleRepository;
+import com.itbd.application.db.dao.HasRoleDao;
+import com.itbd.application.db.dto.HasRoleDto;
+import com.itbd.application.db.repos.HasRoleRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class RoleDtoCrudService implements CrudService<RoleDto, String> {
+public class HasRoleDtoCrudService implements CrudService<HasRoleDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final RoleRepository roleRepo;
+    private final HasRoleRepository hasRoleRepo;
 
-    public RoleDtoCrudService(RoleRepository roleRepo, JpaFilterConverter jpaFilterConverter) {
-        this.roleRepo = roleRepo;
+    public HasRoleDtoCrudService(HasRoleRepository hasRoleRepo, JpaFilterConverter jpaFilterConverter) {
+        this.hasRoleRepo = hasRoleRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull RoleDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull HasRoleDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<RoleDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, RoleDao.class)
+        Specification<HasRoleDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, HasRoleDao.class)
                 : Specification.anyOf();
-        Page<RoleDao> persons = roleRepo.findAll(spec, pageable);
-        return persons.stream().map(RoleDto::fromEntity).toList();
+        Page<HasRoleDao> persons = hasRoleRepo.findAll(spec, pageable);
+        return persons.stream().map(HasRoleDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable RoleDto save(RoleDto value) {
+    public @Nullable HasRoleDto save(HasRoleDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        RoleDao person = check
-                ? roleRepo.getReferenceById(value.name())
-                : new RoleDao();
+        HasRoleDao person = check
+                ? hasRoleRepo.getReferenceById(value.name())
+                : new HasRoleDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        RoleDto.fromDTO(value, person);
-        return RoleDto.fromEntity(roleRepo.save(person));
+        HasRoleDto.fromDTO(value, person);
+        return HasRoleDto.fromEntity(hasRoleRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        roleRepo.deleteById(id);
+        hasRoleRepo.deleteById(id);
     }
 }
