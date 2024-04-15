@@ -1,203 +1,46 @@
-// import { HorizontalLayout } from '@hilla/react-components/HorizontalLayout';
-// import CardRC from "Frontend/components/card/CardRC";
-// import IDashBoardRptDto from "Frontend/generated/com/itbd/application/dto/custom/IDashBoardRptDto";
-// import { OrganizationDtoCrudService } from "Frontend/generated/endpoints";
-// import { useEffect, useState } from "react";
+import { NavLink } from 'react-router-dom';
 
-// import Chart from "react-apexcharts";
+function HomeView() {
+  const handleClick = (title: string) => {
+    document.title = title;
+  };
+  return (
+    <>
+      <h1 className="font-bold text-lg">Your Shortcuts</h1>
+      <div className="grid grid-cols-3 gap-4 mx-2">
+        <div className="bg-white p-4 rounded-lg shadow-md">
+          <p className="text-lg font-bold">Users</p>
+          <NavLink
+            className="bg-blue-500 hover:no-underline hover:text-blue-600"
+            to="/users"
+            onClick={() => handleClick('Users')}
+          >
+            <p className="text-md">Manage users</p>
+          </NavLink>
+        </div>
+        <div className="bg-white p-4 rounded-lg shadow-md">
+          <p className="text-lg font-bold">Roles</p>
+          <p className="text-md">Manage roles</p>
+        </div>
+        <div className="bg-white p-4 rounded-lg shadow-md">
+          <p className="text-lg font-bold">Resources</p>
+          <p className="text-md">Manage resources</p>
+        </div>
+        <div className="bg-white p-4 rounded-lg shadow-md">
+          <p className="text-lg font-bold">Users</p>
+          <p className="text-md">Manage users</p>
+        </div>
+        <div className="bg-white p-4 rounded-lg shadow-md">
+          <p className="text-lg font-bold">Roles</p>
+          <p className="text-md">Manage roles</p>
+        </div>
+        <div className="bg-white p-4 rounded-lg shadow-md">
+          <p className="text-lg font-bold">Resources</p>
+          <p className="text-md">Manage resources</p>
+        </div>
+      </div>
+    </>
+  );
+}
 
-// export default function HomeView() {
-//   const [dashData, setDashData] = useState<IDashBoardRptDto>();
-
-//   const data = {
-//     options: {
-//       chart: {
-//         id: "basic-bar"
-//       },
-//       xaxis: {
-//         categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-//       }
-//     },
-//     series: [
-//       {
-//         name: "series-1",
-//         data: [30, 40, 45, 50, 49, 60, 70, 91]
-//       }
-//     ]
-//   };
-
-//   const placeItems = [
-//     {
-//       title: 'Place',
-//       content:
-//         <>
-//           <HorizontalLayout><div className="w-full h-full">
-//             <HorizontalLayout><Chart
-//               options={{
-//                 chart: {
-//                   id: "basic-bar"
-//                 },
-//                 xaxis: {
-//                   categories: ['Sector', 'Building', 'Floor', 'Room']
-//                 },
-//                 plotOptions: {
-//                   bar: {
-//                     borderRadius: 4,
-//                     horizontal: true,
-//                   }
-//                 },
-//                 dataLabels: {
-//                   enabled: true
-//                 },
-//               }}
-//               series={[
-//                 {
-//                   name: "Place",
-//                   data: [
-//                     dashData?.sectors ?? 0,
-//                     dashData?.buildings ?? 0,
-//                     dashData?.floors ?? 0,
-//                     dashData?.rooms ?? 0
-//                   ]
-//                 }
-//               ]}
-//               type="bar"
-//               height={200} /></HorizontalLayout>
-//           </div></HorizontalLayout><HorizontalLayout><div className="w-full h-full">
-//             <HorizontalLayout><Chart
-//               options={{
-//                 chart: {
-//                   id: "basic-bar"
-//                 },
-//                 xaxis: {
-//                   categories: ['Sector', 'Building', 'Floor', 'Room']
-//                 },
-//                 plotOptions: {
-//                   bar: {
-//                     borderRadius: 4,
-//                     horizontal: true,
-//                   }
-//                 },
-//                 dataLabels: {
-//                   enabled: true
-//                 },
-//               }}
-//               series={[
-//                 {
-//                   name: "Place",
-//                   data: [
-//                     dashData?.sectors ?? 0,
-//                     dashData?.buildings ?? 0,
-//                     dashData?.floors ?? 0,
-//                     dashData?.rooms ?? 0
-//                   ]
-//                 }
-//               ]}
-//               type="bar"
-//               height={200} /></HorizontalLayout>
-//           </div></HorizontalLayout>
-//         </>
-//     },
-//     {
-//       title: 'Organization',
-//       content:
-//         <>
-//           <div className="w-full h-full">
-//             <Chart
-//               options={{
-//                 chart: {
-//                   id: "basic-bar"
-//                 },
-//                 xaxis: {
-//                   categories: ['Profile', 'Department', 'Programme', 'Batch', 'Course']
-//                 },
-//                 plotOptions: {
-//                   bar: {
-//                     borderRadius: 4,
-//                     horizontal: true,
-//                   }
-//                 },
-//                 dataLabels: {
-//                   enabled: true
-//                 },
-//               }}
-//               series={[
-//                 {
-//                   name: "Organization",
-//                   data: [
-//                     dashData?.profiles ?? 0,
-//                     dashData?.departments ?? 0,
-//                     dashData?.programmes ?? 0,
-//                     dashData?.batches ?? 0,
-//                     dashData?.courses ?? 0
-//                   ]
-//                 }
-//               ]}
-//               type="bar"
-//               height={200} />
-//           </div>
-//         </>
-//     },
-//     {
-//       title: 'Users',
-//       content:
-//         <>
-//           <div className="w-full h-full">
-//             <Chart
-//               options={{
-//                 chart: {
-//                   id: "basic-bar"
-//                 },
-//                 xaxis: {
-//                   categories: ['Authnication', 'Coordinator', 'Student',]
-//                 },
-//                 plotOptions: {
-//                   bar: {
-//                     borderRadius: 4,
-//                     horizontal: true,
-//                   }
-//                 },
-//                 dataLabels: {
-//                   enabled: true
-//                 },
-//               }}
-//               series={[
-//                 {
-//                   name: "Organization",
-//                   data: [
-//                     0,
-//                     dashData?.coordinators ?? 0,
-//                     0,
-//                   ]
-//                 }
-//               ]}
-//               type="bar"
-//               height={200} />
-//           </div>
-//         </>
-//     },
-//   ]
-
-//   useEffect(() => {
-//     OrganizationDtoCrudService.getDashBoardRpt()
-//       .then((res) => {
-//         console.log('allData', res);
-//         setDashData(res);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }, [])
-
-//   return (
-//     <>
-//       <div className="bg-gray-50 h-full">
-//         <div className="p-6">
-//           <CardRC contents={placeItems} />
-//         </div>
-//       </div>
-//     </>
-//   )
-// }
-
-
+export default HomeView;
