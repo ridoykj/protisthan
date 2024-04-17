@@ -3,7 +3,7 @@ import DocFieldDto from 'Frontend/generated/com/itbd/application/db/dto/doctypes
 
 interface Item {
   name: string;
-  field: DocFieldDto | null;
+  field: DocFieldDto;
 }
 interface Column {
   name: string;
@@ -20,35 +20,58 @@ interface Tab {
   sections: Section[];
 }
 
+interface ComponentState {
+  tab: boolean;
+  section: boolean;
+  column: boolean;
+}
+
 function FieldDataFormatter({ fieldData }: { fieldData: DocFieldDto[] }) {
+  let cState: ComponentState = { tab: false, section: false, column: false };
   const tabs: Tab[] = [];
-  let currentTab: Tab | null = null;
-  let currentSection: Section | null = null;
-  let currentColumn: Column | null = null;
+  let currentTab: Tab = { name: '', sections: [] };
+  let currentSection: Section = { name: '', columns: [] };
+  let currentColumn: Column = { name: '', items: [] };
 
   fieldData.forEach((item) => {
     switch (item.fieldType) {
-      case 'Tab Break':
-        currentTab = { name: item.fieldType, sections: [] };
-        tabs.push(currentTab);
+      case 'Tab Break': {
+        cState = { tab: false, section: false, column: false };
         break;
-      case 'Section Break':
-        currentSection = { name: item.fieldType, columns: [] };
-        if (currentTab !== null) {
-          currentTab.sections.push(currentSection);
-        }
+      }
+      case 'Section Break': {
+        cState = { tab: true, section: false, column: false };
         break;
-      case 'Column Break':
-        currentColumn = { name: item.fieldType, items: [] };
-        if (currentSection !== null) {
-          currentSection.columns.push(currentColumn);
-        }
+      }
+      case 'Column Break': {
+        cState = { tab: true, section: true, column: false };
         break;
+      }
       default:
-        if (currentColumn !== null) {
-          currentColumn.items.push({ name: item.fieldType ?? '', field: item });
-        }
+        currentColumn?.items.push({ name: item.label ?? '', field: item });
         break;
+    }
+
+    if (!cState.tab) {
+      currentTab = { name: item.fieldType === 'Tab Break' ? item.label ?? '' : '', sections: [] };
+      tabs.push(currentTab);
+      cState.tab = true;
+    }
+    if (!cState.section) {
+      currentSection = {
+        name: item.fieldType === 'Section Break' ? item.label ?? '' : '',
+        columns: [],
+      };
+      currentTab.sections.push(currentSection);
+      cState.section = true;
+    }
+    if (!cState.column) {
+      currentColumn = {
+        name: item.fieldType === 'Column Break' ? item.label ?? '' : '',
+        items: [],
+      };
+      currentSection.columns.push(currentColumn);
+      cState.column = true;
     }
   });
   return tabs;
