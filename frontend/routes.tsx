@@ -4,6 +4,7 @@ import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import HomeView from './views/home/HomeView';
 import RolesView from './views/module/role/RolesView';
 import RoleView from './views/module/role/RoleView';
+import User2View from './views/module/users/User2View';
 import UsersView from './views/module/users/UsersView';
 import UserView from './views/module/users/UserView';
 import ShopView from './views/shop/ShopView';
@@ -23,6 +24,7 @@ export const routes: RouteObject[] = [
 
       { path: 'users', element: <UsersView />, handle: { title: 'Users' } },
       { path: 'users/:userId', element: <UserView />, handle: { title: 'User' } },
+      { path: 'users2/:userId', element: <User2View />, handle: { title: 'User' } },
 
       { path: 'roles', element: <RolesView />, handle: { title: 'Roles' } },
       { path: 'roles/:roleId', element: <RoleView />, handle: { title: 'Roles' } },
