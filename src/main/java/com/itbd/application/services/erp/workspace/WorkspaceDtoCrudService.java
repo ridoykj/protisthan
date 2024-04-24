@@ -1,8 +1,8 @@
-package com.itbd.application.services.erp.role;
+package com.itbd.application.services.erp.workspace;
 
-import com.itbd.application.db.dao.RoleDao;
-import com.itbd.application.db.dto.RoleDto;
-import com.itbd.application.db.repos.RoleRepository;
+import com.itbd.application.db.dao.workspace.WorkspaceDao;
+import com.itbd.application.db.dto.workspace.WorkspaceDto;
+import com.itbd.application.db.repos.WorkspaceRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class RoleDtoCrudService implements CrudService<RoleDto, String> {
+public class WorkspaceDtoCrudService implements CrudService<WorkspaceDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final RoleRepository roleRepo;
+    private final WorkspaceRepository workspaceRepo;
 
-    public RoleDtoCrudService(RoleRepository roleRepo, JpaFilterConverter jpaFilterConverter) {
-        this.roleRepo = roleRepo;
+    public WorkspaceDtoCrudService(WorkspaceRepository workspaceRepo, JpaFilterConverter jpaFilterConverter) {
+        this.workspaceRepo = workspaceRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull RoleDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull WorkspaceDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<RoleDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, RoleDao.class)
+        Specification<WorkspaceDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, WorkspaceDao.class)
                 : Specification.anyOf();
-        Page<RoleDao> persons = roleRepo.findAll(spec, pageable);
-        return persons.stream().map(RoleDto::fromEntity).toList();
+        Page<WorkspaceDao> persons = workspaceRepo.findAll(spec, pageable);
+        return persons.stream().map(WorkspaceDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable RoleDto save(RoleDto value) {
+    public @Nullable WorkspaceDto save(WorkspaceDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        RoleDao person = check
-                ? roleRepo.getReferenceById(value.name())
-                : new RoleDao();
+        WorkspaceDao person = check
+                ? workspaceRepo.getReferenceById(value.name())
+                : new WorkspaceDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        RoleDto.fromDTO(value, person);
-        return RoleDto.fromEntity(roleRepo.save(person));
+        WorkspaceDto.fromDTO(value, person);
+        return WorkspaceDto.fromEntity(workspaceRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        roleRepo.deleteById(id);
+        workspaceRepo.deleteById(id);
     }
 }
