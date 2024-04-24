@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.workspace;
 
-import com.itbd.application.db.dao.workspace.WorkspaceDao;
-import com.itbd.application.db.dto.workspace.WorkspaceDto;
-import com.itbd.application.db.repos.WorkspaceRepository;
+import com.itbd.application.db.dao.workspace.WorkspaceLinkDao;
+import com.itbd.application.db.dto.workspace.WorkspaceLinkDto;
+import com.itbd.application.db.repos.WorkspaceLinkRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class WorkspaceDtoCrudService implements CrudService<WorkspaceDto, String> {
+public class WorkspaceLinkDtoCrudService implements CrudService<WorkspaceLinkDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final WorkspaceRepository workspaceRepo;
+    private final WorkspaceLinkRepository workspaceLinkRepo;
 
-    public WorkspaceDtoCrudService(WorkspaceRepository workspaceRepo, JpaFilterConverter jpaFilterConverter) {
-        this.workspaceRepo = workspaceRepo;
+    public WorkspaceLinkDtoCrudService(WorkspaceLinkRepository workspaceLinkRepo, JpaFilterConverter jpaFilterConverter) {
+        this.workspaceLinkRepo = workspaceLinkRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull WorkspaceDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull WorkspaceLinkDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<WorkspaceDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, WorkspaceDao.class)
+        Specification<WorkspaceLinkDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, WorkspaceLinkDao.class)
                 : Specification.anyOf();
-        Page<WorkspaceDao> persons = workspaceRepo.findAll(spec, pageable);
-        return persons.stream().map(WorkspaceDto::fromEntity).toList();
+        Page<WorkspaceLinkDao> persons = workspaceLinkRepo.findAll(spec, pageable);
+        return persons.stream().map(WorkspaceLinkDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable WorkspaceDto save(WorkspaceDto value) {
+    public @Nullable WorkspaceLinkDto save(WorkspaceLinkDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        WorkspaceDao person = check
-                ? workspaceRepo.getReferenceById(value.name())
-                : new WorkspaceDao();
+        WorkspaceLinkDao person = check
+                ? workspaceLinkRepo.getReferenceById(value.name())
+                : new WorkspaceLinkDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        WorkspaceDto.fromDTO(value, person);
-        return WorkspaceDto.fromEntity(workspaceRepo.save(person));
+        WorkspaceLinkDto.fromDTO(value, person);
+        return WorkspaceLinkDto.fromEntity(workspaceLinkRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        workspaceRepo.deleteById(id);
+        workspaceLinkRepo.deleteById(id);
     }
 }
