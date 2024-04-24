@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChevronUp } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import RippleDivRC from '../effects/ripple/div/RippleDivRC';
 
 const navCss = `relative flex flex-row items-center font-semibold 
 focus:outline-none hover:bg-indigo-50 hover:no-underline `;
 
-type subItemType = { name: string; icon: any; route: string };
+type subItemType = { name: string; icon: React.ReactNode; route: string };
 
 const navLinkClasses = ({ isActive }: any) =>
   `${isActive ? 'bg-indigo-100 text-indigo-700 rounded-md ' : ''}${navCss}`;
@@ -22,15 +22,6 @@ function NavLinkItem({ name, icon, route }: { name: string; icon: any; route: st
         <span className="ml-2 text-sm tracking-wide truncate">{name}</span>
       </RippleDivRC>
     </NavLink>
-  );
-}
-
-// Component to display the Chevron icon based on the isOpen state
-function ChevronIcon({ isOpen }: { isOpen: boolean }) {
-  return isOpen ? (
-    <FaChevronUp size={20} className="pr-2" />
-  ) : (
-    <FaChevronDown size={20} className="pr-2" />
   );
 }
 
@@ -56,7 +47,10 @@ function DropdownButton({
         <span className="inline-flex justify-center items-center ml-4">{icon}</span>
         <span className="ml-2 text-sm tracking-wide truncate">{name}</span>
       </div>
-      <ChevronIcon isOpen={isDropdownOpen} />
+      <FaChevronUp
+        size={20}
+        className={`transition-transform transform pr-2 ${isDropdownOpen ? 'rotate-0' : 'rotate-180'}`}
+      />
     </button>
   );
 }
@@ -67,7 +61,7 @@ function SubItemList({ subItems }: { subItems: subItemType[] }) {
     <div className="pl-4 border-b border-gray-300">
       <ul>
         {subItems.map((item, index) => (
-          <li key={`sub_${index}`}>
+          <li key={`sub_${item.name + index}`}>
             <NavLinkItem name={item.name} icon={item.icon} route={item.route} />
           </li>
         ))}
@@ -90,23 +84,21 @@ function RNavItemRC({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
-  return (
-    <>
-      {subItems && subItems.length > 0 ? (
-        <>
-          <DropdownButton
-            name={name}
-            icon={icon}
-            isDropdownOpen={isDropdownOpen}
-            toggleDropdown={toggleDropdown}
-          />
-          {isDropdownOpen && <SubItemList subItems={subItems} />}
-        </>
-      ) : (
-        <NavLinkItem name={name} icon={icon} route={route} />
-      )}
-    </>
-  );
+  const navItemE: React.ReactNode =
+    subItems && subItems.length > 0 ? (
+      <>
+        <DropdownButton
+          name={name}
+          icon={icon}
+          isDropdownOpen={isDropdownOpen}
+          toggleDropdown={toggleDropdown}
+        />
+        {isDropdownOpen && <SubItemList subItems={subItems} />}
+      </>
+    ) : (
+      <NavLinkItem name={name} icon={icon} route={route} />
+    );
+  return navItemE;
 }
 
 export default RNavItemRC;
