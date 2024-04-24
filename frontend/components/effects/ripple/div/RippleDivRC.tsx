@@ -24,6 +24,8 @@ function RippleDivRC(props: RippleDivRCProps) {
 
   return (
     <div
+      role="button"
+      tabIndex={0} // Add tabIndex attribute to make the div focusable
       className={`ripple-div ${className ?? ''}`}
       onClick={(e) => {
         const rect = (e.target as HTMLElement).getBoundingClientRect();
@@ -32,12 +34,10 @@ function RippleDivRC(props: RippleDivRCProps) {
     >
       {rippleActive ? (
         <span
-          className="ripple-span"
+          className="ripple-span w-0"
           style={{ left: coords.x, top: coords.y } as React.CSSProperties}
         />
-      ) : (
-        ''
-      )}
+      ) : null}
       {children}
     </div>
   );
