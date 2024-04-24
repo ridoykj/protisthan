@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.workspace;
 
-import com.itbd.application.db.dao.workspace.WorkspaceDao;
-import com.itbd.application.db.dto.workspace.WorkspaceDto;
-import com.itbd.application.db.repos.WorkspaceRepository;
+import com.itbd.application.db.dao.workspace.WorkspaceShortcutDao;
+import com.itbd.application.db.dto.workspace.WorkspaceShortcutDto;
+import com.itbd.application.db.repos.WorkspaceShortcutRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class WorkspaceDtoCrudService implements CrudService<WorkspaceDto, String> {
+public class WorkspaceShortcutDtoCrudService implements CrudService<WorkspaceShortcutDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final WorkspaceRepository workspaceRepo;
+    private final WorkspaceShortcutRepository workspaceShortcutRepo;
 
-    public WorkspaceDtoCrudService(WorkspaceRepository workspaceRepo, JpaFilterConverter jpaFilterConverter) {
-        this.workspaceRepo = workspaceRepo;
+    public WorkspaceShortcutDtoCrudService(WorkspaceShortcutRepository workspaceShortcutRepo, JpaFilterConverter jpaFilterConverter) {
+        this.workspaceShortcutRepo = workspaceShortcutRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull WorkspaceDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull WorkspaceShortcutDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<WorkspaceDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, WorkspaceDao.class)
+        Specification<WorkspaceShortcutDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, WorkspaceShortcutDao.class)
                 : Specification.anyOf();
-        Page<WorkspaceDao> persons = workspaceRepo.findAll(spec, pageable);
-        return persons.stream().map(WorkspaceDto::fromEntity).toList();
+        Page<WorkspaceShortcutDao> persons = workspaceShortcutRepo.findAll(spec, pageable);
+        return persons.stream().map(WorkspaceShortcutDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable WorkspaceDto save(WorkspaceDto value) {
+    public @Nullable WorkspaceShortcutDto save(WorkspaceShortcutDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        WorkspaceDao person = check
-                ? workspaceRepo.getReferenceById(value.name())
-                : new WorkspaceDao();
+        WorkspaceShortcutDao person = check
+                ? workspaceShortcutRepo.getReferenceById(value.name())
+                : new WorkspaceShortcutDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        WorkspaceDto.fromDTO(value, person);
-        return WorkspaceDto.fromEntity(workspaceRepo.save(person));
+        WorkspaceShortcutDto.fromDTO(value, person);
+        return WorkspaceShortcutDto.fromEntity(workspaceShortcutRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        workspaceRepo.deleteById(id);
+        workspaceShortcutRepo.deleteById(id);
     }
 }
