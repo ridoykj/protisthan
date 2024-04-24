@@ -1,31 +1,52 @@
 import RNavItemRC from 'Frontend/components/sidebar/NavItemRC';
-import {
-  FaArrowLeft,
-  FaArrowRight,
-  FaBox,
-  FaBuffer,
-  FaBuilding,
-  FaChartArea,
-  FaChartPie,
-  FaCog,
-  FaHeadset,
-  FaPlug,
-  FaRegWindowMaximize,
-  FaTools,
-  FaUsers,
-} from 'react-icons/fa';
-import {
-  FaBagShopping,
-  FaCartShopping,
-  FaEarthAmericas,
-  FaHouseChimney,
-  FaRegFolderClosed,
-  FaScaleBalanced,
-  FaShieldHalved,
-  FaSquarePollHorizontal,
-} from 'react-icons/fa6';
+import NavIcons from 'Frontend/constants/NavIcon';
+import WorkspaceDto from 'Frontend/generated/com/itbd/application/db/dto/workspace/WorkspaceDto';
+import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
+import { WorkspaceDtoCrudService } from 'Frontend/generated/endpoints';
+import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
+import { useEffect, useState } from 'react';
+
+const pagination: Pageable = {
+  pageNumber: 0,
+  pageSize: 50,
+  sort: {
+    orders: [{ property: 'sequenceId', direction: Direction.ASC, ignoreCase: false }],
+  },
+};
+type navItam = {
+  name: string;
+  icon: JSX.Element;
+  route: string;
+  parent: string | undefined;
+  subItems: WorkspaceDto[];
+};
 
 function AppNavItem() {
+  const [workspace, setWorkspace] = useState<navItam[]>([]);
+  const icons = NavIcons;
+  useEffect(() => {
+    WorkspaceDtoCrudService.list(pagination, undefined).then((result) => {
+      const resultModifed = result.reduce((acc: navItam[], item) => {
+        const parent = item.parentPage;
+        const subItem = item;
+        const parentIndex = acc.findIndex((accItem) => accItem.parent === parent);
+        if (parentIndex === -1) {
+          acc.push({
+            name: item?.name ?? '',
+            icon: icons[(item?.icon?.replace('-', '') as keyof typeof icons) ?? ''],
+            route: item?.name?.toLowerCase().replace(' ', '-') ?? '',
+            parent: item.name ?? '',
+            subItems: [],
+          });
+        } else {
+          acc[parentIndex].subItems?.push(subItem);
+        }
+        return acc;
+      }, []);
+      setWorkspace(resultModifed);
+    });
+  }, [icons]);
+
   return (
     <div className="flex flex-col h-screen">
       <div className="flex flex-row h-16 items-center justify-center">
@@ -37,69 +58,33 @@ function AppNavItem() {
           প্রতিষ্ঠান
         </p>
       </div>
-      <div className="overflow-y-scroll flex-grow border-y">
-        <RNavItemRC name="Home" icon={<FaHouseChimney />} route="" />
-        <RNavItemRC
-          name="Accounting"
-          icon={<FaScaleBalanced />}
-          route=""
-          subItems={[
-            { name: 'Payables', icon: <FaArrowLeft />, route: 'academic/organization' },
-            { name: 'Receivables', icon: <FaArrowRight />, route: 'academic/organization' },
-            {
-              name: 'Financial Reports',
-              icon: <FaSquarePollHorizontal />,
-              route: 'academic/organization',
-            },
-          ]}
-        />
-        <RNavItemRC name="Buying" icon={<FaCartShopping />} route="" />
-        <RNavItemRC name="Selling" icon={<FaRegWindowMaximize />} route="" />
-        <RNavItemRC name="Stock" icon={<FaBox />} route="" />
-        <RNavItemRC name="Assets" icon={<FaBagShopping />} route="" />
-        <RNavItemRC name="Manufacturing" icon={<FaBuilding />} route="" />
-        <RNavItemRC name="Quality" icon={<FaShieldHalved />} route="" />
-        <RNavItemRC name="Projects" icon={<FaRegFolderClosed />} route="" />
-        <RNavItemRC name="Support" icon={<FaHeadset />} route="" />
-        <RNavItemRC name="Users" icon={<FaUsers />} route="users" />
-        <RNavItemRC name="Website" icon={<FaEarthAmericas />} route="" />
-        <RNavItemRC name="CRM" icon={<FaChartPie />} route="" />
-        <RNavItemRC name="Tools" icon={<FaTools />} route="" />
-        <RNavItemRC name="Settings" icon={<FaCog />} route="" />
-        <RNavItemRC name="Integrations" icon={<FaPlug />} route="" />
-        <RNavItemRC name="Build" icon={<FaBuffer />} route="" />
-        <RNavItemRC name="Dashboard" icon={<FaChartArea />} route="" />
-        {/* <RNavItemRC name='Organization' icon={<FaHome />} route='' subItems={[
-                        { name: 'Profile', icon: <FaUserGear />, route: 'academic/organization' },
-                        // { name: 'Reservation', icon: <FaCalendarDay />, route: '/edu/reservation' }
-                    ]} />
-                    <RNavItemRC name='Place' icon={<FaMapLocationDot />} route='' subItems={[
-                        { name: 'Sector', icon: <FaBuildingFlag />, route: 'place/sector' },
-                        { name: 'Building', icon: <FaBuildingCircleCheck />, route: 'place/building' },
-                        { name: 'Floor', icon: <FaBarsStaggered />, route: 'place/floor' },
-                        { name: 'Room', icon: <FaDoorOpen />, route: 'place/room' }
-                    ]} />
-                    <RNavItemRC name='User' icon={<FaUser />} route='' subItems={[
-                        { name: 'Users', icon: <FaKey />, route: 'user/users' },
-                    ]} />
-                    <RNavItemRC name='Permission' icon={<FaLock />} route='' subItems={[
-                        { name: 'Resources', icon: <FaFileShield />, route: 'permission/resources' },
-                        { name: 'Role', icon: <FaUserShield />, route: 'permission/roles' },
-                        { name: 'Authorization', icon: <FaKey />, route: 'permission/authorization' }
-                    ]} /> */}
+      <div className="overflow-y-scroll scroll-smooth flex-grow border-y">
+        {/* <RNavItemRC name="Home" icon={<FaHouseChimney />} route="" /> */}
+        {workspace.map((itemE) => (
+          <RNavItemRC
+            key={itemE.name}
+            name={itemE.name}
+            icon={itemE.icon}
+            route={itemE.route}
+            subItems={itemE.subItems.map((item) => ({
+              name: item.name ?? '',
+              icon: icons[(item?.icon?.replace('-', '') as keyof typeof icons) ?? ''],
+              route: item.name?.toLowerCase().replace(' ', '-') ?? '',
+            }))}
+          />
+        ))}
       </div>
       <div className="sticky inset-x-0 bottom-0 border-r border-gray-100">
         <div className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
           <img
             alt=""
-            src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            src="images/profile/profile.jpg"
             className="size-10 rounded-full object-cover"
           />
           <div>
             <p className="text-xs">
               <strong className="block font-medium">Ridoy Kumar Joy</strong>
-
-              <span> ridoykj@gmail.com </span>
+              <span>ridoykj@gmail.com</span>
             </p>
           </div>
         </div>
