@@ -3,19 +3,23 @@ import Filter from 'Frontend/generated/dev/hilla/crud/filter/Filter';
 import PropertyStringFilter from 'Frontend/generated/dev/hilla/crud/filter/PropertyStringFilter';
 import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
 
-export function comboBoxLazyFilter(comboBoxDataProviderParams: ComboBoxDataProviderParams, type: string, property: PropertyStringFilter[]) {
+export function comboBoxLazyFilter(
+  comboBoxDataProviderParams: ComboBoxDataProviderParams,
+  type: string,
+  property: PropertyStringFilter[]
+) {
   const { page, pageSize, filter } = comboBoxDataProviderParams;
   const pagination: Pageable = {
     pageNumber: page,
-    pageSize: pageSize,
+    pageSize,
     sort: {
-      orders: []
+      orders: [],
     },
   };
 
   const filters: Filter = {
     '@type': type,
-    children: property
+    children: property,
   };
 
   return { pagination, filters };
@@ -26,13 +30,13 @@ export function filterById(type: string, property: PropertyStringFilter[]) {
     pageNumber: 0,
     pageSize: 1,
     sort: {
-      orders: []
+      orders: [],
     },
   };
 
   const filters: Filter = {
     '@type': type,
-    children: property
+    children: property,
   };
 
   return { pagination, filters };
