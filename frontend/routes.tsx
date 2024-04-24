@@ -1,15 +1,15 @@
 import MainLayout from 'Frontend/views/MainLayout.js';
-import { lazy } from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import HomeView from './views/home/HomeView';
-import RolesView from './views/module/role/RolesView';
-import RoleView from './views/module/role/RoleView';
-import User2View from './views/module/users/User2View';
-import UsersView from './views/module/users/UsersView';
-import UserView from './views/module/users/UserView';
-import ShopView from './views/shop/ShopView';
+import ItemsView from './views/erp/module/selling/item/ItemsView';
+import ItemView from './views/erp/module/selling/item/ItemView';
+import RolesProfileView from './views/erp/module/users/role/RolesProfileView';
+import RolesView from './views/erp/module/users/role/RolesView';
+import UsersView from './views/erp/module/users/user/UsersView';
+import UserTypeView from './views/erp/module/users/user/UserTypeView';
+import CommonView from './views/erp/sidenav/CommonView';
+import HomeView from './views/erp/sidenav/HomeView';
 
-const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
+// const AboutView = lazy(async () => import('Frontend/views/about/AboutView'));
 
 const rootPath = 'ubd-lms';
 
@@ -20,14 +20,33 @@ export const routes: RouteObject[] = [
     handle: { title: 'Main' },
     children: [
       { path: '', element: <HomeView />, handle: { title: 'Home' } },
-      { path: 'shops', element: <ShopView />, handle: { title: 'Dashboard' } },
+      { path: ':workspace', element: <CommonView />, handle: {} },
+      // { path: 'shops', element: <ShopView />, handle: { title: 'Dashboard' } },
 
-      { path: 'users', element: <UsersView />, handle: { title: 'Users' } },
-      { path: 'users/:userId', element: <UserView />, handle: { title: 'User' } },
-      { path: 'users2/:userId', element: <User2View />, handle: { title: 'User' } },
+      // Module
 
-      { path: 'roles', element: <RolesView />, handle: { title: 'Roles' } },
-      { path: 'roles/:roleId', element: <RoleView />, handle: { title: 'Roles' } },
+      { path: 'm/item', element: <ItemsView />, handle: { title: 'Items' } },
+      { path: 'm/item/:itemId', element: <ItemView />, handle: { title: 'Items' } },
+
+      // Users
+      { path: 'm/user', element: <UsersView />, handle: { title: 'User' } },
+      { path: 'm/user/:queryId', element: <UsersView />, handle: { title: 'User' } },
+
+      { path: 'm/user-type', element: <UserTypeView />, handle: { title: 'User Type' } },
+      { path: 'm/user-type/:queryId', element: <UserTypeView />, handle: { title: 'User Type' } },
+
+      { path: 'm/role', element: <RolesView />, handle: { title: 'Roles' } },
+      { path: 'm/role/:queryId', element: <RolesView />, handle: { title: 'Roles' } },
+
+      { path: 'm/role-profile', element: <RolesProfileView />, handle: { title: 'Role Profile' } },
+      {
+        path: 'm/role-profile/:queryId',
+        element: <RolesProfileView />,
+        handle: { title: 'Role Profile' },
+      },
+
+      // { path: 'm/role/:roleId', element: <RoleView />, handle: { title: 'Roles' } },
+
       // { path: 'default', element: <DefaultView />, handle: { title: 'Not Implemented' } },
       // { path: 'shop', element: <ShopView />, handle: { title: 'Shop' } },
       // { path: 'grid', element: <GridView />, handle: { title: 'Grid' } },
