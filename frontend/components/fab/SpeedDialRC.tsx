@@ -17,18 +17,18 @@ function SpeedDialRC({ children, tooltip }: { children: ChildrenProps[]; tooltip
         <div className="flex flex-col items-end mb-4 space-y-2">
           {children.map((child, index) => (
             <div
-              key={`speed_dial_child_${index}`}
-              className="inline-flex items-center text-gray-100 hover:text-gray-50 hover:font-bold space-x-2"
+              key={`child_${child.name + index}`}
+              className="inline-flex items-center hover:font-bold space-x-2"
             >
               {tooltip === false ||
                 (tooltip === undefined && (
-                  <span className="bg-indigo-600 hover:bg-indigo-500 font-medium rounded-xl py-1 px-4 border border-gray-200 focus:ring-4 focus:ring-gray-300 focus:outline-none shadow-lg shadow-gray-900/20">
+                  <span className="bg-gray-100 hover:bg-white font-medium rounded-xl py-1 px-4 border border-gray-200 focus:ring-4 focus:ring-gray-300 focus:outline-none shadow-lg shadow-gray-900/20">
                     {child.name}
                   </span>
                 ))}
               <button
                 type="button"
-                className="relative w-[52px] h-[52px] bg-indigo-600 rounded-full border border-indigo-500 hover:bg-indigo-500  focus:ring-4 focus:ring-gray-300 focus:outline-none shadow-lg shadow-gray-900/20 hover:shadow-gray-900/40"
+                className="relative w-[52px] h-[52px] bg-gray-100 hover:bg-white rounded-full border focus:ring-4 focus:ring-gray-300 focus:outline-none shadow-lg shadow-gray-900/20 hover:shadow-gray-900/40"
                 data-tooltip-id={`speed_dial_child_${index}`}
                 onClick={child.onClick}
               >
