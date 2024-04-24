@@ -31,7 +31,7 @@ function CheckboxList({ lable, className, onValueChange, items, value }: Checkbo
   return (
     <div className={className}>
       <h2>{lable}</h2>
-      <ul className="grid grid-cols-3 gap-2 w-full">
+      <ul className="columns-3xs gap-2 space-y-2 w-full">
         {checkedItems.map((item, index) => (
           <li key={`cb-lable-${item.key}`} className="flex items-center me-4">
             <label htmlFor={`checkbox-${item.key}`} className="cursor-pointer label space-x-1">
@@ -40,7 +40,7 @@ function CheckboxList({ lable, className, onValueChange, items, value }: Checkbo
                 id={`checkbox-${item.key}`}
                 checked={checkedItems[index].value}
                 onChange={() => handleCheckboxChange(item.key)}
-                className="accent-indigo-700 cursor-pointer "
+                className="accent-indigo-500 cursor-pointer "
               />
               <span className="label-text">{item.key}</span>
             </label>
