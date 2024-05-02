@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.users;
+package com.itbd.application.services.erp.users.user;
 
 import com.itbd.application.db.dao.users.UserDao;
 import com.itbd.application.db.dto.users.UserDto;
