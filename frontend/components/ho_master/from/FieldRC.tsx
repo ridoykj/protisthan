@@ -9,9 +9,9 @@ import { Select } from '@hilla/react-components/Select.js';
 import { TextArea } from '@hilla/react-components/TextArea';
 import { TextField } from '@hilla/react-components/TextField';
 import { Upload } from '@hilla/react-components/Upload';
+import { FieldDirective } from '@hilla/react-form';
 import DocFieldDto from 'Frontend/generated/com/itbd/application/db/dto/doctypes/DocFieldDto';
 import ButtonRC from '../button/ButtonRC';
-import { FromBuilderRCProps } from './FromBuilderRC';
 
 function toCamelCase(str: string | undefined): string {
   return str?.replace(/(_\w)/g, (match) => match.toUpperCase().replace('_', '')) ?? '';
@@ -23,22 +23,23 @@ function resolvePropertyModel(modelInstance: AbstractModel, path: string): Abstr
 }
 
 function FieldRC({
-  formController,
+  field,
+  model,
   item,
   className,
 }: {
-  formController: FromBuilderRCProps;
   item: DocFieldDto;
+  field: FieldDirective;
+  model: AbstractModel;
   className?: string;
 }) {
-  const { field, model } = formController;
   switch (item.fieldType) {
     case 'Data':
       return (
         <TextField
           label={item.label}
           helperText={item.description}
-          // readonly={item.readOnly ?? false}
+          required={item.reqd ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -47,8 +48,9 @@ function FieldRC({
       return (
         <ComboBox
           label={item.label}
+          allowCustomValue
           helperText={item.description}
-          // readonly={item.readOnly ?? false}
+          required={item.reqd ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -57,7 +59,7 @@ function FieldRC({
       return (
         <Checkbox
           label={item.label}
-          // disabled={item.readOnly ?? false}
+          disabled={item.reqd ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -67,7 +69,7 @@ function FieldRC({
       return (
         <Checkbox
           label={item.label}
-          // disabled={item.readOnly ?? false}
+          disabled={item.reqd ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -85,7 +87,7 @@ function FieldRC({
         <DatePicker
           label={item.label}
           helperText={item.description}
-          // readonly={item.readOnly ?? false}
+          required={item.reqd ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -95,7 +97,7 @@ function FieldRC({
         <DateTimePicker
           label={item.label}
           helperText={item.description}
-          // readonly={item.readOnly ?? false}
+          required={item.reqd ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -105,7 +107,7 @@ function FieldRC({
         <TextArea
           label={item.label}
           helperText={item.description}
-          // readonly={item.readOnly ?? false}
+          required={item.reqd ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -115,7 +117,7 @@ function FieldRC({
         <PasswordField
           label={item.label}
           helperText={item.description}
-          // readonly={item.readOnly ?? false}
+          required={item.reqd ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -125,7 +127,7 @@ function FieldRC({
         <NumberField
           label={item.label}
           helperText={item.description}
-          // readonly={item.readOnly ?? false}
+          required={item.reqd ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -135,7 +137,7 @@ function FieldRC({
         <Select
           label={item.label}
           helperText={item.description}
-          // readonly={item.readOnly ?? false}
+          required={item.reqd ?? false}
           className={className}
           items={
             item.options
