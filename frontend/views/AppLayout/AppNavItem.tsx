@@ -21,7 +21,7 @@ type navItam = {
   subItems: WorkspaceDto[];
 };
 
-function AppNavItem() {
+function AppNavItem({ className }: { className?: string }) {
   const [workspace, setWorkspace] = useState<navItam[]>([]);
   const icons = NavIcons;
   useEffect(() => {
@@ -48,15 +48,15 @@ function AppNavItem() {
   }, [icons]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className={`flex flex-col h-screen ${className ?? ''}`}>
       <div className="flex flex-row h-16 items-center justify-center">
         <img src="images/eco-factory.png" alt="" className="w-20 p-4" />
-        <p
+        <span
           className="text-4xl text-center font-kalpurush text-indigo-700 font-bold drop-shadow-[0_10px_10px_rgba(255, 255, 255, 0.8)]"
           lang="bn-BD"
         >
           প্রতিষ্ঠান
-        </p>
+        </span>
       </div>
       <div className="overflow-y-scroll scroll-smooth flex-grow border-y">
         {/* <RNavItemRC name="Home" icon={<FaHouseChimney />} route="" /> */}
