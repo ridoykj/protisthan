@@ -9,7 +9,7 @@ import RolesProfileView from './views/erp/module/users/role/RolesProfileView';
 import RolesView from './views/erp/module/users/role/RolesView';
 import CustomerView from './views/erp/module/users/user/CustomerView';
 import SupplierView from './views/erp/module/users/user/SupplierView';
-import UserProfile from './views/erp/module/users/user/UserProfile';
+import UserProfileView from './views/erp/module/users/user/UserProfileView';
 import UsersView from './views/erp/module/users/user/UsersView';
 import UserTypeView from './views/erp/module/users/user/UserTypeView';
 import CommonView from './views/erp/sidenav/CommonView';
@@ -25,8 +25,8 @@ export const routes: RouteObject[] = [
     element: <MainLayout />,
     handle: { title: 'Main' },
     children: [
-      { path: '', element: <UserProfile />, handle: { title: 'Home' } },
-      { path: 'm/user-profile', element: <UserProfile />, handle: { title: 'Home' } },
+      { path: '', element: <UserProfileView />, handle: { title: 'Home' } },
+      { path: 'm/user-profile', element: <UserProfileView />, handle: { title: 'Home' } },
       { path: ':workspace', element: <CommonView />, handle: {} },
       // { path: 'shops', element: <ShopView />, handle: { title: 'Dashboard' } },
 
