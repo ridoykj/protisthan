@@ -1,32 +1,39 @@
 import MainLayout from 'Frontend/views/MainLayout.js';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import ItemsView from './views/erp/module/selling/item/ItemsView';
-import ItemView from './views/erp/module/selling/item/ItemView';
+import ItemsView from './views/erp/module/sale/item/ItemsView';
+import SalesInvoiceView from './views/erp/module/sale/SalesInvoiceView';
+import AccessLogView from './views/erp/module/settings/log/AccessLogView';
+import ActivityLogView from './views/erp/module/settings/log/ActivityLogView';
+import ModuleProfileView from './views/erp/module/users/module/ModuleProfileView';
 import RolesProfileView from './views/erp/module/users/role/RolesProfileView';
 import RolesView from './views/erp/module/users/role/RolesView';
+import CustomerView from './views/erp/module/users/user/CustomerView';
+import SupplierView from './views/erp/module/users/user/SupplierView';
+import UserProfile from './views/erp/module/users/user/UserProfile';
 import UsersView from './views/erp/module/users/user/UsersView';
 import UserTypeView from './views/erp/module/users/user/UserTypeView';
 import CommonView from './views/erp/sidenav/CommonView';
-import HomeView from './views/erp/sidenav/HomeView';
 
 // const AboutView = lazy(async () => import('Frontend/views/about/AboutView'));
 
-const rootPath = 'ubd-lms';
+const prod = false;
+// const prod = true;
 
 export const routes: RouteObject[] = [
   {
-    //     path: rootPath,
+    // path: rootPath,
     element: <MainLayout />,
     handle: { title: 'Main' },
     children: [
-      { path: '', element: <HomeView />, handle: { title: 'Home' } },
+      { path: '', element: <UserProfile />, handle: { title: 'Home' } },
+      { path: 'm/user-profile', element: <UserProfile />, handle: { title: 'Home' } },
       { path: ':workspace', element: <CommonView />, handle: {} },
       // { path: 'shops', element: <ShopView />, handle: { title: 'Dashboard' } },
 
       // Module
 
       { path: 'm/item', element: <ItemsView />, handle: { title: 'Items' } },
-      { path: 'm/item/:itemId', element: <ItemView />, handle: { title: 'Items' } },
+      { path: 'm/item/:queryId', element: <ItemsView />, handle: { title: 'Items' } },
 
       // Users
       { path: 'm/user', element: <UsersView />, handle: { title: 'User' } },
@@ -43,6 +50,48 @@ export const routes: RouteObject[] = [
         path: 'm/role-profile/:queryId',
         element: <RolesProfileView />,
         handle: { title: 'Role Profile' },
+      },
+
+      {
+        path: 'm/module-profile',
+        element: <ModuleProfileView />,
+        handle: { title: 'Module Profile' },
+      },
+      {
+        path: 'm/module-profile/:queryId',
+        element: <ModuleProfileView />,
+        handle: { title: 'Module Profile' },
+      },
+
+      { path: 'm/activity-log', element: <ActivityLogView />, handle: { title: 'Activity Log' } },
+      {
+        path: 'm/activity-log/:queryId',
+        element: <ActivityLogView />,
+        handle: { title: 'Activity Log' },
+      },
+
+      { path: 'm/access-log', element: <AccessLogView />, handle: { title: 'Access Log' } },
+      {
+        path: 'm/access-log/:queryId',
+        element: <AccessLogView />,
+        handle: { title: 'Access Log' },
+      },
+
+      { path: 'm/customer', element: <CustomerView />, handle: { title: 'Customer' } },
+      { path: 'm/customer/:queryId', element: <CustomerView />, handle: { title: 'Customer' } },
+
+      { path: 'm/supplier', element: <SupplierView />, handle: { title: 'Supplier' } },
+      { path: 'm/supplier/:queryId', element: <SupplierView />, handle: { title: 'Supplier' } },
+
+      {
+        path: 'm/sales-invoice',
+        element: <SalesInvoiceView />,
+        handle: { title: 'Sales Invoice' },
+      },
+      {
+        path: 'm/sales-invoice/:queryId',
+        element: <SalesInvoiceView />,
+        handle: { title: 'Sales Invoice' },
       },
 
       // { path: 'm/role/:roleId', element: <RoleView />, handle: { title: 'Roles' } },
@@ -72,4 +121,4 @@ export const routes: RouteObject[] = [
   },
 ];
 
-export default createBrowserRouter(routes);
+export default createBrowserRouter(routes, { basename: prod ? '/protisthan' : '/' });
