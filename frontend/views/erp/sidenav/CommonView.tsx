@@ -78,7 +78,7 @@ function CommonView() {
             {workspaceShortcut.map((data) => (
               <ViewShortcut
                 key={data.name}
-                to={`/m/${data?.label?.toLowerCase().replace(' ', '-')}` ?? ''}
+                to={`/m/${data?.linkTo?.toLowerCase().replace(' ', '-')}` ?? ''}
                 title={data.label ?? ''}
                 description={data.parentField ?? ''}
               />
@@ -99,7 +99,7 @@ function CommonView() {
                 {linkGroup.links.map((data) => (
                   <ViewLink
                     key={data.name}
-                    to={`/m/${data?.label?.toLowerCase().replace(' ', '-')}` ?? ''}
+                    to={`/m/${data?.linkTo?.toLowerCase().replace(' ', '-')}` ?? ''}
                     title={data.label ?? ''}
                     description={data.parentField ?? ''}
                   />
