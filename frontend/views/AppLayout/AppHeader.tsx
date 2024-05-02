@@ -6,13 +6,14 @@ import { FaXmark } from 'react-icons/fa6';
 import { useParams } from 'react-router-dom';
 
 interface AppHeaderProps {
-  showSideNav: () => void;
+  openSideBar: () => void;
 }
-function AppHeader({ showSideNav }: AppHeaderProps) {
+function AppHeader({ openSideBar }: AppHeaderProps) {
   const currentTitle = useRouteMetadata()?.title ?? 'My App';
   const { workspace } = useParams();
 
   const [iconState, setIconState] = useState(false);
+
   return (
     <div className="flex flex-row">
       <button
@@ -20,13 +21,13 @@ function AppHeader({ showSideNav }: AppHeaderProps) {
         className="text-white px-4"
         onClick={() => {
           setIconState((e) => !e);
-          showSideNav();
+          openSideBar();
         }}
       >
         {iconState ? <FaXmark /> : <FaBars />}
       </button>
       <div className="flex flex-row">
-        <h1 className="text-white text-xl">{workspace ?? 'Prothistan App'}</h1>
+        <h1 className="text-white text-xl">{workspace ?? currentTitle}</h1>
         <AvatarControlRC />
       </div>
     </div>
