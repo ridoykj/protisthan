@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.log;
 
-import com.itbd.application.db.dao.activitys.ActivityLogDao;
-import com.itbd.application.db.dto.activitys.ActivityLogDto;
-import com.itbd.application.db.repos.ActivityLogRepository;
+import com.itbd.application.db.dao.AccessLogDao;
+import com.itbd.application.db.dto.AccessLogDto;
+import com.itbd.application.db.repos.AccessLogRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ActivityLogDtoCrudService implements CrudService<ActivityLogDto, String> {
+public class AccessLogDtoCrudService implements CrudService<AccessLogDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ActivityLogRepository activityLogRepo;
+    private final AccessLogRepository accessLogRepo;
 
-    public ActivityLogDtoCrudService(ActivityLogRepository activityLogRepo, JpaFilterConverter jpaFilterConverter) {
-        this.activityLogRepo = activityLogRepo;
+    public AccessLogDtoCrudService(AccessLogRepository accessLogRepo, JpaFilterConverter jpaFilterConverter) {
+        this.accessLogRepo = accessLogRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ActivityLogDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull AccessLogDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ActivityLogDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ActivityLogDao.class)
+        Specification<AccessLogDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, AccessLogDao.class)
                 : Specification.anyOf();
-        Page<ActivityLogDao> persons = activityLogRepo.findAll(spec, pageable);
-        return persons.stream().map(ActivityLogDto::fromEntity).toList();
+        Page<AccessLogDao> persons = accessLogRepo.findAll(spec, pageable);
+        return persons.stream().map(AccessLogDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ActivityLogDto save(ActivityLogDto value) {
+    public @Nullable AccessLogDto save(AccessLogDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ActivityLogDao person = check
-                ? activityLogRepo.getReferenceById(value.name())
-                : new ActivityLogDao();
+        AccessLogDao person = check
+                ? accessLogRepo.getReferenceById(value.name())
+                : new AccessLogDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ActivityLogDto.fromDTO(value, person);
-        return ActivityLogDto.fromEntity(activityLogRepo.save(person));
+        AccessLogDto.fromDTO(value, person);
+        return AccessLogDto.fromEntity(accessLogRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        activityLogRepo.deleteById(id);
+        accessLogRepo.deleteById(id);
     }
 }
