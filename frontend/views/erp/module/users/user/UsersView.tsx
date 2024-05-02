@@ -235,13 +235,18 @@ function UsersView() {
     return (
       <button
         type="button"
-        className="text-blue-500 hover:underline"
+        className="text-blue-500 hover:underline inline-flex items-center gap-2"
         onClick={(e) => {
           setUser(item);
           read(item);
           navigate(`/m/user/${name}`);
         }}
       >
+        <img
+          src={`images/profile/${name === 'ridoykj@gmail.com' ? 'profile.jpg' : 'default_profile.png'}`}
+          className="w-8 h-8 rounded-full"
+          alt="not_found"
+        />
         {fullName}
       </button>
     );
