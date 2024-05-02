@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 }, uniqueConstraints = {
         @UniqueConstraint(name = "uk_company_name", columnNames = {"tx_company_name"})
 })
+@DynamicInsert
 public class CompanyDao {
 
     @Id
@@ -109,9 +111,11 @@ public class CompanyDao {
     private String registrationDetails;
 
     @Column(name = "ct_lft", nullable = false)
+    @ColumnDefault("0")
     private Integer lft;
 
     @Column(name = "ct_rgt", nullable = false)
+    @ColumnDefault("0")
     private Integer rgt;
 
     @Column(name = "tx_old_parent", length = 140)

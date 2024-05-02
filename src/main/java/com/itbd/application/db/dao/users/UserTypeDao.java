@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @Table(name = "t_user_type", indexes = {
         @Index(name = "idx_modified", columnList = "dtt_modified")
 })
+@DynamicInsert
 public class UserTypeDao {
 
     @Id

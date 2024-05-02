@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ import java.time.LocalDateTime;
 }, uniqueConstraints = {
         @UniqueConstraint(name = "uk_item_code", columnNames = {"tx_item_code"})
 })
+@DynamicInsert
 public class ItemDao {
 
     @Id

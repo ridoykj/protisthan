@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ import java.time.LocalTime;
         @Index(name = "idx_inter_company_invoice_reference", columnList = "tx_inter_company_invoice_reference"),
         @Index(name = "idx_modified", columnList = "dtt_modified"),
 })
+@DynamicInsert
 public class SalesInvoiceDao {
 
     @Id

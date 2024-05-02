@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
         @Index(name = "idx_reference_doc_type_reference_name_index", columnList = "tx_reference_doc_type, tx_reference_name"),
         @Index(name = "idx_timeline_doc_type_timeline_name_index", columnList = "tx_timeline_doc_type, tx_timeline_name")
 })
+@DynamicInsert
 public class ActivityLogDao {
 
     @Id

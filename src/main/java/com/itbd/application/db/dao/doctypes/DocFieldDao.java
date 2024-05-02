@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
         @Index(name = "idx_field_name", columnList = "tx_field_name"),
         @Index(name = "idx_parent", columnList = "tx_parent"),
 })
+@DynamicInsert
 public class DocFieldDao {
 
     @Id

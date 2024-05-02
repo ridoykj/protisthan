@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
         @UniqueConstraint(name = "uk_mobile_no", columnNames = {"tx_mobile_no"}),
         @UniqueConstraint(name = "uk_api_key", columnNames = {"tx_api_key"})
 })
+@DynamicInsert
 public class UserDao {
 
     @Id

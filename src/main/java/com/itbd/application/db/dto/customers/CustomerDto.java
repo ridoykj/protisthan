@@ -114,7 +114,7 @@ public record CustomerDto(
     }
 
     public static void fromDTO(CustomerDto vCustomerDto, CustomerDao eCustomerDao) {
-        eCustomerDao.setName(vCustomerDto.name());
+        eCustomerDao.setName(vCustomerDto.name() != null ? vCustomerDto.name() : vCustomerDto.customerName().toLowerCase().replaceAll("\\s","_"));
         eCustomerDao.setCreation(vCustomerDto.creation());
         eCustomerDao.setModified(vCustomerDto.modified());
         eCustomerDao.setModifiedBy(vCustomerDto.modifiedBy());

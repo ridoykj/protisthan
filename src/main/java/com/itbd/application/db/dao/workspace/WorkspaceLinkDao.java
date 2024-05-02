@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @Table(name = "t_workspace_link", indexes = {
         @Index(name = "idx_parent", columnList = "tx_parent")
 })
+@DynamicInsert
 public class WorkspaceLinkDao {
 
     @Id

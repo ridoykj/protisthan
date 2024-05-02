@@ -189,7 +189,7 @@ public record CompanyDto(
     }
 
     public static void fromDTO(CompanyDto vCompanyDto, CompanyDao eCompanyDao) {
-        eCompanyDao.setName(vCompanyDto.name());
+        eCompanyDao.setName(vCompanyDto.name() != null ? vCompanyDto.name() : vCompanyDto.companyName().toLowerCase());
         eCompanyDao.setCreation(vCompanyDto.creation());
         eCompanyDao.setModified(vCompanyDto.modified());
         eCompanyDao.setModifiedBy(vCompanyDto.modifiedBy());
@@ -231,6 +231,7 @@ public record CompanyDto(
         eCompanyDao.setExchangeGainLossAccount(vCompanyDto.exchangeGainLossAccount());
         eCompanyDao.setUnrealizedExchangeGainLossAccount(vCompanyDto.unrealizedExchangeGainLossAccount());
         eCompanyDao.setUnrealizedProfitLossAccount(vCompanyDto.unrealizedProfitLossAccount());
+//        eCompanyDao.setAllowAccountCreationAgainstChildCompany(false);
         eCompanyDao.setAllowAccountCreationAgainstChildCompany(vCompanyDto.allowAccountCreationAgainstChildCompany());
         eCompanyDao.setDefaultPayableAccount(vCompanyDto.defaultPayableAccount());
         eCompanyDao.setDefaultExpenseAccount(vCompanyDto.defaultExpenseAccount());

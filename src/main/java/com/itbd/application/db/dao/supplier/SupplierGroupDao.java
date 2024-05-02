@@ -59,9 +59,11 @@ public class SupplierGroupDao {
     private String paymentTerms;
 
     @Column(name = "ct_lft", nullable = false)
+    @ColumnDefault("0")
     private Integer lft;
 
     @Column(name = "ct_rgt", nullable = false)
+    @ColumnDefault("0")
     private Integer rgt;
 
     @Column(name = "tx_old_parent", length = 140)

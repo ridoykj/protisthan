@@ -59,12 +59,14 @@ public class ItemGroupDao {
     private String image;
 
     @Column(name = "ct_lft", nullable = false)
+    @ColumnDefault("0")
     private Integer lft;
 
     @Column(name = "tx_old_parent", length = 140)
     private String oldParent;
 
     @Column(name = "ct_rgt", nullable = false)
+    @ColumnDefault("0")
     private Integer rgt;
 
     @Column(name = "_user_tags", columnDefinition = "text")

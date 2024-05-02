@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
         @Index(name = "idx_modified", columnList = "dtt_modified"),
         @Index(name = "idx_lft_rgt_index", columnList = "ct_lft, ct_rgt")
 })
+@DynamicInsert
 public class AccountDao {
 
     @Id
@@ -89,9 +91,11 @@ public class AccountDao {
     private String balanceMustBe;
 
     @Column(name = "ct_lft", nullable = false)
+    @ColumnDefault("0")
     private Integer lft;
 
     @Column(name = "ct_rgt", nullable = false)
+    @ColumnDefault("0")
     private Integer rgt;
 
     @Column(name = "tx_old_parent", length = 140)
