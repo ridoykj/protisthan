@@ -1,26 +1,27 @@
+import { FaBarsProgress } from 'react-icons/fa6';
 import { NavLink } from 'react-router-dom';
 
 function ViewShortcut({
   to,
-  title: header,
+  title,
   description,
 }: {
   to: string;
   title: string;
   description: string;
 }) {
-  const handleClick = (title: string) => {
-    document.title = title;
+  const handleClick = (titleE: string) => {
+    document.title = titleE;
   };
   return (
     <NavLink
-      className="bg-white border p-4 rounded-xl hover:text-indigo-700 hover:shadow-md hover:no-underline"
+      className="bg-white text-md font-medium hover:font-semibold hover:text-indigo-800 border p-4 rounded-xl hover:shadow-md hover:no-underline"
       to={to}
-      onClick={() => handleClick(header)}
+      onClick={() => handleClick(title)}
     >
-      <div>
-        <p className="text-lg font-semibold">{header}</p>
-        <p className="text-md">{description}</p>
+      <div className="inline-flex gap-2">
+        <FaBarsProgress className="flex-none size-6" />
+        <p>{title}</p>
       </div>
     </NavLink>
   );
