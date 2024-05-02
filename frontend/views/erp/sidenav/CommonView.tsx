@@ -13,6 +13,12 @@ import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/D
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+type LinkGroup = {
+  key: string;
+  name: string;
+  links: WorkspaceLinkDto[];
+};
+
 const pagination: Pageable = {
   pageNumber: 0,
   pageSize: 50,
@@ -38,7 +44,7 @@ function filterGenerator(type: string, property: string, filter: string | undefi
 function CommonView() {
   const { workspace } = useParams();
   const [workspaceShortcut, setWorkspaceShortcut] = useState<WorkspaceShortcutDto[]>([]);
-  const [workspaceLink, setWorkspaceLink] = useState<WorkspaceLinkDto[]>([]);
+  const [workspaceLink, setWorkspaceLink] = useState<LinkGroup[]>([]);
 
   useEffect(() => {
     WorkspaceShortcutDtoCrudService.list(
@@ -47,40 +53,63 @@ function CommonView() {
     ).then((result) => {
       setWorkspaceShortcut(result);
     });
-  }, [workspace]);
 
-  useEffect(() => {
     WorkspaceLinkDtoCrudService.list(pagination, filterGenerator('and', 'parent', workspace)).then(
       (result) => {
-        setWorkspaceLink(result);
+        const group: LinkGroup[] = result.reduce((acc: LinkGroup[], curr: WorkspaceLinkDto) => {
+          if (curr.type === 'Card Break') {
+            acc.push({ key: curr.name ?? '', name: curr.label ?? '', links: [] });
+          } else {
+            acc[acc.length - 1].links.push(curr);
+          }
+          return acc;
+        }, []);
+        setWorkspaceLink(group);
       }
     );
   }, [workspace]);
+
   return (
-    <>
-      <h1 className="font-bold text-lg">Your Shortcuts</h1>
-      <div className="grid grid-cols-3 gap-4 mx-2">
-        {workspaceShortcut.map((data) => (
-          <ViewShortcut
-            key={data.name}
-            to={`/m/${data?.label?.toLowerCase().replace(' ', '-')}` ?? ''}
-            title={data.label ?? ''}
-            description={data.parentField ?? ''}
-          />
-        ))}
-      </div>
-      <h1 className="font-bold text-lg">Report Master</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mx-2">
-        {workspaceLink.map((data) => (
-          <ViewLink
-            key={data.name}
-            to={`/m/${data?.label?.toLowerCase().replace(' ', '-')}` ?? ''}
-            title={data.label ?? ''}
-            description={data.parentField ?? ''}
-          />
-        ))}
-      </div>
-    </>
+    <div className="flex flex-col space-y-4">
+      {workspaceShortcut.length > 0 && (
+        <fieldset className="border border-gray-300 p-4 rounded-lg mx-2 md:mx-4 md:mt-4">
+          <legend className="font-bold text-lg text-gray-800">Workspace Shortcuts</legend>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mx-2">
+            {workspaceShortcut.map((data) => (
+              <ViewShortcut
+                key={data.name}
+                to={`/m/${data?.label?.toLowerCase().replace(' ', '-')}` ?? ''}
+                title={data.label ?? ''}
+                description={data.parentField ?? ''}
+              />
+            ))}
+          </div>
+        </fieldset>
+      )}
+      {workspaceLink.length > 0 && (
+        <fieldset className="border border-gray-300 p-4 rounded-lg m-2 md:m-4">
+          <legend className="font-bold text-lg text-gray-800">Redirect Module</legend>
+          <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4  gap-4 mx-2">
+            {workspaceLink.map((linkGroup) => (
+              <div
+                key={linkGroup.key}
+                className="flex flex-col gap-3 border rounded-lg p-2 shadow-sm"
+              >
+                <span>{linkGroup.name}</span>
+                {linkGroup.links.map((data) => (
+                  <ViewLink
+                    key={data.name}
+                    to={`/m/${data?.label?.toLowerCase().replace(' ', '-')}` ?? ''}
+                    title={data.label ?? ''}
+                    description={data.parentField ?? ''}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </fieldset>
+      )}
+    </div>
   );
 }
 
