@@ -49,7 +49,6 @@ function FieldDataFormatter({ fieldData }: { fieldData: DocFieldDto[] }) {
         break;
       }
       default:
-        currentColumn?.items.push({ name: item.label ?? '', field: item });
         break;
     }
 
@@ -67,13 +66,21 @@ function FieldDataFormatter({ fieldData }: { fieldData: DocFieldDto[] }) {
       cState.section = true;
     }
     if (!cState.column) {
-      const isColumnBreak = item.fieldType === 'Column Break';
       currentColumn = {
-        name: isColumnBreak ? item.label ?? '' : '',
-        items: isColumnBreak ? [] : [...currentColumn.items],
+        name: item.fieldType === 'Column Break' ? item.label ?? '' : '',
+        items: [],
       };
       currentSection.columns.push(currentColumn);
       cState.column = true;
+    }
+    switch (item.fieldType) {
+      case 'Column Break':
+      case 'Section Break':
+      case 'Tab Break':
+        break;
+      default:
+        currentColumn.items.push({ name: item.label ?? '', field: item });
+        break;
     }
   });
   return tabs;
