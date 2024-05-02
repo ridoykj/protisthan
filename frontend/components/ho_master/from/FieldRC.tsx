@@ -5,6 +5,7 @@ import { DatePicker } from '@hilla/react-components/DatePicker';
 import { DateTimePicker } from '@hilla/react-components/DateTimePicker';
 import { NumberField } from '@hilla/react-components/NumberField';
 import { PasswordField } from '@hilla/react-components/PasswordField';
+import { Select } from '@hilla/react-components/Select.js';
 import { TextArea } from '@hilla/react-components/TextArea';
 import { TextField } from '@hilla/react-components/TextField';
 import { Upload } from '@hilla/react-components/Upload';
@@ -37,6 +38,7 @@ function FieldRC({
         <TextField
           label={item.label}
           helperText={item.description}
+          // readonly={item.readOnly ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -46,6 +48,7 @@ function FieldRC({
         <ComboBox
           label={item.label}
           helperText={item.description}
+          // readonly={item.readOnly ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -54,6 +57,7 @@ function FieldRC({
       return (
         <Checkbox
           label={item.label}
+          // disabled={item.readOnly ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -63,6 +67,7 @@ function FieldRC({
       return (
         <Checkbox
           label={item.label}
+          // disabled={item.readOnly ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -80,6 +85,7 @@ function FieldRC({
         <DatePicker
           label={item.label}
           helperText={item.description}
+          // readonly={item.readOnly ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -89,6 +95,7 @@ function FieldRC({
         <DateTimePicker
           label={item.label}
           helperText={item.description}
+          // readonly={item.readOnly ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -98,6 +105,7 @@ function FieldRC({
         <TextArea
           label={item.label}
           helperText={item.description}
+          // readonly={item.readOnly ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -107,6 +115,7 @@ function FieldRC({
         <PasswordField
           label={item.label}
           helperText={item.description}
+          // readonly={item.readOnly ?? false}
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
@@ -116,7 +125,24 @@ function FieldRC({
         <NumberField
           label={item.label}
           helperText={item.description}
+          // readonly={item.readOnly ?? false}
           className={className}
+          {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
+        />
+      );
+    case 'Select':
+      return (
+        <Select
+          label={item.label}
+          helperText={item.description}
+          // readonly={item.readOnly ?? false}
+          className={className}
+          items={
+            item.options
+              ?.trim()
+              .split('\n')
+              .map((option) => ({ label: option, value: option })) ?? []
+          }
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
       );
@@ -125,6 +151,7 @@ function FieldRC({
         <ButtonRC
           onClick={() => {}}
           title={item.label}
+          // disabled={item.readOnly ?? false}
           // className={className}
           // {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
