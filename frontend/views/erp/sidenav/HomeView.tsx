@@ -2,32 +2,32 @@ import ViewShortcut from 'Frontend/components/ho_master/view/ViewShortcut';
 
 const viewData = [
   {
-    to: '/user',
+    to: '/m/user',
     title: 'Users',
     description: 'Manage users',
   },
   {
-    to: '/role',
+    to: '/m/role',
     title: 'Roles',
     description: 'Manage roles',
   },
   {
-    to: '/item',
+    to: '/m/item',
     title: 'Item',
     description: 'Manage Item',
   },
   {
-    to: '/user/_',
+    to: '/m/user/_',
     title: 'Permission Manager',
     description: 'Manage Permission',
   },
   {
-    to: '/user',
+    to: '/m/user',
     title: 'Users Profile',
     description: 'Manage Profile',
   },
   {
-    to: '/user',
+    to: '/m/user-type',
     title: 'User Type',
     description: 'Manage User Type',
   },
