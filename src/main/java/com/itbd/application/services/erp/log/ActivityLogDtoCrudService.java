@@ -1,8 +1,8 @@
-package com.itbd.application.services.erp.module;
+package com.itbd.application.services.erp.log;
 
-import com.itbd.application.db.dao.modules.ModuleProfileDao;
-import com.itbd.application.db.dto.modules.ModuleProfileDto;
-import com.itbd.application.db.repos.ModuleProfileRepository;
+import com.itbd.application.db.dao.activitys.ActivityLogDao;
+import com.itbd.application.db.dto.activitys.ActivityLogDto;
+import com.itbd.application.db.repos.ActivityLogRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ModuleProfileDtoCrudService implements CrudService<ModuleProfileDto, String> {
+public class ActivityLogDtoCrudService implements CrudService<ActivityLogDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ModuleProfileRepository moduleProfileRepo;
+    private final ActivityLogRepository activityLogRepo;
 
-    public ModuleProfileDtoCrudService(ModuleProfileRepository moduleProfileRepo, JpaFilterConverter jpaFilterConverter) {
-        this.moduleProfileRepo = moduleProfileRepo;
+    public ActivityLogDtoCrudService(ActivityLogRepository activityLogRepo, JpaFilterConverter jpaFilterConverter) {
+        this.activityLogRepo = activityLogRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ModuleProfileDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ActivityLogDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ModuleProfileDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ModuleProfileDao.class)
+        Specification<ActivityLogDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ActivityLogDao.class)
                 : Specification.anyOf();
-        Page<ModuleProfileDao> persons = moduleProfileRepo.findAll(spec, pageable);
-        return persons.stream().map(ModuleProfileDto::fromEntity).toList();
+        Page<ActivityLogDao> persons = activityLogRepo.findAll(spec, pageable);
+        return persons.stream().map(ActivityLogDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ModuleProfileDto save(ModuleProfileDto value) {
+    public @Nullable ActivityLogDto save(ActivityLogDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ModuleProfileDao person = check
-                ? moduleProfileRepo.getReferenceById(value.name())
-                : new ModuleProfileDao();
+        ActivityLogDao person = check
+                ? activityLogRepo.getReferenceById(value.name())
+                : new ActivityLogDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ModuleProfileDto.fromDTO(value, person);
-        return ModuleProfileDto.fromEntity(moduleProfileRepo.save(person));
+        ActivityLogDto.fromDTO(value, person);
+        return ActivityLogDto.fromEntity(activityLogRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        moduleProfileRepo.deleteById(id);
+        activityLogRepo.deleteById(id);
     }
 }
