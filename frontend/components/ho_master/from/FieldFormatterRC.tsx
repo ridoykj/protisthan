@@ -41,11 +41,11 @@ function FieldDataFormatter({ fieldData }: { fieldData: DocFieldDto[] }) {
         break;
       }
       case 'Section Break': {
-        cState = { tab: true, section: false, column: false };
+        cState = { tab: tabs.length > 0, section: false, column: false };
         break;
       }
       case 'Column Break': {
-        cState = { tab: true, section: true, column: false };
+        cState = { tab: tabs.length > 0, section: currentTab.sections.length > 0, column: false };
         break;
       }
       default:
@@ -53,11 +53,17 @@ function FieldDataFormatter({ fieldData }: { fieldData: DocFieldDto[] }) {
     }
 
     if (!cState.tab) {
+      if (currentTab.sections.length === 0) {
+        tabs.pop();
+      }
       currentTab = { name: item.fieldType === 'Tab Break' ? item.label ?? '' : '', sections: [] };
       tabs.push(currentTab);
       cState.tab = true;
     }
     if (!cState.section) {
+      if (currentSection.columns.length === 0) {
+        currentTab.sections.pop();
+      }
       currentSection = {
         name: item.fieldType === 'Section Break' ? item.label ?? '' : '',
         columns: [],
@@ -66,6 +72,9 @@ function FieldDataFormatter({ fieldData }: { fieldData: DocFieldDto[] }) {
       cState.section = true;
     }
     if (!cState.column) {
+      if (currentColumn.items.length === 0) {
+        currentSection.columns.pop();
+      }
       currentColumn = {
         name: item.fieldType === 'Column Break' ? item.label ?? '' : '',
         items: [],
