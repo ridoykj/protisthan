@@ -63,6 +63,7 @@ function RolesView() {
   const [selectedUserItems, setSelectedUserItems] = useState<RoleDto[]>([]);
 
   const [selectedRole, setSelectedRole] = useState<RoleDto>({} as RoleDto);
+  const [tabChange, setTabChange] = useState<number>(0);
   const [uiField, setUiField] = useState<DocFieldDto[]>([]);
 
   const {
@@ -246,6 +247,9 @@ function RolesView() {
       </>
     );
   }
+  useEffect(() => {
+    read(value);
+  }, [tabChange]);
 
   function childComponent() {
     return (
@@ -255,7 +259,14 @@ function RolesView() {
         </div>
         <div className="rounded-xl px-3">
           <div className="flex flex-col p-2 border rounded-xl shadow-sm">
-            <FromBuilderRC uiField={uiField} field={field} model={model} />
+            <FromBuilderRC
+              uiField={uiField}
+              field={field}
+              model={model}
+              tabChange={(tabE) => {
+                setTabChange(tabE);
+              }}
+            />
           </div>
         </div>
         <div className="h-8" />

@@ -63,6 +63,7 @@ function ItemsView() {
   const autoGridRef = React.useRef<AutoGridRef>(null);
   const [user, setUser] = useState<SalesInvoiceDto>({} as SalesInvoiceDto);
   const [selectedUserItems, setSelectedUserItems] = useState<SalesInvoiceDto[]>([]);
+  const [tabChange, setTabChange] = useState<number>(0);
 
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
 
@@ -262,6 +263,9 @@ function ItemsView() {
       </>
     );
   }
+  useEffect(() => {
+    read(value);
+  }, [tabChange]);
 
   function childComponent() {
     return (
@@ -271,7 +275,14 @@ function ItemsView() {
         </div>
         <div className="rounded-xl px-3">
           <div className="flex flex-col p-2 border rounded-xl shadow-sm">
-            <FromBuilderRC uiField={uiField} field={field} model={model} />
+            <FromBuilderRC
+              uiField={uiField}
+              field={field}
+              model={model}
+              tabChange={(tabE) => {
+                setTabChange(tabE);
+              }}
+            />
           </div>
         </div>
 

@@ -62,6 +62,7 @@ function CustomerView() {
   const [user, setUser] = useState<CustomerDto>({} as CustomerDto);
   const [selectedUserItems, setSelectedUserItems] = useState<CustomerDto[]>([]);
 
+  const [tabChange, setTabChange] = useState<number>(0);
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
 
   const {
@@ -246,6 +247,9 @@ function CustomerView() {
     );
   }
 
+  useEffect(() => {
+    read(value);
+  }, [tabChange]);
   function childComponent() {
     return (
       <div className="w-full md:px-10 sm:px-0 ">
@@ -254,7 +258,14 @@ function CustomerView() {
         </div>
         <div className="rounded-xl px-3">
           <div className="flex flex-col p-2 border rounded-xl shadow-sm">
-            <FromBuilderRC uiField={uiField} field={field} model={model} />
+            <FromBuilderRC
+              uiField={uiField}
+              field={field}
+              model={model}
+              tabChange={(tabE) => {
+                setTabChange(tabE);
+              }}
+            />
           </div>
         </div>
 

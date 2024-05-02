@@ -79,6 +79,7 @@ function UserTypeView() {
   const [user, setUser] = useState<UserDto>({} as UserDto);
   const [selectedUserItems, setSelectedUserItems] = useState<UserDto[]>([]);
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
+  const [tabChange, setTabChange] = useState<number>(0);
 
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
 
@@ -309,7 +310,9 @@ function UserTypeView() {
       </>
     );
   }
-
+  useEffect(() => {
+    read(value);
+  }, [tabChange]);
   function childComponent() {
     return (
       <div className="w-full md:px-10 sm:px-0 ">
@@ -318,7 +321,14 @@ function UserTypeView() {
         </div>
         <div className="rounded-xl px-3">
           <div className="flex flex-col p-2 border rounded-xl shadow-sm">
-            <FromBuilderRC uiField={uiField} field={field} model={model} />
+            <FromBuilderRC
+              uiField={uiField}
+              field={field}
+              model={model}
+              tabChange={(tabE) => {
+                setTabChange(tabE);
+              }}
+            />
           </div>
         </div>
 

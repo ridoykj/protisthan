@@ -79,6 +79,7 @@ function UsersView() {
   const [user, setUser] = useState<UserDto>({} as UserDto);
   const [selectedUserItems, setSelectedUserItems] = useState<UserDto[]>([]);
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
+  const [tabChange, setTabChange] = useState<number>(0);
 
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
 
@@ -100,7 +101,7 @@ function UsersView() {
     onSubmit: async (userE) => {
       await UserDtoCrudService.save(userE)
         .then((result) => {
-          clear();
+          // clear();
           setSuccessNotification(true);
           setIsOpen(false);
           setGridRefresh(!gridRefresh);
@@ -310,6 +311,7 @@ function UsersView() {
               onActiveItemChanged={(e) => {
                 const item = e.detail.value;
                 setSelectedUserItems(item ? [item] : []);
+                // setUser(item);
                 // read(item);
                 // const roleIds: string[] = result
                 //   .map((role) => role.name)
@@ -324,15 +326,26 @@ function UsersView() {
     );
   }
 
+  useEffect(() => {
+    read(value);
+  }, [tabChange]);
+
   function childComponent() {
     return (
-      <div className="w-full md:px-10 sm:px-0 ">
+      <div className="w-full md:px-10 sm:px-0">
         <div className="flex flex-col p-2 items-end">
           <ButtonRC title="Save" onClick={() => submit()} />
         </div>
         <div className="rounded-xl px-3">
-          <div className="flex flex-col p-2 border rounded-xl shadow-sm">
-            <FromBuilderRC uiField={uiField} field={field} model={model} />
+          <div className="flex flex-col border rounded-xl shadow-sm">
+            <FromBuilderRC
+              uiField={uiField}
+              field={field}
+              model={model}
+              tabChange={(tabE) => {
+                setTabChange(tabE);
+              }}
+            />
           </div>
         </div>
 
@@ -369,6 +382,7 @@ function UsersView() {
       </>
     );
   }
+
   function switchComponent() {
     if ((value.name !== undefined && queryId !== undefined) || queryId === '_') {
       return childComponent();

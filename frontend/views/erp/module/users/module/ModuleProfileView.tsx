@@ -63,6 +63,7 @@ function ModuleProfileView() {
   const [selectedUserItems, setSelectedUserItems] = useState<ModuleProfileDto[]>([]);
 
   const [selectedRole, setSelectedRole] = useState<ModuleProfileDto>({} as ModuleProfileDto);
+  const [tabChange, setTabChange] = useState<number>(0);
   const [uiField, setUiField] = useState<DocFieldDto[]>([]);
 
   const {
@@ -246,7 +247,9 @@ function ModuleProfileView() {
       </>
     );
   }
-
+  useEffect(() => {
+    read(value);
+  }, [tabChange]);
   function childComponent() {
     return (
       <div className="w-full md:px-10 sm:px-0 ">
@@ -255,7 +258,14 @@ function ModuleProfileView() {
         </div>
         <div className="rounded-xl px-3">
           <div className="flex flex-col p-2 border rounded-xl shadow-sm">
-            <FromBuilderRC uiField={uiField} field={field} model={model} />
+            <FromBuilderRC
+              uiField={uiField}
+              field={field}
+              model={model}
+              tabChange={(tabE) => {
+                setTabChange(tabE);
+              }}
+            />
           </div>
         </div>
         <div className="h-8" />
