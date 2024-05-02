@@ -30,6 +30,7 @@
     "date-fns": "^3.3.1",
     "lit": "3.1.0",
     "react-apexcharts": "^1.4.1",
+    "react-calendar-heatmap": "^1.9.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-pdf": "^7.7.0",
@@ -40,6 +41,7 @@
     "@eslint/js": "^9.0.0",
     "@rollup/plugin-replace": "5.0.4",
     "@rollup/pluginutils": "5.0.5",
+    "@types/react-calendar-heatmap": "^1.6.7",
     "@types/react-dom": "^18.2.25",
     "@types/react-resizable": "^3.0.7",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
@@ -116,7 +118,7 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "3866fbe40fc07658aafae0f6145091b96d78e88901303a8cfa7cce454c2c8846"
+    "hash": "1a7b4a1a8a482ad852313d241743a636260ee149ebb8bd1c93b1149085f27291"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
@@ -147,6 +149,7 @@
     "react-pdf": "$react-pdf",
     "react-dom": "$react-dom",
     "react-router-dom": "$react-router-dom",
-    "react-apexcharts": "$react-apexcharts"
+    "react-apexcharts": "$react-apexcharts",
+    "react-calendar-heatmap": "$react-calendar-heatmap"
   }
 }
