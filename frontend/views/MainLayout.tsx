@@ -12,18 +12,22 @@ export default function MainLayout() {
   };
 
   return (
-    // <div className="flex flex-row h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
     <div className="flex flex-row h-screen bg-slate-50 text-gray-800">
       <aside
-        className={`bg-gray-100 overflow-hidden duration-300 ${isSidebarVisible ? 'w-64' : 'w-0'}`}
+        className={`inline-flex overflow-hidden z-50 shadow-lg duration-300 fixed md:relative ${isSidebarVisible ? 'w-full md:w-64' : 'w-0'}`}
       >
-        <AppNavItem />
+        <AppNavItem className={`bg-gray-100 ${isSidebarVisible ? 'w-3/4 md:w-64' : 'w-0'}`} />
+        <button
+          type="button"
+          className="bg-gray-800/20 w-1/3 md:w-0"
+          onClick={showSideNav}
+          aria-label="Toggle Sidebar"
+        />
       </aside>
       <div className="flex flex-col overflow-hidden w-screen">
         <nav className="bg-indigo-700 p-3">
-          <AppHeader showSideNav={showSideNav} />
+          <AppHeader openSideBar={showSideNav} />
         </nav>
-        {/* <main className="flex-1 overflow-auto bg-gray-50"> */}
         <main className="flex-1 overflow-auto ">
           <Suspense fallback={<Placeholder />}>
             <Outlet />
