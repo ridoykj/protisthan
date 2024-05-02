@@ -1,5 +1,6 @@
 import MainLayout from 'Frontend/views/MainLayout.js';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import AccountView from './views/erp/module/accounting/AccountView';
 import ItemsView from './views/erp/module/sale/item/ItemsView';
 import SalesInvoiceView from './views/erp/module/sale/SalesInvoiceView';
 import AccessLogView from './views/erp/module/settings/log/AccessLogView';
@@ -7,6 +8,7 @@ import ActivityLogView from './views/erp/module/settings/log/ActivityLogView';
 import ModuleProfileView from './views/erp/module/users/module/ModuleProfileView';
 import RolesProfileView from './views/erp/module/users/role/RolesProfileView';
 import RolesView from './views/erp/module/users/role/RolesView';
+import CompanyView from './views/erp/module/users/user/CompanyView';
 import CustomerView from './views/erp/module/users/user/CustomerView';
 import SupplierView from './views/erp/module/users/user/SupplierView';
 import UserProfileView from './views/erp/module/users/user/UserProfileView';
@@ -93,6 +95,12 @@ export const routes: RouteObject[] = [
         element: <SalesInvoiceView />,
         handle: { title: 'Sales Invoice' },
       },
+
+      { path: 'm/account', element: <AccountView />, handle: { title: 'Account' } },
+      { path: 'm/account/:queryId', element: <AccountView />, handle: { title: 'Account' } },
+
+      { path: 'm/company', element: <CompanyView />, handle: { title: 'Company' } },
+      { path: 'm/company/:queryId', element: <CompanyView />, handle: { title: 'Company' } },
 
       // { path: 'm/role/:roleId', element: <RoleView />, handle: { title: 'Roles' } },
 
