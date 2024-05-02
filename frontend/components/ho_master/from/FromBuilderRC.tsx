@@ -3,6 +3,7 @@ import { FieldDirective } from '@hilla/react-form';
 import DocFieldDto from 'Frontend/generated/com/itbd/application/db/dto/doctypes/DocFieldDto';
 
 import { Tab } from '@headlessui/react';
+import RippleDivRC from 'Frontend/components/effects/ripple/div/RippleDivRC';
 import FieldDataFormatter from './FieldFormatterRC';
 import FieldRC from './FieldRC';
 
@@ -18,19 +19,21 @@ export interface FromBuilderRCProps {
 
 function TabHeader({ title }: { title: string }) {
   return (
-    <Tab
-      className={({ selected }) =>
-        classNames(
-          'w-full rounded-lg py-2.5 text-sm font-semibold leading-5',
-          'ring-white/60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
-          selected
-            ? 'bg-white text-indigo-700 shadow'
-            : 'text-indigo-100 hover:bg-white/[0.12] hover:text-white'
-        )
-      }
-    >
-      {title}
-    </Tab>
+    <RippleDivRC className="w-full rounded-lg">
+      <Tab
+        className={({ selected }) =>
+          classNames(
+            'w-full h-full rounded-lg py-2.5 text-sm font-semibold leading-5',
+            'ring-white/60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
+            selected
+              ? 'bg-white text-indigo-700 shadow'
+              : 'text-indigo-100 hover:bg-white/[0.12] hover:text-white'
+          )
+        }
+      >
+        {title}
+      </Tab>
+    </RippleDivRC>
   );
 }
 
@@ -56,20 +59,28 @@ function FromBuilderRC({ uiField, field, model }: FromBuilderRCProps) {
           <Tab.List
             className={`flex space-x-1 rounded-xl bg-indigo-700 p-1 ${fieldContent.length <= 1 ? 'hidden' : ''}`}
           >
-            {fieldContent.map((category) => (
-              <TabHeader key={category.name} title={category.name} />
+            {fieldContent.map((category, index) => (
+              <TabHeader
+                key={category.name.length > 0 ? category.name.length : `tabH-${index}`}
+                title={category.name}
+              />
             ))}
           </Tab.List>
           <Tab.Panels className="mt-2">
             {fieldContent.map((tab, tIndex) => {
               return (
                 <TabPaneE key={tab.name.length === 0 ? `tab-${tIndex}` : tab.name}>
-                  {tab.sections.map((section) => {
+                  {tab.sections.map((section, sIndex) => {
                     return (
-                      <div key={section.name} className="flex flex-col divide-y-2">
-                        {section.name.length > 0 ? (
-                          <span className="font-semibold text-sm pt-4">{section.name}</span>
-                        ) : null}
+                      <fieldset
+                        key={section.name.length === 0 ? `section-${sIndex}` : section.name}
+                        className="flex flex-col border border-gray-300 p-2 rounded-lg m-2"
+                      >
+                        <legend
+                          className={`${section.name.length > 0 ? 'font-bold text-lg text-gray-800' : 'hidden'}`}
+                        >
+                          {section.name}
+                        </legend>
                         <div className="grid grid-rows-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                           {section.columns.map((column, cIndex) => {
                             return (
@@ -91,7 +102,7 @@ function FromBuilderRC({ uiField, field, model }: FromBuilderRCProps) {
                             );
                           })}
                         </div>
-                      </div>
+                      </fieldset>
                     );
                   })}
                 </TabPaneE>
