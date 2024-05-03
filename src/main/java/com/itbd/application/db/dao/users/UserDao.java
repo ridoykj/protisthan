@@ -200,6 +200,7 @@ public class UserDao {
     private String lastIp;
 
     @Column(name = "ct_login_after", nullable = false)
+    @ColumnDefault("0")
     private Integer loginAfter;
 
     @Column(name = "tx_user_type", length = 140)
@@ -210,6 +211,7 @@ public class UserDao {
     private LocalDateTime lastActive;
 
     @Column(name = "ct_login_before", nullable = false)
+    @ColumnDefault("0")
     private Integer loginBefore;
 
     @Column(name = "is_bypass_restrict_ip_check_if_2_fa_enabled", nullable = false)

@@ -57,7 +57,7 @@ public class SupplierQuotationItemDao {
     @Column(name = "tx_item_name", length = 140)
     private String itemName;
 
-    @Column(name = "ct_lead_time_days", nullable = false)
+    @Column(name = "ct_lead_time_days", nullable = false)     @ColumnDefault("0")
     private Integer leadTimeDays;
 
     @Column(name = "dt_expected_delivery_date")

@@ -92,7 +92,7 @@ public class ItemPriceDao {
     @Column(name = "dt_validFrom")
     private LocalDate validFrom;
 
-    @Column(name = "ct_lead_time_days", nullable = false)
+    @Column(name = "ct_lead_time_days", nullable = false)     @ColumnDefault("0")
     private Integer leadTimeDays;
 
     @Column(name = "dt_validUpto")

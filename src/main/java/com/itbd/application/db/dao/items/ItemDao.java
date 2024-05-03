@@ -130,6 +130,7 @@ public class ItemDao {
     private String brand;
 
     @Column(name = "ct_shelf_life_in_days", nullable = false)
+    @ColumnDefault("0")
     private Integer shelfLifeInDays;
 
     @Column(name = "dt_end_of_life")
@@ -177,6 +178,7 @@ public class ItemDao {
     private Boolean retainSample;
 
     @Column(name = "ct_sample_quantity", nullable = false)
+    @ColumnDefault("0")
     private Integer sampleQuantity;
 
     @Column(name = "is_has_serial_no", nullable = false)
@@ -198,6 +200,7 @@ public class ItemDao {
     private Boolean enableDeferredExpense;
 
     @Column(name = "ct_no_of_months_exp", nullable = false)
+    @ColumnDefault("0")
     private Integer noOfMonthsExp;
 
     @Column(name = "is_enable_deferred_revenue", nullable = false)
@@ -205,6 +208,7 @@ public class ItemDao {
     private Boolean enableDeferredRevenue;
 
     @Column(name = "ct_no_of_months", nullable = false)
+    @ColumnDefault("0")
     private Integer noOfMonths;
 
     @Column(name = "tx_purchase_uom", length = 140)
@@ -222,7 +226,7 @@ public class ItemDao {
     @ColumnDefault("1")
     private Boolean isPurchaseItem;
 
-    @Column(name = "ct_lead_time_days", nullable = false)
+    @Column(name = "ct_lead_time_days", nullable = false)     @ColumnDefault("0")
     private Integer leadTimeDays;
 
     @Column(name = "flt_last_purchase_rate", nullable = false, precision = 21, scale = 9)

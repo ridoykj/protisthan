@@ -175,7 +175,7 @@ public record ItemDto(
     }
 
     public static void fromDTO(ItemDto vItemDto, ItemDao eItemDao) {
-        eItemDao.setName(vItemDto.name());
+        eItemDao.setName(vItemDto.name() != null ? vItemDto.name() : (vItemDto.itemGroup()+"_"+vItemDto.itemCode()  +"_"+vItemDto.salesUom()) .toLowerCase().replaceAll("\\s","_"));
         eItemDao.setCreation(vItemDto.creation());
         eItemDao.setModified(vItemDto.modified());
         eItemDao.setModifiedBy(vItemDto.modifiedBy());

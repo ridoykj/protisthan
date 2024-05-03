@@ -106,7 +106,7 @@ public record SupplierDto(
     }
 
     public static void fromDTO(SupplierDto vSupplierDto, SupplierDao eSupplierDao) {
-        eSupplierDao.setName(vSupplierDto.name());
+        eSupplierDao.setName(vSupplierDto.name() != null ? vSupplierDto.name() : (vSupplierDto.supplierName()+"_"+vSupplierDto.supplierType()).toLowerCase().replaceAll("\\s","_"));
         eSupplierDao.setCreation(vSupplierDto.creation());
         eSupplierDao.setModified(vSupplierDto.modified());
         eSupplierDao.setModifiedBy(vSupplierDto.modifiedBy());
