@@ -18,7 +18,7 @@ import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
 import { DocFieldDtoCrudService, SalesInvoiceDtoCrudService } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
-import { FaSortAmountDown, FaUserPlus } from 'react-icons/fa';
+import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
 import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -95,6 +95,9 @@ function SalesInvoiceView() {
     },
   });
 
+  useEffect(() => {
+    autoGridRef.current?.refresh();
+  }, [gridRefresh]);
   useEffect(() => {
     DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'sales invoice')).then(
       (result) => {
@@ -174,6 +177,7 @@ function SalesInvoiceView() {
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
+        setUser({} as SalesInvoiceDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
@@ -197,6 +201,23 @@ function SalesInvoiceView() {
     );
   }
 
+  function deleteRander({ item }: { item: SalesInvoiceDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-red-500 hover:underline"
+        title="Delete"
+        onClick={(e) => {
+          SalesInvoiceDtoCrudService.delete(item.name).then((result) => {
+            setGridRefresh(!gridRefresh);
+          });
+        }}
+      >
+        <FaTrash />
+      </button>
+    );
+  }
   function parentComponent() {
     return (
       <>
@@ -208,7 +229,7 @@ function SalesInvoiceView() {
               model={SalesInvoiceDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['name', 'title', 'customer', 'company', 'status']}
+              visibleColumns={['name', 'title', 'customer', 'company', 'status', 'idx']}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
@@ -234,6 +255,13 @@ function SalesInvoiceView() {
                 status: {
                   header: 'Status',
                   resizable: true,
+                },
+                idx: {
+                  header: 'Action',
+                  filterable: false,
+                  sortable: false,
+                  resizable: true,
+                  renderer: deleteRander,
                 },
               }}
               onSelectedItemsChanged={(e) => {
@@ -318,10 +346,16 @@ function SalesInvoiceView() {
         }}
       >
         <FormLayout responsiveSteps={responsiveSteps} className="w-fit h-fit p-2">
-          <TextField label="Customer Name" {...{ colspan: 1 }} {...field(model.namingSeries)} />
-          <TextField label="Customer Type" {...{ colspan: 1 }} {...field(model.customerName)} />
+          <TextField
+            label="Naming Series"
+            {...{ colspan: 1 }}
+            required
+            {...field(model.namingSeries)}
+          />
+          <TextField label="Company" {...{ colspan: 1 }} required {...field(model.company)} />
+          <TextField label="Customer Name" {...{ colspan: 1 }} {...field(model.customerName)} />
 
-          <DatePicker label="Email Id" {...{ colspan: 1 }} {...field(model.poDate)} />
+          <DatePicker label="Email Id" {...{ colspan: 1 }} required {...field(model.poDate)} />
         </FormLayout>
       </DialogFromRC>
     </>

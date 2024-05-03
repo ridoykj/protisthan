@@ -150,6 +150,9 @@ function UserProfileView() {
   });
 
   useEffect(() => {
+    autoGridRef.current?.refresh();
+  }, [gridRefresh]);
+  useEffect(() => {
     DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'User')).then(
       (result) => {
         setUiField(result);

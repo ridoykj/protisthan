@@ -18,7 +18,7 @@ import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
 import { AccountDtoCrudService, DocFieldDtoCrudService } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
-import { FaSortAmountDown, FaUserPlus } from 'react-icons/fa';
+import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
 import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -96,6 +96,9 @@ function AccountView() {
   });
 
   useEffect(() => {
+    autoGridRef.current?.refresh();
+  }, [gridRefresh]);
+  useEffect(() => {
     DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Account')).then(
       (result) => {
         setUiField(result);
@@ -170,10 +173,11 @@ function AccountView() {
       },
     },
     {
-      name: 'Add User',
+      name: 'Add Account',
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
+        setUser({} as AccountDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
@@ -197,6 +201,23 @@ function AccountView() {
     );
   }
 
+  function deleteRander({ item }: { item: AccountDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-red-500 hover:underline"
+        title="Delete"
+        onClick={(e) => {
+          AccountDtoCrudService.delete(item.name).then((result) => {
+            setGridRefresh(!gridRefresh);
+          });
+        }}
+      >
+        <FaTrash />
+      </button>
+    );
+  }
   function parentComponent() {
     return (
       <>
@@ -208,7 +229,7 @@ function AccountView() {
               model={AccountDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['name', 'disabled', 'accountName', 'accountNumber']}
+              visibleColumns={['name', 'disabled', 'accountName', 'accountNumber', 'idx']}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
@@ -230,6 +251,13 @@ function AccountView() {
                 accountNumber: {
                   header: 'Account Number',
                   resizable: true,
+                },
+                idx: {
+                  header: 'Action',
+                  filterable: false,
+                  sortable: false,
+                  resizable: true,
+                  renderer: deleteRander,
                 },
               }}
               onSelectedItemsChanged={(e) => {

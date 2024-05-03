@@ -16,7 +16,7 @@ import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
 import { DocFieldDtoCrudService, RoleDtoCrudService } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
-import { FaSortAmountDown, FaUserPlus } from 'react-icons/fa';
+import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
 import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -96,6 +96,9 @@ function RolesView() {
   });
 
   useEffect(() => {
+    autoGridRef.current?.refresh();
+  }, [gridRefresh]);
+  useEffect(() => {
     DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Role')).then(
       (result) => {
         setUiField(result);
@@ -120,6 +123,23 @@ function RolesView() {
     );
   }
 
+  function deleteRander({ item }: { item: RoleDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-red-500 hover:underline"
+        title="Delete"
+        onClick={(e) => {
+          RoleDtoCrudService.delete(item.name).then((result) => {
+            setGridRefresh(!gridRefresh);
+          });
+        }}
+      >
+        <FaTrash />
+      </button>
+    );
+  }
   const actionBtn = [
     {
       children: <FaArrowsRotate size={15} />,
@@ -191,6 +211,7 @@ function RolesView() {
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
+        setSelectedRole({} as RoleDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
@@ -208,7 +229,7 @@ function RolesView() {
               model={RoleDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['name', 'deskAccess', 'isCustom', 'email', 'creation']}
+              visibleColumns={['name', 'deskAccess', 'isCustom', 'email', 'creation', 'idx']}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
@@ -231,6 +252,13 @@ function RolesView() {
                   header: 'Created At',
                   resizable: true,
                   filterable: false,
+                },
+                idx: {
+                  header: 'Action',
+                  filterable: false,
+                  sortable: false,
+                  resizable: true,
+                  renderer: deleteRander,
                 },
               }}
               onActiveItemChanged={(e) => {

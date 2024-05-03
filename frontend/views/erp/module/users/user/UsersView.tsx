@@ -27,7 +27,7 @@ import {
 } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
-import { FaSortAmountDown, FaUserPlus } from 'react-icons/fa';
+import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
 import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -111,6 +111,10 @@ function UsersView() {
         });
     },
   });
+
+  useEffect(() => {
+    autoGridRef.current?.refresh();
+  }, [gridRefresh]);
 
   useEffect(() => {
     DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'User')).then(
@@ -225,6 +229,7 @@ function UsersView() {
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
+        setUser({} as UserDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
@@ -253,6 +258,23 @@ function UsersView() {
     );
   }
 
+  function deleteRander({ item }: { item: UserDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-red-500 hover:underline"
+        title="Delete"
+        onClick={(e) => {
+          UserDtoCrudService.delete(item.name).then((result) => {
+            setGridRefresh(!gridRefresh);
+          });
+        }}
+      >
+        <FaTrash />
+      </button>
+    );
+  }
   function parentComponent() {
     return (
       <>
@@ -291,6 +313,13 @@ function UsersView() {
                   header: 'Created At',
                   resizable: true,
                   filterable: false,
+                },
+                idx: {
+                  header: 'Action',
+                  filterable: false,
+                  sortable: false,
+                  resizable: true,
+                  renderer: deleteRander,
                 },
 
                 // 'floor.name': {

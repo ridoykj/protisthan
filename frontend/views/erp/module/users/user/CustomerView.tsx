@@ -17,8 +17,8 @@ import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
 import { CustomerDtoCrudService, DocFieldDtoCrudService } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
-import { FaSortAmountDown, FaUserPlus } from 'react-icons/fa';
-import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
+import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
+import { FaArrowsRotate, FaFilter } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const responsiveSteps = [
@@ -95,6 +95,9 @@ function CustomerView() {
   });
 
   useEffect(() => {
+    autoGridRef.current?.refresh();
+  }, [gridRefresh]);
+  useEffect(() => {
     DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'customer')).then(
       (result) => {
         setUiField(result);
@@ -126,53 +129,54 @@ function CustomerView() {
   ];
 
   const speedDial = [
+    // {
+    //   name: 'Import',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
+    // {
+    //   name: 'User Permissions',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
+    // {
+    //   name: 'Role Permissions Manager',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
+    // {
+    //   name: 'Customize',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
+    // {
+    //   name: 'Toggle Sidebar',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
+    // {
+    //   name: 'List Settings',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
     {
-      name: 'Import',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'User Permissions',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'Role Permissions Manager',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'Customize',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'Toggle Sidebar',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'List Settings',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'Add User',
+      name: 'Add Customer',
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
+        setUser({} as CustomerDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
@@ -184,18 +188,41 @@ function CustomerView() {
     return (
       <button
         type="button"
-        className="text-blue-500 hover:underline"
+        className="text-blue-500 hover:underline inline-flex items-center gap-2"
         onClick={(e) => {
           setUser(item);
           read(item);
           navigate(`/m/customer/${name}`);
         }}
       >
+        {' '}
+        <img
+          src={`images/profile/${name === 'ridoykj@gmail.com' ? 'profile.jpg' : 'default_profile.png'}`}
+          className="w-8 h-8 rounded-full"
+          alt="not_found"
+        />
         {customerName}
       </button>
     );
   }
 
+  function deleteRander({ item }: { item: CustomerDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-red-500 hover:underline"
+        title="Delete"
+        onClick={(e) => {
+          CustomerDtoCrudService.delete(item.name).then((result) => {
+            setGridRefresh(!gridRefresh);
+          });
+        }}
+      >
+        <FaTrash />
+      </button>
+    );
+  }
   function parentComponent() {
     return (
       <>
@@ -207,7 +234,7 @@ function CustomerView() {
               model={CustomerDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['name', 'customerName', 'customerGroup', 'territory']}
+              visibleColumns={['name', 'customerName', 'customerGroup', 'territory', 'idx']}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
@@ -229,6 +256,13 @@ function CustomerView() {
                 territory: {
                   header: 'Territory',
                   resizable: true,
+                },
+                idx: {
+                  header: 'Action',
+                  filterable: false,
+                  sortable: false,
+                  resizable: true,
+                  renderer: deleteRander,
                 },
               }}
               onSelectedItemsChanged={(e) => {

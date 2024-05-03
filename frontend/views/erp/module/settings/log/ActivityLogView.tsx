@@ -16,7 +16,7 @@ import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
 import { ActivityLogDtoCrudService, DocFieldDtoCrudService } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
-import { FaSortAmountDown, FaUserPlus } from 'react-icons/fa';
+import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
 import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -95,6 +95,9 @@ function ActivityLogView() {
   });
 
   useEffect(() => {
+    autoGridRef.current?.refresh();
+  }, [gridRefresh]);
+  useEffect(() => {
     DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Activity Log')).then(
       (result) => {
         setUiField(result);
@@ -119,6 +122,23 @@ function ActivityLogView() {
     );
   }
 
+  function deleteRander({ item }: { item: ActivityLogDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-red-500 hover:underline"
+        title="Delete"
+        onClick={(e) => {
+          ActivityLogDtoCrudService.delete(item.name).then((result) => {
+            setGridRefresh(!gridRefresh);
+          });
+        }}
+      >
+        <FaTrash />
+      </button>
+    );
+  }
   const actionBtn = [
     {
       children: <FaArrowsRotate size={15} />,
@@ -190,6 +210,7 @@ function ActivityLogView() {
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
+        setSelectedRole({} as ActivityLogDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
@@ -207,7 +228,7 @@ function ActivityLogView() {
               model={ActivityLogDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['subject', 'status', 'fullName', 'name']}
+              visibleColumns={['subject', 'status', 'fullName', 'name', 'idx']}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
@@ -229,6 +250,13 @@ function ActivityLogView() {
                 name: {
                   header: 'ID',
                   resizable: true,
+                },
+                idx: {
+                  header: 'Action',
+                  filterable: false,
+                  sortable: false,
+                  resizable: true,
+                  renderer: deleteRander,
                 },
               }}
               onActiveItemChanged={(e) => {

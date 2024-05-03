@@ -1,4 +1,5 @@
 import { Checkbox } from '@hilla/react-components/Checkbox.js';
+import { ComboBox } from '@hilla/react-components/ComboBox.js';
 import { FormLayout } from '@hilla/react-components/FormLayout';
 import { TextField } from '@hilla/react-components/TextField';
 import { useForm } from '@hilla/react-form';
@@ -13,14 +14,19 @@ import ItemDto from 'Frontend/generated/com/itbd/application/db/dto/items/ItemDt
 
 import ItemDtoModel from 'Frontend/generated/com/itbd/application/db/dto/items/ItemDtoModel';
 import SalesInvoiceDto from 'Frontend/generated/com/itbd/application/db/dto/sales/SalesInvoiceDto';
+import UomDto from 'Frontend/generated/com/itbd/application/db/dto/uoms/UomDto';
 import Filter from 'Frontend/generated/dev/hilla/crud/filter/Filter';
 import Matcher from 'Frontend/generated/dev/hilla/crud/filter/PropertyStringFilter/Matcher';
 import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
-import { DocFieldDtoCrudService, ItemDtoCrudService } from 'Frontend/generated/endpoints';
+import {
+  DocFieldDtoCrudService,
+  ItemDtoCrudService,
+  UomDtoCrudService,
+} from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
-import { FaSortAmountDown, FaUserPlus } from 'react-icons/fa';
-import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
+import { FaCarrot, FaSortAmountDown, FaTrash } from 'react-icons/fa';
+import { FaArrowsRotate, FaFilter } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const responsiveSteps = [
@@ -63,6 +69,7 @@ function ItemsView() {
   const autoGridRef = React.useRef<AutoGridRef>(null);
   const [user, setUser] = useState<SalesInvoiceDto>({} as SalesInvoiceDto);
   const [selectedUserItems, setSelectedUserItems] = useState<SalesInvoiceDto[]>([]);
+  const [selectUom, setSelectUom] = useState<UomDto[]>([]);
   const [tabChange, setTabChange] = useState<number>(0);
 
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
@@ -97,11 +104,20 @@ function ItemsView() {
   });
 
   useEffect(() => {
+    autoGridRef.current?.refresh();
+  }, [gridRefresh]);
+  useEffect(() => {
     DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Item')).then(
       (result) => {
         setUiField(result);
       }
     );
+  }, []);
+
+  useEffect(() => {
+    UomDtoCrudService.list(pagination, undefined).then((uomE) => {
+      setSelectUom(uomE);
+    });
   }, []);
 
   const actionBtn = [
@@ -128,53 +144,54 @@ function ItemsView() {
   ];
 
   const speedDial = [
-    {
-      name: 'Import',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'User Permissions',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'Role Permissions Manager',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'Customize',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'Toggle Sidebar',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
-    {
-      name: 'List Settings',
-      icon: <FaLaptopCode />,
-      onClick: () => {
-        setSelectedUserItems([]);
-      },
-    },
+    // {
+    //   name: 'Import',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
+    // {
+    //   name: 'User Permissions',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
+    // {
+    //   name: 'Role Permissions Manager',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
+    // {
+    //   name: 'Customize',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
+    // {
+    //   name: 'Toggle Sidebar',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
+    // {
+    //   name: 'List Settings',
+    //   icon: <FaLaptopCode />,
+    //   onClick: () => {
+    //     setSelectedUserItems([]);
+    //   },
+    // },
     {
       name: 'Add Item',
-      icon: <FaUserPlus />,
+      icon: <FaCarrot />,
       onClick: () => {
         clear();
+        setUser({} as ItemDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
@@ -182,7 +199,7 @@ function ItemsView() {
   ];
 
   function ChildRedirect({ item }: { item: ItemDto }) {
-    const { itemName, name } = item;
+    const { name } = item;
     return (
       <button
         type="button"
@@ -193,11 +210,28 @@ function ItemsView() {
           navigate(`/m/item/${name}`);
         }}
       >
-        {itemName}
+        {name}
       </button>
     );
   }
 
+  function deleteRander({ item }: { item: ItemDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-red-500 hover:underline"
+        title="Delete"
+        onClick={(e) => {
+          ItemDtoCrudService.delete(item.name).then((result) => {
+            setGridRefresh(!gridRefresh);
+          });
+        }}
+      >
+        <FaTrash />
+      </button>
+    );
+  }
   function parentComponent() {
     return (
       <>
@@ -210,6 +244,7 @@ function ItemsView() {
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
               visibleColumns={[
+                'name',
                 'itemName',
                 'disabled',
                 'itemCode',
@@ -223,10 +258,14 @@ function ItemsView() {
               // rowNumbers
               multiSelect
               columnOptions={{
+                name: {
+                  header: 'ID',
+                  resizable: true,
+                  renderer: ChildRedirect,
+                },
                 itemName: {
                   header: 'Item Name',
                   resizable: true,
-                  renderer: ChildRedirect,
                 },
                 disabled: {
                   header: 'Status',
@@ -248,6 +287,13 @@ function ItemsView() {
                   header: 'Created At',
                   resizable: true,
                   filterable: false,
+                },
+                idx: {
+                  header: 'Action',
+                  filterable: false,
+                  sortable: false,
+                  resizable: true,
+                  renderer: deleteRander,
                 },
               }}
               onActiveItemChanged={(e) => {
@@ -313,7 +359,7 @@ function ItemsView() {
     <>
       {switchComponent()}
       <DialogFromRC
-        header="Add User"
+        header="Add Item"
         opened={isOpen}
         submitDisabled={!dirty || invalid || submitting}
         submit={submit}
@@ -329,9 +375,15 @@ function ItemsView() {
         }}
       >
         <FormLayout responsiveSteps={responsiveSteps} className="w-fit h-fit p-2">
-          <TextField label="Customer Name" {...{ colspan: 1 }} {...field(model.itemCode)} />
-          <TextField label="Customer Type" {...{ colspan: 1 }} {...field(model.itemGroup)} />
-          <TextField label="Customer Type" {...{ colspan: 1 }} {...field(model.salesUom)} />
+          <TextField label="Item Code" required {...{ colspan: 1 }} {...field(model.itemCode)} />
+          <TextField label="Item Group" required {...{ colspan: 1 }} {...field(model.itemGroup)} />
+          <ComboBox
+            label="Default Unit of Measure"
+            required
+            items={selectUom.map((e) => e.name)}
+            {...{ colspan: 1 }}
+            {...field(model.salesUom)}
+          />
           <Checkbox label="Maintain Stock" {...{ colspan: 1 }} {...field(model.isStockItem)} />
           <Checkbox label="Is Fixed Asset" {...{ colspan: 1 }} {...field(model.isFixedAsset)} />
         </FormLayout>
