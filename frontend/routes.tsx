@@ -18,8 +18,8 @@ import CommonView from './views/erp/sidenav/CommonView';
 
 // const AboutView = lazy(async () => import('Frontend/views/about/AboutView'));
 
-const prod = false;
-// const prod = true;
+// const prod = false;
+const prod = true;
 
 export const routes: RouteObject[] = [
   {
