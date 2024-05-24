@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.item;
 
-import com.itbd.application.db.dao.price.PricingRuleDao;
-import com.itbd.application.db.dto.price.PricingRuleDto;
-import com.itbd.application.db.repos.PricingRuleRepository;
+import com.itbd.application.db.dao.shipments.ShippingRuleDao;
+import com.itbd.application.db.dto.shipments.ShippingRuleDto;
+import com.itbd.application.db.repos.ShippingRuleRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PricingRuleDtoCrudService implements CrudService<PricingRuleDto, String> {
+public class ShippingRuleDtoCrudService implements CrudService<ShippingRuleDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PricingRuleRepository pricingRuleRepo;
+    private final ShippingRuleRepository shippingRuleRepo;
 
-    public PricingRuleDtoCrudService(PricingRuleRepository pricingRuleRepo, JpaFilterConverter jpaFilterConverter) {
-        this.pricingRuleRepo = pricingRuleRepo;
+    public ShippingRuleDtoCrudService(ShippingRuleRepository shippingRuleRepo, JpaFilterConverter jpaFilterConverter) {
+        this.shippingRuleRepo = shippingRuleRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PricingRuleDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ShippingRuleDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PricingRuleDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PricingRuleDao.class)
+        Specification<ShippingRuleDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ShippingRuleDao.class)
                 : Specification.anyOf();
-        Page<PricingRuleDao> persons = pricingRuleRepo.findAll(spec, pageable);
-        return persons.stream().map(PricingRuleDto::fromEntity).toList();
+        Page<ShippingRuleDao> persons = shippingRuleRepo.findAll(spec, pageable);
+        return persons.stream().map(ShippingRuleDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PricingRuleDto save(PricingRuleDto value) {
+    public @Nullable ShippingRuleDto save(ShippingRuleDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PricingRuleDao person = check
-                ? pricingRuleRepo.getReferenceById(value.name())
-                : new PricingRuleDao();
+        ShippingRuleDao person = check
+                ? shippingRuleRepo.getReferenceById(value.name())
+                : new ShippingRuleDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PricingRuleDto.fromDTO(value, person);
-        return PricingRuleDto.fromEntity(pricingRuleRepo.save(person));
+        ShippingRuleDto.fromDTO(value, person);
+        return ShippingRuleDto.fromEntity(shippingRuleRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        pricingRuleRepo.deleteById(id);
+        shippingRuleRepo.deleteById(id);
     }
 }
