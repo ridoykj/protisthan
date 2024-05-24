@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.item;
 
-import com.itbd.application.db.dao.items.ItemDao;
-import com.itbd.application.db.dto.items.ItemDto;
-import com.itbd.application.db.repos.ItemRepository;
+import com.itbd.application.db.dao.items.ItemPriceDao;
+import com.itbd.application.db.dto.items.ItemPriceDto;
+import com.itbd.application.db.repos.ItemPriceRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ItemDtoCrudService implements CrudService<ItemDto, String> {
+public class ItemPriceDtoCrudService implements CrudService<ItemPriceDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ItemRepository itemRepo;
+    private final ItemPriceRepository itemPriceRepo;
 
-    public ItemDtoCrudService(ItemRepository itemRepo, JpaFilterConverter jpaFilterConverter) {
-        this.itemRepo = itemRepo;
+    public ItemPriceDtoCrudService(ItemPriceRepository itemPriceRepo, JpaFilterConverter jpaFilterConverter) {
+        this.itemPriceRepo = itemPriceRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ItemDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ItemPriceDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ItemDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ItemDao.class)
+        Specification<ItemPriceDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ItemPriceDao.class)
                 : Specification.anyOf();
-        Page<ItemDao> persons = itemRepo.findAll(spec, pageable);
-        return persons.stream().map(ItemDto::fromEntity).toList();
+        Page<ItemPriceDao> persons = itemPriceRepo.findAll(spec, pageable);
+        return persons.stream().map(ItemPriceDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ItemDto save(ItemDto value) {
+    public @Nullable ItemPriceDto save(ItemPriceDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ItemDao person = check
-                ? itemRepo.getReferenceById(value.name())
-                : new ItemDao();
+        ItemPriceDao person = check
+                ? itemPriceRepo.getReferenceById(value.name())
+                : new ItemPriceDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ItemDto.fromDTO(value, person);
-        return ItemDto.fromEntity(itemRepo.save(person));
+        ItemPriceDto.fromDTO(value, person);
+        return ItemPriceDto.fromEntity(itemPriceRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        itemRepo.deleteById(id);
+        itemPriceRepo.deleteById(id);
     }
 }
