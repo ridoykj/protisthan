@@ -7,6 +7,13 @@ import RippleDivRC from 'Frontend/components/effects/ripple/div/RippleDivRC';
 import FieldDataFormatter from './FieldFormatterRC';
 import FieldRC from './FieldRC';
 
+const columnCss: { [key: number]: string } = {
+  1: 'w-full',
+  2: 'grid grid-rows-1 md:grid-cols-2 gap-4',
+  3: 'grid grid-rows-1 md:grid-cols-2 lg:grid-cols-3 gap-4',
+  4: 'grid grid-rows-1 md:grid-cols-2 lg:grid-cols-4 gap-4',
+};
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
@@ -16,6 +23,7 @@ export interface FromBuilderRCProps {
   field: FieldDirective;
   model: AbstractModel;
   tabChange?: (index: number) => void;
+  custom?: any;
 }
 
 function TabHeader({ title }: { title: string }) {
@@ -46,7 +54,7 @@ function TabPaneE({ children }: { children?: React.ReactNode }) {
   );
 }
 
-function FromBuilderRC({ uiField, field, model, tabChange }: FromBuilderRCProps) {
+function FromBuilderRC({ uiField, field, model, tabChange, custom }: FromBuilderRCProps) {
   if (uiField.length !== 0) {
     const fieldContent = FieldDataFormatter({ fieldData: uiField });
     const header = () => {
@@ -86,7 +94,9 @@ function FromBuilderRC({ uiField, field, model, tabChange }: FromBuilderRCProps)
                       >
                         {section.name}
                       </legend>
-                      <div className="grid grid-rows-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                      <div
+                        className={`${section.columns.length <= 3 ? columnCss[section.columns.length] : columnCss[4]}`}
+                      >
                         {section.columns.map((column, cIndex) => {
                           return (
                             <div
@@ -97,10 +107,11 @@ function FromBuilderRC({ uiField, field, model, tabChange }: FromBuilderRCProps)
                                 return (
                                   <FieldRC
                                     key={item.field.fieldName}
-                                    className="w-full"
+                                    // className="w-full"
                                     item={item.field}
                                     field={field}
                                     model={model}
+                                    custom={custom}
                                   />
                                 );
                               })}

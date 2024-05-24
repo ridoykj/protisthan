@@ -14,21 +14,21 @@ function SpeedDialRC({ children, tooltip }: { children: ChildrenProps[]; tooltip
   return (
     <div className="absolute bottom-5 end-5 group items-end">
       {isOpen && (
-        <div className="flex flex-col items-end mb-4 space-y-2">
+        <ul className="flex flex-col items-end mb-4 space-y-2">
           {children.map((child, index) => (
-            <div
+            <li
               key={`child_${child.name + index}`}
-              className="inline-flex items-center hover:font-bold space-x-2"
+              className="group/item inline-flex items-center hover:font-bold space-x-2"
             >
               {tooltip === false ||
                 (tooltip === undefined && (
-                  <span className="bg-gray-100 hover:bg-white font-medium rounded-xl py-1 px-4 border border-gray-200 focus:ring-4 focus:ring-gray-300 focus:outline-none shadow-lg shadow-gray-900/20">
+                  <span className="bg-gray-100 group-hover/item:bg-white font-medium rounded-xl py-1 px-4 border border-gray-200 focus:ring-4 focus:ring-gray-300 focus:outline-none shadow-lg shadow-gray-900/20 cursor-pointer">
                     {child.name}
                   </span>
                 ))}
               <button
                 type="button"
-                className="relative w-[52px] h-[52px] bg-gray-100 hover:bg-white rounded-full border focus:ring-4 focus:ring-gray-300 focus:outline-none shadow-lg shadow-gray-900/20 hover:shadow-gray-900/40"
+                className=" relative w-[52px] h-[52px] bg-gray-100 group-hover/item:bg-white rounded-full border focus:ring-4 focus:ring-gray-300 focus:outline-none shadow-lg shadow-gray-900/20 hover:shadow-gray-900/40"
                 data-tooltip-id={`speed_dial_child_${index}`}
                 onClick={child.onClick}
               >
@@ -38,9 +38,9 @@ function SpeedDialRC({ children, tooltip }: { children: ChildrenProps[]; tooltip
               {tooltip === true && (
                 <ReactTooltip id={`speed_dial_child_${index}`} place="left" content={child.name} />
               )}
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
       <div className="flex flex-col items-end">
         <button

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaChevronUp } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import RippleDivRC from '../effects/ripple/div/RippleDivRC';
 
 const navCss = `relative flex flex-row items-center font-semibold 
@@ -31,21 +31,34 @@ function DropdownButton({
   icon,
   isDropdownOpen,
   toggleDropdown,
+  route,
 }: {
   name: string;
   icon: React.ReactNode;
   isDropdownOpen: boolean;
   toggleDropdown: () => void;
+  route: string;
 }) {
+  const navigate = useNavigate();
   return (
     <button
       type="button"
-      className={`${navCss} w-full flex justify-between items-center h-10 pr-6 ${isDropdownOpen ? 'shadow-[0_5px_5px_#dfe7ff]' : ''}`}
-      onClick={toggleDropdown}
+      className={`${navCss} w-full flex justify-between items-center  h-10 pr-6 ${isDropdownOpen ? 'shadow-[0_5px_5px_#dfe7ff]' : ''}`}
+      onClick={() => {
+        toggleDropdown();
+      }}
     >
       <div className="flex items-center">
         <span className="inline-flex justify-center items-center ml-4">{icon}</span>
-        <span className="ml-2 text-sm tracking-wide truncate">{name}</span>
+        <button
+          type="button"
+          className="ml-2 text-sm tracking-wide truncate hover:underline"
+          onClick={() => {
+            navigate(route);
+          }}
+        >
+          {name}
+        </button>
       </div>
       <FaChevronUp
         size={20}
@@ -92,6 +105,7 @@ function RNavItemRC({
           icon={icon}
           isDropdownOpen={isDropdownOpen}
           toggleDropdown={toggleDropdown}
+          route={route}
         />
         {isDropdownOpen && <SubItemList subItems={subItems} />}
       </>

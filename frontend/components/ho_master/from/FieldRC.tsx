@@ -22,17 +22,25 @@ function resolvePropertyModel(modelInstance: AbstractModel, path: string): Abstr
   return (currentModel as any)[path];
 }
 
+interface CustomeField {
+  field: string;
+  component: React.ReactNode;
+}
+
 function FieldRC({
   field,
   model,
   item,
   className,
+  custom,
 }: {
   item: DocFieldDto;
   field: FieldDirective;
   model: AbstractModel;
   className?: string;
+  custom?: any;
 }) {
+  if (item.fieldName && custom && item.fieldName in custom) return custom[item.fieldName];
   switch (item.fieldType) {
     case 'Data':
       return (
@@ -76,11 +84,14 @@ function FieldRC({
       );
     case 'Attach Image':
       return (
-        <Upload
-          method="PUT"
-          target="/api/upload-handler"
-          headers='{ "X-API-KEY": "7f4306cb-bb25-4064-9475-1254c4eff6e5" }'
-        />
+        <>
+          <p>{item.label}</p>
+          <Upload
+            method="PUT"
+            target="/api/upload-handler"
+            headers='{ "X-API-KEY": "7f4306cb-bb25-4064-9475-1254c4eff6e5" }'
+          />
+        </>
       );
     case 'Date':
       return (
@@ -88,7 +99,8 @@ function FieldRC({
           label={item.label}
           helperText={item.description}
           required={item.reqd ?? false}
-          className={className}
+          // className={className}
+          className="max-w-96"
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
       );
@@ -98,7 +110,8 @@ function FieldRC({
           label={item.label}
           helperText={item.description}
           required={item.reqd ?? false}
-          className={className}
+          // className={className}
+          className="max-w-96"
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
       );
@@ -167,6 +180,12 @@ function FieldRC({
           className={className}
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
+      );
+    case 'Table':
+      return item.label && custom && item.label in custom ? (
+        custom[item.label]
+      ) : (
+        <p>table: {item.label}</p>
       );
     default:
       return null;

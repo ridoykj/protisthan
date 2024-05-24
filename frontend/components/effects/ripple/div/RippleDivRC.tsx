@@ -6,20 +6,18 @@ interface RippleDivRCProps {
   className?: string;
 }
 // https://codesandbox.io/p/sandbox/react-button-ripple-effect-z8rqw?file=%2Fsrc%2Fcomponents%2FRipple.styled.js%3A16%2C21-16%2C27
-function RippleDivRC(props: RippleDivRCProps) {
-  const { children, className } = props;
+function RippleDivRC({ children, className }: RippleDivRCProps) {
   const [coords, setCoords] = useState({ x: -1, y: -1 });
   const [rippleActive, setRippleActive] = useState(false);
 
   useEffect(() => {
-    if (coords.x !== -1 && coords.y !== -1) {
-      setRippleActive(true);
-      setTimeout(() => setRippleActive(false), 1000);
-    } else setRippleActive(false);
+    if (coords.x !== -1 && coords.y !== -1) setRippleActive(true);
+    else setRippleActive(false);
   }, [coords]);
 
   useEffect(() => {
-    if (!rippleActive) setCoords({ x: -1, y: -1 });
+    if (rippleActive) setTimeout(() => setRippleActive(false), 1000);
+    else setCoords({ x: -1, y: -1 });
   }, [rippleActive]);
 
   return (
