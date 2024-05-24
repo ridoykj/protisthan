@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public record UserDto(
         @Id String name,
@@ -154,7 +155,7 @@ public record UserDto(
     }
 
     public static void fromDTO(UserDto vUserDto, UserDao eUserDao) {
-        eUserDao.setName(vUserDto.name()!= null ? vUserDto.name() : vUserDto.email().toLowerCase().replaceAll("\\s","_"));
+        eUserDao.setName(vUserDto.name() != null ? vUserDto.name() : vUserDto.email().toLowerCase().replaceAll("\\s", "_"));
         eUserDao.setCreation(vUserDto.creation());
         eUserDao.setModified(vUserDto.modified());
         eUserDao.setModifiedBy(vUserDto.modifiedBy());
@@ -166,7 +167,7 @@ public record UserDto(
         eUserDao.setFirstName(vUserDto.firstName());
         eUserDao.setMiddleName(vUserDto.middleName());
         eUserDao.setLastName(vUserDto.lastName());
-        eUserDao.setFullName((vUserDto.firstName() +" " +vUserDto.middleName() +" "+ vUserDto.lastName()).trim());
+        eUserDao.setFullName((vUserDto.firstName() + " " + Optional.ofNullable(vUserDto.middleName()).orElse("") + " " + Optional.ofNullable(vUserDto.lastName()).orElse("")).trim());
         eUserDao.setUsername(vUserDto.username());
         eUserDao.setLanguage(vUserDto.language());
         eUserDao.setTimeZone(vUserDto.timeZone());
