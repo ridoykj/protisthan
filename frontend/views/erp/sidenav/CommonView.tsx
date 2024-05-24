@@ -60,7 +60,7 @@ function CommonView() {
           if (curr.type === 'Card Break') {
             acc.push({ key: curr.name ?? '', name: curr.label ?? '', links: [] });
           } else {
-            acc[acc.length - 1].links.push(curr);
+            acc[acc.length - 1]?.links.push(curr);
           }
           return acc;
         }, []);
@@ -78,7 +78,7 @@ function CommonView() {
             {workspaceShortcut.map((data) => (
               <ViewShortcut
                 key={data.name}
-                to={`/m/${data?.linkTo?.toLowerCase().replace(' ', '-')}` ?? ''}
+                to={`/m/${data?.linkTo?.toLowerCase().replace(/\s/g, '-')}` ?? ''}
                 title={data.label ?? ''}
                 description={data.parentField ?? ''}
               />
@@ -99,7 +99,7 @@ function CommonView() {
                 {linkGroup.links.map((data) => (
                   <ViewLink
                     key={data.name}
-                    to={`/m/${data?.linkTo?.toLowerCase().replace(' ', '-')}` ?? ''}
+                    to={`/m/${data?.linkTo?.toLowerCase().replace(/\s/g, '-')}` ?? ''}
                     title={data.label ?? ''}
                     description={data.parentField ?? ''}
                   />
