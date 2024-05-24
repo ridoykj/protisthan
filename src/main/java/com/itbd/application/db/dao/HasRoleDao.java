@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 public class HasRoleDao {
 
     @Id
+    @UuidGenerator
     @Column(name = "tx_name", nullable = false, updatable = false, length = 140)
     private String name;
 
