@@ -1,17 +1,23 @@
 import { Avatar } from '@hilla/react-components/Avatar';
+import {
+  ComboBox,
+  ComboBoxDataProviderCallback,
+  ComboBoxDataProviderParams,
+} from '@hilla/react-components/ComboBox.js';
 import { FormLayout } from '@hilla/react-components/FormLayout';
 import { TextField } from '@hilla/react-components/TextField';
 import { useForm } from '@hilla/react-form';
-import CheckboxList from 'Frontend/components/checkbox/CheckboxListRC';
 import SpeedDialRC from 'Frontend/components/fab/SpeedDialRC';
 import { AutoGrid, AutoGridRef } from 'Frontend/components/grid/autogrid';
 import ButtonRC from 'Frontend/components/ho_master/button/ButtonRC';
 import ActionTopBtnRC from 'Frontend/components/ho_master/from/ActionTopBtnRC';
 import DialogFromRC from 'Frontend/components/ho_master/from/DialogFromRC';
 import FromBuilderRC from 'Frontend/components/ho_master/from/FromBuilderRC';
-import RoleDto from 'Frontend/generated/com/itbd/application/db/dto/RoleDto';
+import HasRoleDto from 'Frontend/generated/com/itbd/application/db/dto/HasRoleDto';
+import RoleProfileDtoModel from 'Frontend/generated/com/itbd/application/db/dto/RoleProfileDtoModel';
 import DocFieldDto from 'Frontend/generated/com/itbd/application/db/dto/doctypes/DocFieldDto';
 import ModuleDefDto from 'Frontend/generated/com/itbd/application/db/dto/modules/ModuleDefDto';
+import ModuleProfileDtoModel from 'Frontend/generated/com/itbd/application/db/dto/modules/ModuleProfileDtoModel';
 import UserDto from 'Frontend/generated/com/itbd/application/db/dto/users/UserDto';
 import UserDtoModel from 'Frontend/generated/com/itbd/application/db/dto/users/UserDtoModel';
 import Filter from 'Frontend/generated/dev/hilla/crud/filter/Filter';
@@ -22,11 +28,14 @@ import {
   DocFieldDtoCrudService,
   HasRoleDtoCrudService,
   ModuleDefDtoCrudService,
-  RoleDtoCrudService,
+  ModuleProfileDtoCrudService,
+  RoleProfileDtoCrudService,
   UserDtoCrudService,
 } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
-import React, { useEffect, useState } from 'react';
+import ModulesTable from 'Frontend/tables/ModulesTable';
+import RolesTable from 'Frontend/tables/RolesTable';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
 import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -36,6 +45,11 @@ const responsiveSteps = [
   { minWidth: '500px', columns: 2 },
 ];
 
+interface AlterItem {
+  new: string[];
+  delete: string[];
+}
+
 const pagination: Pageable = {
   pageNumber: 0,
   pageSize: 1000,
@@ -43,6 +57,7 @@ const pagination: Pageable = {
     orders: [{ property: 'idx', direction: Direction.ASC, ignoreCase: false }],
   },
 };
+
 function filterGenerator(type: string, property: string, filter: string | undefined) {
   const filters: Filter = {
     '@type': type,
@@ -68,9 +83,12 @@ function UsersView() {
   const [isOpen, setIsOpen] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
 
-  //
-  const [roles, setRoles] = useState<RoleDto[]>([]);
-  const [selectedRoleIds, setSelectedRoleIds] = useState<string[]>([]);
+  const [roleAssigned, setRoleAssigned] = useState<HasRoleDto[]>([]);
+  const [roleSelected, setRoleSelected] = useState<string[]>([]);
+  const [roleAssignedAlter, setRoleAssignedAlter] = useState<AlterItem>({
+    new: [],
+    delete: [],
+  });
   //
   const [modules, setModules] = useState<ModuleDefDto[]>([]);
   const [selectedModuleIds, setSelectedModuleIds] = useState<string[]>([]);
@@ -82,6 +100,9 @@ function UsersView() {
   const [tabChange, setTabChange] = useState<number>(0);
 
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
+
+  const [roleProfile, setRoleProfile] = useState<string>('');
+  const [moduleProfile, setModuleProfile] = useState<string>('');
 
   const {
     model,
@@ -99,12 +120,25 @@ function UsersView() {
     addValidator,
   } = useForm(UserDtoModel, {
     onSubmit: async (userE) => {
+      console.log(roleAssignedAlter);
       await UserDtoCrudService.save(userE)
         .then((result) => {
           // clear();
           setSuccessNotification(true);
           setIsOpen(false);
           setGridRefresh(!gridRefresh);
+
+          HasRoleDtoCrudService.deleteWithNames(roleAssignedAlter.delete).then((deleteItems) => {
+            HasRoleDtoCrudService.saveAll(
+              roleAssignedAlter.new.map((it) => ({
+                parent: userE.name,
+                role: it,
+                parentType: 'User',
+                parentfield: 'roles',
+                idx: 0,
+              }))
+            );
+          });
         })
         .catch((error) => {
           setFailureNotification(true);
@@ -116,6 +150,46 @@ function UsersView() {
     autoGridRef.current?.refresh();
   }, [gridRefresh]);
 
+  function ChildRedirect({ item }: { item: UserDto }) {
+    const { fullName, name } = item;
+    return (
+      <button
+        type="button"
+        className="text-blue-500 hover:underline inline-flex items-center gap-2"
+        onClick={(e) => {
+          setUser(item);
+          read(item);
+          navigate(`/m/user/${name}`);
+        }}
+      >
+        <img
+          src={`images/profile/${name === 'ridoykj@gmail.com' ? 'profile.jpg' : 'default_profile.png'}`}
+          className="w-8 h-8 rounded-full"
+          alt="not_found"
+        />
+        {fullName}
+      </button>
+    );
+  }
+
+  function deleteRander({ item }: { item: UserDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-red-500 hover:underline"
+        title="Delete"
+        onClick={(e) => {
+          UserDtoCrudService.delete(item.name).then((result) => {
+            setGridRefresh(!gridRefresh);
+          });
+        }}
+      >
+        <FaTrash />
+      </button>
+    );
+  }
+
   useEffect(() => {
     DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'User')).then(
       (result) => {
@@ -124,39 +198,113 @@ function UsersView() {
     );
   }, []);
 
-  useEffect(() => {
-    if (queryId !== undefined)
-      HasRoleDtoCrudService.list(pagination, filterGenerator('and', 'parent', queryId)).then(
-        (result) => {
-          const roleIds: string[] = result
-            .map((role) => role.role)
-            .filter((it) => it !== undefined) as string[];
-          setSelectedRoleIds(roleIds);
-        }
-      );
-    RoleDtoCrudService.list(pagination, undefined).then((result) => {
-      setRoles(result);
-    });
-  }, [queryId]);
+  const roleProfileProvider = useMemo(
+    () =>
+      async (
+        params: ComboBoxDataProviderParams,
+        callback: ComboBoxDataProviderCallback<RoleProfileDtoModel>
+      ) => {
+        const { page, pageSize, filter } = params;
+
+        const paginationE: Pageable = {
+          pageNumber: page,
+          pageSize: 7,
+          // pageSize,
+          sort: {
+            orders: [{ property: 'idx', direction: Direction.ASC, ignoreCase: false }],
+          },
+        };
+
+        const filters: Filter = {
+          '@type': 'and',
+          children: [
+            {
+              '@type': 'propertyString',
+              propertyId: 'name',
+              filterValue: filter,
+              matcher: Matcher.CONTAINS,
+            },
+          ],
+        };
+
+        RoleProfileDtoCrudService.list(paginationE, filters).then((result: any) => {
+          callback(result, result.length);
+        });
+      },
+    []
+  );
+
+  const moduleProfileProvider = useMemo(
+    () =>
+      async (
+        params: ComboBoxDataProviderParams,
+        callback: ComboBoxDataProviderCallback<ModuleProfileDtoModel>
+      ) => {
+        const { page, pageSize, filter } = params;
+
+        const paginationE: Pageable = {
+          pageNumber: page,
+          pageSize: 7,
+          // pageSize,
+          sort: {
+            orders: [{ property: 'idx', direction: Direction.ASC, ignoreCase: false }],
+          },
+        };
+
+        const filters: Filter = {
+          '@type': 'and',
+          children: [
+            {
+              '@type': 'propertyString',
+              propertyId: 'name',
+              filterValue: filter,
+              matcher: Matcher.CONTAINS,
+            },
+          ],
+        };
+
+        ModuleProfileDtoCrudService.list(paginationE, filters).then((result: any) => {
+          callback(result, result.length);
+        });
+      },
+    []
+  );
 
   useEffect(() => {
-    let blockModule: string[] = [];
     if (queryId !== undefined)
-      BlockModuleDtoCrudService.list(pagination, filterGenerator('and', 'parent', queryId)).then(
-        (result) => {
-          blockModule = result
-            .map((role) => role.name)
-            .filter((it) => it !== undefined) as string[];
-        }
-      );
+      HasRoleDtoCrudService.list(
+        pagination,
+        filterGenerator('and', 'parent', roleProfile && roleProfile !== '' ? roleProfile : queryId)
+      ).then((result) => {
+        const roleIds: string[] = result
+          .map((role) => role.role)
+          .filter((it) => it !== undefined) as string[];
+        setRoleSelected(roleIds);
+        setRoleAssigned(result);
+      });
+  }, [queryId, roleProfile]);
+
+  useEffect(() => {
+    let blockModuleE: string[] = [];
+    if (queryId !== undefined)
+      BlockModuleDtoCrudService.list(
+        pagination,
+        filterGenerator(
+          'and',
+          'parent',
+          moduleProfile && moduleProfile !== '' ? moduleProfile : queryId
+        )
+      ).then((result) => {
+        blockModuleE = result.map((role) => role.name).filter((it) => it !== undefined) as string[];
+      });
     ModuleDefDtoCrudService.list(pagination, undefined).then((result) => {
       setModules(result);
       const modulesIds: string[] = result
         .map((role) => role.name)
-        .filter((it) => it !== undefined && !blockModule.includes(it)) as string[];
+        .filter((it) => it !== undefined && !blockModuleE.includes(it)) as string[];
       setSelectedModuleIds(modulesIds);
     });
-  }, [queryId]);
+  }, [queryId, moduleProfile]);
 
   const actionBtn = [
     {
@@ -236,45 +384,103 @@ function UsersView() {
     },
   ];
 
-  function ChildRedirect({ item }: { item: UserDto }) {
-    const { fullName, name } = item;
+  function RoleComponent() {
     return (
-      <button
-        type="button"
-        className="text-blue-500 hover:underline inline-flex items-center gap-2"
-        onClick={(e) => {
-          setUser(item);
-          read(item);
-          navigate(`/m/user/${name}`);
-        }}
-      >
-        <img
-          src={`images/profile/${name === 'ridoykj@gmail.com' ? 'profile.jpg' : 'default_profile.png'}`}
-          className="w-8 h-8 rounded-full"
-          alt="not_found"
+      <div className="w-full">
+        <div className="flex flex-col space-y-2">
+          <ComboBox
+            dataProvider={roleProfileProvider}
+            {...field(model.roleProfileName)}
+            label="Role Profile"
+            itemLabelPath="name"
+            itemValuePath="name"
+            className="md:w-1/2 sm:w-full"
+            clearButtonVisible
+            onValueChanged={(e) => {
+              console.info('newCheckedItems', e.detail.value);
+              setRoleProfile(e.detail.value);
+            }}
+          />
+          <div className="inline-flex space-x-2">
+            <button
+              type="button"
+              className="bg-gray-100 hover:bg-gray-50 text-gray-800 rounded-xl py-1 px-4 shadow-md inline-flex items-center"
+            >
+              Sellect All
+            </button>
+            <button
+              type="button"
+              className="bg-gray-100 hover:bg-gray-50 text-gray-800 rounded-xl py-1 px-4 shadow-md inline-flex items-center"
+            >
+              Unsellect All
+            </button>
+          </div>
+        </div>
+        <RolesTable
+          value={roleSelected}
+          setSelectedRole={(itemE) => {
+            // console.info('newCheckedItems', itemE);
+            setRoleAssignedAlter({
+              new: itemE.filter((it) => !roleAssigned.map((itE) => itE.role).includes(it)),
+              delete: roleAssigned
+                .filter((itE) => itE.role && !itemE.includes(itE.role))
+                .map((it) => it.name as string),
+            });
+            setRoleSelected(itemE);
+          }}
         />
-        {fullName}
-      </button>
+      </div>
     );
   }
 
-  function deleteRander({ item }: { item: UserDto }) {
-    const { name } = item;
+  function ModuleComponent() {
     return (
-      <button
-        type="button"
-        className="text-red-500 hover:underline"
-        title="Delete"
-        onClick={(e) => {
-          UserDtoCrudService.delete(item.name).then((result) => {
-            setGridRefresh(!gridRefresh);
-          });
-        }}
-      >
-        <FaTrash />
-      </button>
+      <div>
+        <div className="flex flex-col space-y-2">
+          <ComboBox
+            dataProvider={moduleProfileProvider}
+            itemLabelPath="name"
+            itemValuePath="name"
+            label="Module Profile"
+            className="md:w-1/2 sm:w-full"
+            clearButtonVisible
+            onValueChanged={(e) => {
+              setModuleProfile(e.detail.value);
+            }}
+          />
+          <div className="inline-flex space-x-2">
+            <button
+              type="button"
+              className="bg-gray-100 hover:bg-gray-50 text-gray-800 rounded-xl py-1 px-4 shadow-md inline-flex items-center"
+            >
+              Sellect All
+            </button>
+            <button
+              type="button"
+              className="bg-gray-100 hover:bg-gray-50 text-gray-800 rounded-xl py-1 px-4 shadow-md inline-flex items-center"
+            >
+              Unsellect All
+            </button>
+          </div>
+        </div>
+        <ModulesTable
+          // value={roleSelected}
+          value={selectedModuleIds}
+          setSelectedModule={(itemE) => {
+            // console.info('newCheckedItems', itemE);
+            // setRoleAssignedAlter({
+            //   new: itemE.filter((it) => !roleAssigned.map((itE) => itE.role).includes(it)),
+            //   delete: roleAssigned
+            //     .filter((itE) => itE.role && !itemE.includes(itE.role))
+            //     .map((it) => it.name as string),
+            // });
+            // setRoleSelected(itemE);
+          }}
+        />
+      </div>
     );
   }
+
   function parentComponent() {
     return (
       <>
@@ -286,33 +492,50 @@ function UsersView() {
               model={UserDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['fullName', 'enabled', 'userType', 'email', 'creation', 'idx']}
+              visibleColumns={[
+                'fullName',
+                'username',
+                'email',
+                'unsubscribed',
+                'roleProfileName',
+                'mobileNo',
+                'userType',
+                'creation',
+                'idx',
+              ]}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
-              multiSelect
+              multiSelect // Fix: Cast girdField to ColumnOptions
               columnOptions={{
                 fullName: {
                   header: 'Full Name',
                   resizable: true,
                   renderer: ChildRedirect,
                 },
-                enabled: {
-                  header: 'Status',
+                username: {
+                  header: 'Username',
+                  resizable: true,
+                },
+                email: {
+                  header: 'Unsubscribed',
+                  resizable: true,
+                },
+                unsubscribed: {
+                  header: 'Unsubscribed',
+                  resizable: true,
+                },
+                roleProfileName: {
+                  header: 'Role Profile',
+                  resizable: true,
+                },
+                mobileNo: {
+                  header: 'Mobile No',
                   resizable: true,
                 },
                 userType: {
                   header: 'User Type',
                   resizable: true,
-                },
-                email: {
-                  header: 'Email',
-                  resizable: true,
-                },
-                creation: {
-                  header: 'Created At',
-                  resizable: true,
-                  filterable: false,
                 },
                 idx: {
                   header: 'Action',
@@ -321,17 +544,6 @@ function UsersView() {
                   resizable: true,
                   renderer: deleteRander,
                 },
-
-                // 'floor.name': {
-                //   header: 'Floor',
-                //   resizable: true,
-                //   externalValue: placeFilter.floorFilter != null ? placeFilter.floorFilter.name : ''
-                // },
-                // 'floor.building.name': {
-                //   header: 'Building',
-                //   resizable: true,
-                //   externalValue: placeFilter.buildingFilter != null ? placeFilter.buildingFilter.name : ''
-                // },
               }}
               onSelectedItemsChanged={(e) => {
                 const items = e.detail.value;
@@ -374,6 +586,12 @@ function UsersView() {
               tabChange={(tabE) => {
                 setTabChange(tabE);
               }}
+              custom={{
+                roles: RoleComponent(),
+                role_profile_name: null,
+                block_modules: ModuleComponent(),
+                module_profile: null,
+              }}
             />
           </div>
         </div>
@@ -392,23 +610,6 @@ function UsersView() {
         </div>
         <div className="h-8" />
       </div>
-    );
-  }
-
-  function roleSelect() {
-    return (
-      <>
-        <div />
-        <CheckboxList
-          items={roles.map((it) => it.name).filter((it) => it !== undefined) as string[]}
-          value={selectedRoleIds}
-          className="w-full p-2"
-          onValueChange={(values) => {
-            console.info('newCheckedItems', values);
-            setSelectedRoleIds(values);
-          }}
-        />
-      </>
     );
   }
 
