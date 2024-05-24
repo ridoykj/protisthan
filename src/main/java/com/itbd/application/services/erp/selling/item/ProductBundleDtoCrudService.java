@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.item;
 
-import com.itbd.application.db.dao.items.ItemGroupDao;
-import com.itbd.application.db.dto.items.ItemGroupDto;
-import com.itbd.application.db.repos.ItemGroupRepository;
+import com.itbd.application.db.dao.ProductBundleDao;
+import com.itbd.application.db.dto.ProductBundleDto;
+import com.itbd.application.db.repos.ProductBundleRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ItemGroupDtoCrudService implements CrudService<ItemGroupDto, String> {
+public class ProductBundleDtoCrudService implements CrudService<ProductBundleDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ItemGroupRepository itemGroupRepo;
+    private final ProductBundleRepository productBundleRepo;
 
-    public ItemGroupDtoCrudService(ItemGroupRepository itemGroupRepo, JpaFilterConverter jpaFilterConverter) {
-        this.itemGroupRepo = itemGroupRepo;
+    public ProductBundleDtoCrudService(ProductBundleRepository productBundleRepo, JpaFilterConverter jpaFilterConverter) {
+        this.productBundleRepo = productBundleRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ItemGroupDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ProductBundleDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ItemGroupDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ItemGroupDao.class)
+        Specification<ProductBundleDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ProductBundleDao.class)
                 : Specification.anyOf();
-        Page<ItemGroupDao> persons = itemGroupRepo.findAll(spec, pageable);
-        return persons.stream().map(ItemGroupDto::fromEntity).toList();
+        Page<ProductBundleDao> persons = productBundleRepo.findAll(spec, pageable);
+        return persons.stream().map(ProductBundleDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ItemGroupDto save(ItemGroupDto value) {
+    public @Nullable ProductBundleDto save(ProductBundleDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ItemGroupDao person = check
-                ? itemGroupRepo.getReferenceById(value.name())
-                : new ItemGroupDao();
+        ProductBundleDao person = check
+                ? productBundleRepo.getReferenceById(value.name())
+                : new ProductBundleDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ItemGroupDto.fromDTO(value, person);
-        return ItemGroupDto.fromEntity(itemGroupRepo.save(person));
+        ProductBundleDto.fromDTO(value, person);
+        return ProductBundleDto.fromEntity(productBundleRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        itemGroupRepo.deleteById(id);
+        productBundleRepo.deleteById(id);
     }
 }
