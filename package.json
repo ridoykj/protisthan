@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@preact/signals-react": "^2.0.1",
     "@rollup/plugin-replace": "5.0.4",
     "@rollup/pluginutils": "5.0.5",
     "@types/react-calendar-heatmap": "^1.6.7",
@@ -118,7 +119,7 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "5389afe31ecf6d812aab7590d4fd07ff686d34326dfbd5313d2680ed949712e0"
+    "hash": "88088e3d03817940faa886b6bace37f084202d538bf911bf28788e32905eae8d"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
@@ -150,6 +151,7 @@
     "react-dom": "$react-dom",
     "react-router-dom": "$react-router-dom",
     "react-apexcharts": "$react-apexcharts",
-    "react-calendar-heatmap": "$react-calendar-heatmap"
+    "react-calendar-heatmap": "$react-calendar-heatmap",
+    "@preact/signals-react": "$@preact/signals-react"
   }
 }
