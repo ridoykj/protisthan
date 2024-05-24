@@ -3,6 +3,7 @@ import { TextField } from '@hilla/react-components/TextField';
 import { useForm } from '@hilla/react-form';
 import SpeedDialRC from 'Frontend/components/fab/SpeedDialRC';
 import { AutoGrid, AutoGridRef } from 'Frontend/components/grid/autogrid';
+import { ColumnOptions } from 'Frontend/components/grid/autogrid-columns';
 import ButtonRC from 'Frontend/components/ho_master/button/ButtonRC';
 import ActionTopBtnRC from 'Frontend/components/ho_master/from/ActionTopBtnRC';
 import DialogFromRC from 'Frontend/components/ho_master/from/DialogFromRC';
@@ -24,6 +25,10 @@ const responsiveSteps = [
   { minWidth: '0', columns: 1 },
   { minWidth: '500px', columns: 2 },
 ];
+
+function toCamelCase(str: string | undefined): string {
+  return str?.replace(/(_\w)/g, (match) => match.toUpperCase().replace('_', '')) ?? '';
+}
 
 const pagination: Pageable = {
   pageNumber: 0,
@@ -65,6 +70,7 @@ function RolesView() {
   const [selectedRole, setSelectedRole] = useState<RoleDto>({} as RoleDto);
   const [tabChange, setTabChange] = useState<number>(0);
   const [uiField, setUiField] = useState<DocFieldDto[]>([]);
+  const [girdField, setGirdField] = useState<Record<string, ColumnOptions>>();
 
   const {
     model,
@@ -98,13 +104,6 @@ function RolesView() {
   useEffect(() => {
     autoGridRef.current?.refresh();
   }, [gridRefresh]);
-  useEffect(() => {
-    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Role')).then(
-      (result) => {
-        setUiField(result);
-      }
-    );
-  }, []);
 
   function ChildRedirect({ item }: { item: RoleDto }) {
     const { name } = item;
@@ -122,7 +121,6 @@ function RolesView() {
       </button>
     );
   }
-
   function deleteRander({ item }: { item: RoleDto }) {
     const { name } = item;
     return (
@@ -140,6 +138,46 @@ function RolesView() {
       </button>
     );
   }
+
+  useEffect(() => {
+    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Role')).then(
+      (result) => {
+        setUiField(result);
+
+        let gridColumn = {};
+        result.forEach((it) => {
+          if (
+            it.fieldName &&
+            (it.inListView || it.inGlobalSearch || it.inStandardFilter || it.unique)
+          ) {
+            const mapField = {
+              [toCamelCase(it.fieldName)]: {
+                header: it.label,
+                resizable: true,
+                renderer: Object.keys(gridColumn).length === 0 ? ChildRedirect : undefined,
+              },
+            };
+            gridColumn = { ...gridColumn, ...mapField };
+          }
+        });
+        gridColumn = {
+          ...gridColumn,
+          ...{
+            idx: {
+              header: 'Action',
+              filterable: false,
+              sortable: false,
+              resizable: true,
+              renderer: deleteRander,
+            },
+          },
+        };
+
+        setGirdField(gridColumn);
+      }
+    );
+  }, []);
+
   const actionBtn = [
     {
       children: <FaArrowsRotate size={15} />,
@@ -229,38 +267,40 @@ function RolesView() {
               model={RoleDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['name', 'deskAccess', 'isCustom', 'email', 'creation', 'idx']}
+              // visibleColumns={['name', 'deskAccess', 'isCustom', 'email', 'creation', 'idx']}
+              visibleColumns={Object.keys(girdField ?? {})}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
               multiSelect
-              columnOptions={{
-                name: {
-                  header: 'ID',
-                  resizable: true,
-                  renderer: ChildRedirect,
-                },
-                deskAccess: {
-                  header: 'Status',
-                  resizable: true,
-                },
-                isCustom: {
-                  header: 'Is Custom',
-                  resizable: true,
-                },
-                creation: {
-                  header: 'Created At',
-                  resizable: true,
-                  filterable: false,
-                },
-                idx: {
-                  header: 'Action',
-                  filterable: false,
-                  sortable: false,
-                  resizable: true,
-                  renderer: deleteRander,
-                },
-              }}
+              columnOptions={girdField}
+              // columnOptions={{
+              //   name: {
+              //     header: 'ID',
+              //     resizable: true,
+              //     renderer: ChildRedirect,
+              //   },
+              //   deskAccess: {
+              //     header: 'Status',
+              //     resizable: true,
+              //   },
+              //   isCustom: {
+              //     header: 'Is Custom',
+              //     resizable: true,
+              //   },
+              //   creation: {
+              //     header: 'Created At',
+              //     resizable: true,
+              //     filterable: false,
+              //   },
+              //   idx: {
+              //     header: 'Action',
+              //     filterable: false,
+              //     sortable: false,
+              //     resizable: true,
+              //     renderer: deleteRander,
+              //   },
+              // }}
               onActiveItemChanged={(e) => {
                 const item = e.detail.value;
                 // console.log('item', item);
