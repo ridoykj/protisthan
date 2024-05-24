@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.item;
 
-import com.itbd.application.db.dao.PromotionalSchemeDao;
-import com.itbd.application.db.dto.PromotionalSchemeDto;
-import com.itbd.application.db.repos.PromotionalSchemeRepository;
+import com.itbd.application.db.dao.price.PricingRuleDao;
+import com.itbd.application.db.dto.price.PricingRuleDto;
+import com.itbd.application.db.repos.PricingRuleRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PromotionalSchemeDtoCrudService implements CrudService<PromotionalSchemeDto, String> {
+public class PricingRuleDtoCrudService implements CrudService<PricingRuleDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PromotionalSchemeRepository promotionalSchemeRepo;
+    private final PricingRuleRepository pricingRuleRepo;
 
-    public PromotionalSchemeDtoCrudService(PromotionalSchemeRepository promotionalSchemeRepo, JpaFilterConverter jpaFilterConverter) {
-        this.promotionalSchemeRepo = promotionalSchemeRepo;
+    public PricingRuleDtoCrudService(PricingRuleRepository pricingRuleRepo, JpaFilterConverter jpaFilterConverter) {
+        this.pricingRuleRepo = pricingRuleRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PromotionalSchemeDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PricingRuleDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PromotionalSchemeDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PromotionalSchemeDao.class)
+        Specification<PricingRuleDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PricingRuleDao.class)
                 : Specification.anyOf();
-        Page<PromotionalSchemeDao> persons = promotionalSchemeRepo.findAll(spec, pageable);
-        return persons.stream().map(PromotionalSchemeDto::fromEntity).toList();
+        Page<PricingRuleDao> persons = pricingRuleRepo.findAll(spec, pageable);
+        return persons.stream().map(PricingRuleDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PromotionalSchemeDto save(PromotionalSchemeDto value) {
+    public @Nullable PricingRuleDto save(PricingRuleDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PromotionalSchemeDao person = check
-                ? promotionalSchemeRepo.getReferenceById(value.name())
-                : new PromotionalSchemeDao();
+        PricingRuleDao person = check
+                ? pricingRuleRepo.getReferenceById(value.name())
+                : new PricingRuleDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PromotionalSchemeDto.fromDTO(value, person);
-        return PromotionalSchemeDto.fromEntity(promotionalSchemeRepo.save(person));
+        PricingRuleDto.fromDTO(value, person);
+        return PricingRuleDto.fromEntity(pricingRuleRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        promotionalSchemeRepo.deleteById(id);
+        pricingRuleRepo.deleteById(id);
     }
 }
