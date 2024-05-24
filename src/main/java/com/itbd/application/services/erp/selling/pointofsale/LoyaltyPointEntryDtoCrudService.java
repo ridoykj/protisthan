@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.pointofsale;
 
-import com.itbd.application.db.dao.loyaltys.LoyaltyProgramDao;
-import com.itbd.application.db.dto.loyaltys.LoyaltyProgramDto;
-import com.itbd.application.db.repos.LoyaltyProgramRepository;
+import com.itbd.application.db.dao.loyaltys.LoyaltyPointEntryDao;
+import com.itbd.application.db.dto.loyaltys.LoyaltyPointEntryDto;
+import com.itbd.application.db.repos.LoyaltyPointEntryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class LoyaltyProgramDtoCrudService implements CrudService<LoyaltyProgramDto, String> {
+public class LoyaltyPointEntryDtoCrudService implements CrudService<LoyaltyPointEntryDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final LoyaltyProgramRepository loyaltyProgramRepo;
+    private final LoyaltyPointEntryRepository loyaltyPointEntryRepo;
 
-    public LoyaltyProgramDtoCrudService(LoyaltyProgramRepository loyaltyProgramRepo, JpaFilterConverter jpaFilterConverter) {
-        this.loyaltyProgramRepo = loyaltyProgramRepo;
+    public LoyaltyPointEntryDtoCrudService(LoyaltyPointEntryRepository loyaltyPointEntryRepo, JpaFilterConverter jpaFilterConverter) {
+        this.loyaltyPointEntryRepo = loyaltyPointEntryRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull LoyaltyProgramDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull LoyaltyPointEntryDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<LoyaltyProgramDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, LoyaltyProgramDao.class)
+        Specification<LoyaltyPointEntryDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, LoyaltyPointEntryDao.class)
                 : Specification.anyOf();
-        Page<LoyaltyProgramDao> persons = loyaltyProgramRepo.findAll(spec, pageable);
-        return persons.stream().map(LoyaltyProgramDto::fromEntity).toList();
+        Page<LoyaltyPointEntryDao> persons = loyaltyPointEntryRepo.findAll(spec, pageable);
+        return persons.stream().map(LoyaltyPointEntryDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable LoyaltyProgramDto save(LoyaltyProgramDto value) {
+    public @Nullable LoyaltyPointEntryDto save(LoyaltyPointEntryDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        LoyaltyProgramDao person = check
-                ? loyaltyProgramRepo.getReferenceById(value.name())
-                : new LoyaltyProgramDao();
+        LoyaltyPointEntryDao person = check
+                ? loyaltyPointEntryRepo.getReferenceById(value.name())
+                : new LoyaltyPointEntryDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        LoyaltyProgramDto.fromDTO(value, person);
-        return LoyaltyProgramDto.fromEntity(loyaltyProgramRepo.save(person));
+        LoyaltyPointEntryDto.fromDTO(value, person);
+        return LoyaltyPointEntryDto.fromEntity(loyaltyPointEntryRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        loyaltyProgramRepo.deleteById(id);
+        loyaltyPointEntryRepo.deleteById(id);
     }
 }
