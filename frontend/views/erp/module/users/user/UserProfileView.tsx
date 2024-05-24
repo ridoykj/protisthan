@@ -119,7 +119,6 @@ function UserProfileView() {
   const [selectedUserItems, setSelectedUserItems] = useState<UserDto[]>([]);
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
-
   const {
     model,
     field,
