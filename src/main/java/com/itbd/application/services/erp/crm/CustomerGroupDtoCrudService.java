@@ -1,9 +1,8 @@
 package com.itbd.application.services.erp.crm;
 
-import com.itbd.application.db.dao.LeadDao;
-import com.itbd.application.db.dto.LeadDto;
-import com.itbd.application.db.repos.BrandRepository;
-import com.itbd.application.db.repos.LeadRepository;
+import com.itbd.application.db.dao.customers.CustomerGroupDao;
+import com.itbd.application.db.dto.customers.CustomerGroupDto;
+import com.itbd.application.db.repos.CustomerGroupRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -20,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class LeadDtoCrudService implements CrudService<LeadDto, String> {
+public class CustomerGroupDtoCrudService implements CrudService<CustomerGroupDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final LeadRepository leadRepo;
+    private final CustomerGroupRepository customerGroupRepo;
 
-    public LeadDtoCrudService(LeadRepository leadRepo, JpaFilterConverter jpaFilterConverter) {
-        this.leadRepo = leadRepo;
+    public CustomerGroupDtoCrudService(CustomerGroupRepository leadRepo, JpaFilterConverter jpaFilterConverter) {
+        this.customerGroupRepo = leadRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull LeadDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull CustomerGroupDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<LeadDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, LeadDao.class)
+        Specification<CustomerGroupDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, CustomerGroupDao.class)
                 : Specification.anyOf();
-        Page<LeadDao> persons = leadRepo.findAll(spec, pageable);
-        return persons.stream().map(LeadDto::fromEntity).toList();
+        Page<CustomerGroupDao> persons = customerGroupRepo.findAll(spec, pageable);
+        return persons.stream().map(CustomerGroupDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable LeadDto save(LeadDto value) {
+    public @Nullable CustomerGroupDto save(CustomerGroupDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        LeadDao person = check
-                ? leadRepo.getReferenceById(value.name())
-                : new LeadDao();
+        CustomerGroupDao person = check
+                ? customerGroupRepo.getReferenceById(value.name())
+                : new CustomerGroupDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        LeadDto.fromDTO(value, person);
-        return LeadDto.fromEntity(leadRepo.save(person));
+        CustomerGroupDto.fromDTO(value, person);
+        return CustomerGroupDto.fromEntity(customerGroupRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        leadRepo.deleteById(id);
+        customerGroupRepo.deleteById(id);
     }
 }
