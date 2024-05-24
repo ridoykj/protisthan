@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.pointofsale;
 
-import com.itbd.application.db.dao.pos.PosProfileDao;
-import com.itbd.application.db.dto.pos.PosProfileDto;
-import com.itbd.application.db.repos.PosProfileRepository;
+import com.itbd.application.db.dao.loyaltys.LoyaltyProgramDao;
+import com.itbd.application.db.dto.loyaltys.LoyaltyProgramDto;
+import com.itbd.application.db.repos.LoyaltyProgramRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PosProfileDtoCrudService implements CrudService<PosProfileDto, String> {
+public class LoyaltyProgramDtoCrudService implements CrudService<LoyaltyProgramDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PosProfileRepository posProfileRepo;
+    private final LoyaltyProgramRepository loyaltyProgramRepo;
 
-    public PosProfileDtoCrudService(PosProfileRepository posProfileRepo, JpaFilterConverter jpaFilterConverter) {
-        this.posProfileRepo = posProfileRepo;
+    public LoyaltyProgramDtoCrudService(LoyaltyProgramRepository loyaltyProgramRepo, JpaFilterConverter jpaFilterConverter) {
+        this.loyaltyProgramRepo = loyaltyProgramRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PosProfileDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull LoyaltyProgramDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PosProfileDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PosProfileDao.class)
+        Specification<LoyaltyProgramDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, LoyaltyProgramDao.class)
                 : Specification.anyOf();
-        Page<PosProfileDao> persons = posProfileRepo.findAll(spec, pageable);
-        return persons.stream().map(PosProfileDto::fromEntity).toList();
+        Page<LoyaltyProgramDao> persons = loyaltyProgramRepo.findAll(spec, pageable);
+        return persons.stream().map(LoyaltyProgramDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PosProfileDto save(PosProfileDto value) {
+    public @Nullable LoyaltyProgramDto save(LoyaltyProgramDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PosProfileDao person = check
-                ? posProfileRepo.getReferenceById(value.name())
-                : new PosProfileDao();
+        LoyaltyProgramDao person = check
+                ? loyaltyProgramRepo.getReferenceById(value.name())
+                : new LoyaltyProgramDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PosProfileDto.fromDTO(value, person);
-        return PosProfileDto.fromEntity(posProfileRepo.save(person));
+        LoyaltyProgramDto.fromDTO(value, person);
+        return LoyaltyProgramDto.fromEntity(loyaltyProgramRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        posProfileRepo.deleteById(id);
+        loyaltyProgramRepo.deleteById(id);
     }
 }
