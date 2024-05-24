@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.item;
 
-import com.itbd.application.db.dao.ProductBundleDao;
-import com.itbd.application.db.dto.ProductBundleDto;
-import com.itbd.application.db.repos.ProductBundleRepository;
+import com.itbd.application.db.dao.PromotionalSchemeDao;
+import com.itbd.application.db.dto.PromotionalSchemeDto;
+import com.itbd.application.db.repos.PromotionalSchemeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ProductBundleDtoCrudService implements CrudService<ProductBundleDto, String> {
+public class PromotionalSchemeDtoCrudService implements CrudService<PromotionalSchemeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ProductBundleRepository productBundleRepo;
+    private final PromotionalSchemeRepository promotionalSchemeRepo;
 
-    public ProductBundleDtoCrudService(ProductBundleRepository productBundleRepo, JpaFilterConverter jpaFilterConverter) {
-        this.productBundleRepo = productBundleRepo;
+    public PromotionalSchemeDtoCrudService(PromotionalSchemeRepository promotionalSchemeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.promotionalSchemeRepo = promotionalSchemeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ProductBundleDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PromotionalSchemeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ProductBundleDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ProductBundleDao.class)
+        Specification<PromotionalSchemeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PromotionalSchemeDao.class)
                 : Specification.anyOf();
-        Page<ProductBundleDao> persons = productBundleRepo.findAll(spec, pageable);
-        return persons.stream().map(ProductBundleDto::fromEntity).toList();
+        Page<PromotionalSchemeDao> persons = promotionalSchemeRepo.findAll(spec, pageable);
+        return persons.stream().map(PromotionalSchemeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ProductBundleDto save(ProductBundleDto value) {
+    public @Nullable PromotionalSchemeDto save(PromotionalSchemeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ProductBundleDao person = check
-                ? productBundleRepo.getReferenceById(value.name())
-                : new ProductBundleDao();
+        PromotionalSchemeDao person = check
+                ? promotionalSchemeRepo.getReferenceById(value.name())
+                : new PromotionalSchemeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ProductBundleDto.fromDTO(value, person);
-        return ProductBundleDto.fromEntity(productBundleRepo.save(person));
+        PromotionalSchemeDto.fromDTO(value, person);
+        return PromotionalSchemeDto.fromEntity(promotionalSchemeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        productBundleRepo.deleteById(id);
+        promotionalSchemeRepo.deleteById(id);
     }
 }
