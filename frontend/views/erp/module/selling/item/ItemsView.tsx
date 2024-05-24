@@ -13,7 +13,6 @@ import DocFieldDto from 'Frontend/generated/com/itbd/application/db/dto/doctypes
 import ItemDto from 'Frontend/generated/com/itbd/application/db/dto/items/ItemDto';
 
 import ItemDtoModel from 'Frontend/generated/com/itbd/application/db/dto/items/ItemDtoModel';
-import SalesInvoiceDto from 'Frontend/generated/com/itbd/application/db/dto/sales/SalesInvoiceDto';
 import UomDto from 'Frontend/generated/com/itbd/application/db/dto/uoms/UomDto';
 import Filter from 'Frontend/generated/dev/hilla/crud/filter/Filter';
 import Matcher from 'Frontend/generated/dev/hilla/crud/filter/PropertyStringFilter/Matcher';
@@ -67,8 +66,8 @@ function ItemsView() {
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   const autoGridRef = React.useRef<AutoGridRef>(null);
-  const [user, setUser] = useState<SalesInvoiceDto>({} as SalesInvoiceDto);
-  const [selectedUserItems, setSelectedUserItems] = useState<SalesInvoiceDto[]>([]);
+  const [user, setUser] = useState<ItemDto>({} as ItemDto);
+  const [selectedUserItems, setSelectedUserItems] = useState<ItemDto[]>([]);
   const [selectUom, setSelectUom] = useState<UomDto[]>([]);
   const [tabChange, setTabChange] = useState<number>(0);
 
@@ -200,6 +199,7 @@ function ItemsView() {
 
   function ChildRedirect({ item }: { item: ItemDto }) {
     const { name } = item;
+
     return (
       <button
         type="button"
@@ -245,11 +245,17 @@ function ItemsView() {
               className="h-full w-full overflow-auto bg-white/40"
               visibleColumns={[
                 'name',
-                'itemName',
-                'disabled',
                 'itemCode',
+                'itemName',
                 'itemGroup',
-                'stockUom',
+                'isStockItem',
+                'hasVariants',
+                'isFixedAsset',
+                'assetCategory',
+                'variantOf',
+                'attributes',
+                'customerCode',
+                'totalProjectedQty',
                 'creation',
                 'idx',
               ]}
@@ -263,24 +269,48 @@ function ItemsView() {
                   resizable: true,
                   renderer: ChildRedirect,
                 },
-                itemName: {
-                  header: 'Item Name',
-                  resizable: true,
-                },
-                disabled: {
-                  header: 'Status',
-                  resizable: true,
-                },
                 itemCode: {
                   header: 'Item Code',
+                  resizable: true,
+                },
+                itemName: {
+                  header: 'Item Name',
                   resizable: true,
                 },
                 itemGroup: {
                   header: 'Item Group',
                   resizable: true,
                 },
-                stockUom: {
-                  header: 'StockUom',
+                isStockItem: {
+                  header: 'Maintain Stock',
+                  resizable: true,
+                },
+                hasVariants: {
+                  header: 'Has Variants',
+                  resizable: true,
+                },
+                isFixedAsset: {
+                  header: 'Is Fixed Asset',
+                  resizable: true,
+                },
+                assetCategory: {
+                  header: 'Asset Category',
+                  resizable: true,
+                },
+                variantOf: {
+                  header: 'Variant Of',
+                  resizable: true,
+                },
+                attributes: {
+                  header: 'Variant Attributes',
+                  resizable: true,
+                },
+                customerCode: {
+                  header: 'Customer Code',
+                  resizable: true,
+                },
+                totalProjectedQty: {
+                  header: 'Total Projected Qty',
                   resizable: true,
                 },
                 creation: {
@@ -375,7 +405,7 @@ function ItemsView() {
         }}
       >
         <FormLayout responsiveSteps={responsiveSteps} className="w-fit h-fit p-2">
-          <TextField label="Item Code" required {...{ colspan: 1 }} {...field(model.itemCode)} />
+          {/* <TextField label="Item Code" required {...{ colspan: 1 }} {...field(model.itemCode)} /> */}
           <TextField label="Item Group" required {...{ colspan: 1 }} {...field(model.itemGroup)} />
           <ComboBox
             label="Default Unit of Measure"

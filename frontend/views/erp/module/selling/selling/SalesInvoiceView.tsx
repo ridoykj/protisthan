@@ -1,4 +1,5 @@
 import { Avatar } from '@hilla/react-components/Avatar';
+import { DatePicker } from '@hilla/react-components/DatePicker.js';
 import { FormLayout } from '@hilla/react-components/FormLayout';
 import { TextField } from '@hilla/react-components/TextField';
 import { useForm } from '@hilla/react-form';
@@ -8,17 +9,17 @@ import ButtonRC from 'Frontend/components/ho_master/button/ButtonRC';
 import ActionTopBtnRC from 'Frontend/components/ho_master/from/ActionTopBtnRC';
 import DialogFromRC from 'Frontend/components/ho_master/from/DialogFromRC';
 import FromBuilderRC from 'Frontend/components/ho_master/from/FromBuilderRC';
-import CustomerDto from 'Frontend/generated/com/itbd/application/db/dto/customers/CustomerDto';
-import CustomerDtoModel from 'Frontend/generated/com/itbd/application/db/dto/customers/CustomerDtoModel';
 import DocFieldDto from 'Frontend/generated/com/itbd/application/db/dto/doctypes/DocFieldDto';
+import SalesInvoiceDto from 'Frontend/generated/com/itbd/application/db/dto/sales/SalesInvoiceDto';
+import SalesInvoiceDtoModel from 'Frontend/generated/com/itbd/application/db/dto/sales/SalesInvoiceDtoModel';
 import Filter from 'Frontend/generated/dev/hilla/crud/filter/Filter';
 import Matcher from 'Frontend/generated/dev/hilla/crud/filter/PropertyStringFilter/Matcher';
 import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
-import { CustomerDtoCrudService, DocFieldDtoCrudService } from 'Frontend/generated/endpoints';
+import { DocFieldDtoCrudService, SalesInvoiceDtoCrudService } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
 import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
-import { FaArrowsRotate, FaFilter } from 'react-icons/fa6';
+import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const responsiveSteps = [
@@ -48,7 +49,7 @@ function filterGenerator(type: string, property: string, filter: string | undefi
   return filters;
 }
 
-function CustomerView() {
+function SalesInvoiceView() {
   const { queryId } = useParams();
   const navigate = useNavigate();
   const [uiField, setUiField] = useState<DocFieldDto[]>([]);
@@ -59,10 +60,10 @@ function CustomerView() {
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   const autoGridRef = React.useRef<AutoGridRef>(null);
-  const [user, setUser] = useState<CustomerDto>({} as CustomerDto);
-  const [selectedUserItems, setSelectedUserItems] = useState<CustomerDto[]>([]);
-
+  const [user, setUser] = useState<SalesInvoiceDto>({} as SalesInvoiceDto);
+  const [selectedUserItems, setSelectedUserItems] = useState<SalesInvoiceDto[]>([]);
   const [tabChange, setTabChange] = useState<number>(0);
+
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
 
   const {
@@ -79,9 +80,9 @@ function CustomerView() {
     submitting,
     validate,
     addValidator,
-  } = useForm(CustomerDtoModel, {
+  } = useForm(SalesInvoiceDtoModel, {
     onSubmit: async (userE) => {
-      await CustomerDtoCrudService.save(userE)
+      await SalesInvoiceDtoCrudService.save(userE)
         .then((result) => {
           clear();
           setSuccessNotification(true);
@@ -97,8 +98,44 @@ function CustomerView() {
   useEffect(() => {
     autoGridRef.current?.refresh();
   }, [gridRefresh]);
+
+  function ChildRedirect({ item }: { item: SalesInvoiceDto }) {
+    const { name, customerName } = item;
+    return (
+      <button
+        type="button"
+        className="text-blue-500 hover:underline"
+        onClick={(e) => {
+          setUser(item);
+          read(item);
+          navigate(`/m/sales-invoice/${name}`);
+        }}
+      >
+        {customerName}
+      </button>
+    );
+  }
+
+  function deleteRander({ item }: { item: SalesInvoiceDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-red-500 hover:underline"
+        title="Delete"
+        onClick={(e) => {
+          SalesInvoiceDtoCrudService.delete(item.name).then((result) => {
+            setGridRefresh(!gridRefresh);
+          });
+        }}
+      >
+        <FaTrash />
+      </button>
+    );
+  }
+
   useEffect(() => {
-    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'customer')).then(
+    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'sales invoice')).then(
       (result) => {
         setUiField(result);
       }
@@ -129,100 +166,60 @@ function CustomerView() {
   ];
 
   const speedDial = [
-    // {
-    //   name: 'Import',
-    //   icon: <FaLaptopCode />,
-    //   onClick: () => {
-    //     setSelectedUserItems([]);
-    //   },
-    // },
-    // {
-    //   name: 'User Permissions',
-    //   icon: <FaLaptopCode />,
-    //   onClick: () => {
-    //     setSelectedUserItems([]);
-    //   },
-    // },
-    // {
-    //   name: 'Role Permissions Manager',
-    //   icon: <FaLaptopCode />,
-    //   onClick: () => {
-    //     setSelectedUserItems([]);
-    //   },
-    // },
-    // {
-    //   name: 'Customize',
-    //   icon: <FaLaptopCode />,
-    //   onClick: () => {
-    //     setSelectedUserItems([]);
-    //   },
-    // },
-    // {
-    //   name: 'Toggle Sidebar',
-    //   icon: <FaLaptopCode />,
-    //   onClick: () => {
-    //     setSelectedUserItems([]);
-    //   },
-    // },
-    // {
-    //   name: 'List Settings',
-    //   icon: <FaLaptopCode />,
-    //   onClick: () => {
-    //     setSelectedUserItems([]);
-    //   },
-    // },
     {
-      name: 'Add Customer',
+      name: 'Import',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'User Permissions',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Role Permissions Manager',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Customize',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Toggle Sidebar',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'List Settings',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Add User',
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
-        setUser({} as CustomerDto);
+        setUser({} as SalesInvoiceDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
     },
   ];
 
-  function ChildRedirect({ item }: { item: CustomerDto }) {
-    const { name, customerName } = item;
-    return (
-      <button
-        type="button"
-        className="text-blue-500 hover:underline inline-flex items-center gap-2"
-        onClick={(e) => {
-          setUser(item);
-          read(item);
-          navigate(`/m/customer/${name}`);
-        }}
-      >
-        {' '}
-        <img
-          src={`images/profile/${name === 'ridoykj@gmail.com' ? 'profile.jpg' : 'default_profile.png'}`}
-          className="w-8 h-8 rounded-full"
-          alt="not_found"
-        />
-        {customerName}
-      </button>
-    );
-  }
-
-  function deleteRander({ item }: { item: CustomerDto }) {
-    const { name } = item;
-    return (
-      <button
-        type="button"
-        className="text-red-500 hover:underline"
-        title="Delete"
-        onClick={(e) => {
-          CustomerDtoCrudService.delete(item.name).then((result) => {
-            setGridRefresh(!gridRefresh);
-          });
-        }}
-      >
-        <FaTrash />
-      </button>
-    );
-  }
   function parentComponent() {
     return (
       <>
@@ -230,11 +227,31 @@ function CustomerView() {
           <ActionTopBtnRC actions={actionBtn} />
           <div className="h-full mx-2 mb-2 bg-white p-3 rounded-xl border">
             <AutoGrid
-              service={CustomerDtoCrudService}
-              model={CustomerDtoModel}
+              service={SalesInvoiceDtoCrudService}
+              model={SalesInvoiceDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['name', 'customerName', 'customerGroup', 'territory', 'idx']}
+              visibleColumns={[
+                'name',
+                'title',
+                'customer',
+                'customerName',
+                'company',
+                'project',
+                'grandTotal',
+                'cashBankAccount',
+                'contactPerson',
+                'contactMobile',
+                'contactEmail',
+                'ignoreDefaultPaymentTermsTemplate',
+                'partyAccountCurrency',
+                'againstIncomeAccount',
+                'status',
+                'customerGroup',
+                'repostRequired',
+                'creation',
+                'idx',
+              ]}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
@@ -245,17 +262,74 @@ function CustomerView() {
                   resizable: true,
                   renderer: ChildRedirect,
                 },
+                title: {
+                  header: 'Title',
+                  resizable: true,
+                },
+                customer: {
+                  header: 'Customer',
+                  resizable: true,
+                },
                 customerName: {
                   header: 'Customer Name',
+                  resizable: true,
+                },
+                company: {
+                  header: 'Company',
+                  resizable: true,
+                },
+                project: {
+                  header: 'Project',
+                  resizable: true,
+                },
+                grandTotal: {
+                  header: 'Grand Total',
+                  resizable: true,
+                },
+                cashBankAccount: {
+                  header: 'Cash/Bank Account',
+                  resizable: true,
+                },
+                contactPerson: {
+                  header: 'Contact Person',
+                  resizable: true,
+                },
+                contactMobile: {
+                  header: 'Mobile No',
+                  resizable: true,
+                },
+                contactEmail: {
+                  header: 'Contact Email',
+                  resizable: true,
+                },
+                ignoreDefaultPaymentTermsTemplate: {
+                  header: 'Ignore Default Payment Terms Template',
+                  resizable: true,
+                },
+                partyAccountCurrency: {
+                  header: 'Party Account Currency',
+                  resizable: true,
+                },
+                againstIncomeAccount: {
+                  header: 'Against Income Account',
+                  resizable: true,
+                },
+                status: {
+                  header: 'Status',
                   resizable: true,
                 },
                 customerGroup: {
                   header: 'Customer Group',
                   resizable: true,
                 },
-                territory: {
-                  header: 'Territory',
+                repostRequired: {
+                  header: 'Repost Required',
                   resizable: true,
+                },
+                creation: {
+                  header: 'Created At',
+                  resizable: true,
+                  filterable: false,
                 },
                 idx: {
                   header: 'Action',
@@ -280,10 +354,10 @@ function CustomerView() {
       </>
     );
   }
-
   useEffect(() => {
     read(value);
   }, [tabChange]);
+
   function childComponent() {
     return (
       <div className="w-full md:px-10 sm:px-0 ">
@@ -343,25 +417,24 @@ function CustomerView() {
         onNavigate={() => {
           setIsOpen(false);
           clear();
-          navigate(`/m/customer/_`);
+          navigate(`/m/sales-invoice/_`);
         }}
       >
         <FormLayout responsiveSteps={responsiveSteps} className="w-fit h-fit p-2">
-          <TextField label="Customer Name" {...{ colspan: 1 }} {...field(model.customerName)} />
-          <TextField label="Customer Type" {...{ colspan: 1 }} {...field(model.customerType)} />
-
-          <TextField label="Email Id" {...{ colspan: 1 }} {...field(model.emailId)} />
-          <TextField label="Mobile Number" {...{ colspan: 1 }} {...field(model.mobileNo)} />
-
           <TextField
-            label="Praimary Address"
+            label="Naming Series"
             {...{ colspan: 1 }}
-            {...field(model.customerPrimaryAddress)}
+            required
+            {...field(model.namingSeries)}
           />
+          <TextField label="Company" {...{ colspan: 1 }} required {...field(model.company)} />
+          <TextField label="Customer Name" {...{ colspan: 1 }} {...field(model.customerName)} />
+
+          <DatePicker label="Email Id" {...{ colspan: 1 }} required {...field(model.poDate)} />
         </FormLayout>
       </DialogFromRC>
     </>
   );
 }
 
-export default CustomerView;
+export default SalesInvoiceView;
