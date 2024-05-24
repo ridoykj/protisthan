@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.module;
 
-import com.itbd.application.db.dao.modules.ModuleProfileDao;
-import com.itbd.application.db.dto.modules.ModuleProfileDto;
-import com.itbd.application.db.repos.ModuleProfileRepository;
+import com.itbd.application.db.dao.doctypes.DocPermDao;
+import com.itbd.application.db.dto.doctypes.DocPermDto;
+import com.itbd.application.db.repos.DocPermRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,58 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class DocParemDtoCrudService implements CrudService<ModuleProfileDto, String> {
+public class DocPermDtoCrudService implements CrudService<DocPermDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ModuleProfileRepository moduleProfileRepo;
+    private final DocPermRepository docPermRepo;
 
-    public DocParemDtoCrudService(ModuleProfileRepository moduleProfileRepo, JpaFilterConverter jpaFilterConverter) {
-        this.moduleProfileRepo = moduleProfileRepo;
+    public DocPermDtoCrudService(DocPermRepository docPermRepo, JpaFilterConverter jpaFilterConverter) {
+        this.docPermRepo = docPermRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ModuleProfileDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull DocPermDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ModuleProfileDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ModuleProfileDao.class)
+        Specification<DocPermDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, DocPermDao.class)
                 : Specification.anyOf();
-        Page<ModuleProfileDao> persons = moduleProfileRepo.findAll(spec, pageable);
-        return persons.stream().map(ModuleProfileDto::fromEntity).toList();
+        Page<DocPermDao> persons = docPermRepo.findAll(spec, pageable);
+        return persons.stream().map(DocPermDto::fromEntity).toList();
     }
+
+    @Nonnull
+    public List<@Nonnull String> docType(Pageable pageable, @Nullable String filter) {
+        Page<String> persons = docPermRepo.findParent("%"+filter+"%", pageable);
+        return persons.stream().map(String::trim).toList();
+    }
+
+
+    @Nonnull
+    public List<@Nonnull String> roleProfile(Pageable pageable, @Nullable String filter) {
+        // Basic list implementation that only covers pagination,
+        // but not sorting or filtering
+        Page<String> persons = docPermRepo.findRole("%"+filter+"%", pageable);
+        return persons.stream().map(String::trim).toList();
+    }
+
 
     @Override
     @Transactional
-    public @Nullable ModuleProfileDto save(ModuleProfileDto value) {
+    public @Nullable DocPermDto save(DocPermDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ModuleProfileDao person = check
-                ? moduleProfileRepo.getReferenceById(value.name())
-                : new ModuleProfileDao();
+        DocPermDao person = check
+                ? docPermRepo.getReferenceById(value.name())
+                : new DocPermDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ModuleProfileDto.fromDTO(value, person);
-        return ModuleProfileDto.fromEntity(moduleProfileRepo.save(person));
+        DocPermDto.fromDTO(value, person);
+        return DocPermDto.fromEntity(docPermRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        moduleProfileRepo.deleteById(id);
+        docPermRepo.deleteById(id);
     }
 }
