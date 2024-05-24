@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.item;
 
-import com.itbd.application.db.dao.price.PriceListDao;
-import com.itbd.application.db.dto.price.PriceListDto;
-import com.itbd.application.db.repos.PriceListRepository;
+import com.itbd.application.db.dao.items.ItemGroupDao;
+import com.itbd.application.db.dto.items.ItemGroupDto;
+import com.itbd.application.db.repos.ItemGroupRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PriceListDtoCrudService implements CrudService<PriceListDto, String> {
+public class ItemGroupDtoCrudService implements CrudService<ItemGroupDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PriceListRepository priceListRepo;
+    private final ItemGroupRepository itemGroupRepo;
 
-    public PriceListDtoCrudService(PriceListRepository itemPriceRepo, JpaFilterConverter jpaFilterConverter) {
-        this.priceListRepo = itemPriceRepo;
+    public ItemGroupDtoCrudService(ItemGroupRepository itemGroupRepo, JpaFilterConverter jpaFilterConverter) {
+        this.itemGroupRepo = itemGroupRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PriceListDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ItemGroupDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PriceListDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PriceListDao.class)
+        Specification<ItemGroupDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ItemGroupDao.class)
                 : Specification.anyOf();
-        Page<PriceListDao> persons = priceListRepo.findAll(spec, pageable);
-        return persons.stream().map(PriceListDto::fromEntity).toList();
+        Page<ItemGroupDao> persons = itemGroupRepo.findAll(spec, pageable);
+        return persons.stream().map(ItemGroupDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PriceListDto save(PriceListDto value) {
+    public @Nullable ItemGroupDto save(ItemGroupDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PriceListDao person = check
-                ? priceListRepo.getReferenceById(value.name())
-                : new PriceListDao();
+        ItemGroupDao person = check
+                ? itemGroupRepo.getReferenceById(value.name())
+                : new ItemGroupDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PriceListDto.fromDTO(value, person);
-        return PriceListDto.fromEntity(priceListRepo.save(person));
+        ItemGroupDto.fromDTO(value, person);
+        return ItemGroupDto.fromEntity(itemGroupRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        priceListRepo.deleteById(id);
+        itemGroupRepo.deleteById(id);
     }
 }
