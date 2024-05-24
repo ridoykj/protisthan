@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.item;
 
-import com.itbd.application.db.dao.shipments.ShippingRuleDao;
-import com.itbd.application.db.dto.shipments.ShippingRuleDto;
-import com.itbd.application.db.repos.ShippingRuleRepository;
+import com.itbd.application.db.dao.CouponCodeDao;
+import com.itbd.application.db.dto.CouponCodeDto;
+import com.itbd.application.db.repos.CouponCodeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ShippingRuleDtoCrudService implements CrudService<ShippingRuleDto, String> {
+public class CouponCodeDtoCrudService implements CrudService<CouponCodeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ShippingRuleRepository shippingRuleRepo;
+    private final CouponCodeRepository couponCodeRepo;
 
-    public ShippingRuleDtoCrudService(ShippingRuleRepository shippingRuleRepo, JpaFilterConverter jpaFilterConverter) {
-        this.shippingRuleRepo = shippingRuleRepo;
+    public CouponCodeDtoCrudService(CouponCodeRepository couponCodeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.couponCodeRepo = couponCodeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ShippingRuleDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull CouponCodeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ShippingRuleDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ShippingRuleDao.class)
+        Specification<CouponCodeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, CouponCodeDao.class)
                 : Specification.anyOf();
-        Page<ShippingRuleDao> persons = shippingRuleRepo.findAll(spec, pageable);
-        return persons.stream().map(ShippingRuleDto::fromEntity).toList();
+        Page<CouponCodeDao> persons = couponCodeRepo.findAll(spec, pageable);
+        return persons.stream().map(CouponCodeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ShippingRuleDto save(ShippingRuleDto value) {
+    public @Nullable CouponCodeDto save(CouponCodeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ShippingRuleDao person = check
-                ? shippingRuleRepo.getReferenceById(value.name())
-                : new ShippingRuleDao();
+        CouponCodeDao person = check
+                ? couponCodeRepo.getReferenceById(value.name())
+                : new CouponCodeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ShippingRuleDto.fromDTO(value, person);
-        return ShippingRuleDto.fromEntity(shippingRuleRepo.save(person));
+        CouponCodeDto.fromDTO(value, person);
+        return CouponCodeDto.fromEntity(couponCodeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        shippingRuleRepo.deleteById(id);
+        couponCodeRepo.deleteById(id);
     }
 }
