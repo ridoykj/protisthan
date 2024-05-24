@@ -1,9 +1,8 @@
 package com.itbd.application.services.erp.crm;
 
-import com.itbd.application.db.dao.LeadDao;
-import com.itbd.application.db.dto.LeadDto;
-import com.itbd.application.db.repos.BrandRepository;
-import com.itbd.application.db.repos.LeadRepository;
+import com.itbd.application.db.dao.TerritoryDao;
+import com.itbd.application.db.dto.TerritoryDto;
+import com.itbd.application.db.repos.TerritoryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -20,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class LeadDtoCrudService implements CrudService<LeadDto, String> {
+public class TerritoryDtoCrudService implements CrudService<TerritoryDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final LeadRepository leadRepo;
+    private final TerritoryRepository territoryRepo;
 
-    public LeadDtoCrudService(LeadRepository leadRepo, JpaFilterConverter jpaFilterConverter) {
-        this.leadRepo = leadRepo;
+    public TerritoryDtoCrudService(TerritoryRepository territoryRepo, JpaFilterConverter jpaFilterConverter) {
+        this.territoryRepo = territoryRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull LeadDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull TerritoryDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<LeadDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, LeadDao.class)
+        Specification<TerritoryDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, TerritoryDao.class)
                 : Specification.anyOf();
-        Page<LeadDao> persons = leadRepo.findAll(spec, pageable);
-        return persons.stream().map(LeadDto::fromEntity).toList();
+        Page<TerritoryDao> persons = territoryRepo.findAll(spec, pageable);
+        return persons.stream().map(TerritoryDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable LeadDto save(LeadDto value) {
+    public @Nullable TerritoryDto save(TerritoryDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        LeadDao person = check
-                ? leadRepo.getReferenceById(value.name())
-                : new LeadDao();
+        TerritoryDao person = check
+                ? territoryRepo.getReferenceById(value.name())
+                : new TerritoryDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        LeadDto.fromDTO(value, person);
-        return LeadDto.fromEntity(leadRepo.save(person));
+        TerritoryDto.fromDTO(value, person);
+        return TerritoryDto.fromEntity(territoryRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        leadRepo.deleteById(id);
+        territoryRepo.deleteById(id);
     }
 }
