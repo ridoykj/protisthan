@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.pointofsale;
 
-import com.itbd.application.db.dao.pos.PosProfileDao;
-import com.itbd.application.db.dto.pos.PosProfileDto;
-import com.itbd.application.db.repos.PosProfileRepository;
+import com.itbd.application.db.dao.pos.PosOpeningEntryDao;
+import com.itbd.application.db.dto.pos.PosOpeningEntryDto;
+import com.itbd.application.db.repos.PosOpeningEntryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PosSettingsDtoCrudService implements CrudService<Pos, String> {
+public class PosOpeningEntryDtoCrudService implements CrudService<PosOpeningEntryDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PosProfileRepository posProfileRepo;
+    private final PosOpeningEntryRepository posOpeningEntryRepo;
 
-    public PosSettingsDtoCrudService(PosProfileRepository posProfileRepo, JpaFilterConverter jpaFilterConverter) {
-        this.posProfileRepo = posProfileRepo;
+    public PosOpeningEntryDtoCrudService(PosOpeningEntryRepository posOpeningEntryRepo, JpaFilterConverter jpaFilterConverter) {
+        this.posOpeningEntryRepo = posOpeningEntryRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PosProfileDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PosOpeningEntryDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PosProfileDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PosProfileDao.class)
+        Specification<PosOpeningEntryDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PosOpeningEntryDao.class)
                 : Specification.anyOf();
-        Page<PosProfileDao> persons = posProfileRepo.findAll(spec, pageable);
-        return persons.stream().map(PosProfileDto::fromEntity).toList();
+        Page<PosOpeningEntryDao> persons = posOpeningEntryRepo.findAll(spec, pageable);
+        return persons.stream().map(PosOpeningEntryDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PosProfileDto save(PosProfileDto value) {
+    public @Nullable PosOpeningEntryDto save(PosOpeningEntryDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PosProfileDao person = check
-                ? posProfileRepo.getReferenceById(value.name())
-                : new PosProfileDao();
+        PosOpeningEntryDao person = check
+                ? posOpeningEntryRepo.getReferenceById(value.name())
+                : new PosOpeningEntryDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PosProfileDto.fromDTO(value, person);
-        return PosProfileDto.fromEntity(posProfileRepo.save(person));
+        PosOpeningEntryDto.fromDTO(value, person);
+        return PosOpeningEntryDto.fromEntity(posOpeningEntryRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        posProfileRepo.deleteById(id);
+        posOpeningEntryRepo.deleteById(id);
     }
 }
