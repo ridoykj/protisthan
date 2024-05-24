@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type MapItem = {
   key: string;
@@ -11,11 +11,22 @@ type CheckboxListProps = {
   onValueChange?: (values: string[]) => void;
   items: string[];
   value?: string[];
+  onLabelClick?: (item: string) => void;
+  lableClick?: boolean;
 };
-function CheckboxList({ lable, className, onValueChange, items, value }: CheckboxListProps) {
-  const [checkedItems, setCheckedItems] = useState<MapItem[]>(
-    items.map((it) => ({ key: it, value: value?.includes(it) || false }))
-  );
+function CheckboxList({
+  lable,
+  className,
+  onValueChange,
+  items,
+  value,
+  onLabelClick,
+  lableClick,
+}: CheckboxListProps) {
+  const [checkedItems, setCheckedItems] = useState<MapItem[]>([]);
+  useEffect(() => {
+    setCheckedItems(items.map((it) => ({ key: it, value: value?.includes(it) || false })));
+  }, [value, items]);
 
   const handleCheckboxChange = (item: string) => {
     // if items key matches the item key, then toggle the value
@@ -42,8 +53,20 @@ function CheckboxList({ lable, className, onValueChange, items, value }: Checkbo
                 onChange={() => handleCheckboxChange(item.key)}
                 className="accent-indigo-500 cursor-pointer "
               />
-              <span className="label-text">{item.key}</span>
+              {!lableClick && <span className="label-text">{item.key}</span>}
             </label>
+            {lableClick && (
+              <span
+                className="label-text hover:underline cursor-pointer"
+                role="button"
+                tabIndex={0}
+                onClick={(e) => {
+                  onLabelClick?.(item.key);
+                }}
+              >
+                {item.key}
+              </span>
+            )}
           </li>
         ))}
       </ul>
