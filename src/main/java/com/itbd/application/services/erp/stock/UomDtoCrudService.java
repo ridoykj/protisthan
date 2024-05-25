@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.sale.uint;
+package com.itbd.application.services.erp.stock;
 
 import com.itbd.application.db.dao.uoms.UomDao;
 import com.itbd.application.db.dto.uoms.UomDto;
