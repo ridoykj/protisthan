@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.settings;
 
-import com.itbd.application.db.dao.TerritoryDao;
-import com.itbd.application.db.dto.TerritoryDto;
-import com.itbd.application.db.repos.TerritoryRepository;
+import com.itbd.application.db.dao.campaign.CampaignDao;
+import com.itbd.application.db.dto.campaign.CampaignDto;
+import com.itbd.application.db.repos.CampaignRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class TerritoryDtoCrudService implements CrudService<TerritoryDto, String> {
+public class CampaignDtoCrudService implements CrudService<CampaignDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final TerritoryRepository territoryRepo;
+    private final CampaignRepository campaignRepo;
 
-    public TerritoryDtoCrudService(TerritoryRepository territoryRepo, JpaFilterConverter jpaFilterConverter) {
-        this.territoryRepo = territoryRepo;
+    public CampaignDtoCrudService(CampaignRepository campaignRepo, JpaFilterConverter jpaFilterConverter) {
+        this.campaignRepo = campaignRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull TerritoryDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull CampaignDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<TerritoryDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, TerritoryDao.class)
+        Specification<CampaignDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, CampaignDao.class)
                 : Specification.anyOf();
-        Page<TerritoryDao> persons = territoryRepo.findAll(spec, pageable);
-        return persons.stream().map(TerritoryDto::fromEntity).toList();
+        Page<CampaignDao> persons = campaignRepo.findAll(spec, pageable);
+        return persons.stream().map(CampaignDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable TerritoryDto save(TerritoryDto value) {
+    public @Nullable CampaignDto save(CampaignDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        TerritoryDao person = check
-                ? territoryRepo.getReferenceById(value.name())
-                : new TerritoryDao();
+        CampaignDao person = check
+                ? campaignRepo.getReferenceById(value.name())
+                : new CampaignDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        TerritoryDto.fromDTO(value, person);
-        return TerritoryDto.fromEntity(territoryRepo.save(person));
+        CampaignDto.fromDTO(value, person);
+        return CampaignDto.fromEntity(campaignRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        territoryRepo.deleteById(id);
+        campaignRepo.deleteById(id);
     }
 }
