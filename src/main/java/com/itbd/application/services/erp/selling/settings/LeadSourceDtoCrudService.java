@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.settings;
 
-import com.itbd.application.db.dao.sales.SalesTaxesAndChargesDao;
-import com.itbd.application.db.dto.sales.SalesTaxesAndChargesDto;
-import com.itbd.application.db.repos.SalesTaxesAndChargesRepository;
+import com.itbd.application.db.dao.LeadSourceDao;
+import com.itbd.application.db.dto.LeadSourceDto;
+import com.itbd.application.db.repos.LeadSourceRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class SalesTaxesAndChargesDtoCrudService implements CrudService<SalesTaxesAndChargesDto, String> {
+public class LeadSourceDtoCrudService implements CrudService<LeadSourceDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final SalesTaxesAndChargesRepository salesTaxesAndChargesRepo;
+    private final LeadSourceRepository leadSourceRepository;
 
-    public SalesTaxesAndChargesDtoCrudService(SalesTaxesAndChargesRepository termsAndConditionsRepo, JpaFilterConverter jpaFilterConverter) {
-        this.salesTaxesAndChargesRepo = termsAndConditionsRepo;
+    public LeadSourceDtoCrudService(LeadSourceRepository leadSourceRepository, JpaFilterConverter jpaFilterConverter) {
+        this.leadSourceRepository = leadSourceRepository;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull SalesTaxesAndChargesDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull LeadSourceDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<SalesTaxesAndChargesDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, SalesTaxesAndChargesDao.class)
+        Specification<LeadSourceDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, LeadSourceDao.class)
                 : Specification.anyOf();
-        Page<SalesTaxesAndChargesDao> persons = salesTaxesAndChargesRepo.findAll(spec, pageable);
-        return persons.stream().map(SalesTaxesAndChargesDto::fromEntity).toList();
+        Page<LeadSourceDao> persons = leadSourceRepository.findAll(spec, pageable);
+        return persons.stream().map(LeadSourceDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable SalesTaxesAndChargesDto save(SalesTaxesAndChargesDto value) {
+    public @Nullable LeadSourceDto save(LeadSourceDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        SalesTaxesAndChargesDao person = check
-                ? salesTaxesAndChargesRepo.getReferenceById(value.name())
-                : new SalesTaxesAndChargesDao();
+        LeadSourceDao person = check
+                ? leadSourceRepository.getReferenceById(value.name())
+                : new LeadSourceDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        SalesTaxesAndChargesDto.fromDTO(value, person);
-        return SalesTaxesAndChargesDto.fromEntity(salesTaxesAndChargesRepo.save(person));
+        LeadSourceDto.fromDTO(value, person);
+        return LeadSourceDto.fromEntity(leadSourceRepository.save(person));
     }
 
     @Override
     public void delete(String id) {
-        salesTaxesAndChargesRepo.deleteById(id);
+        leadSourceRepository.deleteById(id);
     }
 }
