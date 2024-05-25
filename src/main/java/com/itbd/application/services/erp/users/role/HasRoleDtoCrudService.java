@@ -53,8 +53,30 @@ public class HasRoleDtoCrudService implements CrudService<HasRoleDto, String> {
         return HasRoleDto.fromEntity(hasRoleRepo.save(person));
     }
 
+    @Transactional
+    public List<HasRoleDao> saveAll(List<HasRoleDto> values) {
+//        boolean check = value.name() != null && !value.name().isEmpty();
+//        HasRoleDao person = check
+//                ? hasRoleRepo.getReferenceById(value.name())
+//                : new HasRoleDao();
+//
+//        // person.setRecordComment(check ? "UPDATE" : "NEW");
+//        HasRoleDto.fromDTO(value, person);
+        List<HasRoleDao> ii = values.stream().map(item -> {
+            HasRoleDao hasRoleDao = new HasRoleDao();
+            HasRoleDto.fromDTO(item, hasRoleDao);
+            return hasRoleDao;
+        }).toList();
+
+        return hasRoleRepo.saveAll(ii);
+    }
+
     @Override
     public void delete(String id) {
         hasRoleRepo.deleteById(id);
+    }
+
+    public void deleteWithNames(List<String> names) {
+        hasRoleRepo.deleteAllById(names);
     }
 }
