@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.warehouse.WarehouseDao;
-import com.itbd.application.db.dto.warehouse.WarehouseDto;
-import com.itbd.application.db.repos.CompanyRepository;
+import com.itbd.application.db.dao.BrandDao;
+import com.itbd.application.db.dto.BrandDto;
+import com.itbd.application.db.repos.BrandRepository;
 import com.itbd.application.db.repos.WarehouseRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
@@ -20,42 +20,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class WarehouseDtoCrudService implements CrudService<WarehouseDto, String> {
+public class BrandDtoCrudService implements CrudService<BrandDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final WarehouseRepository warehouseRepo;
+    private final BrandRepository brandRepo;
 
-    public WarehouseDtoCrudService(WarehouseRepository warehouseRepo, JpaFilterConverter jpaFilterConverter) {
-        this.warehouseRepo = warehouseRepo;
+    public BrandDtoCrudService(BrandRepository brandRepo, JpaFilterConverter jpaFilterConverter) {
+        this.brandRepo = brandRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull WarehouseDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull BrandDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<WarehouseDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, WarehouseDao.class)
+        Specification<BrandDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, BrandDao.class)
                 : Specification.anyOf();
-        Page<WarehouseDao> persons = warehouseRepo.findAll(spec, pageable);
-        return persons.stream().map(WarehouseDto::fromEntity).toList();
+        Page<BrandDao> persons = brandRepo.findAll(spec, pageable);
+        return persons.stream().map(BrandDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable WarehouseDto save(WarehouseDto value) {
+    public @Nullable BrandDto save(BrandDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        WarehouseDao person = check
-                ? warehouseRepo.getReferenceById(value.name())
-                : new WarehouseDao();
+        BrandDao person = check
+                ? brandRepo.getReferenceById(value.name())
+                : new BrandDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        WarehouseDto.fromDTO(value, person);
-        return WarehouseDto.fromEntity(warehouseRepo.save(person));
+        BrandDto.fromDTO(value, person);
+        return BrandDto.fromEntity(brandRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        warehouseRepo.deleteById(id);
+        brandRepo.deleteById(id);
     }
 }
