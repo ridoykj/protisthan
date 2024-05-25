@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.uoms.UomDao;
-import com.itbd.application.db.dto.uoms.UomDto;
-import com.itbd.application.db.repos.UomRepository;
+import com.itbd.application.db.dao.stocks.StockReconciliationDao;
+import com.itbd.application.db.dto.stocks.StockReconciliationDto;
+import com.itbd.application.db.repos.StockReconciliationRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class UomDtoCrudService implements CrudService<UomDto, String> {
+public class StockReconciliationDtoCrudService implements CrudService<StockReconciliationDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final UomRepository uomRepo;
+    private final StockReconciliationRepository stockReconciliationRepo;
 
-    public UomDtoCrudService(UomRepository uomRepo, JpaFilterConverter jpaFilterConverter) {
-        this.uomRepo = uomRepo;
+    public StockReconciliationDtoCrudService(StockReconciliationRepository stockReconciliationRepo, JpaFilterConverter jpaFilterConverter) {
+        this.stockReconciliationRepo = stockReconciliationRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull UomDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull StockReconciliationDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<UomDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, UomDao.class)
+        Specification<StockReconciliationDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, StockReconciliationDao.class)
                 : Specification.anyOf();
-        Page<UomDao> persons = uomRepo.findAll(spec, pageable);
-        return persons.stream().map(UomDto::fromEntity).toList();
+        Page<StockReconciliationDao> persons = stockReconciliationRepo.findAll(spec, pageable);
+        return persons.stream().map(StockReconciliationDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable UomDto save(UomDto value) {
+    public @Nullable StockReconciliationDto save(StockReconciliationDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        UomDao person = check
-                ? uomRepo.getReferenceById(value.name())
-                : new UomDao();
+        StockReconciliationDao person = check
+                ? stockReconciliationRepo.getReferenceById(value.name())
+                : new StockReconciliationDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        UomDto.fromDTO(value, person);
-        return UomDto.fromEntity(uomRepo.save(person));
+        StockReconciliationDto.fromDTO(value, person);
+        return StockReconciliationDto.fromEntity(stockReconciliationRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        uomRepo.deleteById(id);
+        stockReconciliationRepo.deleteById(id);
     }
 }
