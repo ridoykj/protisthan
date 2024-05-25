@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.selling;
 
-import com.itbd.application.db.dao.quotations.QuotationDao;
-import com.itbd.application.db.dto.quotations.QuotationDto;
-import com.itbd.application.db.repos.QuotationRepository;
+import com.itbd.application.db.dao.sales.SalesOrderDao;
+import com.itbd.application.db.dto.sales.SalesOrderDto;
+import com.itbd.application.db.repos.SalesOrderRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class QuotationDtoCrudService implements CrudService<QuotationDto, String> {
+public class SalesOrderDtoCrudService implements CrudService<SalesOrderDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final QuotationRepository quotationRepo;
+    private final SalesOrderRepository salesOrderRepo;
 
-    public QuotationDtoCrudService(QuotationRepository quotationRepo, JpaFilterConverter jpaFilterConverter) {
-        this.quotationRepo = quotationRepo;
+    public SalesOrderDtoCrudService(SalesOrderRepository salesOrderRepo, JpaFilterConverter jpaFilterConverter) {
+        this.salesOrderRepo = salesOrderRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull QuotationDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull SalesOrderDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<QuotationDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, QuotationDao.class)
+        Specification<SalesOrderDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, SalesOrderDao.class)
                 : Specification.anyOf();
-        Page<QuotationDao> persons = quotationRepo.findAll(spec, pageable);
-        return persons.stream().map(QuotationDto::fromEntity).toList();
+        Page<SalesOrderDao> persons = salesOrderRepo.findAll(spec, pageable);
+        return persons.stream().map(SalesOrderDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable QuotationDto save(QuotationDto value) {
+    public @Nullable SalesOrderDto save(SalesOrderDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        QuotationDao person = check
-                ? quotationRepo.getReferenceById(value.name())
-                : new QuotationDao();
+        SalesOrderDao person = check
+                ? salesOrderRepo.getReferenceById(value.name())
+                : new SalesOrderDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        QuotationDto.fromDTO(value, person);
-        return QuotationDto.fromEntity(quotationRepo.save(person));
+        SalesOrderDto.fromDTO(value, person);
+        return SalesOrderDto.fromEntity(salesOrderRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        quotationRepo.deleteById(id);
+        salesOrderRepo.deleteById(id);
     }
 }
