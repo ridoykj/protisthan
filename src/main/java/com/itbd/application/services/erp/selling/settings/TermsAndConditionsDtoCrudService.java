@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling.settings;
 
-import com.itbd.application.db.dao.CouponCodeDao;
-import com.itbd.application.db.dto.CouponCodeDto;
-import com.itbd.application.db.repos.CouponCodeRepository;
+import com.itbd.application.db.dao.TermsAndConditionsDao;
+import com.itbd.application.db.dto.TermsAndConditionsDto;
+import com.itbd.application.db.repos.TermsAndConditionsRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class SellingSettingsDtoCrudService implements CrudService<Selling, String> {
+public class TermsAndConditionsDtoCrudService implements CrudService<TermsAndConditionsDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final CouponCodeRepository couponCodeRepo;
+    private final TermsAndConditionsRepository termsAndConditionsRepo;
 
-    public SellingSettingsDtoCrudService(CouponCodeRepository couponCodeRepo, JpaFilterConverter jpaFilterConverter) {
-        this.couponCodeRepo = couponCodeRepo;
+    public TermsAndConditionsDtoCrudService(TermsAndConditionsRepository termsAndConditionsRepo, JpaFilterConverter jpaFilterConverter) {
+        this.termsAndConditionsRepo = termsAndConditionsRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull CouponCodeDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull TermsAndConditionsDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<CouponCodeDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, CouponCodeDao.class)
+        Specification<TermsAndConditionsDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, TermsAndConditionsDao.class)
                 : Specification.anyOf();
-        Page<CouponCodeDao> persons = couponCodeRepo.findAll(spec, pageable);
-        return persons.stream().map(CouponCodeDto::fromEntity).toList();
+        Page<TermsAndConditionsDao> persons = termsAndConditionsRepo.findAll(spec, pageable);
+        return persons.stream().map(TermsAndConditionsDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable CouponCodeDto save(CouponCodeDto value) {
+    public @Nullable TermsAndConditionsDto save(TermsAndConditionsDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        CouponCodeDao person = check
-                ? couponCodeRepo.getReferenceById(value.name())
-                : new CouponCodeDao();
+        TermsAndConditionsDao person = check
+                ? termsAndConditionsRepo.getReferenceById(value.name())
+                : new TermsAndConditionsDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        CouponCodeDto.fromDTO(value, person);
-        return CouponCodeDto.fromEntity(couponCodeRepo.save(person));
+        TermsAndConditionsDto.fromDTO(value, person);
+        return TermsAndConditionsDto.fromEntity(termsAndConditionsRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        couponCodeRepo.deleteById(id);
+        termsAndConditionsRepo.deleteById(id);
     }
 }
