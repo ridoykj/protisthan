@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.RouteHistoryDao;
-import com.itbd.application.db.dto.RouteHistoryDto;
-import com.itbd.application.db.repos.RouteHistoryRepository;
+import com.itbd.application.db.dao.workspace.WorkspaceChartDao;
+import com.itbd.application.db.dto.workspace.WorkspaceChartDto;
+import com.itbd.application.db.repos.WorkspaceChartRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class RouteHistoryDtoCrudService implements CrudService<RouteHistoryDto, String> {
+public class WorkspaceChartDtoCrudService implements CrudService<WorkspaceChartDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final RouteHistoryRepository routeHistoryRepo;
+    private final WorkspaceChartRepository workspaceChartRepos;
 
-    public RouteHistoryDtoCrudService(RouteHistoryRepository routeHistoryRepo, JpaFilterConverter jpaFilterConverter) {
-        this.routeHistoryRepo = routeHistoryRepo;
+    public WorkspaceChartDtoCrudService(WorkspaceChartRepository workspaceChartRepos, JpaFilterConverter jpaFilterConverter) {
+        this.workspaceChartRepos = workspaceChartRepos;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull RouteHistoryDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull WorkspaceChartDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<RouteHistoryDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, RouteHistoryDao.class)
+        Specification<WorkspaceChartDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, WorkspaceChartDao.class)
                 : Specification.anyOf();
-        Page<RouteHistoryDao> persons = routeHistoryRepo.findAll(spec, pageable);
-        return persons.stream().map(RouteHistoryDto::fromEntity).toList();
+        Page<WorkspaceChartDao> persons = workspaceChartRepos.findAll(spec, pageable);
+        return persons.stream().map(WorkspaceChartDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable RouteHistoryDto save(RouteHistoryDto value) {
+    public @Nullable WorkspaceChartDto save(WorkspaceChartDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        RouteHistoryDao person = check
-                ? routeHistoryRepo.getReferenceById(value.name())
-                : new RouteHistoryDao();
+        WorkspaceChartDao person = check
+                ? workspaceChartRepos.getReferenceById(value.name())
+                : new WorkspaceChartDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        RouteHistoryDto.fromDTO(value, person);
-        return RouteHistoryDto.fromEntity(routeHistoryRepo.save(person));
+        WorkspaceChartDto.fromDTO(value, person);
+        return WorkspaceChartDto.fromEntity(workspaceChartRepos.save(person));
     }
 
     @Override
     public void delete(String id) {
-        routeHistoryRepo.deleteById(id);
+        workspaceChartRepos.deleteById(id);
     }
 }

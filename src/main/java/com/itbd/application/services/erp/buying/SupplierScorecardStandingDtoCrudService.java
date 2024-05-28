@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.buying;
 
-import com.itbd.application.db.dao.supplier.SupplierDao;
-import com.itbd.application.db.dto.supplier.SupplierDto;
-import com.itbd.application.db.repos.SupplierRepository;
+import com.itbd.application.db.dao.supplier.SupplierScorecardStandingDao;
+import com.itbd.application.db.dto.supplier.SupplierScorecardStandingDto;
+import com.itbd.application.db.repos.SupplierScorecardStandingRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class SupplierDtoCrudService implements CrudService<SupplierDto, String> {
+public class SupplierScorecardStandingDtoCrudService implements CrudService<SupplierScorecardStandingDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final SupplierRepository supplierRepo;
+    private final SupplierScorecardStandingRepository supplierScorecardStandingRepo;
 
-    public SupplierDtoCrudService(SupplierRepository supplierRepo, JpaFilterConverter jpaFilterConverter) {
-        this.supplierRepo = supplierRepo;
+    public SupplierScorecardStandingDtoCrudService(SupplierScorecardStandingRepository supplierScorecardStandingRepo, JpaFilterConverter jpaFilterConverter) {
+        this.supplierScorecardStandingRepo = supplierScorecardStandingRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull SupplierDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull SupplierScorecardStandingDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<SupplierDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, SupplierDao.class)
+        Specification<SupplierScorecardStandingDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, SupplierScorecardStandingDao.class)
                 : Specification.anyOf();
-        Page<SupplierDao> persons = supplierRepo.findAll(spec, pageable);
-        return persons.stream().map(SupplierDto::fromEntity).toList();
+        Page<SupplierScorecardStandingDao> persons = supplierScorecardStandingRepo.findAll(spec, pageable);
+        return persons.stream().map(SupplierScorecardStandingDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable SupplierDto save(SupplierDto value) {
+    public @Nullable SupplierScorecardStandingDto save(SupplierScorecardStandingDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        SupplierDao person = check
-                ? supplierRepo.getReferenceById(value.name())
-                : new SupplierDao();
+        SupplierScorecardStandingDao person = check
+                ? supplierScorecardStandingRepo.getReferenceById(value.name())
+                : new SupplierScorecardStandingDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        SupplierDto.fromDTO(value, person);
-        return SupplierDto.fromEntity(supplierRepo.save(person));
+        SupplierScorecardStandingDto.fromDTO(value, person);
+        return SupplierScorecardStandingDto.fromEntity(supplierScorecardStandingRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        supplierRepo.deleteById(id);
+        supplierScorecardStandingRepo.deleteById(id);
     }
 }

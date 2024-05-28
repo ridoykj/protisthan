@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.FileDao;
-import com.itbd.application.db.dto.FileDto;
-import com.itbd.application.db.repos.FileRepository;
+import com.itbd.application.db.dao.LanguageDao;
+import com.itbd.application.db.dto.LanguageDto;
+import com.itbd.application.db.repos.LanguageRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class FileDtoCrudService implements CrudService<FileDto, String> {
+public class LanguageDtoCrudService implements CrudService<LanguageDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final FileRepository fileRepo;
+    private final LanguageRepository languageRepo;
 
-    public FileDtoCrudService(FileRepository fileRepo, JpaFilterConverter jpaFilterConverter) {
-        this.fileRepo = fileRepo;
+    public LanguageDtoCrudService(LanguageRepository languageRepo, JpaFilterConverter jpaFilterConverter) {
+        this.languageRepo = languageRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull FileDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull LanguageDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<FileDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, FileDao.class)
+        Specification<LanguageDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, LanguageDao.class)
                 : Specification.anyOf();
-        Page<FileDao> persons = fileRepo.findAll(spec, pageable);
-        return persons.stream().map(FileDto::fromEntity).toList();
+        Page<LanguageDao> persons = languageRepo.findAll(spec, pageable);
+        return persons.stream().map(LanguageDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable FileDto save(FileDto value) {
+    public @Nullable LanguageDto save(LanguageDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        FileDao person = check
-                ? fileRepo.getReferenceById(value.name())
-                : new FileDao();
+        LanguageDao person = check
+                ? languageRepo.getReferenceById(value.name())
+                : new LanguageDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        FileDto.fromDTO(value, person);
-        return FileDto.fromEntity(fileRepo.save(person));
+        LanguageDto.fromDTO(value, person);
+        return LanguageDto.fromEntity(languageRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        fileRepo.deleteById(id);
+        languageRepo.deleteById(id);
     }
 }

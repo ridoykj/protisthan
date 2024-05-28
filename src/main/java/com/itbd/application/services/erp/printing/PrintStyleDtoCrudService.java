@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.printing;
 
-import com.itbd.application.db.dao.print.PrintFormatDao;
-import com.itbd.application.db.dto.print.PrintFormatDto;
-import com.itbd.application.db.repos.PrintFormatRepository;
+import com.itbd.application.db.dao.print.PrintStyleDao;
+import com.itbd.application.db.dto.print.PrintStyleDto;
+import com.itbd.application.db.repos.PrintStyleRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PrintFormatDtoCrudService implements CrudService<PrintFormatDto, String> {
+public class PrintStyleDtoCrudService implements CrudService<PrintStyleDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PrintFormatRepository printFormatRepo;
+    private final PrintStyleRepository printStyleRepo;
 
-    public PrintFormatDtoCrudService(PrintFormatRepository printFormatRepo, JpaFilterConverter jpaFilterConverter) {
-        this.printFormatRepo = printFormatRepo;
+    public PrintStyleDtoCrudService(PrintStyleRepository printStyleRepo, JpaFilterConverter jpaFilterConverter) {
+        this.printStyleRepo = printStyleRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PrintFormatDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PrintStyleDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PrintFormatDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PrintFormatDao.class)
+        Specification<PrintStyleDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PrintStyleDao.class)
                 : Specification.anyOf();
-        Page<PrintFormatDao> persons = printFormatRepo.findAll(spec, pageable);
-        return persons.stream().map(PrintFormatDto::fromEntity).toList();
+        Page<PrintStyleDao> persons = printStyleRepo.findAll(spec, pageable);
+        return persons.stream().map(PrintStyleDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PrintFormatDto save(PrintFormatDto value) {
+    public @Nullable PrintStyleDto save(PrintStyleDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PrintFormatDao person = check
-                ? printFormatRepo.getReferenceById(value.name())
-                : new PrintFormatDao();
+        PrintStyleDao person = check
+                ? printStyleRepo.getReferenceById(value.name())
+                : new PrintStyleDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PrintFormatDto.fromDTO(value, person);
-        return PrintFormatDto.fromEntity(printFormatRepo.save(person));
+        PrintStyleDto.fromDTO(value, person);
+        return PrintStyleDto.fromEntity(printStyleRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        printFormatRepo.deleteById(id);
+        printStyleRepo.deleteById(id);
     }
 }

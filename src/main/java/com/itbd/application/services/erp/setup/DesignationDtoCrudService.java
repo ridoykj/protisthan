@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.DepartmentDao;
-import com.itbd.application.db.dto.DepartmentDto;
-import com.itbd.application.db.repos.DepartmentRepository;
+import com.itbd.application.db.dao.DesignationDao;
+import com.itbd.application.db.dto.DesignationDto;
+import com.itbd.application.db.repos.DesignationRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class DepartmentDtoCrudService implements CrudService<DepartmentDto, String> {
+public class DesignationDtoCrudService implements CrudService<DesignationDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final DepartmentRepository departmentRepo;
+    private final DesignationRepository designationRepo;
 
-    public DepartmentDtoCrudService(DepartmentRepository departmentRepo, JpaFilterConverter jpaFilterConverter) {
-        this.departmentRepo = departmentRepo;
+    public DesignationDtoCrudService(DesignationRepository designationRepo, JpaFilterConverter jpaFilterConverter) {
+        this.designationRepo = designationRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull DepartmentDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull DesignationDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<DepartmentDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, DepartmentDao.class)
+        Specification<DesignationDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, DesignationDao.class)
                 : Specification.anyOf();
-        Page<DepartmentDao> persons = departmentRepo.findAll(spec, pageable);
-        return persons.stream().map(DepartmentDto::fromEntity).toList();
+        Page<DesignationDao> persons = designationRepo.findAll(spec, pageable);
+        return persons.stream().map(DesignationDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable DepartmentDto save(DepartmentDto value) {
+    public @Nullable DesignationDto save(DesignationDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        DepartmentDao person = check
-                ? departmentRepo.getReferenceById(value.name())
-                : new DepartmentDao();
+        DesignationDao person = check
+                ? designationRepo.getReferenceById(value.name())
+                : new DesignationDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        DepartmentDto.fromDTO(value, person);
-        return DepartmentDto.fromEntity(departmentRepo.save(person));
+        DesignationDto.fromDTO(value, person);
+        return DesignationDto.fromEntity(designationRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        departmentRepo.deleteById(id);
+        designationRepo.deleteById(id);
     }
 }

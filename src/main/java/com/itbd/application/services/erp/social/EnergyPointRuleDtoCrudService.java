@@ -1,8 +1,8 @@
-package com.itbd.application.services.erp.setup;
+package com.itbd.application.services.erp.social;
 
-import com.itbd.application.db.dao.uoms.UomDao;
-import com.itbd.application.db.dto.uoms.UomDto;
-import com.itbd.application.db.repos.UomRepository;
+import com.itbd.application.db.dao.EnergyPointRuleDao;
+import com.itbd.application.db.dto.EnergyPointRuleDto;
+import com.itbd.application.db.repos.EnergyPointRuleRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class UomDtoCrudService implements CrudService<UomDto, String> {
+public class EnergyPointRuleDtoCrudService implements CrudService<EnergyPointRuleDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final UomRepository uomRepo;
+    private final EnergyPointRuleRepository energyPointRuleRepo;
 
-    public UomDtoCrudService(UomRepository uomRepo, JpaFilterConverter jpaFilterConverter) {
-        this.uomRepo = uomRepo;
+    public EnergyPointRuleDtoCrudService(EnergyPointRuleRepository energyPointRuleRepo, JpaFilterConverter jpaFilterConverter) {
+        this.energyPointRuleRepo = energyPointRuleRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull UomDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull EnergyPointRuleDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<UomDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, UomDao.class)
+        Specification<EnergyPointRuleDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, EnergyPointRuleDao.class)
                 : Specification.anyOf();
-        Page<UomDao> persons = uomRepo.findAll(spec, pageable);
-        return persons.stream().map(UomDto::fromEntity).toList();
+        Page<EnergyPointRuleDao> persons = energyPointRuleRepo.findAll(spec, pageable);
+        return persons.stream().map(EnergyPointRuleDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable UomDto save(UomDto value) {
+    public @Nullable EnergyPointRuleDto save(EnergyPointRuleDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        UomDao person = check
-                ? uomRepo.getReferenceById(value.name())
-                : new UomDao();
+        EnergyPointRuleDao person = check
+                ? energyPointRuleRepo.getReferenceById(value.name())
+                : new EnergyPointRuleDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        UomDto.fromDTO(value, person);
-        return UomDto.fromEntity(uomRepo.save(person));
+        EnergyPointRuleDto.fromDTO(value, person);
+        return EnergyPointRuleDto.fromEntity(energyPointRuleRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        uomRepo.deleteById(id);
+        energyPointRuleRepo.deleteById(id);
     }
 }

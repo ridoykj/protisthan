@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.uoms.UomDao;
-import com.itbd.application.db.dto.uoms.UomDto;
-import com.itbd.application.db.repos.UomRepository;
+import com.itbd.application.db.dao.uoms.UomConversionFactorDao;
+import com.itbd.application.db.dto.uoms.UomConversionFactorDto;
+import com.itbd.application.db.repos.UomConversionFactorRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class UomDtoCrudService implements CrudService<UomDto, String> {
+public class UOMConversionFactorDtoCrudService implements CrudService<UomConversionFactorDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final UomRepository uomRepo;
+    private final UomConversionFactorRepository uomConversionFactorRepo;
 
-    public UomDtoCrudService(UomRepository uomRepo, JpaFilterConverter jpaFilterConverter) {
-        this.uomRepo = uomRepo;
+    public UOMConversionFactorDtoCrudService(UomConversionFactorRepository uomConversionFactorRepo, JpaFilterConverter jpaFilterConverter) {
+        this.uomConversionFactorRepo = uomConversionFactorRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull UomDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull UomConversionFactorDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<UomDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, UomDao.class)
+        Specification<UomConversionFactorDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, UomConversionFactorDao.class)
                 : Specification.anyOf();
-        Page<UomDao> persons = uomRepo.findAll(spec, pageable);
-        return persons.stream().map(UomDto::fromEntity).toList();
+        Page<UomConversionFactorDao> persons = uomConversionFactorRepo.findAll(spec, pageable);
+        return persons.stream().map(UomConversionFactorDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable UomDto save(UomDto value) {
+    public @Nullable UomConversionFactorDto save(UomConversionFactorDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        UomDao person = check
-                ? uomRepo.getReferenceById(value.name())
-                : new UomDao();
+        UomConversionFactorDao person = check
+                ? uomConversionFactorRepo.getReferenceById(value.name())
+                : new UomConversionFactorDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        UomDto.fromDTO(value, person);
-        return UomDto.fromEntity(uomRepo.save(person));
+        UomConversionFactorDto.fromDTO(value, person);
+        return UomConversionFactorDto.fromEntity(uomConversionFactorRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        uomRepo.deleteById(id);
+        uomConversionFactorRepo.deleteById(id);
     }
 }

@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.items.ItemDao;
-import com.itbd.application.db.dto.items.ItemDto;
-import com.itbd.application.db.repos.ItemRepository;
+import com.itbd.application.db.dao.uoms.UomCategoryDao;
+import com.itbd.application.db.dto.uoms.UomCategoryDto;
+import com.itbd.application.db.repos.UomCategoryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ItemDtoCrudService implements CrudService<ItemDto, String> {
+public class UomCategoryDtoCrudService implements CrudService<UomCategoryDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ItemRepository itemRepo;
+    private final UomCategoryRepository uomCategoryRepo;
 
-    public ItemDtoCrudService(ItemRepository itemRepo, JpaFilterConverter jpaFilterConverter) {
-        this.itemRepo = itemRepo;
+    public UomCategoryDtoCrudService(UomCategoryRepository uomCategoryRepo, JpaFilterConverter jpaFilterConverter) {
+        this.uomCategoryRepo = uomCategoryRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ItemDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull UomCategoryDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ItemDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ItemDao.class)
+        Specification<UomCategoryDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, UomCategoryDao.class)
                 : Specification.anyOf();
-        Page<ItemDao> persons = itemRepo.findAll(spec, pageable);
-        return persons.stream().map(ItemDto::fromEntity).toList();
+        Page<UomCategoryDao> persons = uomCategoryRepo.findAll(spec, pageable);
+        return persons.stream().map(UomCategoryDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ItemDto save(ItemDto value) {
+    public @Nullable UomCategoryDto save(UomCategoryDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ItemDao person = check
-                ? itemRepo.getReferenceById(value.name())
-                : new ItemDao();
+        UomCategoryDao person = check
+                ? uomCategoryRepo.getReferenceById(value.name())
+                : new UomCategoryDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ItemDto.fromDTO(value, person);
-        return ItemDto.fromEntity(itemRepo.save(person));
+        UomCategoryDto.fromDTO(value, person);
+        return UomCategoryDto.fromEntity(uomCategoryRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        itemRepo.deleteById(id);
+        uomCategoryRepo.deleteById(id);
     }
 }

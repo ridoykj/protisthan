@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.sales.SalesTaxesAndChargesDao;
-import com.itbd.application.db.dto.sales.SalesTaxesAndChargesDto;
-import com.itbd.application.db.repos.SalesTaxesAndChargesRepository;
+import com.itbd.application.db.dao.sales.SalesTaxesAndChargesTemplateDao;
+import com.itbd.application.db.dto.sales.SalesTaxesAndChargesTemplateDto;
+import com.itbd.application.db.repos.SalesTaxesAndChargesTemplateRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class SalesTaxesAndChargesDtoCrudService implements CrudService<SalesTaxesAndChargesDto, String> {
+public class SalesTaxesAndChargesTemplateDtoCrudService implements CrudService<SalesTaxesAndChargesTemplateDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final SalesTaxesAndChargesRepository salesTaxesAndChargesRepo;
+    private final SalesTaxesAndChargesTemplateRepository salesTaxesAndChargesTemplateRepo;
 
-    public SalesTaxesAndChargesDtoCrudService(SalesTaxesAndChargesRepository termsAndConditionsRepo, JpaFilterConverter jpaFilterConverter) {
-        this.salesTaxesAndChargesRepo = termsAndConditionsRepo;
+    public SalesTaxesAndChargesTemplateDtoCrudService(SalesTaxesAndChargesTemplateRepository salesTaxesAndChargesTemplateRepo, JpaFilterConverter jpaFilterConverter) {
+        this.salesTaxesAndChargesTemplateRepo = salesTaxesAndChargesTemplateRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull SalesTaxesAndChargesDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull SalesTaxesAndChargesTemplateDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<SalesTaxesAndChargesDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, SalesTaxesAndChargesDao.class)
+        Specification<SalesTaxesAndChargesTemplateDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, SalesTaxesAndChargesTemplateDao.class)
                 : Specification.anyOf();
-        Page<SalesTaxesAndChargesDao> persons = salesTaxesAndChargesRepo.findAll(spec, pageable);
-        return persons.stream().map(SalesTaxesAndChargesDto::fromEntity).toList();
+        Page<SalesTaxesAndChargesTemplateDao> persons = salesTaxesAndChargesTemplateRepo.findAll(spec, pageable);
+        return persons.stream().map(SalesTaxesAndChargesTemplateDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable SalesTaxesAndChargesDto save(SalesTaxesAndChargesDto value) {
+    public @Nullable SalesTaxesAndChargesTemplateDto save(SalesTaxesAndChargesTemplateDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        SalesTaxesAndChargesDao person = check
-                ? salesTaxesAndChargesRepo.getReferenceById(value.name())
-                : new SalesTaxesAndChargesDao();
+        SalesTaxesAndChargesTemplateDao person = check
+                ? salesTaxesAndChargesTemplateRepo.getReferenceById(value.name())
+                : new SalesTaxesAndChargesTemplateDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        SalesTaxesAndChargesDto.fromDTO(value, person);
-        return SalesTaxesAndChargesDto.fromEntity(salesTaxesAndChargesRepo.save(person));
+        SalesTaxesAndChargesTemplateDto.fromDTO(value, person);
+        return SalesTaxesAndChargesTemplateDto.fromEntity(salesTaxesAndChargesTemplateRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        salesTaxesAndChargesRepo.deleteById(id);
+        salesTaxesAndChargesTemplateRepo.deleteById(id);
     }
 }

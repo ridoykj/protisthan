@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.crm;
 
-import com.itbd.application.db.dao.MarketSegmentDao;
-import com.itbd.application.db.dto.MarketSegmentDto;
-import com.itbd.application.db.repos.MarketSegmentRepository;
+import com.itbd.application.db.dao.opportunity.OpportunityTypeDao;
+import com.itbd.application.db.dto.opportunity.OpportunityTypeDto;
+import com.itbd.application.db.repos.OpportunityTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class MarketSegmentDtoCrudService implements CrudService<MarketSegmentDto, String> {
+public class OpportunityTypeDtoCrudService implements CrudService<OpportunityTypeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final MarketSegmentRepository marketSegmentRepo;
+    private final OpportunityTypeRepository opportunityTypeRepo;
 
-    public MarketSegmentDtoCrudService(MarketSegmentRepository marketSegmentRepo, JpaFilterConverter jpaFilterConverter) {
-        this.marketSegmentRepo = marketSegmentRepo;
+    public OpportunityTypeDtoCrudService(OpportunityTypeRepository opportunityTypeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.opportunityTypeRepo = opportunityTypeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull MarketSegmentDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull OpportunityTypeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<MarketSegmentDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, MarketSegmentDao.class)
+        Specification<OpportunityTypeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, OpportunityTypeDao.class)
                 : Specification.anyOf();
-        Page<MarketSegmentDao> persons = marketSegmentRepo.findAll(spec, pageable);
-        return persons.stream().map(MarketSegmentDto::fromEntity).toList();
+        Page<OpportunityTypeDao> persons = opportunityTypeRepo.findAll(spec, pageable);
+        return persons.stream().map(OpportunityTypeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable MarketSegmentDto save(MarketSegmentDto value) {
+    public @Nullable OpportunityTypeDto save(OpportunityTypeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        MarketSegmentDao person = check
-                ? marketSegmentRepo.getReferenceById(value.name())
-                : new MarketSegmentDao();
+        OpportunityTypeDao person = check
+                ? opportunityTypeRepo.getReferenceById(value.name())
+                : new OpportunityTypeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        MarketSegmentDto.fromDTO(value, person);
-        return MarketSegmentDto.fromEntity(marketSegmentRepo.save(person));
+        OpportunityTypeDto.fromDTO(value, person);
+        return OpportunityTypeDto.fromEntity(opportunityTypeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        marketSegmentRepo.deleteById(id);
+        opportunityTypeRepo.deleteById(id);
     }
 }

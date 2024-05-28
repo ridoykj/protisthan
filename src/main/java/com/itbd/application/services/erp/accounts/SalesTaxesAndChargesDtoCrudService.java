@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.selling.settings;
+package com.itbd.application.services.erp.accounts;
 
 import com.itbd.application.db.dao.sales.SalesTaxesAndChargesDao;
 import com.itbd.application.db.dto.sales.SalesTaxesAndChargesDto;

@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.PartyTypeDao;
-import com.itbd.application.db.dto.PartyTypeDto;
-import com.itbd.application.db.repos.PartyTypeRepository;
+import com.itbd.application.db.dao.print.PrintHeadingDao;
+import com.itbd.application.db.dto.print.PrintHeadingDto;
+import com.itbd.application.db.repos.PrintHeadingRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PartyTypeDtoCrudService implements CrudService<PartyTypeDto, String> {
+public class PrintHeadingDtoCrudService implements CrudService<PrintHeadingDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PartyTypeRepository partyTypeRepo;
+    private final PrintHeadingRepository printHeadingRepo;
 
-    public PartyTypeDtoCrudService(PartyTypeRepository partyTypeRepo, JpaFilterConverter jpaFilterConverter) {
-        this.partyTypeRepo = partyTypeRepo;
+    public PrintHeadingDtoCrudService(PrintHeadingRepository printHeadingRepo, JpaFilterConverter jpaFilterConverter) {
+        this.printHeadingRepo = printHeadingRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PartyTypeDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PrintHeadingDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PartyTypeDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PartyTypeDao.class)
+        Specification<PrintHeadingDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PrintHeadingDao.class)
                 : Specification.anyOf();
-        Page<PartyTypeDao> persons = partyTypeRepo.findAll(spec, pageable);
-        return persons.stream().map(PartyTypeDto::fromEntity).toList();
+        Page<PrintHeadingDao> persons = printHeadingRepo.findAll(spec, pageable);
+        return persons.stream().map(PrintHeadingDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PartyTypeDto save(PartyTypeDto value) {
+    public @Nullable PrintHeadingDto save(PrintHeadingDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PartyTypeDao person = check
-                ? partyTypeRepo.getReferenceById(value.name())
-                : new PartyTypeDao();
+        PrintHeadingDao person = check
+                ? printHeadingRepo.getReferenceById(value.name())
+                : new PrintHeadingDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PartyTypeDto.fromDTO(value, person);
-        return PartyTypeDto.fromEntity(partyTypeRepo.save(person));
+        PrintHeadingDto.fromDTO(value, person);
+        return PrintHeadingDto.fromEntity(printHeadingRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        partyTypeRepo.deleteById(id);
+        printHeadingRepo.deleteById(id);
     }
 }

@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.ModeOfPaymentDao;
-import com.itbd.application.db.dto.ModeOfPaymentDto;
-import com.itbd.application.db.repos.ModeOfPaymentRepository;
+import com.itbd.application.db.dao.ModeOfPaymentAccountDao;
+import com.itbd.application.db.dto.ModeOfPaymentAccountDto;
+import com.itbd.application.db.repos.ModeOfPaymentAccountRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ModeOfPaymentDtoCrudService implements CrudService<ModeOfPaymentDto, String> {
+public class ModeOfPaymentAccountDtoCrudService implements CrudService<ModeOfPaymentAccountDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ModeOfPaymentRepository modeOfPaymentRepo;
+    private final ModeOfPaymentAccountRepository modeOfPaymentAccountRepo;
 
-    public ModeOfPaymentDtoCrudService(ModeOfPaymentRepository modeOfPaymentRepo, JpaFilterConverter jpaFilterConverter) {
-        this.modeOfPaymentRepo = modeOfPaymentRepo;
+    public ModeOfPaymentAccountDtoCrudService(ModeOfPaymentAccountRepository modeOfPaymentAccountRepo, JpaFilterConverter jpaFilterConverter) {
+        this.modeOfPaymentAccountRepo = modeOfPaymentAccountRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ModeOfPaymentDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ModeOfPaymentAccountDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ModeOfPaymentDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ModeOfPaymentDao.class)
+        Specification<ModeOfPaymentAccountDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ModeOfPaymentAccountDao.class)
                 : Specification.anyOf();
-        Page<ModeOfPaymentDao> persons = modeOfPaymentRepo.findAll(spec, pageable);
-        return persons.stream().map(ModeOfPaymentDto::fromEntity).toList();
+        Page<ModeOfPaymentAccountDao> persons = modeOfPaymentAccountRepo.findAll(spec, pageable);
+        return persons.stream().map(ModeOfPaymentAccountDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ModeOfPaymentDto save(ModeOfPaymentDto value) {
+    public @Nullable ModeOfPaymentAccountDto save(ModeOfPaymentAccountDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ModeOfPaymentDao person = check
-                ? modeOfPaymentRepo.getReferenceById(value.name())
-                : new ModeOfPaymentDao();
+        ModeOfPaymentAccountDao person = check
+                ? modeOfPaymentAccountRepo.getReferenceById(value.name())
+                : new ModeOfPaymentAccountDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ModeOfPaymentDto.fromDTO(value, person);
-        return ModeOfPaymentDto.fromEntity(modeOfPaymentRepo.save(person));
+        ModeOfPaymentAccountDto.fromDTO(value, person);
+        return ModeOfPaymentAccountDto.fromEntity(modeOfPaymentAccountRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        modeOfPaymentRepo.deleteById(id);
+        modeOfPaymentAccountRepo.deleteById(id);
     }
 }

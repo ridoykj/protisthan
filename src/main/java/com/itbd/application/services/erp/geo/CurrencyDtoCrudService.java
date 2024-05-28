@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.geo;
 
-import com.itbd.application.db.dao.CountryDao;
-import com.itbd.application.db.dto.CountryDto;
-import com.itbd.application.db.repos.CountryRepository;
+import com.itbd.application.db.dao.currencys.CurrencyDao;
+import com.itbd.application.db.dto.currencys.CurrencyDto;
+import com.itbd.application.db.repos.CurrencyRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class CountryDtoCrudService implements CrudService<CountryDto, String> {
+public class CurrencyDtoCrudService implements CrudService<CurrencyDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final CountryRepository countryRepo;
+    private final CurrencyRepository currencyRepo;
 
-    public CountryDtoCrudService(CountryRepository countryRepo, JpaFilterConverter jpaFilterConverter) {
-        this.countryRepo = countryRepo;
+    public CurrencyDtoCrudService(CurrencyRepository currencyRepo, JpaFilterConverter jpaFilterConverter) {
+        this.currencyRepo = currencyRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull CountryDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull CurrencyDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<CountryDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, CountryDao.class)
+        Specification<CurrencyDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, CurrencyDao.class)
                 : Specification.anyOf();
-        Page<CountryDao> persons = countryRepo.findAll(spec, pageable);
-        return persons.stream().map(CountryDto::fromEntity).toList();
+        Page<CurrencyDao> persons = currencyRepo.findAll(spec, pageable);
+        return persons.stream().map(CurrencyDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable CountryDto save(CountryDto value) {
+    public @Nullable CurrencyDto save(CurrencyDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        CountryDao person = check
-                ? countryRepo.getReferenceById(value.name())
-                : new CountryDao();
+        CurrencyDao person = check
+                ? currencyRepo.getReferenceById(value.name())
+                : new CurrencyDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        CountryDto.fromDTO(value, person);
-        return CountryDto.fromEntity(countryRepo.save(person));
+        CurrencyDto.fromDTO(value, person);
+        return CurrencyDto.fromEntity(currencyRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        countryRepo.deleteById(id);
+        currencyRepo.deleteById(id);
     }
 }

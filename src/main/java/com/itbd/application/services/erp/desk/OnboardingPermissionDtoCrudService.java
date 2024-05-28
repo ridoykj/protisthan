@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.NumberCardLinkDao;
-import com.itbd.application.db.dto.NumberCardLinkDto;
-import com.itbd.application.db.repos.NumberCardLinkRepository;
+import com.itbd.application.db.dao.onboarding.OnboardingPermissionDao;
+import com.itbd.application.db.dto.onboarding.OnboardingPermissionDto;
+import com.itbd.application.db.repos.OnboardingPermissionRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class NumberCardLinkDtoCrudService implements CrudService<NumberCardLinkDto, String> {
+public class OnboardingPermissionDtoCrudService implements CrudService<OnboardingPermissionDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final NumberCardLinkRepository numberCardLinkRepo;
+    private final OnboardingPermissionRepository onboardingPermissionRepo;
 
-    public NumberCardLinkDtoCrudService(NumberCardLinkRepository numberCardLinkRepo, JpaFilterConverter jpaFilterConverter) {
-        this.numberCardLinkRepo = numberCardLinkRepo;
+    public OnboardingPermissionDtoCrudService(OnboardingPermissionRepository onboardingPermissionRepo, JpaFilterConverter jpaFilterConverter) {
+        this.onboardingPermissionRepo = onboardingPermissionRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull NumberCardLinkDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull OnboardingPermissionDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<NumberCardLinkDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, NumberCardLinkDao.class)
+        Specification<OnboardingPermissionDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, OnboardingPermissionDao.class)
                 : Specification.anyOf();
-        Page<NumberCardLinkDao> persons = numberCardLinkRepo.findAll(spec, pageable);
-        return persons.stream().map(NumberCardLinkDto::fromEntity).toList();
+        Page<OnboardingPermissionDao> persons = onboardingPermissionRepo.findAll(spec, pageable);
+        return persons.stream().map(OnboardingPermissionDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable NumberCardLinkDto save(NumberCardLinkDto value) {
+    public @Nullable OnboardingPermissionDto save(OnboardingPermissionDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        NumberCardLinkDao person = check
-                ? numberCardLinkRepo.getReferenceById(value.name())
-                : new NumberCardLinkDao();
+        OnboardingPermissionDao person = check
+                ? onboardingPermissionRepo.getReferenceById(value.name())
+                : new OnboardingPermissionDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        NumberCardLinkDto.fromDTO(value, person);
-        return NumberCardLinkDto.fromEntity(numberCardLinkRepo.save(person));
+        OnboardingPermissionDto.fromDTO(value, person);
+        return OnboardingPermissionDto.fromEntity(onboardingPermissionRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        numberCardLinkRepo.deleteById(id);
+        onboardingPermissionRepo.deleteById(id);
     }
 }

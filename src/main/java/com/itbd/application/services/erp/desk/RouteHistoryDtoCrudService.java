@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.onboarding.OnboardingStepMapDao;
-import com.itbd.application.db.dto.onboarding.OnboardingStepMapDto;
-import com.itbd.application.db.repos.OnboardingStepMapRepository;
+import com.itbd.application.db.dao.RouteHistoryDao;
+import com.itbd.application.db.dto.RouteHistoryDto;
+import com.itbd.application.db.repos.RouteHistoryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class OnboardingStepMapDtoCrudService implements CrudService<OnboardingStepMapDto, String> {
+public class RouteHistoryDtoCrudService implements CrudService<RouteHistoryDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final OnboardingStepMapRepository onboardingStepMapRepo;
+    private final RouteHistoryRepository routeHistoryRepo;
 
-    public OnboardingStepMapDtoCrudService(OnboardingStepMapRepository onboardingStepMapRepo, JpaFilterConverter jpaFilterConverter) {
-        this.onboardingStepMapRepo = onboardingStepMapRepo;
+    public RouteHistoryDtoCrudService(RouteHistoryRepository routeHistoryRepo, JpaFilterConverter jpaFilterConverter) {
+        this.routeHistoryRepo = routeHistoryRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull OnboardingStepMapDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull RouteHistoryDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<OnboardingStepMapDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, OnboardingStepMapDao.class)
+        Specification<RouteHistoryDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, RouteHistoryDao.class)
                 : Specification.anyOf();
-        Page<OnboardingStepMapDao> persons = onboardingStepMapRepo.findAll(spec, pageable);
-        return persons.stream().map(OnboardingStepMapDto::fromEntity).toList();
+        Page<RouteHistoryDao> persons = routeHistoryRepo.findAll(spec, pageable);
+        return persons.stream().map(RouteHistoryDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable OnboardingStepMapDto save(OnboardingStepMapDto value) {
+    public @Nullable RouteHistoryDto save(RouteHistoryDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        OnboardingStepMapDao person = check
-                ? onboardingStepMapRepo.getReferenceById(value.name())
-                : new OnboardingStepMapDao();
+        RouteHistoryDao person = check
+                ? routeHistoryRepo.getReferenceById(value.name())
+                : new RouteHistoryDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        OnboardingStepMapDto.fromDTO(value, person);
-        return OnboardingStepMapDto.fromEntity(onboardingStepMapRepo.save(person));
+        RouteHistoryDto.fromDTO(value, person);
+        return RouteHistoryDto.fromEntity(routeHistoryRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        onboardingStepMapRepo.deleteById(id);
+        routeHistoryRepo.deleteById(id);
     }
 }

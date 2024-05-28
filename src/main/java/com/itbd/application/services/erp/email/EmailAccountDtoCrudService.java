@@ -1,8 +1,8 @@
-package com.itbd.application.services.erp.desk;
+package com.itbd.application.services.erp.email;
 
-import com.itbd.application.db.dao.workspace.WorkspaceShortcutDao;
-import com.itbd.application.db.dto.workspace.WorkspaceShortcutDto;
-import com.itbd.application.db.repos.WorkspaceShortcutRepository;
+import com.itbd.application.db.dao.emails.EmailAccountDao;
+import com.itbd.application.db.dto.emails.EmailAccountDto;
+import com.itbd.application.db.repos.EmailAccountRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class WorkspaceShortcutDtoCrudService implements CrudService<WorkspaceShortcutDto, String> {
+public class EmailAccountDtoCrudService implements CrudService<EmailAccountDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final WorkspaceShortcutRepository workspaceShortcutRepo;
+    private final EmailAccountRepository emailAccountRepo;
 
-    public WorkspaceShortcutDtoCrudService(WorkspaceShortcutRepository workspaceShortcutRepo, JpaFilterConverter jpaFilterConverter) {
-        this.workspaceShortcutRepo = workspaceShortcutRepo;
+    public EmailAccountDtoCrudService(EmailAccountRepository emailAccountRepo, JpaFilterConverter jpaFilterConverter) {
+        this.emailAccountRepo = emailAccountRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull WorkspaceShortcutDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull EmailAccountDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<WorkspaceShortcutDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, WorkspaceShortcutDao.class)
+        Specification<EmailAccountDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, EmailAccountDao.class)
                 : Specification.anyOf();
-        Page<WorkspaceShortcutDao> persons = workspaceShortcutRepo.findAll(spec, pageable);
-        return persons.stream().map(WorkspaceShortcutDto::fromEntity).toList();
+        Page<EmailAccountDao> persons = emailAccountRepo.findAll(spec, pageable);
+        return persons.stream().map(EmailAccountDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable WorkspaceShortcutDto save(WorkspaceShortcutDto value) {
+    public @Nullable EmailAccountDto save(EmailAccountDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        WorkspaceShortcutDao person = check
-                ? workspaceShortcutRepo.getReferenceById(value.name())
-                : new WorkspaceShortcutDao();
+        EmailAccountDao person = check
+                ? emailAccountRepo.getReferenceById(value.name())
+                : new EmailAccountDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        WorkspaceShortcutDto.fromDTO(value, person);
-        return WorkspaceShortcutDto.fromEntity(workspaceShortcutRepo.save(person));
+        EmailAccountDto.fromDTO(value, person);
+        return EmailAccountDto.fromEntity(emailAccountRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        workspaceShortcutRepo.deleteById(id);
+        emailAccountRepo.deleteById(id);
     }
 }

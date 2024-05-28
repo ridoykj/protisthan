@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.CostCenterDao;
-import com.itbd.application.db.dto.CostCenterDto;
-import com.itbd.application.db.repos.CostCenterRepository;
+import com.itbd.application.db.dao.currencys.CurrencyExchangeSettingsDetailsDao;
+import com.itbd.application.db.dto.currencys.CurrencyExchangeSettingsDetailsDto;
+import com.itbd.application.db.repos.CurrencyExchangeSettingsDetailsRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class CostCenterDtoCrudService implements CrudService<CostCenterDto, String> {
+public class CurrencyExchangeSettingsDetailsDtoCrudService implements CrudService<CurrencyExchangeSettingsDetailsDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final CostCenterRepository costCenterRepo;
+    private final CurrencyExchangeSettingsDetailsRepository currencyExchangeSettingsDetailsRepo;
 
-    public CostCenterDtoCrudService(CostCenterRepository costCenterRepo, JpaFilterConverter jpaFilterConverter) {
-        this.costCenterRepo = costCenterRepo;
+    public CurrencyExchangeSettingsDetailsDtoCrudService(CurrencyExchangeSettingsDetailsRepository currencyExchangeSettingsDetailsRepo, JpaFilterConverter jpaFilterConverter) {
+        this.currencyExchangeSettingsDetailsRepo = currencyExchangeSettingsDetailsRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull CostCenterDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull CurrencyExchangeSettingsDetailsDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<CostCenterDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, CostCenterDao.class)
+        Specification<CurrencyExchangeSettingsDetailsDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, CurrencyExchangeSettingsDetailsDao.class)
                 : Specification.anyOf();
-        Page<CostCenterDao> persons = costCenterRepo.findAll(spec, pageable);
-        return persons.stream().map(CostCenterDto::fromEntity).toList();
+        Page<CurrencyExchangeSettingsDetailsDao> persons = currencyExchangeSettingsDetailsRepo.findAll(spec, pageable);
+        return persons.stream().map(CurrencyExchangeSettingsDetailsDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable CostCenterDto save(CostCenterDto value) {
+    public @Nullable CurrencyExchangeSettingsDetailsDto save(CurrencyExchangeSettingsDetailsDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        CostCenterDao person = check
-                ? costCenterRepo.getReferenceById(value.name())
-                : new CostCenterDao();
+        CurrencyExchangeSettingsDetailsDao person = check
+                ? currencyExchangeSettingsDetailsRepo.getReferenceById(value.name())
+                : new CurrencyExchangeSettingsDetailsDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        CostCenterDto.fromDTO(value, person);
-        return CostCenterDto.fromEntity(costCenterRepo.save(person));
+        CurrencyExchangeSettingsDetailsDto.fromDTO(value, person);
+        return CurrencyExchangeSettingsDetailsDto.fromEntity(currencyExchangeSettingsDetailsRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        costCenterRepo.deleteById(id);
+        currencyExchangeSettingsDetailsRepo.deleteById(id);
     }
 }

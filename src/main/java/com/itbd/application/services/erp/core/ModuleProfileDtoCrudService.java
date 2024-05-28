@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.module;
+package com.itbd.application.services.erp.core;
 
 import com.itbd.application.db.dao.modules.ModuleProfileDao;
 import com.itbd.application.db.dto.modules.ModuleProfileDto;

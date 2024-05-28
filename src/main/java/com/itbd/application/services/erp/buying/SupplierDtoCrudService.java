@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.accounts;
+package com.itbd.application.services.erp.buying;
 
 import com.itbd.application.db.dao.supplier.SupplierDao;
 import com.itbd.application.db.dto.supplier.SupplierDto;

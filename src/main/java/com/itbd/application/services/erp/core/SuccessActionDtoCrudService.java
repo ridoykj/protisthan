@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.ScheduledJobTypeDao;
-import com.itbd.application.db.dto.ScheduledJobTypeDto;
-import com.itbd.application.db.repos.ScheduledJobTypeRepository;
+import com.itbd.application.db.dao.SuccessActionDao;
+import com.itbd.application.db.dto.SuccessActionDto;
+import com.itbd.application.db.repos.SuccessActionRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ScheduledJobTypeDtoCrudService implements CrudService<ScheduledJobTypeDto, String> {
+public class SuccessActionDtoCrudService implements CrudService<SuccessActionDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ScheduledJobTypeRepository scheduledJobTypeRepo;
+    private final SuccessActionRepository successActionRepo;
 
-    public ScheduledJobTypeDtoCrudService(ScheduledJobTypeRepository scheduledJobTypeRepo, JpaFilterConverter jpaFilterConverter) {
-        this.scheduledJobTypeRepo = scheduledJobTypeRepo;
+    public SuccessActionDtoCrudService(SuccessActionRepository successActionRepo, JpaFilterConverter jpaFilterConverter) {
+        this.successActionRepo = successActionRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ScheduledJobTypeDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull SuccessActionDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ScheduledJobTypeDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ScheduledJobTypeDao.class)
+        Specification<SuccessActionDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, SuccessActionDao.class)
                 : Specification.anyOf();
-        Page<ScheduledJobTypeDao> persons = scheduledJobTypeRepo.findAll(spec, pageable);
-        return persons.stream().map(ScheduledJobTypeDto::fromEntity).toList();
+        Page<SuccessActionDao> persons = successActionRepo.findAll(spec, pageable);
+        return persons.stream().map(SuccessActionDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ScheduledJobTypeDto save(ScheduledJobTypeDto value) {
+    public @Nullable SuccessActionDto save(SuccessActionDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ScheduledJobTypeDao person = check
-                ? scheduledJobTypeRepo.getReferenceById(value.name())
-                : new ScheduledJobTypeDao();
+        SuccessActionDao person = check
+                ? successActionRepo.getReferenceById(value.name())
+                : new SuccessActionDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ScheduledJobTypeDto.fromDTO(value, person);
-        return ScheduledJobTypeDto.fromEntity(scheduledJobTypeRepo.save(person));
+        SuccessActionDto.fromDTO(value, person);
+        return SuccessActionDto.fromEntity(successActionRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        scheduledJobTypeRepo.deleteById(id);
+        successActionRepo.deleteById(id);
     }
 }

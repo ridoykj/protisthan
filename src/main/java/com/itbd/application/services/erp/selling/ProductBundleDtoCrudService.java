@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.selling.item;
+package com.itbd.application.services.erp.selling;
 
 import com.itbd.application.db.dao.ProductBundleDao;
 import com.itbd.application.db.dto.ProductBundleDto;

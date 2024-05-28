@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.NavbarItemDao;
-import com.itbd.application.db.dto.NavbarItemDto;
-import com.itbd.application.db.repos.NavbarItemRepository;
+import com.itbd.application.db.dao.website.PageDao;
+import com.itbd.application.db.dto.website.PageDto;
+import com.itbd.application.db.repos.PageRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class NavbarItemDtoCrudService implements CrudService<NavbarItemDto, String> {
+public class PageDtoCrudService implements CrudService<PageDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final NavbarItemRepository navbarItemRepo;
+    private final PageRepository pageRepo;
 
-    public NavbarItemDtoCrudService(NavbarItemRepository navbarItemRepo, JpaFilterConverter jpaFilterConverter) {
-        this.navbarItemRepo = navbarItemRepo;
+    public PageDtoCrudService(PageRepository pageRepo, JpaFilterConverter jpaFilterConverter) {
+        this.pageRepo = pageRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull NavbarItemDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PageDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<NavbarItemDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, NavbarItemDao.class)
+        Specification<PageDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PageDao.class)
                 : Specification.anyOf();
-        Page<NavbarItemDao> persons = navbarItemRepo.findAll(spec, pageable);
-        return persons.stream().map(NavbarItemDto::fromEntity).toList();
+        Page<PageDao> persons = pageRepo.findAll(spec, pageable);
+        return persons.stream().map(PageDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable NavbarItemDto save(NavbarItemDto value) {
+    public @Nullable PageDto save(PageDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        NavbarItemDao person = check
-                ? navbarItemRepo.getReferenceById(value.name())
-                : new NavbarItemDao();
+        PageDao person = check
+                ? pageRepo.getReferenceById(value.name())
+                : new PageDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        NavbarItemDto.fromDTO(value, person);
-        return NavbarItemDto.fromEntity(navbarItemRepo.save(person));
+        PageDto.fromDTO(value, person);
+        return PageDto.fromEntity(pageRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        navbarItemRepo.deleteById(id);
+        pageRepo.deleteById(id);
     }
 }

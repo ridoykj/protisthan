@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.selling.settings;
+package com.itbd.application.services.erp.crm;
 
 import com.itbd.application.db.dao.campaign.CampaignDao;
 import com.itbd.application.db.dto.campaign.CampaignDto;

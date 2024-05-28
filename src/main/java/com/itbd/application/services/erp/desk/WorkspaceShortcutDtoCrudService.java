@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.workspace;
+package com.itbd.application.services.erp.desk;
 
 import com.itbd.application.db.dao.workspace.WorkspaceShortcutDao;
 import com.itbd.application.db.dto.workspace.WorkspaceShortcutDto;

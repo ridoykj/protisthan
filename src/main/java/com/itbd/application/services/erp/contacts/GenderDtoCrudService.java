@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.contacts;
 
-import com.itbd.application.db.dao.SalutationDao;
-import com.itbd.application.db.dto.SalutationDto;
-import com.itbd.application.db.repos.SalutationRepository;
+import com.itbd.application.db.dao.GenderDao;
+import com.itbd.application.db.dto.GenderDto;
+import com.itbd.application.db.repos.GenderRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class SalutationDtoCrudService implements CrudService<SalutationDto, String> {
+public class GenderDtoCrudService implements CrudService<GenderDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final SalutationRepository salutationRepos;
+    private final GenderRepository genderRepo;
 
-    public SalutationDtoCrudService(SalutationRepository salutationRepos, JpaFilterConverter jpaFilterConverter) {
-        this.salutationRepos = salutationRepos;
+    public GenderDtoCrudService(GenderRepository genderRepo, JpaFilterConverter jpaFilterConverter) {
+        this.genderRepo = genderRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull SalutationDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull GenderDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<SalutationDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, SalutationDao.class)
+        Specification<GenderDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, GenderDao.class)
                 : Specification.anyOf();
-        Page<SalutationDao> persons = salutationRepos.findAll(spec, pageable);
-        return persons.stream().map(SalutationDto::fromEntity).toList();
+        Page<GenderDao> persons = genderRepo.findAll(spec, pageable);
+        return persons.stream().map(GenderDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable SalutationDto save(SalutationDto value) {
+    public @Nullable GenderDto save(GenderDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        SalutationDao person = check
-                ? salutationRepos.getReferenceById(value.name())
-                : new SalutationDao();
+        GenderDao person = check
+                ? genderRepo.getReferenceById(value.name())
+                : new GenderDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        SalutationDto.fromDTO(value, person);
-        return SalutationDto.fromEntity(salutationRepos.save(person));
+        GenderDto.fromDTO(value, person);
+        return GenderDto.fromEntity(genderRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        salutationRepos.deleteById(id);
+        genderRepo.deleteById(id);
     }
 }

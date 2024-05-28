@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.selling;
 
-import com.itbd.application.db.dao.IndustryTypeDao;
-import com.itbd.application.db.dto.IndustryTypeDto;
-import com.itbd.application.db.repos.IndustryTypeRepository;
+import com.itbd.application.db.dao.sales.SalesPartnerTypeDao;
+import com.itbd.application.db.dto.sales.SalesPartnerTypeDto;
+import com.itbd.application.db.repos.SalesPartnerTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class IndustryTypeDtoCrudService implements CrudService<IndustryTypeDto, String> {
+public class SalesPartnerTypeDtoCrudService implements CrudService<SalesPartnerTypeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final IndustryTypeRepository industryTypeRepo;
+    private final SalesPartnerTypeRepository salesPartnerTypeRepo;
 
-    public IndustryTypeDtoCrudService(IndustryTypeRepository industryTypeRepo, JpaFilterConverter jpaFilterConverter) {
-        this.industryTypeRepo = industryTypeRepo;
+    public SalesPartnerTypeDtoCrudService(SalesPartnerTypeRepository salesPartnerTypeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.salesPartnerTypeRepo = salesPartnerTypeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull IndustryTypeDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull SalesPartnerTypeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<IndustryTypeDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, IndustryTypeDao.class)
+        Specification<SalesPartnerTypeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, SalesPartnerTypeDao.class)
                 : Specification.anyOf();
-        Page<IndustryTypeDao> persons = industryTypeRepo.findAll(spec, pageable);
-        return persons.stream().map(IndustryTypeDto::fromEntity).toList();
+        Page<SalesPartnerTypeDao> persons = salesPartnerTypeRepo.findAll(spec, pageable);
+        return persons.stream().map(SalesPartnerTypeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable IndustryTypeDto save(IndustryTypeDto value) {
+    public @Nullable SalesPartnerTypeDto save(SalesPartnerTypeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        IndustryTypeDao person = check
-                ? industryTypeRepo.getReferenceById(value.name())
-                : new IndustryTypeDao();
+        SalesPartnerTypeDao person = check
+                ? salesPartnerTypeRepo.getReferenceById(value.name())
+                : new SalesPartnerTypeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        IndustryTypeDto.fromDTO(value, person);
-        return IndustryTypeDto.fromEntity(industryTypeRepo.save(person));
+        SalesPartnerTypeDto.fromDTO(value, person);
+        return SalesPartnerTypeDto.fromEntity(salesPartnerTypeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        industryTypeRepo.deleteById(id);
+        salesPartnerTypeRepo.deleteById(id);
     }
 }

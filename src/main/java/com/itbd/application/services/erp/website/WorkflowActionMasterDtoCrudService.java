@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.website;
 
-import com.itbd.application.db.dao.website.WebsiteThemeDao;
-import com.itbd.application.db.dto.website.WebsiteThemeDto;
-import com.itbd.application.db.repos.WebsiteThemeRepository;
+import com.itbd.application.db.dao.workflow.WorkflowActionMasterDao;
+import com.itbd.application.db.dto.workflow.WorkflowActionMasterDto;
+import com.itbd.application.db.repos.WorkflowActionMasterRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class WebsiteThemeDtoCrudService implements CrudService<WebsiteThemeDto, String> {
+public class WorkflowActionMasterDtoCrudService implements CrudService<WorkflowActionMasterDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final WebsiteThemeRepository websiteThemeRepo;
+    private final WorkflowActionMasterRepository workflowActionMasterRepo;
 
-    public WebsiteThemeDtoCrudService(WebsiteThemeRepository websiteThemeRepo, JpaFilterConverter jpaFilterConverter) {
-        this.websiteThemeRepo = websiteThemeRepo;
+    public WorkflowActionMasterDtoCrudService(WorkflowActionMasterRepository workflowActionMasterRepo, JpaFilterConverter jpaFilterConverter) {
+        this.workflowActionMasterRepo = workflowActionMasterRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull WebsiteThemeDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull WorkflowActionMasterDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<WebsiteThemeDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, WebsiteThemeDao.class)
+        Specification<WorkflowActionMasterDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, WorkflowActionMasterDao.class)
                 : Specification.anyOf();
-        Page<WebsiteThemeDao> persons = websiteThemeRepo.findAll(spec, pageable);
-        return persons.stream().map(WebsiteThemeDto::fromEntity).toList();
+        Page<WorkflowActionMasterDao> persons = workflowActionMasterRepo.findAll(spec, pageable);
+        return persons.stream().map(WorkflowActionMasterDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable WebsiteThemeDto save(WebsiteThemeDto value) {
+    public @Nullable WorkflowActionMasterDto save(WorkflowActionMasterDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        WebsiteThemeDao person = check
-                ? websiteThemeRepo.getReferenceById(value.name())
-                : new WebsiteThemeDao();
+        WorkflowActionMasterDao person = check
+                ? workflowActionMasterRepo.getReferenceById(value.name())
+                : new WorkflowActionMasterDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        WebsiteThemeDto.fromDTO(value, person);
-        return WebsiteThemeDto.fromEntity(websiteThemeRepo.save(person));
+        WorkflowActionMasterDto.fromDTO(value, person);
+        return WorkflowActionMasterDto.fromEntity(workflowActionMasterRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        websiteThemeRepo.deleteById(id);
+        workflowActionMasterRepo.deleteById(id);
     }
 }

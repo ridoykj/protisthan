@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.log;
+package com.itbd.application.services.erp.core;
 
 import com.itbd.application.db.dao.AccessLogDao;
 import com.itbd.application.db.dto.AccessLogDto;

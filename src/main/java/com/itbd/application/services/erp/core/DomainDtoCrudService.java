@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.users.UserDao;
-import com.itbd.application.db.dto.users.UserDto;
-import com.itbd.application.db.repos.UserRepository;
+import com.itbd.application.db.dao.DomainDao;
+import com.itbd.application.db.dto.DomainDto;
+import com.itbd.application.db.repos.DomainRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class UserDtoCrudService implements CrudService<UserDto, String> {
+public class DomainDtoCrudService implements CrudService<DomainDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final UserRepository userRepo;
+    private final DomainRepository domainRepo;
 
-    public UserDtoCrudService(UserRepository userRepo, JpaFilterConverter jpaFilterConverter) {
-        this.userRepo = userRepo;
+    public DomainDtoCrudService(DomainRepository domainRepo, JpaFilterConverter jpaFilterConverter) {
+        this.domainRepo = domainRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull UserDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull DomainDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<UserDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, UserDao.class)
+        Specification<DomainDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, DomainDao.class)
                 : Specification.anyOf();
-        Page<UserDao> persons = userRepo.findAll(spec, pageable);
-        return persons.stream().map(UserDto::fromEntity).toList();
+        Page<DomainDao> persons = domainRepo.findAll(spec, pageable);
+        return persons.stream().map(DomainDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable UserDto save(UserDto value) {
+    public @Nullable DomainDto save(DomainDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        UserDao person = check
-                ? userRepo.getReferenceById(value.name())
-                : new UserDao();
+        DomainDao person = check
+                ? domainRepo.getReferenceById(value.name())
+                : new DomainDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        UserDto.fromDTO(value, person);
-        return UserDto.fromEntity(userRepo.save(person));
+        DomainDto.fromDTO(value, person);
+        return DomainDto.fromEntity(domainRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        userRepo.deleteById(id);
+        domainRepo.deleteById(id);
     }
 }

@@ -1,8 +1,8 @@
-package com.itbd.application.services.erp.printing;
+package com.itbd.application.services.erp.projects;
 
-import com.itbd.application.db.dao.print.PrintStyleDao;
-import com.itbd.application.db.dto.print.PrintStyleDto;
-import com.itbd.application.db.repos.PrintStyleRepository;
+import com.itbd.application.db.dao.activitys.ActivityTypeDao;
+import com.itbd.application.db.dto.activitys.ActivityTypeDto;
+import com.itbd.application.db.repos.ActivityTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PrintStyleDtoCrudService implements CrudService<PrintStyleDto, String> {
+public class ActivityTypeDtoCrudService implements CrudService<ActivityTypeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PrintStyleRepository printStyleRepo;
+    private final ActivityTypeRepository activityTypeRepo;
 
-    public PrintStyleDtoCrudService(PrintStyleRepository printStyleRepo, JpaFilterConverter jpaFilterConverter) {
-        this.printStyleRepo = printStyleRepo;
+    public ActivityTypeDtoCrudService(ActivityTypeRepository activityTypeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.activityTypeRepo = activityTypeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PrintStyleDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ActivityTypeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PrintStyleDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PrintStyleDao.class)
+        Specification<ActivityTypeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ActivityTypeDao.class)
                 : Specification.anyOf();
-        Page<PrintStyleDao> persons = printStyleRepo.findAll(spec, pageable);
-        return persons.stream().map(PrintStyleDto::fromEntity).toList();
+        Page<ActivityTypeDao> persons = activityTypeRepo.findAll(spec, pageable);
+        return persons.stream().map(ActivityTypeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PrintStyleDto save(PrintStyleDto value) {
+    public @Nullable ActivityTypeDto save(ActivityTypeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PrintStyleDao person = check
-                ? printStyleRepo.getReferenceById(value.name())
-                : new PrintStyleDao();
+        ActivityTypeDao person = check
+                ? activityTypeRepo.getReferenceById(value.name())
+                : new ActivityTypeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PrintStyleDto.fromDTO(value, person);
-        return PrintStyleDto.fromEntity(printStyleRepo.save(person));
+        ActivityTypeDto.fromDTO(value, person);
+        return ActivityTypeDto.fromEntity(activityTypeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        printStyleRepo.deleteById(id);
+        activityTypeRepo.deleteById(id);
     }
 }

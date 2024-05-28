@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.DefaultValueDao;
-import com.itbd.application.db.dto.DefaultValueDto;
-import com.itbd.application.db.repos.DefaultValueRepository;
+import com.itbd.application.db.dao.DeletedDocumentDao;
+import com.itbd.application.db.dto.DeletedDocumentDto;
+import com.itbd.application.db.repos.DeletedDocumentRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class DefaultValueDtoCrudService implements CrudService<DefaultValueDto, String> {
+public class DeletedDocumentDtoCrudService implements CrudService<DeletedDocumentDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final DefaultValueRepository defaultValueRepo;
+    private final DeletedDocumentRepository deletedDocumentRepo;
 
-    public DefaultValueDtoCrudService(DefaultValueRepository defaultValueRepo, JpaFilterConverter jpaFilterConverter) {
-        this.defaultValueRepo = defaultValueRepo;
+    public DeletedDocumentDtoCrudService(DeletedDocumentRepository deletedDocumentRepo, JpaFilterConverter jpaFilterConverter) {
+        this.deletedDocumentRepo = deletedDocumentRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull DefaultValueDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull DeletedDocumentDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<DefaultValueDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, DefaultValueDao.class)
+        Specification<DeletedDocumentDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, DeletedDocumentDao.class)
                 : Specification.anyOf();
-        Page<DefaultValueDao> persons = defaultValueRepo.findAll(spec, pageable);
-        return persons.stream().map(DefaultValueDto::fromEntity).toList();
+        Page<DeletedDocumentDao> persons = deletedDocumentRepo.findAll(spec, pageable);
+        return persons.stream().map(DeletedDocumentDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable DefaultValueDto save(DefaultValueDto value) {
+    public @Nullable DeletedDocumentDto save(DeletedDocumentDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        DefaultValueDao person = check
-                ? defaultValueRepo.getReferenceById(value.name())
-                : new DefaultValueDao();
+        DeletedDocumentDao person = check
+                ? deletedDocumentRepo.getReferenceById(value.name())
+                : new DeletedDocumentDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        DefaultValueDto.fromDTO(value, person);
-        return DefaultValueDto.fromEntity(defaultValueRepo.save(person));
+        DeletedDocumentDto.fromDTO(value, person);
+        return DeletedDocumentDto.fromEntity(deletedDocumentRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        defaultValueRepo.deleteById(id);
+        deletedDocumentRepo.deleteById(id);
     }
 }

@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.NumberCardDao;
-import com.itbd.application.db.dto.NumberCardDto;
-import com.itbd.application.db.repos.NumberCardRepository;
+import com.itbd.application.db.dao.NumberCardLinkDao;
+import com.itbd.application.db.dto.NumberCardLinkDto;
+import com.itbd.application.db.repos.NumberCardLinkRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class NumberCardDtoCrudService implements CrudService<NumberCardDto, String> {
+public class NumberCardLinkDtoCrudService implements CrudService<NumberCardLinkDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final NumberCardRepository numberCardRepo;
+    private final NumberCardLinkRepository numberCardLinkRepo;
 
-    public NumberCardDtoCrudService(NumberCardRepository numberCardRepo, JpaFilterConverter jpaFilterConverter) {
-        this.numberCardRepo = numberCardRepo;
+    public NumberCardLinkDtoCrudService(NumberCardLinkRepository numberCardLinkRepo, JpaFilterConverter jpaFilterConverter) {
+        this.numberCardLinkRepo = numberCardLinkRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull NumberCardDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull NumberCardLinkDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<NumberCardDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, NumberCardDao.class)
+        Specification<NumberCardLinkDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, NumberCardLinkDao.class)
                 : Specification.anyOf();
-        Page<NumberCardDao> persons = numberCardRepo.findAll(spec, pageable);
-        return persons.stream().map(NumberCardDto::fromEntity).toList();
+        Page<NumberCardLinkDao> persons = numberCardLinkRepo.findAll(spec, pageable);
+        return persons.stream().map(NumberCardLinkDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable NumberCardDto save(NumberCardDto value) {
+    public @Nullable NumberCardLinkDto save(NumberCardLinkDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        NumberCardDao person = check
-                ? numberCardRepo.getReferenceById(value.name())
-                : new NumberCardDao();
+        NumberCardLinkDao person = check
+                ? numberCardLinkRepo.getReferenceById(value.name())
+                : new NumberCardLinkDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        NumberCardDto.fromDTO(value, person);
-        return NumberCardDto.fromEntity(numberCardRepo.save(person));
+        NumberCardLinkDto.fromDTO(value, person);
+        return NumberCardLinkDto.fromEntity(numberCardLinkRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        numberCardRepo.deleteById(id);
+        numberCardLinkRepo.deleteById(id);
     }
 }

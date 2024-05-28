@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.FormTourStepDao;
-import com.itbd.application.db.dto.FormTourStepDto;
-import com.itbd.application.db.repos.FormTourStepRepository;
+import com.itbd.application.db.dao.GlobalSearchDocTypeDao;
+import com.itbd.application.db.dto.GlobalSearchDocTypeDto;
+import com.itbd.application.db.repos.GlobalSearchDocTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class FormTourStepDtoCrudService implements CrudService<FormTourStepDto, String> {
+public class GlobalSearchDocTypeDtoCrudService implements CrudService<GlobalSearchDocTypeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final FormTourStepRepository formTourStepRepo;
+    private final GlobalSearchDocTypeRepository globalSearchDocTypeRepo;
 
-    public FormTourStepDtoCrudService(FormTourStepRepository formTourStepRepo, JpaFilterConverter jpaFilterConverter) {
-        this.formTourStepRepo = formTourStepRepo;
+    public GlobalSearchDocTypeDtoCrudService(GlobalSearchDocTypeRepository globalSearchDocTypeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.globalSearchDocTypeRepo = globalSearchDocTypeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull FormTourStepDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull GlobalSearchDocTypeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<FormTourStepDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, FormTourStepDao.class)
+        Specification<GlobalSearchDocTypeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, GlobalSearchDocTypeDao.class)
                 : Specification.anyOf();
-        Page<FormTourStepDao> persons = formTourStepRepo.findAll(spec, pageable);
-        return persons.stream().map(FormTourStepDto::fromEntity).toList();
+        Page<GlobalSearchDocTypeDao> persons = globalSearchDocTypeRepo.findAll(spec, pageable);
+        return persons.stream().map(GlobalSearchDocTypeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable FormTourStepDto save(FormTourStepDto value) {
+    public @Nullable GlobalSearchDocTypeDto save(GlobalSearchDocTypeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        FormTourStepDao person = check
-                ? formTourStepRepo.getReferenceById(value.name())
-                : new FormTourStepDao();
+        GlobalSearchDocTypeDao person = check
+                ? globalSearchDocTypeRepo.getReferenceById(value.name())
+                : new GlobalSearchDocTypeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        FormTourStepDto.fromDTO(value, person);
-        return FormTourStepDto.fromEntity(formTourStepRepo.save(person));
+        GlobalSearchDocTypeDto.fromDTO(value, person);
+        return GlobalSearchDocTypeDto.fromEntity(globalSearchDocTypeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        formTourStepRepo.deleteById(id);
+        globalSearchDocTypeRepo.deleteById(id);
     }
 }

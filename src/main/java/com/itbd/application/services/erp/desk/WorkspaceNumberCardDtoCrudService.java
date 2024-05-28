@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.workspace.WorkspaceChartDao;
-import com.itbd.application.db.dto.workspace.WorkspaceChartDto;
-import com.itbd.application.db.repos.WorkspaceChartRepository;
+import com.itbd.application.db.dao.workspace.WorkspaceNumberCardDao;
+import com.itbd.application.db.dto.workspace.WorkspaceNumberCardDto;
+import com.itbd.application.db.repos.WorkspaceNumberCardRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class WorkspaceChartDtoCrudService implements CrudService<WorkspaceChartDto, String> {
+public class WorkspaceNumberCardDtoCrudService implements CrudService<WorkspaceNumberCardDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final WorkspaceChartRepository workspaceChartRepos;
+    private final WorkspaceNumberCardRepository workspaceNumberCardRepo;
 
-    public WorkspaceChartDtoCrudService(WorkspaceChartRepository workspaceChartRepos, JpaFilterConverter jpaFilterConverter) {
-        this.workspaceChartRepos = workspaceChartRepos;
+    public WorkspaceNumberCardDtoCrudService(WorkspaceNumberCardRepository workspaceNumberCardRepo, JpaFilterConverter jpaFilterConverter) {
+        this.workspaceNumberCardRepo = workspaceNumberCardRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull WorkspaceChartDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull WorkspaceNumberCardDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<WorkspaceChartDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, WorkspaceChartDao.class)
+        Specification<WorkspaceNumberCardDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, WorkspaceNumberCardDao.class)
                 : Specification.anyOf();
-        Page<WorkspaceChartDao> persons = workspaceChartRepos.findAll(spec, pageable);
-        return persons.stream().map(WorkspaceChartDto::fromEntity).toList();
+        Page<WorkspaceNumberCardDao> persons = workspaceNumberCardRepo.findAll(spec, pageable);
+        return persons.stream().map(WorkspaceNumberCardDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable WorkspaceChartDto save(WorkspaceChartDto value) {
+    public @Nullable WorkspaceNumberCardDto save(WorkspaceNumberCardDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        WorkspaceChartDao person = check
-                ? workspaceChartRepos.getReferenceById(value.name())
-                : new WorkspaceChartDao();
+        WorkspaceNumberCardDao person = check
+                ? workspaceNumberCardRepo.getReferenceById(value.name())
+                : new WorkspaceNumberCardDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        WorkspaceChartDto.fromDTO(value, person);
-        return WorkspaceChartDto.fromEntity(workspaceChartRepos.save(person));
+        WorkspaceNumberCardDto.fromDTO(value, person);
+        return WorkspaceNumberCardDto.fromEntity(workspaceNumberCardRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        workspaceChartRepos.deleteById(id);
+        workspaceNumberCardRepo.deleteById(id);
     }
 }

@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.accounts;
+package com.itbd.application.services.erp.setup;
 
 import com.itbd.application.db.dao.customers.CustomerGroupDao;
 import com.itbd.application.db.dto.customers.CustomerGroupDto;

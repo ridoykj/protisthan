@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.items.ItemDao;
-import com.itbd.application.db.dto.items.ItemDto;
-import com.itbd.application.db.repos.ItemRepository;
+import com.itbd.application.db.dao.stocks.StockEntryTypeDao;
+import com.itbd.application.db.dto.stocks.StockEntryTypeDto;
+import com.itbd.application.db.repos.StockEntryTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ItemDtoCrudService implements CrudService<ItemDto, String> {
+public class StockEntryTypeDtoCrudService implements CrudService<StockEntryTypeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ItemRepository itemRepo;
+    private final StockEntryTypeRepository stockEntryTypeRepo;
 
-    public ItemDtoCrudService(ItemRepository itemRepo, JpaFilterConverter jpaFilterConverter) {
-        this.itemRepo = itemRepo;
+    public StockEntryTypeDtoCrudService(StockEntryTypeRepository stockEntryTypeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.stockEntryTypeRepo = stockEntryTypeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ItemDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull StockEntryTypeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ItemDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ItemDao.class)
+        Specification<StockEntryTypeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, StockEntryTypeDao.class)
                 : Specification.anyOf();
-        Page<ItemDao> persons = itemRepo.findAll(spec, pageable);
-        return persons.stream().map(ItemDto::fromEntity).toList();
+        Page<StockEntryTypeDao> persons = stockEntryTypeRepo.findAll(spec, pageable);
+        return persons.stream().map(StockEntryTypeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ItemDto save(ItemDto value) {
+    public @Nullable StockEntryTypeDto save(StockEntryTypeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ItemDao person = check
-                ? itemRepo.getReferenceById(value.name())
-                : new ItemDao();
+        StockEntryTypeDao person = check
+                ? stockEntryTypeRepo.getReferenceById(value.name())
+                : new StockEntryTypeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ItemDto.fromDTO(value, person);
-        return ItemDto.fromEntity(itemRepo.save(person));
+        StockEntryTypeDto.fromDTO(value, person);
+        return StockEntryTypeDto.fromEntity(stockEntryTypeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        itemRepo.deleteById(id);
+        stockEntryTypeRepo.deleteById(id);
     }
 }

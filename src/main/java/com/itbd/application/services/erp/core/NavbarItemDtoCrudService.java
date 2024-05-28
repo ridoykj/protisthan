@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.LanguageDao;
-import com.itbd.application.db.dto.LanguageDto;
-import com.itbd.application.db.repos.LanguageRepository;
+import com.itbd.application.db.dao.NavbarItemDao;
+import com.itbd.application.db.dto.NavbarItemDto;
+import com.itbd.application.db.repos.NavbarItemRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class LanguageDtoCrudService implements CrudService<LanguageDto, String> {
+public class NavbarItemDtoCrudService implements CrudService<NavbarItemDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final LanguageRepository languageRepo;
+    private final NavbarItemRepository navbarItemRepo;
 
-    public LanguageDtoCrudService(LanguageRepository languageRepo, JpaFilterConverter jpaFilterConverter) {
-        this.languageRepo = languageRepo;
+    public NavbarItemDtoCrudService(NavbarItemRepository navbarItemRepo, JpaFilterConverter jpaFilterConverter) {
+        this.navbarItemRepo = navbarItemRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull LanguageDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull NavbarItemDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<LanguageDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, LanguageDao.class)
+        Specification<NavbarItemDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, NavbarItemDao.class)
                 : Specification.anyOf();
-        Page<LanguageDao> persons = languageRepo.findAll(spec, pageable);
-        return persons.stream().map(LanguageDto::fromEntity).toList();
+        Page<NavbarItemDao> persons = navbarItemRepo.findAll(spec, pageable);
+        return persons.stream().map(NavbarItemDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable LanguageDto save(LanguageDto value) {
+    public @Nullable NavbarItemDto save(NavbarItemDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        LanguageDao person = check
-                ? languageRepo.getReferenceById(value.name())
-                : new LanguageDao();
+        NavbarItemDao person = check
+                ? navbarItemRepo.getReferenceById(value.name())
+                : new NavbarItemDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        LanguageDto.fromDTO(value, person);
-        return LanguageDto.fromEntity(languageRepo.save(person));
+        NavbarItemDto.fromDTO(value, person);
+        return NavbarItemDto.fromEntity(navbarItemRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        languageRepo.deleteById(id);
+        navbarItemRepo.deleteById(id);
     }
 }

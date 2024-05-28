@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.projects;
 
-import com.itbd.application.db.dao.activitys.ActivityTypeDao;
-import com.itbd.application.db.dto.activitys.ActivityTypeDto;
-import com.itbd.application.db.repos.ActivityTypeRepository;
+import com.itbd.application.db.dao.projects.ProjectTypeDao;
+import com.itbd.application.db.dto.projects.ProjectTypeDto;
+import com.itbd.application.db.repos.ProjectTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ActivityTypeDtoCrudService implements CrudService<ActivityTypeDto, String> {
+public class ProjectTypeDtoCrudService implements CrudService<ProjectTypeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ActivityTypeRepository activityTypeRepo;
+    private final ProjectTypeRepository projectTypeRepo;
 
-    public ActivityTypeDtoCrudService(ActivityTypeRepository activityTypeRepo, JpaFilterConverter jpaFilterConverter) {
-        this.activityTypeRepo = activityTypeRepo;
+    public ProjectTypeDtoCrudService(ProjectTypeRepository projectTypeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.projectTypeRepo = projectTypeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ActivityTypeDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ProjectTypeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ActivityTypeDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ActivityTypeDao.class)
+        Specification<ProjectTypeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ProjectTypeDao.class)
                 : Specification.anyOf();
-        Page<ActivityTypeDao> persons = activityTypeRepo.findAll(spec, pageable);
-        return persons.stream().map(ActivityTypeDto::fromEntity).toList();
+        Page<ProjectTypeDao> persons = projectTypeRepo.findAll(spec, pageable);
+        return persons.stream().map(ProjectTypeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ActivityTypeDto save(ActivityTypeDto value) {
+    public @Nullable ProjectTypeDto save(ProjectTypeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ActivityTypeDao person = check
-                ? activityTypeRepo.getReferenceById(value.name())
-                : new ActivityTypeDao();
+        ProjectTypeDao person = check
+                ? projectTypeRepo.getReferenceById(value.name())
+                : new ProjectTypeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ActivityTypeDto.fromDTO(value, person);
-        return ActivityTypeDto.fromEntity(activityTypeRepo.save(person));
+        ProjectTypeDto.fromDTO(value, person);
+        return ProjectTypeDto.fromEntity(projectTypeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        activityTypeRepo.deleteById(id);
+        projectTypeRepo.deleteById(id);
     }
 }

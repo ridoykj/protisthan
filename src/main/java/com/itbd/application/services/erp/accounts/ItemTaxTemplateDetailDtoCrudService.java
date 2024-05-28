@@ -1,7 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.items.ItemTaxTemplateDao;
-import com.itbd.application.db.dto.items.ItemTaxTemplateDto;
+import com.itbd.application.db.dao.items.ItemTaxTemplateDetailDao;
+import com.itbd.application.db.dto.items.ItemTaxTemplateDetailDto;
+import com.itbd.application.db.repos.ItemTaxTemplateDetailRepository;
 import com.itbd.application.db.repos.ItemTaxTemplateRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
@@ -19,42 +20,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ItemTaxTemplateDtoCrudService implements CrudService<ItemTaxTemplateDto, String> {
+public class ItemTaxTemplateDetailDtoCrudService implements CrudService<ItemTaxTemplateDetailDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ItemTaxTemplateRepository itemTaxTemplateRepo;
+    private final ItemTaxTemplateDetailRepository itemTaxTemplateDetailRepo;
 
-    public ItemTaxTemplateDtoCrudService(ItemTaxTemplateRepository itemTaxTemplateRepo, JpaFilterConverter jpaFilterConverter) {
-        this.itemTaxTemplateRepo = itemTaxTemplateRepo;
+    public ItemTaxTemplateDetailDtoCrudService(ItemTaxTemplateDetailRepository itemTaxTemplateDetailRepo, JpaFilterConverter jpaFilterConverter) {
+        this.itemTaxTemplateDetailRepo = itemTaxTemplateDetailRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ItemTaxTemplateDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ItemTaxTemplateDetailDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ItemTaxTemplateDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ItemTaxTemplateDao.class)
+        Specification<ItemTaxTemplateDetailDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ItemTaxTemplateDetailDao.class)
                 : Specification.anyOf();
-        Page<ItemTaxTemplateDao> persons = itemTaxTemplateRepo.findAll(spec, pageable);
-        return persons.stream().map(ItemTaxTemplateDto::fromEntity).toList();
+        Page<ItemTaxTemplateDetailDao> persons = itemTaxTemplateDetailRepo.findAll(spec, pageable);
+        return persons.stream().map(ItemTaxTemplateDetailDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ItemTaxTemplateDto save(ItemTaxTemplateDto value) {
+    public @Nullable ItemTaxTemplateDetailDto save(ItemTaxTemplateDetailDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ItemTaxTemplateDao person = check
-                ? itemTaxTemplateRepo.getReferenceById(value.name())
-                : new ItemTaxTemplateDao();
+        ItemTaxTemplateDetailDao person = check
+                ? itemTaxTemplateDetailRepo.getReferenceById(value.name())
+                : new ItemTaxTemplateDetailDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ItemTaxTemplateDto.fromDTO(value, person);
-        return ItemTaxTemplateDto.fromEntity(itemTaxTemplateRepo.save(person));
+        ItemTaxTemplateDetailDto.fromDTO(value, person);
+        return ItemTaxTemplateDetailDto.fromEntity(itemTaxTemplateDetailRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        itemTaxTemplateRepo.deleteById(id);
+        itemTaxTemplateDetailRepo.deleteById(id);
     }
 }

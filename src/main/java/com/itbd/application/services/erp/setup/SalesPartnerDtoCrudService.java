@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.selling.selling;
+package com.itbd.application.services.erp.setup;
 
 import com.itbd.application.db.dao.sales.SalesPartnerDao;
 import com.itbd.application.db.dto.sales.SalesPartnerDto;

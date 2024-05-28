@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.selling.settings;
+package com.itbd.application.services.erp.contacts;
 
 import com.itbd.application.db.dao.contacts.ContactDao;
 import com.itbd.application.db.dto.contacts.ContactDto;

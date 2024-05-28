@@ -1,8 +1,9 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.currencys.CurrencyExchangeSettingsDetailsDao;
-import com.itbd.application.db.dto.currencys.CurrencyExchangeSettingsDetailsDto;
+import com.itbd.application.db.dao.currencys.CurrencyExchangeSettingsResultDao;
+import com.itbd.application.db.dto.currencys.CurrencyExchangeSettingsResultDto;
 import com.itbd.application.db.repos.CurrencyExchangeSettingsDetailsRepository;
+import com.itbd.application.db.repos.CurrencyExchangeSettingsResultRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +20,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class CurrencyExchangeSettingsDetailsDtoCrudService implements CrudService<CurrencyExchangeSettingsDetailsDto, String> {
+public class CurrencyExchangeSettingsResultDtoCrudService implements CrudService<CurrencyExchangeSettingsResultDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final CurrencyExchangeSettingsDetailsRepository currencyExchangeSettingsDetailsRepo;
+    private final CurrencyExchangeSettingsResultRepository currencyExchangeSettingsResultRepo;
 
-    public CurrencyExchangeSettingsDetailsDtoCrudService(CurrencyExchangeSettingsDetailsRepository currencyExchangeSettingsDetailsRepo, JpaFilterConverter jpaFilterConverter) {
-        this.currencyExchangeSettingsDetailsRepo = currencyExchangeSettingsDetailsRepo;
+    public CurrencyExchangeSettingsResultDtoCrudService(CurrencyExchangeSettingsResultRepository currencyExchangeSettingsResultRepo, JpaFilterConverter jpaFilterConverter) {
+        this.currencyExchangeSettingsResultRepo = currencyExchangeSettingsResultRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull CurrencyExchangeSettingsDetailsDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull CurrencyExchangeSettingsResultDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<CurrencyExchangeSettingsDetailsDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, CurrencyExchangeSettingsDetailsDao.class)
+        Specification<CurrencyExchangeSettingsResultDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, CurrencyExchangeSettingsResultDao.class)
                 : Specification.anyOf();
-        Page<CurrencyExchangeSettingsDetailsDao> persons = currencyExchangeSettingsDetailsRepo.findAll(spec, pageable);
-        return persons.stream().map(CurrencyExchangeSettingsDetailsDto::fromEntity).toList();
+        Page<CurrencyExchangeSettingsResultDao> persons = currencyExchangeSettingsResultRepo.findAll(spec, pageable);
+        return persons.stream().map(CurrencyExchangeSettingsResultDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable CurrencyExchangeSettingsDetailsDto save(CurrencyExchangeSettingsDetailsDto value) {
+    public @Nullable CurrencyExchangeSettingsResultDto save(CurrencyExchangeSettingsResultDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        CurrencyExchangeSettingsDetailsDao person = check
-                ? currencyExchangeSettingsDetailsRepo.getReferenceById(value.name())
-                : new CurrencyExchangeSettingsDetailsDao();
+        CurrencyExchangeSettingsResultDao person = check
+                ? currencyExchangeSettingsResultRepo.getReferenceById(value.name())
+                : new CurrencyExchangeSettingsResultDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        CurrencyExchangeSettingsDetailsDto.fromDTO(value, person);
-        return CurrencyExchangeSettingsDetailsDto.fromEntity(currencyExchangeSettingsDetailsRepo.save(person));
+        CurrencyExchangeSettingsResultDto.fromDTO(value, person);
+        return CurrencyExchangeSettingsResultDto.fromEntity(currencyExchangeSettingsResultRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        currencyExchangeSettingsDetailsRepo.deleteById(id);
+        currencyExchangeSettingsResultRepo.deleteById(id);
     }
 }

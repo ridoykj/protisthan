@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.workspace.WorkspaceDao;
-import com.itbd.application.db.dto.workspace.WorkspaceDto;
-import com.itbd.application.db.repos.WorkspaceRepository;
+import com.itbd.application.db.dao.FormTourDao;
+import com.itbd.application.db.dto.FormTourDto;
+import com.itbd.application.db.repos.FormTourRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class WorkspaceDtoCrudService implements CrudService<WorkspaceDto, String> {
+public class FormTourDtoCrudService implements CrudService<FormTourDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final WorkspaceRepository workspaceRepo;
+    private final FormTourRepository formTourRepo;
 
-    public WorkspaceDtoCrudService(WorkspaceRepository workspaceRepo, JpaFilterConverter jpaFilterConverter) {
-        this.workspaceRepo = workspaceRepo;
+    public FormTourDtoCrudService(FormTourRepository formTourRepo, JpaFilterConverter jpaFilterConverter) {
+        this.formTourRepo = formTourRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull WorkspaceDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull FormTourDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<WorkspaceDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, WorkspaceDao.class)
+        Specification<FormTourDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, FormTourDao.class)
                 : Specification.anyOf();
-        Page<WorkspaceDao> persons = workspaceRepo.findAll(spec, pageable);
-        return persons.stream().map(WorkspaceDto::fromEntity).toList();
+        Page<FormTourDao> persons = formTourRepo.findAll(spec, pageable);
+        return persons.stream().map(FormTourDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable WorkspaceDto save(WorkspaceDto value) {
+    public @Nullable FormTourDto save(FormTourDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        WorkspaceDao person = check
-                ? workspaceRepo.getReferenceById(value.name())
-                : new WorkspaceDao();
+        FormTourDao person = check
+                ? formTourRepo.getReferenceById(value.name())
+                : new FormTourDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        WorkspaceDto.fromDTO(value, person);
-        return WorkspaceDto.fromEntity(workspaceRepo.save(person));
+        FormTourDto.fromDTO(value, person);
+        return FormTourDto.fromEntity(formTourRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        workspaceRepo.deleteById(id);
+        formTourRepo.deleteById(id);
     }
 }

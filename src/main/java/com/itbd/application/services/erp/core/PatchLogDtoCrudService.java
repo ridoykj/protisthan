@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.website.PageDao;
-import com.itbd.application.db.dto.website.PageDto;
-import com.itbd.application.db.repos.PageRepository;
+import com.itbd.application.db.dao.PatchLogDao;
+import com.itbd.application.db.dto.PatchLogDto;
+import com.itbd.application.db.repos.PatchLogRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PageDtoCrudService implements CrudService<PageDto, String> {
+public class PatchLogDtoCrudService implements CrudService<PatchLogDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PageRepository pageRepo;
+    private final PatchLogRepository patchLogRepo;
 
-    public PageDtoCrudService(PageRepository pageRepo, JpaFilterConverter jpaFilterConverter) {
-        this.pageRepo = pageRepo;
+    public PatchLogDtoCrudService(PatchLogRepository pageRepo, JpaFilterConverter jpaFilterConverter) {
+        this.patchLogRepo = pageRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PageDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PatchLogDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PageDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PageDao.class)
+        Specification<PatchLogDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PatchLogDao.class)
                 : Specification.anyOf();
-        Page<PageDao> persons = pageRepo.findAll(spec, pageable);
-        return persons.stream().map(PageDto::fromEntity).toList();
+        Page<PatchLogDao> persons = patchLogRepo.findAll(spec, pageable);
+        return persons.stream().map(PatchLogDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PageDto save(PageDto value) {
+    public @Nullable PatchLogDto save(PatchLogDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PageDao person = check
-                ? pageRepo.getReferenceById(value.name())
-                : new PageDao();
+        PatchLogDao person = check
+                ? patchLogRepo.getReferenceById(value.name())
+                : new PatchLogDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PageDto.fromDTO(value, person);
-        return PageDto.fromEntity(pageRepo.save(person));
+        PatchLogDto.fromDTO(value, person);
+        return PatchLogDto.fromEntity(patchLogRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        pageRepo.deleteById(id);
+        patchLogRepo.deleteById(id);
     }
 }

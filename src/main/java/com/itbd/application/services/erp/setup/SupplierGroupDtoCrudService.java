@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.print.PrintHeadingDao;
-import com.itbd.application.db.dto.print.PrintHeadingDto;
-import com.itbd.application.db.repos.PrintHeadingRepository;
+import com.itbd.application.db.dao.supplier.SupplierGroupDao;
+import com.itbd.application.db.dto.supplier.SupplierGroupDto;
+import com.itbd.application.db.repos.SupplierGroupRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PrintHeadingDtoCrudService implements CrudService<PrintHeadingDto, String> {
+public class SupplierGroupDtoCrudService implements CrudService<SupplierGroupDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PrintHeadingRepository printHeadingRepo;
+    private final SupplierGroupRepository supplierGroupRepo;
 
-    public PrintHeadingDtoCrudService(PrintHeadingRepository printHeadingRepo, JpaFilterConverter jpaFilterConverter) {
-        this.printHeadingRepo = printHeadingRepo;
+    public SupplierGroupDtoCrudService(SupplierGroupRepository supplierGroupRepo, JpaFilterConverter jpaFilterConverter) {
+        this.supplierGroupRepo = supplierGroupRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PrintHeadingDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull SupplierGroupDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PrintHeadingDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PrintHeadingDao.class)
+        Specification<SupplierGroupDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, SupplierGroupDao.class)
                 : Specification.anyOf();
-        Page<PrintHeadingDao> persons = printHeadingRepo.findAll(spec, pageable);
-        return persons.stream().map(PrintHeadingDto::fromEntity).toList();
+        Page<SupplierGroupDao> persons = supplierGroupRepo.findAll(spec, pageable);
+        return persons.stream().map(SupplierGroupDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PrintHeadingDto save(PrintHeadingDto value) {
+    public @Nullable SupplierGroupDto save(SupplierGroupDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PrintHeadingDao person = check
-                ? printHeadingRepo.getReferenceById(value.name())
-                : new PrintHeadingDao();
+        SupplierGroupDao person = check
+                ? supplierGroupRepo.getReferenceById(value.name())
+                : new SupplierGroupDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PrintHeadingDto.fromDTO(value, person);
-        return PrintHeadingDto.fromEntity(printHeadingRepo.save(person));
+        SupplierGroupDto.fromDTO(value, person);
+        return SupplierGroupDto.fromEntity(supplierGroupRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        printHeadingRepo.deleteById(id);
+        supplierGroupRepo.deleteById(id);
     }
 }

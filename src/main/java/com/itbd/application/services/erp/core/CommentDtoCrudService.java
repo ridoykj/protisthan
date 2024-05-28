@@ -1,8 +1,9 @@
+
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.AccessLogDao;
-import com.itbd.application.db.dto.AccessLogDto;
-import com.itbd.application.db.repos.AccessLogRepository;
+import com.itbd.application.db.dao.cummunication.CommentDao;
+import com.itbd.application.db.dto.cummunication.CommentDto;
+import com.itbd.application.db.repos.CommentRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +20,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class AccessLogDtoCrudService implements CrudService<AccessLogDto, String> {
+public class CommentDtoCrudService implements CrudService<CommentDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final AccessLogRepository accessLogRepo;
+    private final CommentRepository commentRepo;
 
-    public AccessLogDtoCrudService(AccessLogRepository accessLogRepo, JpaFilterConverter jpaFilterConverter) {
-        this.accessLogRepo = accessLogRepo;
+    public CommentDtoCrudService(CommentRepository commentRepo, JpaFilterConverter jpaFilterConverter) {
+        this.commentRepo = commentRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull AccessLogDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull CommentDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<AccessLogDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, AccessLogDao.class)
+        Specification<CommentDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, CommentDao.class)
                 : Specification.anyOf();
-        Page<AccessLogDao> persons = accessLogRepo.findAll(spec, pageable);
-        return persons.stream().map(AccessLogDto::fromEntity).toList();
+        Page<CommentDao> persons = commentRepo.findAll(spec, pageable);
+        return persons.stream().map(CommentDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable AccessLogDto save(AccessLogDto value) {
+    public @Nullable CommentDto save(CommentDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        AccessLogDao person = check
-                ? accessLogRepo.getReferenceById(value.name())
-                : new AccessLogDao();
+        CommentDao person = check
+                ? commentRepo.getReferenceById(value.name())
+                : new CommentDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        AccessLogDto.fromDTO(value, person);
-        return AccessLogDto.fromEntity(accessLogRepo.save(person));
+        CommentDto.fromDTO(value, person);
+        return CommentDto.fromEntity(commentRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        accessLogRepo.deleteById(id);
+        commentRepo.deleteById(id);
     }
 }

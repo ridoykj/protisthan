@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.selling.pointofsale;
+package com.itbd.application.services.erp.accounts;
 
 import com.itbd.application.db.dao.loyaltys.LoyaltyProgramDao;
 import com.itbd.application.db.dto.loyaltys.LoyaltyProgramDto;

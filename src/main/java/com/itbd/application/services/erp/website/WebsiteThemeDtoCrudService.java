@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.website;
 
-import com.itbd.application.db.dao.website.component.WebTemplateFieldDao;
-import com.itbd.application.db.dto.website.component.WebTemplateFieldDto;
-import com.itbd.application.db.repos.WebTemplateFieldRepository;
+import com.itbd.application.db.dao.website.WebsiteThemeDao;
+import com.itbd.application.db.dto.website.WebsiteThemeDto;
+import com.itbd.application.db.repos.WebsiteThemeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class WebTemplateFieldDtoCrudService implements CrudService<WebTemplateFieldDto, String> {
+public class WebsiteThemeDtoCrudService implements CrudService<WebsiteThemeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final WebTemplateFieldRepository webTemplateFieldRepo;
+    private final WebsiteThemeRepository websiteThemeRepo;
 
-    public WebTemplateFieldDtoCrudService(WebTemplateFieldRepository webTemplateFieldRepo, JpaFilterConverter jpaFilterConverter) {
-        this.webTemplateFieldRepo = webTemplateFieldRepo;
+    public WebsiteThemeDtoCrudService(WebsiteThemeRepository websiteThemeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.websiteThemeRepo = websiteThemeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull WebTemplateFieldDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull WebsiteThemeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<WebTemplateFieldDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, WebTemplateFieldDao.class)
+        Specification<WebsiteThemeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, WebsiteThemeDao.class)
                 : Specification.anyOf();
-        Page<WebTemplateFieldDao> persons = webTemplateFieldRepo.findAll(spec, pageable);
-        return persons.stream().map(WebTemplateFieldDto::fromEntity).toList();
+        Page<WebsiteThemeDao> persons = websiteThemeRepo.findAll(spec, pageable);
+        return persons.stream().map(WebsiteThemeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable WebTemplateFieldDto save(WebTemplateFieldDto value) {
+    public @Nullable WebsiteThemeDto save(WebsiteThemeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        WebTemplateFieldDao person = check
-                ? webTemplateFieldRepo.getReferenceById(value.name())
-                : new WebTemplateFieldDao();
+        WebsiteThemeDao person = check
+                ? websiteThemeRepo.getReferenceById(value.name())
+                : new WebsiteThemeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        WebTemplateFieldDto.fromDTO(value, person);
-        return WebTemplateFieldDto.fromEntity(webTemplateFieldRepo.save(person));
+        WebsiteThemeDto.fromDTO(value, person);
+        return WebsiteThemeDto.fromEntity(websiteThemeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        webTemplateFieldRepo.deleteById(id);
+        websiteThemeRepo.deleteById(id);
     }
 }

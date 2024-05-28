@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.onboarding.OnboardingPermissionDao;
-import com.itbd.application.db.dto.onboarding.OnboardingPermissionDto;
-import com.itbd.application.db.repos.OnboardingPermissionRepository;
+import com.itbd.application.db.dao.onboarding.OnboardingStepDao;
+import com.itbd.application.db.dto.onboarding.OnboardingStepDto;
+import com.itbd.application.db.repos.OnboardingStepRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class OnboardingPermissionDtoCrudService implements CrudService<OnboardingPermissionDto, String> {
+public class OnboardingStepDtoCrudService implements CrudService<OnboardingStepDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final OnboardingPermissionRepository onboardingPermissionRepo;
+    private final OnboardingStepRepository onboardingStepRepo;
 
-    public OnboardingPermissionDtoCrudService(OnboardingPermissionRepository onboardingPermissionRepo, JpaFilterConverter jpaFilterConverter) {
-        this.onboardingPermissionRepo = onboardingPermissionRepo;
+    public OnboardingStepDtoCrudService(OnboardingStepRepository onboardingStepRepo, JpaFilterConverter jpaFilterConverter) {
+        this.onboardingStepRepo = onboardingStepRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull OnboardingPermissionDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull OnboardingStepDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<OnboardingPermissionDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, OnboardingPermissionDao.class)
+        Specification<OnboardingStepDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, OnboardingStepDao.class)
                 : Specification.anyOf();
-        Page<OnboardingPermissionDao> persons = onboardingPermissionRepo.findAll(spec, pageable);
-        return persons.stream().map(OnboardingPermissionDto::fromEntity).toList();
+        Page<OnboardingStepDao> persons = onboardingStepRepo.findAll(spec, pageable);
+        return persons.stream().map(OnboardingStepDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable OnboardingPermissionDto save(OnboardingPermissionDto value) {
+    public @Nullable OnboardingStepDto save(OnboardingStepDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        OnboardingPermissionDao person = check
-                ? onboardingPermissionRepo.getReferenceById(value.name())
-                : new OnboardingPermissionDao();
+        OnboardingStepDao person = check
+                ? onboardingStepRepo.getReferenceById(value.name())
+                : new OnboardingStepDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        OnboardingPermissionDto.fromDTO(value, person);
-        return OnboardingPermissionDto.fromEntity(onboardingPermissionRepo.save(person));
+        OnboardingStepDto.fromDTO(value, person);
+        return OnboardingStepDto.fromEntity(onboardingStepRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        onboardingPermissionRepo.deleteById(id);
+        onboardingStepRepo.deleteById(id);
     }
 }

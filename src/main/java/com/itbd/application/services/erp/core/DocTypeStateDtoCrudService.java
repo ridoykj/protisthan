@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.doctypes.DocTypeLinkDao;
-import com.itbd.application.db.dto.doctypes.DocTypeLinkDto;
-import com.itbd.application.db.repos.DocTypeLinkRepository;
+import com.itbd.application.db.dao.doctypes.DocTypeStateDao;
+import com.itbd.application.db.dto.doctypes.DocTypeStateDto;
+import com.itbd.application.db.repos.DocTypeStateRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class DocTypeLinkDtoCrudService implements CrudService<DocTypeLinkDto, String> {
+public class DocTypeStateDtoCrudService implements CrudService<DocTypeStateDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final DocTypeLinkRepository docTypeLinkRepo;
+    private final DocTypeStateRepository docTypeStateRepo;
 
-    public DocTypeLinkDtoCrudService(DocTypeLinkRepository docTypeLinkRepo, JpaFilterConverter jpaFilterConverter) {
-        this.docTypeLinkRepo = docTypeLinkRepo;
+    public DocTypeStateDtoCrudService(DocTypeStateRepository docTypeStateRepo, JpaFilterConverter jpaFilterConverter) {
+        this.docTypeStateRepo = docTypeStateRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull DocTypeLinkDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull DocTypeStateDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<DocTypeLinkDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, DocTypeLinkDao.class)
+        Specification<DocTypeStateDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, DocTypeStateDao.class)
                 : Specification.anyOf();
-        Page<DocTypeLinkDao> persons = docTypeLinkRepo.findAll(spec, pageable);
-        return persons.stream().map(DocTypeLinkDto::fromEntity).toList();
+        Page<DocTypeStateDao> persons = docTypeStateRepo.findAll(spec, pageable);
+        return persons.stream().map(DocTypeStateDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable DocTypeLinkDto save(DocTypeLinkDto value) {
+    public @Nullable DocTypeStateDto save(DocTypeStateDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        DocTypeLinkDao person = check
-                ? docTypeLinkRepo.getReferenceById(value.name())
-                : new DocTypeLinkDao();
+        DocTypeStateDao person = check
+                ? docTypeStateRepo.getReferenceById(value.name())
+                : new DocTypeStateDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        DocTypeLinkDto.fromDTO(value, person);
-        return DocTypeLinkDto.fromEntity(docTypeLinkRepo.save(person));
+        DocTypeStateDto.fromDTO(value, person);
+        return DocTypeStateDto.fromEntity(docTypeStateRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        docTypeLinkRepo.deleteById(id);
+        docTypeStateRepo.deleteById(id);
     }
 }

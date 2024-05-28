@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.selling.settings;
+package com.itbd.application.services.erp.setup;
 
 import com.itbd.application.db.dao.TermsAndConditionsDao;
 import com.itbd.application.db.dto.TermsAndConditionsDto;

@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.purchases.PurchaseTaxesAndChargesDao;
-import com.itbd.application.db.dto.purchases.PurchaseTaxesAndChargesDto;
-import com.itbd.application.db.repos.PurchaseTaxesAndChargesRepository;
+import com.itbd.application.db.dao.purchases.PurchaseTaxesAndChargesTemplateDao;
+import com.itbd.application.db.dto.purchases.PurchaseTaxesAndChargesTemplateDto;
+import com.itbd.application.db.repos.PurchaseTaxesAndChargesTemplateRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PurchaseTaxesandChargesDtoCrudService implements CrudService<PurchaseTaxesAndChargesDto, String> {
+public class PurchaseTaxesAndChargesTemplateDtoCrudService implements CrudService<PurchaseTaxesAndChargesTemplateDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PurchaseTaxesAndChargesRepository purchaseTaxesAndChargesRepo;
+    private final PurchaseTaxesAndChargesTemplateRepository purchaseTaxesAndChargesTemplateRepo;
 
-    public PurchaseTaxesandChargesDtoCrudService(PurchaseTaxesAndChargesRepository purchaseTaxesAndChargesRepo, JpaFilterConverter jpaFilterConverter) {
-        this.purchaseTaxesAndChargesRepo = purchaseTaxesAndChargesRepo;
+    public PurchaseTaxesAndChargesTemplateDtoCrudService(PurchaseTaxesAndChargesTemplateRepository purchaseTaxesAndChargesTemplateRepo, JpaFilterConverter jpaFilterConverter) {
+        this.purchaseTaxesAndChargesTemplateRepo = purchaseTaxesAndChargesTemplateRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PurchaseTaxesAndChargesDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PurchaseTaxesAndChargesTemplateDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PurchaseTaxesAndChargesDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PurchaseTaxesAndChargesDao.class)
+        Specification<PurchaseTaxesAndChargesTemplateDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PurchaseTaxesAndChargesTemplateDao.class)
                 : Specification.anyOf();
-        Page<PurchaseTaxesAndChargesDao> persons = purchaseTaxesAndChargesRepo.findAll(spec, pageable);
-        return persons.stream().map(PurchaseTaxesAndChargesDto::fromEntity).toList();
+        Page<PurchaseTaxesAndChargesTemplateDao> persons = purchaseTaxesAndChargesTemplateRepo.findAll(spec, pageable);
+        return persons.stream().map(PurchaseTaxesAndChargesTemplateDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PurchaseTaxesAndChargesDto save(PurchaseTaxesAndChargesDto value) {
+    public @Nullable PurchaseTaxesAndChargesTemplateDto save(PurchaseTaxesAndChargesTemplateDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PurchaseTaxesAndChargesDao person = check
-                ? purchaseTaxesAndChargesRepo.getReferenceById(value.name())
-                : new PurchaseTaxesAndChargesDao();
+        PurchaseTaxesAndChargesTemplateDao person = check
+                ? purchaseTaxesAndChargesTemplateRepo.getReferenceById(value.name())
+                : new PurchaseTaxesAndChargesTemplateDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PurchaseTaxesAndChargesDto.fromDTO(value, person);
-        return PurchaseTaxesAndChargesDto.fromEntity(purchaseTaxesAndChargesRepo.save(person));
+        PurchaseTaxesAndChargesTemplateDto.fromDTO(value, person);
+        return PurchaseTaxesAndChargesTemplateDto.fromEntity(purchaseTaxesAndChargesTemplateRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        purchaseTaxesAndChargesRepo.deleteById(id);
+        purchaseTaxesAndChargesTemplateRepo.deleteById(id);
     }
 }

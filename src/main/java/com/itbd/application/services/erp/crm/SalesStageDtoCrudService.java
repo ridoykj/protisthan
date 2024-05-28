@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.crm;
 
-import com.itbd.application.db.dao.opportunity.OpportunityTypeDao;
-import com.itbd.application.db.dto.opportunity.OpportunityTypeDto;
-import com.itbd.application.db.repos.OpportunityTypeRepository;
+import com.itbd.application.db.dao.sales.SalesStageDao;
+import com.itbd.application.db.dto.sales.SalesStageDto;
+import com.itbd.application.db.repos.SalesStageRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class OpportunityTypeDtoCrudService implements CrudService<OpportunityTypeDto, String> {
+public class SalesStageDtoCrudService implements CrudService<SalesStageDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final OpportunityTypeRepository opportunityTypeRepo;
+    private final SalesStageRepository salesStageRepo;
 
-    public OpportunityTypeDtoCrudService(OpportunityTypeRepository opportunityTypeRepo, JpaFilterConverter jpaFilterConverter) {
-        this.opportunityTypeRepo = opportunityTypeRepo;
+    public SalesStageDtoCrudService(SalesStageRepository salesStageRepo, JpaFilterConverter jpaFilterConverter) {
+        this.salesStageRepo = salesStageRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull OpportunityTypeDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull SalesStageDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<OpportunityTypeDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, OpportunityTypeDao.class)
+        Specification<SalesStageDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, SalesStageDao.class)
                 : Specification.anyOf();
-        Page<OpportunityTypeDao> persons = opportunityTypeRepo.findAll(spec, pageable);
-        return persons.stream().map(OpportunityTypeDto::fromEntity).toList();
+        Page<SalesStageDao> persons = salesStageRepo.findAll(spec, pageable);
+        return persons.stream().map(SalesStageDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable OpportunityTypeDto save(OpportunityTypeDto value) {
+    public @Nullable SalesStageDto save(SalesStageDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        OpportunityTypeDao person = check
-                ? opportunityTypeRepo.getReferenceById(value.name())
-                : new OpportunityTypeDao();
+        SalesStageDao person = check
+                ? salesStageRepo.getReferenceById(value.name())
+                : new SalesStageDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        OpportunityTypeDto.fromDTO(value, person);
-        return OpportunityTypeDto.fromEntity(opportunityTypeRepo.save(person));
+        SalesStageDto.fromDTO(value, person);
+        return SalesStageDto.fromEntity(salesStageRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        opportunityTypeRepo.deleteById(id);
+        salesStageRepo.deleteById(id);
     }
 }

@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.dashboardchart.DashboardChartDao;
-import com.itbd.application.db.dto.dashboardchart.DashboardChartDto;
-import com.itbd.application.db.repos.DashboardChartRepository;
+import com.itbd.application.db.dao.dashboardchart.DashboardChartFieldDao;
+import com.itbd.application.db.dto.dashboardchart.DashboardChartFieldDto;
+import com.itbd.application.db.repos.DashboardChartFieldRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class DashboardChartDtoCrudService implements CrudService<DashboardChartDto, String> {
+public class DashboardChartFieldDtoCrudService implements CrudService<DashboardChartFieldDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final DashboardChartRepository dashboardChartRepo;
+    private final DashboardChartFieldRepository dashboardChartFieldRepo;
 
-    public DashboardChartDtoCrudService(DashboardChartRepository dashboardChartRepo, JpaFilterConverter jpaFilterConverter) {
-        this.dashboardChartRepo = dashboardChartRepo;
+    public DashboardChartFieldDtoCrudService(DashboardChartFieldRepository dashboardChartFieldRepo, JpaFilterConverter jpaFilterConverter) {
+        this.dashboardChartFieldRepo = dashboardChartFieldRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull DashboardChartDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull DashboardChartFieldDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<DashboardChartDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, DashboardChartDao.class)
+        Specification<DashboardChartFieldDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, DashboardChartFieldDao.class)
                 : Specification.anyOf();
-        Page<DashboardChartDao> persons = dashboardChartRepo.findAll(spec, pageable);
-        return persons.stream().map(DashboardChartDto::fromEntity).toList();
+        Page<DashboardChartFieldDao> persons = dashboardChartFieldRepo.findAll(spec, pageable);
+        return persons.stream().map(DashboardChartFieldDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable DashboardChartDto save(DashboardChartDto value) {
+    public @Nullable DashboardChartFieldDto save(DashboardChartFieldDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        DashboardChartDao person = check
-                ? dashboardChartRepo.getReferenceById(value.name())
-                : new DashboardChartDao();
+        DashboardChartFieldDao person = check
+                ? dashboardChartFieldRepo.getReferenceById(value.name())
+                : new DashboardChartFieldDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        DashboardChartDto.fromDTO(value, person);
-        return DashboardChartDto.fromEntity(dashboardChartRepo.save(person));
+        DashboardChartFieldDto.fromDTO(value, person);
+        return DashboardChartFieldDto.fromEntity(dashboardChartFieldRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        dashboardChartRepo.deleteById(id);
+        dashboardChartFieldRepo.deleteById(id);
     }
 }

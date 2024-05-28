@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.email;
 
-import com.itbd.application.db.dao.notifications.NotificationDao;
-import com.itbd.application.db.dto.notifications.NotificationDto;
-import com.itbd.application.db.repos.NotificationRepository;
+import com.itbd.application.db.dao.notifications.NotificationRecipientDao;
+import com.itbd.application.db.dto.notifications.NotificationRecipientDto;
+import com.itbd.application.db.repos.NotificationRecipientRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class NotificationDtoCrudService implements CrudService<NotificationDto, String> {
+public class NotificationRecipientDtoCrudService implements CrudService<NotificationRecipientDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final NotificationRepository notificationRepo;
+    private final NotificationRecipientRepository notificationRecipientRepo;
 
-    public NotificationDtoCrudService(NotificationRepository notificationRepo, JpaFilterConverter jpaFilterConverter) {
-        this.notificationRepo = notificationRepo;
+    public NotificationRecipientDtoCrudService(NotificationRecipientRepository notificationRecipientRepo, JpaFilterConverter jpaFilterConverter) {
+        this.notificationRecipientRepo = notificationRecipientRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull NotificationDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull NotificationRecipientDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<NotificationDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, NotificationDao.class)
+        Specification<NotificationRecipientDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, NotificationRecipientDao.class)
                 : Specification.anyOf();
-        Page<NotificationDao> persons = notificationRepo.findAll(spec, pageable);
-        return persons.stream().map(NotificationDto::fromEntity).toList();
+        Page<NotificationRecipientDao> persons = notificationRecipientRepo.findAll(spec, pageable);
+        return persons.stream().map(NotificationRecipientDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable NotificationDto save(NotificationDto value) {
+    public @Nullable NotificationRecipientDto save(NotificationRecipientDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        NotificationDao person = check
-                ? notificationRepo.getReferenceById(value.name())
-                : new NotificationDao();
+        NotificationRecipientDao person = check
+                ? notificationRecipientRepo.getReferenceById(value.name())
+                : new NotificationRecipientDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        NotificationDto.fromDTO(value, person);
-        return NotificationDto.fromEntity(notificationRepo.save(person));
+        NotificationRecipientDto.fromDTO(value, person);
+        return NotificationRecipientDto.fromEntity(notificationRecipientRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        notificationRepo.deleteById(id);
+        notificationRecipientRepo.deleteById(id);
     }
 }

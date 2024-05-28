@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.accounts.AccountDao;
-import com.itbd.application.db.dto.accounts.AccountDto;
-import com.itbd.application.db.repos.AccountRepository;
+import com.itbd.application.db.dao.ProcessDeferredAccountingDao;
+import com.itbd.application.db.dto.ProcessDeferredAccountingDto;
+import com.itbd.application.db.repos.ProcessDeferredAccountingRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class AccountDtoCrudService implements CrudService<AccountDto, String> {
+public class ProcessDeferredAccountingDtoCrudService implements CrudService<ProcessDeferredAccountingDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final AccountRepository accountRepo;
+    private final ProcessDeferredAccountingRepository processDeferredAccountingRepo;
 
-    public AccountDtoCrudService(AccountRepository accountRepo, JpaFilterConverter jpaFilterConverter) {
-        this.accountRepo = accountRepo;
+    public ProcessDeferredAccountingDtoCrudService(ProcessDeferredAccountingRepository processDeferredAccountingRepo, JpaFilterConverter jpaFilterConverter) {
+        this.processDeferredAccountingRepo = processDeferredAccountingRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull AccountDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ProcessDeferredAccountingDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<AccountDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, AccountDao.class)
+        Specification<ProcessDeferredAccountingDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ProcessDeferredAccountingDao.class)
                 : Specification.anyOf();
-        Page<AccountDao> persons = accountRepo.findAll(spec, pageable);
-        return persons.stream().map(AccountDto::fromEntity).toList();
+        Page<ProcessDeferredAccountingDao> persons = processDeferredAccountingRepo.findAll(spec, pageable);
+        return persons.stream().map(ProcessDeferredAccountingDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable AccountDto save(AccountDto value) {
+    public @Nullable ProcessDeferredAccountingDto save(ProcessDeferredAccountingDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        AccountDao person = check
-                ? accountRepo.getReferenceById(value.name())
-                : new AccountDao();
+        ProcessDeferredAccountingDao person = check
+                ? processDeferredAccountingRepo.getReferenceById(value.name())
+                : new ProcessDeferredAccountingDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        AccountDto.fromDTO(value, person);
-        return AccountDto.fromEntity(accountRepo.save(person));
+        ProcessDeferredAccountingDto.fromDTO(value, person);
+        return ProcessDeferredAccountingDto.fromEntity(processDeferredAccountingRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        accountRepo.deleteById(id);
+        processDeferredAccountingRepo.deleteById(id);
     }
 }

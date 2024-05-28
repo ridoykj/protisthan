@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.IncotermDao;
-import com.itbd.application.db.dto.IncotermDto;
-import com.itbd.application.db.repos.IncotermRepository;
+import com.itbd.application.db.dao.PartyTypeDao;
+import com.itbd.application.db.dto.PartyTypeDto;
+import com.itbd.application.db.repos.PartyTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class IncotermDtoCrudService implements CrudService<IncotermDto, String> {
+public class PartyTypeDtoCrudService implements CrudService<PartyTypeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final IncotermRepository incotermRepo;
+    private final PartyTypeRepository partyTypeRepo;
 
-    public IncotermDtoCrudService(IncotermRepository incotermRepo, JpaFilterConverter jpaFilterConverter) {
-        this.incotermRepo = incotermRepo;
+    public PartyTypeDtoCrudService(PartyTypeRepository partyTypeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.partyTypeRepo = partyTypeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull IncotermDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PartyTypeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<IncotermDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, IncotermDao.class)
+        Specification<PartyTypeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PartyTypeDao.class)
                 : Specification.anyOf();
-        Page<IncotermDao> persons = incotermRepo.findAll(spec, pageable);
-        return persons.stream().map(IncotermDto::fromEntity).toList();
+        Page<PartyTypeDao> persons = partyTypeRepo.findAll(spec, pageable);
+        return persons.stream().map(PartyTypeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable IncotermDto save(IncotermDto value) {
+    public @Nullable PartyTypeDto save(PartyTypeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        IncotermDao person = check
-                ? incotermRepo.getReferenceById(value.name())
-                : new IncotermDao();
+        PartyTypeDao person = check
+                ? partyTypeRepo.getReferenceById(value.name())
+                : new PartyTypeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        IncotermDto.fromDTO(value, person);
-        return IncotermDto.fromEntity(incotermRepo.save(person));
+        PartyTypeDto.fromDTO(value, person);
+        return PartyTypeDto.fromEntity(partyTypeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        incotermRepo.deleteById(id);
+        partyTypeRepo.deleteById(id);
     }
 }

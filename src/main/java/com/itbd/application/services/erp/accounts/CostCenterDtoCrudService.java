@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.accounts.AccountDao;
-import com.itbd.application.db.dto.accounts.AccountDto;
-import com.itbd.application.db.repos.AccountRepository;
+import com.itbd.application.db.dao.CostCenterDao;
+import com.itbd.application.db.dto.CostCenterDto;
+import com.itbd.application.db.repos.CostCenterRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class AccountDtoCrudService implements CrudService<AccountDto, String> {
+public class CostCenterDtoCrudService implements CrudService<CostCenterDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final AccountRepository accountRepo;
+    private final CostCenterRepository costCenterRepo;
 
-    public AccountDtoCrudService(AccountRepository accountRepo, JpaFilterConverter jpaFilterConverter) {
-        this.accountRepo = accountRepo;
+    public CostCenterDtoCrudService(CostCenterRepository costCenterRepo, JpaFilterConverter jpaFilterConverter) {
+        this.costCenterRepo = costCenterRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull AccountDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull CostCenterDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<AccountDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, AccountDao.class)
+        Specification<CostCenterDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, CostCenterDao.class)
                 : Specification.anyOf();
-        Page<AccountDao> persons = accountRepo.findAll(spec, pageable);
-        return persons.stream().map(AccountDto::fromEntity).toList();
+        Page<CostCenterDao> persons = costCenterRepo.findAll(spec, pageable);
+        return persons.stream().map(CostCenterDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable AccountDto save(AccountDto value) {
+    public @Nullable CostCenterDto save(CostCenterDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        AccountDao person = check
-                ? accountRepo.getReferenceById(value.name())
-                : new AccountDao();
+        CostCenterDao person = check
+                ? costCenterRepo.getReferenceById(value.name())
+                : new CostCenterDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        AccountDto.fromDTO(value, person);
-        return AccountDto.fromEntity(accountRepo.save(person));
+        CostCenterDto.fromDTO(value, person);
+        return CostCenterDto.fromEntity(costCenterRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        accountRepo.deleteById(id);
+        costCenterRepo.deleteById(id);
     }
 }

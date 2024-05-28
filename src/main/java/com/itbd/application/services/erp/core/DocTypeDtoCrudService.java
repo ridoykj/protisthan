@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.module;
+package com.itbd.application.services.erp.core;
 
 import com.itbd.application.db.dao.doctypes.DocTypeDao;
 import com.itbd.application.db.dto.doctypes.DocTypeDto;

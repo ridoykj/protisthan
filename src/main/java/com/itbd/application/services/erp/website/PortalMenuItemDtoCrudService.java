@@ -1,8 +1,8 @@
-package com.itbd.application.services.erp.support;
+package com.itbd.application.services.erp.website;
 
-import com.itbd.application.db.dao.issues.IssuePriorityDao;
-import com.itbd.application.db.dto.issues.IssuePriorityDto;
-import com.itbd.application.db.repos.IssuePriorityRepository;
+import com.itbd.application.db.dao.PortalMenuItemDao;
+import com.itbd.application.db.dto.PortalMenuItemDto;
+import com.itbd.application.db.repos.PortalMenuItemRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class IssuePriorityDtoCrudService implements CrudService<IssuePriorityDto, String> {
+public class PortalMenuItemDtoCrudService implements CrudService<PortalMenuItemDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final IssuePriorityRepository issuePriorityRepo;
+    private final PortalMenuItemRepository portalMenuItemRepo;
 
-    public IssuePriorityDtoCrudService(IssuePriorityRepository issuePriorityRepo, JpaFilterConverter jpaFilterConverter) {
-        this.issuePriorityRepo = issuePriorityRepo;
+    public PortalMenuItemDtoCrudService(PortalMenuItemRepository portalMenuItemRepo, JpaFilterConverter jpaFilterConverter) {
+        this.portalMenuItemRepo = portalMenuItemRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull IssuePriorityDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PortalMenuItemDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<IssuePriorityDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, IssuePriorityDao.class)
+        Specification<PortalMenuItemDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PortalMenuItemDao.class)
                 : Specification.anyOf();
-        Page<IssuePriorityDao> persons = issuePriorityRepo.findAll(spec, pageable);
-        return persons.stream().map(IssuePriorityDto::fromEntity).toList();
+        Page<PortalMenuItemDao> persons = portalMenuItemRepo.findAll(spec, pageable);
+        return persons.stream().map(PortalMenuItemDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable IssuePriorityDto save(IssuePriorityDto value) {
+    public @Nullable PortalMenuItemDto save(PortalMenuItemDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        IssuePriorityDao person = check
-                ? issuePriorityRepo.getReferenceById(value.name())
-                : new IssuePriorityDao();
+        PortalMenuItemDao person = check
+                ? portalMenuItemRepo.getReferenceById(value.name())
+                : new PortalMenuItemDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        IssuePriorityDto.fromDTO(value, person);
-        return IssuePriorityDto.fromEntity(issuePriorityRepo.save(person));
+        PortalMenuItemDto.fromDTO(value, person);
+        return PortalMenuItemDto.fromEntity(portalMenuItemRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        issuePriorityRepo.deleteById(id);
+        portalMenuItemRepo.deleteById(id);
     }
 }

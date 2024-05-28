@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.accounts.AccountDao;
-import com.itbd.application.db.dto.accounts.AccountDto;
-import com.itbd.application.db.repos.AccountRepository;
+import com.itbd.application.db.dao.payments.PaymentLedgerEntryDao;
+import com.itbd.application.db.dto.payments.PaymentLedgerEntryDto;
+import com.itbd.application.db.repos.PaymentLedgerEntryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class AccountDtoCrudService implements CrudService<AccountDto, String> {
+public class PaymentLedgerEntryDtoCrudService implements CrudService<PaymentLedgerEntryDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final AccountRepository accountRepo;
+    private final PaymentLedgerEntryRepository paymentLedgerEntryRepo;
 
-    public AccountDtoCrudService(AccountRepository accountRepo, JpaFilterConverter jpaFilterConverter) {
-        this.accountRepo = accountRepo;
+    public PaymentLedgerEntryDtoCrudService(PaymentLedgerEntryRepository paymentLedgerEntryRepo, JpaFilterConverter jpaFilterConverter) {
+        this.paymentLedgerEntryRepo = paymentLedgerEntryRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull AccountDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PaymentLedgerEntryDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<AccountDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, AccountDao.class)
+        Specification<PaymentLedgerEntryDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PaymentLedgerEntryDao.class)
                 : Specification.anyOf();
-        Page<AccountDao> persons = accountRepo.findAll(spec, pageable);
-        return persons.stream().map(AccountDto::fromEntity).toList();
+        Page<PaymentLedgerEntryDao> persons = paymentLedgerEntryRepo.findAll(spec, pageable);
+        return persons.stream().map(PaymentLedgerEntryDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable AccountDto save(AccountDto value) {
+    public @Nullable PaymentLedgerEntryDto save(PaymentLedgerEntryDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        AccountDao person = check
-                ? accountRepo.getReferenceById(value.name())
-                : new AccountDao();
+        PaymentLedgerEntryDao person = check
+                ? paymentLedgerEntryRepo.getReferenceById(value.name())
+                : new PaymentLedgerEntryDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        AccountDto.fromDTO(value, person);
-        return AccountDto.fromEntity(accountRepo.save(person));
+        PaymentLedgerEntryDto.fromDTO(value, person);
+        return PaymentLedgerEntryDto.fromEntity(paymentLedgerEntryRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        accountRepo.deleteById(id);
+        paymentLedgerEntryRepo.deleteById(id);
     }
 }

@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.workspace.WorkspaceDao;
-import com.itbd.application.db.dto.workspace.WorkspaceDto;
-import com.itbd.application.db.repos.WorkspaceRepository;
+import com.itbd.application.db.dao.dashboardchart.DashboardDao;
+import com.itbd.application.db.dto.dashboardchart.DashboardDto;
+import com.itbd.application.db.repos.DashboardRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class WorkspaceDtoCrudService implements CrudService<WorkspaceDto, String> {
+public class DashboardDtoCrudService implements CrudService<DashboardDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final WorkspaceRepository workspaceRepo;
+    private final DashboardRepository dashboardRepo;
 
-    public WorkspaceDtoCrudService(WorkspaceRepository workspaceRepo, JpaFilterConverter jpaFilterConverter) {
-        this.workspaceRepo = workspaceRepo;
+    public DashboardDtoCrudService(DashboardRepository dashboardRepo, JpaFilterConverter jpaFilterConverter) {
+        this.dashboardRepo = dashboardRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull WorkspaceDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull DashboardDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<WorkspaceDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, WorkspaceDao.class)
+        Specification<DashboardDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, DashboardDao.class)
                 : Specification.anyOf();
-        Page<WorkspaceDao> persons = workspaceRepo.findAll(spec, pageable);
-        return persons.stream().map(WorkspaceDto::fromEntity).toList();
+        Page<DashboardDao> persons = dashboardRepo.findAll(spec, pageable);
+        return persons.stream().map(DashboardDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable WorkspaceDto save(WorkspaceDto value) {
+    public @Nullable DashboardDto save(DashboardDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        WorkspaceDao person = check
-                ? workspaceRepo.getReferenceById(value.name())
-                : new WorkspaceDao();
+        DashboardDao person = check
+                ? dashboardRepo.getReferenceById(value.name())
+                : new DashboardDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        WorkspaceDto.fromDTO(value, person);
-        return WorkspaceDto.fromEntity(workspaceRepo.save(person));
+        DashboardDto.fromDTO(value, person);
+        return DashboardDto.fromEntity(dashboardRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        workspaceRepo.deleteById(id);
+        dashboardRepo.deleteById(id);
     }
 }

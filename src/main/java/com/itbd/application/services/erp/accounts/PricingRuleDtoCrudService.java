@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.selling.item;
+package com.itbd.application.services.erp.accounts;
 
 import com.itbd.application.db.dao.price.PricingRuleDao;
 import com.itbd.application.db.dto.price.PricingRuleDto;

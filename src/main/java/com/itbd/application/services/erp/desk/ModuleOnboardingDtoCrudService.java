@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.FormTourStepDao;
-import com.itbd.application.db.dto.FormTourStepDto;
-import com.itbd.application.db.repos.FormTourStepRepository;
+import com.itbd.application.db.dao.modules.ModuleOnboardingDao;
+import com.itbd.application.db.dto.modules.ModuleOnboardingDto;
+import com.itbd.application.db.repos.ModuleOnboardingRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class FormTourStepDtoCrudService implements CrudService<FormTourStepDto, String> {
+public class ModuleOnboardingDtoCrudService implements CrudService<ModuleOnboardingDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final FormTourStepRepository formTourStepRepo;
+    private final ModuleOnboardingRepository moduleOnboardingRepo;
 
-    public FormTourStepDtoCrudService(FormTourStepRepository formTourStepRepo, JpaFilterConverter jpaFilterConverter) {
-        this.formTourStepRepo = formTourStepRepo;
+    public ModuleOnboardingDtoCrudService(ModuleOnboardingRepository moduleOnboardingRepo, JpaFilterConverter jpaFilterConverter) {
+        this.moduleOnboardingRepo = moduleOnboardingRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull FormTourStepDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ModuleOnboardingDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<FormTourStepDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, FormTourStepDao.class)
+        Specification<ModuleOnboardingDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ModuleOnboardingDao.class)
                 : Specification.anyOf();
-        Page<FormTourStepDao> persons = formTourStepRepo.findAll(spec, pageable);
-        return persons.stream().map(FormTourStepDto::fromEntity).toList();
+        Page<ModuleOnboardingDao> persons = moduleOnboardingRepo.findAll(spec, pageable);
+        return persons.stream().map(ModuleOnboardingDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable FormTourStepDto save(FormTourStepDto value) {
+    public @Nullable ModuleOnboardingDto save(ModuleOnboardingDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        FormTourStepDao person = check
-                ? formTourStepRepo.getReferenceById(value.name())
-                : new FormTourStepDao();
+        ModuleOnboardingDao person = check
+                ? moduleOnboardingRepo.getReferenceById(value.name())
+                : new ModuleOnboardingDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        FormTourStepDto.fromDTO(value, person);
-        return FormTourStepDto.fromEntity(formTourStepRepo.save(person));
+        ModuleOnboardingDto.fromDTO(value, person);
+        return ModuleOnboardingDto.fromEntity(moduleOnboardingRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        formTourStepRepo.deleteById(id);
+        moduleOnboardingRepo.deleteById(id);
     }
 }

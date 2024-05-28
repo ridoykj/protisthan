@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.contacts;
 
-import com.itbd.application.db.dao.address.AddressDao;
-import com.itbd.application.db.dto.address.AddressDto;
-import com.itbd.application.db.repos.AddressRepository;
+import com.itbd.application.db.dao.address.AddressTemplateDao;
+import com.itbd.application.db.dto.address.AddressTemplateDto;
+import com.itbd.application.db.repos.AddressTemplateRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class AddressDtoCrudService implements CrudService<AddressDto, String> {
+public class AddressTemplateDtoCrudService implements CrudService<AddressTemplateDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final AddressRepository addressRepo;
+    private final AddressTemplateRepository addressTemplateRepo;
 
-    public AddressDtoCrudService(AddressRepository addressRepo, JpaFilterConverter jpaFilterConverter) {
-        this.addressRepo = addressRepo;
+    public AddressTemplateDtoCrudService(AddressTemplateRepository addressRepo, JpaFilterConverter jpaFilterConverter) {
+        this.addressTemplateRepo = addressRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull AddressDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull AddressTemplateDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<AddressDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, AddressDao.class)
+        Specification<AddressTemplateDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, AddressTemplateDao.class)
                 : Specification.anyOf();
-        Page<AddressDao> persons = addressRepo.findAll(spec, pageable);
-        return persons.stream().map(AddressDto::fromEntity).toList();
+        Page<AddressTemplateDao> persons = addressTemplateRepo.findAll(spec, pageable);
+        return persons.stream().map(AddressTemplateDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable AddressDto save(AddressDto value) {
+    public @Nullable AddressTemplateDto save(AddressTemplateDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        AddressDao person = check
-                ? addressRepo.getReferenceById(value.name())
-                : new AddressDao();
+        AddressTemplateDao person = check
+                ? addressTemplateRepo.getReferenceById(value.name())
+                : new AddressTemplateDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        AddressDto.fromDTO(value, person);
-        return AddressDto.fromEntity(addressRepo.save(person));
+        AddressTemplateDto.fromDTO(value, person);
+        return AddressTemplateDto.fromEntity(addressTemplateRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        addressRepo.deleteById(id);
+        addressTemplateRepo.deleteById(id);
     }
 }

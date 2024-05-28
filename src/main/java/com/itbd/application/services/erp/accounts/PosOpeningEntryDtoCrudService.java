@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.selling.pointofsale;
+package com.itbd.application.services.erp.accounts;
 
 import com.itbd.application.db.dao.pos.PosOpeningEntryDao;
 import com.itbd.application.db.dto.pos.PosOpeningEntryDto;

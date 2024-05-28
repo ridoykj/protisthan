@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.accounts.AccountDao;
-import com.itbd.application.db.dto.accounts.AccountDto;
-import com.itbd.application.db.repos.AccountRepository;
+import com.itbd.application.db.dao.shares.ShareTypeDao;
+import com.itbd.application.db.dto.shares.ShareTypeDto;
+import com.itbd.application.db.repos.ShareTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class AccountDtoCrudService implements CrudService<AccountDto, String> {
+public class ShareTypeDtoCrudService implements CrudService<ShareTypeDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final AccountRepository accountRepo;
+    private final ShareTypeRepository shareTypeRepo;
 
-    public AccountDtoCrudService(AccountRepository accountRepo, JpaFilterConverter jpaFilterConverter) {
-        this.accountRepo = accountRepo;
+    public ShareTypeDtoCrudService(ShareTypeRepository shareTypeRepo, JpaFilterConverter jpaFilterConverter) {
+        this.shareTypeRepo = shareTypeRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull AccountDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ShareTypeDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<AccountDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, AccountDao.class)
+        Specification<ShareTypeDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ShareTypeDao.class)
                 : Specification.anyOf();
-        Page<AccountDao> persons = accountRepo.findAll(spec, pageable);
-        return persons.stream().map(AccountDto::fromEntity).toList();
+        Page<ShareTypeDao> persons = shareTypeRepo.findAll(spec, pageable);
+        return persons.stream().map(ShareTypeDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable AccountDto save(AccountDto value) {
+    public @Nullable ShareTypeDto save(ShareTypeDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        AccountDao person = check
-                ? accountRepo.getReferenceById(value.name())
-                : new AccountDao();
+        ShareTypeDao person = check
+                ? shareTypeRepo.getReferenceById(value.name())
+                : new ShareTypeDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        AccountDto.fromDTO(value, person);
-        return AccountDto.fromEntity(accountRepo.save(person));
+        ShareTypeDto.fromDTO(value, person);
+        return ShareTypeDto.fromEntity(shareTypeRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        accountRepo.deleteById(id);
+        shareTypeRepo.deleteById(id);
     }
 }

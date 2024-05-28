@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.email;
 
-import com.itbd.application.db.dao.emails.EmailUnsubscribeDao;
-import com.itbd.application.db.dto.emails.EmailUnsubscribeDto;
-import com.itbd.application.db.repos.EmailUnsubscribeRepository;
+import com.itbd.application.db.dao.notifications.NotificationDao;
+import com.itbd.application.db.dto.notifications.NotificationDto;
+import com.itbd.application.db.repos.NotificationRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class EmailUnsubscribeDtoCrudService implements CrudService<EmailUnsubscribeDto, String> {
+public class NotificationDtoCrudService implements CrudService<NotificationDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final EmailUnsubscribeRepository emailUnsubscribeRepo;
+    private final NotificationRepository notificationRepo;
 
-    public EmailUnsubscribeDtoCrudService(EmailUnsubscribeRepository emailUnsubscribeRepo, JpaFilterConverter jpaFilterConverter) {
-        this.emailUnsubscribeRepo = emailUnsubscribeRepo;
+    public NotificationDtoCrudService(NotificationRepository notificationRepo, JpaFilterConverter jpaFilterConverter) {
+        this.notificationRepo = notificationRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull EmailUnsubscribeDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull NotificationDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<EmailUnsubscribeDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, EmailUnsubscribeDao.class)
+        Specification<NotificationDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, NotificationDao.class)
                 : Specification.anyOf();
-        Page<EmailUnsubscribeDao> persons = emailUnsubscribeRepo.findAll(spec, pageable);
-        return persons.stream().map(EmailUnsubscribeDto::fromEntity).toList();
+        Page<NotificationDao> persons = notificationRepo.findAll(spec, pageable);
+        return persons.stream().map(NotificationDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable EmailUnsubscribeDto save(EmailUnsubscribeDto value) {
+    public @Nullable NotificationDto save(NotificationDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        EmailUnsubscribeDao person = check
-                ? emailUnsubscribeRepo.getReferenceById(value.name())
-                : new EmailUnsubscribeDao();
+        NotificationDao person = check
+                ? notificationRepo.getReferenceById(value.name())
+                : new NotificationDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        EmailUnsubscribeDto.fromDTO(value, person);
-        return EmailUnsubscribeDto.fromEntity(emailUnsubscribeRepo.save(person));
+        NotificationDto.fromDTO(value, person);
+        return NotificationDto.fromEntity(notificationRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        emailUnsubscribeRepo.deleteById(id);
+        notificationRepo.deleteById(id);
     }
 }

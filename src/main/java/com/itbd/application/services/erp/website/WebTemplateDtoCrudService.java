@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.website;
 
-import com.itbd.application.db.dao.website.component.WebFormFieldDao;
-import com.itbd.application.db.dto.website.component.WebFormFieldDto;
-import com.itbd.application.db.repos.WebFormFieldRepository;
+import com.itbd.application.db.dao.website.component.WebTemplateDao;
+import com.itbd.application.db.dto.website.component.WebTemplateDto;
+import com.itbd.application.db.repos.WebTemplateRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class WebFormFieldDtoCrudService implements CrudService<WebFormFieldDto, String> {
+public class WebTemplateDtoCrudService implements CrudService<WebTemplateDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final WebFormFieldRepository webFormFieldRepo;
+    private final WebTemplateRepository webTemplateRepo;
 
-    public WebFormFieldDtoCrudService(WebFormFieldRepository webFormFieldRepo, JpaFilterConverter jpaFilterConverter) {
-        this.webFormFieldRepo = webFormFieldRepo;
+    public WebTemplateDtoCrudService(WebTemplateRepository webTemplateRepo, JpaFilterConverter jpaFilterConverter) {
+        this.webTemplateRepo = webTemplateRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull WebFormFieldDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull WebTemplateDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<WebFormFieldDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, WebFormFieldDao.class)
+        Specification<WebTemplateDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, WebTemplateDao.class)
                 : Specification.anyOf();
-        Page<WebFormFieldDao> persons = webFormFieldRepo.findAll(spec, pageable);
-        return persons.stream().map(WebFormFieldDto::fromEntity).toList();
+        Page<WebTemplateDao> persons = webTemplateRepo.findAll(spec, pageable);
+        return persons.stream().map(WebTemplateDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable WebFormFieldDto save(WebFormFieldDto value) {
+    public @Nullable WebTemplateDto save(WebTemplateDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        WebFormFieldDao person = check
-                ? webFormFieldRepo.getReferenceById(value.name())
-                : new WebFormFieldDao();
+        WebTemplateDao person = check
+                ? webTemplateRepo.getReferenceById(value.name())
+                : new WebTemplateDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        WebFormFieldDto.fromDTO(value, person);
-        return WebFormFieldDto.fromEntity(webFormFieldRepo.save(person));
+        WebTemplateDto.fromDTO(value, person);
+        return WebTemplateDto.fromEntity(webTemplateRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        webFormFieldRepo.deleteById(id);
+        webTemplateRepo.deleteById(id);
     }
 }

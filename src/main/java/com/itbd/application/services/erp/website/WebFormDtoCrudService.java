@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.website;
 
-import com.itbd.application.db.dao.PortalMenuItemDao;
-import com.itbd.application.db.dto.PortalMenuItemDto;
-import com.itbd.application.db.repos.PortalMenuItemRepository;
+import com.itbd.application.db.dao.website.component.WebFormDao;
+import com.itbd.application.db.dto.website.component.WebFormDto;
+import com.itbd.application.db.repos.WebFormRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PortalMenuItemDtoCrudService implements CrudService<PortalMenuItemDto, String> {
+public class WebFormDtoCrudService implements CrudService<WebFormDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PortalMenuItemRepository portalMenuItemRepo;
+    private final WebFormRepository webFormRepo;
 
-    public PortalMenuItemDtoCrudService(PortalMenuItemRepository portalMenuItemRepo, JpaFilterConverter jpaFilterConverter) {
-        this.portalMenuItemRepo = portalMenuItemRepo;
+    public WebFormDtoCrudService(WebFormRepository webFormRepo, JpaFilterConverter jpaFilterConverter) {
+        this.webFormRepo = webFormRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PortalMenuItemDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull WebFormDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PortalMenuItemDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PortalMenuItemDao.class)
+        Specification<WebFormDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, WebFormDao.class)
                 : Specification.anyOf();
-        Page<PortalMenuItemDao> persons = portalMenuItemRepo.findAll(spec, pageable);
-        return persons.stream().map(PortalMenuItemDto::fromEntity).toList();
+        Page<WebFormDao> persons = webFormRepo.findAll(spec, pageable);
+        return persons.stream().map(WebFormDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PortalMenuItemDto save(PortalMenuItemDto value) {
+    public @Nullable WebFormDto save(WebFormDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PortalMenuItemDao person = check
-                ? portalMenuItemRepo.getReferenceById(value.name())
-                : new PortalMenuItemDao();
+        WebFormDao person = check
+                ? webFormRepo.getReferenceById(value.name())
+                : new WebFormDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PortalMenuItemDto.fromDTO(value, person);
-        return PortalMenuItemDto.fromEntity(portalMenuItemRepo.save(person));
+        WebFormDto.fromDTO(value, person);
+        return WebFormDto.fromEntity(webFormRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        portalMenuItemRepo.deleteById(id);
+        webFormRepo.deleteById(id);
     }
 }

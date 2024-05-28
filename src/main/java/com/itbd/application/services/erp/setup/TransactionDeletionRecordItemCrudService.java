@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.uoms.UomDao;
-import com.itbd.application.db.dto.uoms.UomDto;
-import com.itbd.application.db.repos.UomRepository;
+import com.itbd.application.db.dao.transactions.TransactionDeletionRecordItemDao;
+import com.itbd.application.db.dto.transactions.TransactionDeletionRecordItemDto;
+import com.itbd.application.db.repos.TransactionDeletionRecordItemRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class UomDtoCrudService implements CrudService<UomDto, String> {
+public class TransactionDeletionRecordItemCrudService implements CrudService<TransactionDeletionRecordItemDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final UomRepository uomRepo;
+    private final TransactionDeletionRecordItemRepository transactionDeletionRecordItemRepo;
 
-    public UomDtoCrudService(UomRepository uomRepo, JpaFilterConverter jpaFilterConverter) {
-        this.uomRepo = uomRepo;
+    public TransactionDeletionRecordItemCrudService(TransactionDeletionRecordItemRepository transactionDeletionRecordItemRepo, JpaFilterConverter jpaFilterConverter) {
+        this.transactionDeletionRecordItemRepo = transactionDeletionRecordItemRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull UomDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull TransactionDeletionRecordItemDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<UomDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, UomDao.class)
+        Specification<TransactionDeletionRecordItemDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, TransactionDeletionRecordItemDao.class)
                 : Specification.anyOf();
-        Page<UomDao> persons = uomRepo.findAll(spec, pageable);
-        return persons.stream().map(UomDto::fromEntity).toList();
+        Page<TransactionDeletionRecordItemDao> persons = transactionDeletionRecordItemRepo.findAll(spec, pageable);
+        return persons.stream().map(TransactionDeletionRecordItemDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable UomDto save(UomDto value) {
+    public @Nullable TransactionDeletionRecordItemDto save(TransactionDeletionRecordItemDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        UomDao person = check
-                ? uomRepo.getReferenceById(value.name())
-                : new UomDao();
+        TransactionDeletionRecordItemDao person = check
+                ? transactionDeletionRecordItemRepo.getReferenceById(value.name())
+                : new TransactionDeletionRecordItemDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        UomDto.fromDTO(value, person);
-        return UomDto.fromEntity(uomRepo.save(person));
+        TransactionDeletionRecordItemDto.fromDTO(value, person);
+        return TransactionDeletionRecordItemDto.fromEntity(transactionDeletionRecordItemRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        uomRepo.deleteById(id);
+        transactionDeletionRecordItemRepo.deleteById(id);
     }
 }

@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.PatchLogDao;
-import com.itbd.application.db.dto.PatchLogDto;
-import com.itbd.application.db.repos.PatchLogRepository;
+import com.itbd.application.db.dao.reports.ReportDao;
+import com.itbd.application.db.dto.reports.ReportDto;
+import com.itbd.application.db.repos.ReportRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class PatchLogDtoCrudService implements CrudService<PatchLogDto, String> {
+public class ReportDtoCrudService implements CrudService<ReportDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final PatchLogRepository patchLogRepo;
+    private final ReportRepository reportRepo;
 
-    public PatchLogDtoCrudService(PatchLogRepository pageRepo, JpaFilterConverter jpaFilterConverter) {
-        this.patchLogRepo = pageRepo;
+    public ReportDtoCrudService(ReportRepository reportRepo, JpaFilterConverter jpaFilterConverter) {
+        this.reportRepo = reportRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull PatchLogDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull ReportDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<PatchLogDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, PatchLogDao.class)
+        Specification<ReportDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, ReportDao.class)
                 : Specification.anyOf();
-        Page<PatchLogDao> persons = patchLogRepo.findAll(spec, pageable);
-        return persons.stream().map(PatchLogDto::fromEntity).toList();
+        Page<ReportDao> persons = reportRepo.findAll(spec, pageable);
+        return persons.stream().map(ReportDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable PatchLogDto save(PatchLogDto value) {
+    public @Nullable ReportDto save(ReportDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        PatchLogDao person = check
-                ? patchLogRepo.getReferenceById(value.name())
-                : new PatchLogDao();
+        ReportDao person = check
+                ? reportRepo.getReferenceById(value.name())
+                : new ReportDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        PatchLogDto.fromDTO(value, person);
-        return PatchLogDto.fromEntity(patchLogRepo.save(person));
+        ReportDto.fromDTO(value, person);
+        return ReportDto.fromEntity(reportRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        patchLogRepo.deleteById(id);
+        reportRepo.deleteById(id);
     }
 }

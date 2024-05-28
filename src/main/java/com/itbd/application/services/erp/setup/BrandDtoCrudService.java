@@ -1,9 +1,8 @@
-package com.itbd.application.services.erp.stock;
+package com.itbd.application.services.erp.setup;
 
 import com.itbd.application.db.dao.BrandDao;
 import com.itbd.application.db.dto.BrandDto;
 import com.itbd.application.db.repos.BrandRepository;
-import com.itbd.application.db.repos.WarehouseRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;

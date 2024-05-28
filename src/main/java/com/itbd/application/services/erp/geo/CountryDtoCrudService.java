@@ -1,8 +1,8 @@
-package com.itbd.application.services.erp.email;
+package com.itbd.application.services.erp.geo;
 
-import com.itbd.application.db.dao.notifications.NotificationRecipientDao;
-import com.itbd.application.db.dto.notifications.NotificationRecipientDto;
-import com.itbd.application.db.repos.NotificationRecipientRepository;
+import com.itbd.application.db.dao.CountryDao;
+import com.itbd.application.db.dto.CountryDto;
+import com.itbd.application.db.repos.CountryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class NotificationRecipientDtoCrudService implements CrudService<NotificationRecipientDto, String> {
+public class CountryDtoCrudService implements CrudService<CountryDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final NotificationRecipientRepository notificationRecipientRepo;
+    private final CountryRepository countryRepo;
 
-    public NotificationRecipientDtoCrudService(NotificationRecipientRepository notificationRecipientRepo, JpaFilterConverter jpaFilterConverter) {
-        this.notificationRecipientRepo = notificationRecipientRepo;
+    public CountryDtoCrudService(CountryRepository countryRepo, JpaFilterConverter jpaFilterConverter) {
+        this.countryRepo = countryRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull NotificationRecipientDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull CountryDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<NotificationRecipientDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, NotificationRecipientDao.class)
+        Specification<CountryDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, CountryDao.class)
                 : Specification.anyOf();
-        Page<NotificationRecipientDao> persons = notificationRecipientRepo.findAll(spec, pageable);
-        return persons.stream().map(NotificationRecipientDto::fromEntity).toList();
+        Page<CountryDao> persons = countryRepo.findAll(spec, pageable);
+        return persons.stream().map(CountryDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable NotificationRecipientDto save(NotificationRecipientDto value) {
+    public @Nullable CountryDto save(CountryDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        NotificationRecipientDao person = check
-                ? notificationRecipientRepo.getReferenceById(value.name())
-                : new NotificationRecipientDao();
+        CountryDao person = check
+                ? countryRepo.getReferenceById(value.name())
+                : new CountryDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        NotificationRecipientDto.fromDTO(value, person);
-        return NotificationRecipientDto.fromEntity(notificationRecipientRepo.save(person));
+        CountryDto.fromDTO(value, person);
+        return CountryDto.fromEntity(countryRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        notificationRecipientRepo.deleteById(id);
+        countryRepo.deleteById(id);
     }
 }

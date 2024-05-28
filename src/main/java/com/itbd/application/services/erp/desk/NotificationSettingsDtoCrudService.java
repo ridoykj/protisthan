@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.modules.ModuleOnboardingDao;
-import com.itbd.application.db.dto.modules.ModuleOnboardingDto;
-import com.itbd.application.db.repos.ModuleOnboardingRepository;
+import com.itbd.application.db.dao.notifications.NotificationSettingsDao;
+import com.itbd.application.db.dto.notifications.NotificationSettingsDto;
+import com.itbd.application.db.repos.NotificationSettingsRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class ModuleOnboardingDtoCrudService implements CrudService<ModuleOnboardingDto, String> {
+public class NotificationSettingsDtoCrudService implements CrudService<NotificationSettingsDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final ModuleOnboardingRepository moduleOnboardingRepo;
+    private final NotificationSettingsRepository notificationSettingsRepo;
 
-    public ModuleOnboardingDtoCrudService(ModuleOnboardingRepository moduleOnboardingRepo, JpaFilterConverter jpaFilterConverter) {
-        this.moduleOnboardingRepo = moduleOnboardingRepo;
+    public NotificationSettingsDtoCrudService(NotificationSettingsRepository notificationSettingsRepo, JpaFilterConverter jpaFilterConverter) {
+        this.notificationSettingsRepo = notificationSettingsRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull ModuleOnboardingDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull NotificationSettingsDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<ModuleOnboardingDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, ModuleOnboardingDao.class)
+        Specification<NotificationSettingsDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, NotificationSettingsDao.class)
                 : Specification.anyOf();
-        Page<ModuleOnboardingDao> persons = moduleOnboardingRepo.findAll(spec, pageable);
-        return persons.stream().map(ModuleOnboardingDto::fromEntity).toList();
+        Page<NotificationSettingsDao> persons = notificationSettingsRepo.findAll(spec, pageable);
+        return persons.stream().map(NotificationSettingsDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable ModuleOnboardingDto save(ModuleOnboardingDto value) {
+    public @Nullable NotificationSettingsDto save(NotificationSettingsDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        ModuleOnboardingDao person = check
-                ? moduleOnboardingRepo.getReferenceById(value.name())
-                : new ModuleOnboardingDao();
+        NotificationSettingsDao person = check
+                ? notificationSettingsRepo.getReferenceById(value.name())
+                : new NotificationSettingsDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        ModuleOnboardingDto.fromDTO(value, person);
-        return ModuleOnboardingDto.fromEntity(moduleOnboardingRepo.save(person));
+        NotificationSettingsDto.fromDTO(value, person);
+        return NotificationSettingsDto.fromEntity(notificationSettingsRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        moduleOnboardingRepo.deleteById(id);
+        notificationSettingsRepo.deleteById(id);
     }
 }

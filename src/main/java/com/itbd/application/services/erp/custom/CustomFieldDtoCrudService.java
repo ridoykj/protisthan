@@ -1,8 +1,8 @@
-package com.itbd.application.services.erp.crm;
+package com.itbd.application.services.erp.custom;
 
-import com.itbd.application.db.dao.sales.SalesStageDao;
-import com.itbd.application.db.dto.sales.SalesStageDto;
-import com.itbd.application.db.repos.SalesStageRepository;
+import com.itbd.application.db.dao.CustomFieldDao;
+import com.itbd.application.db.dto.CustomFieldDto;
+import com.itbd.application.db.repos.CustomFieldRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class SalesStageDtoCrudService implements CrudService<SalesStageDto, String> {
+public class CustomFieldDtoCrudService implements CrudService<CustomFieldDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final SalesStageRepository salesStageRepo;
+    private final CustomFieldRepository customFieldRepo;
 
-    public SalesStageDtoCrudService(SalesStageRepository salesStageRepo, JpaFilterConverter jpaFilterConverter) {
-        this.salesStageRepo = salesStageRepo;
+    public CustomFieldDtoCrudService(CustomFieldRepository customFieldRepo, JpaFilterConverter jpaFilterConverter) {
+        this.customFieldRepo = customFieldRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull SalesStageDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull CustomFieldDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<SalesStageDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, SalesStageDao.class)
+        Specification<CustomFieldDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, CustomFieldDao.class)
                 : Specification.anyOf();
-        Page<SalesStageDao> persons = salesStageRepo.findAll(spec, pageable);
-        return persons.stream().map(SalesStageDto::fromEntity).toList();
+        Page<CustomFieldDao> persons = customFieldRepo.findAll(spec, pageable);
+        return persons.stream().map(CustomFieldDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable SalesStageDto save(SalesStageDto value) {
+    public @Nullable CustomFieldDto save(CustomFieldDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        SalesStageDao person = check
-                ? salesStageRepo.getReferenceById(value.name())
-                : new SalesStageDao();
+        CustomFieldDao person = check
+                ? customFieldRepo.getReferenceById(value.name())
+                : new CustomFieldDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        SalesStageDto.fromDTO(value, person);
-        return SalesStageDto.fromEntity(salesStageRepo.save(person));
+        CustomFieldDto.fromDTO(value, person);
+        return CustomFieldDto.fromEntity(customFieldRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        salesStageRepo.deleteById(id);
+        customFieldRepo.deleteById(id);
     }
 }

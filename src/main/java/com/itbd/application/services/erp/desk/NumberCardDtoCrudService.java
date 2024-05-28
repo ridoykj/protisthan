@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.notifications.NotificationSettingsDao;
-import com.itbd.application.db.dto.notifications.NotificationSettingsDto;
-import com.itbd.application.db.repos.NotificationSettingsRepository;
+import com.itbd.application.db.dao.NumberCardDao;
+import com.itbd.application.db.dto.NumberCardDto;
+import com.itbd.application.db.repos.NumberCardRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class NotificationSettingsDtoCrudService implements CrudService<NotificationSettingsDto, String> {
+public class NumberCardDtoCrudService implements CrudService<NumberCardDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final NotificationSettingsRepository notificationSettingsRepo;
+    private final NumberCardRepository numberCardRepo;
 
-    public NotificationSettingsDtoCrudService(NotificationSettingsRepository notificationSettingsRepo, JpaFilterConverter jpaFilterConverter) {
-        this.notificationSettingsRepo = notificationSettingsRepo;
+    public NumberCardDtoCrudService(NumberCardRepository numberCardRepo, JpaFilterConverter jpaFilterConverter) {
+        this.numberCardRepo = numberCardRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull NotificationSettingsDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull NumberCardDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<NotificationSettingsDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, NotificationSettingsDao.class)
+        Specification<NumberCardDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, NumberCardDao.class)
                 : Specification.anyOf();
-        Page<NotificationSettingsDao> persons = notificationSettingsRepo.findAll(spec, pageable);
-        return persons.stream().map(NotificationSettingsDto::fromEntity).toList();
+        Page<NumberCardDao> persons = numberCardRepo.findAll(spec, pageable);
+        return persons.stream().map(NumberCardDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable NotificationSettingsDto save(NotificationSettingsDto value) {
+    public @Nullable NumberCardDto save(NumberCardDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        NotificationSettingsDao person = check
-                ? notificationSettingsRepo.getReferenceById(value.name())
-                : new NotificationSettingsDao();
+        NumberCardDao person = check
+                ? numberCardRepo.getReferenceById(value.name())
+                : new NumberCardDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        NotificationSettingsDto.fromDTO(value, person);
-        return NotificationSettingsDto.fromEntity(notificationSettingsRepo.save(person));
+        NumberCardDto.fromDTO(value, person);
+        return NumberCardDto.fromEntity(numberCardRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        notificationSettingsRepo.deleteById(id);
+        numberCardRepo.deleteById(id);
     }
 }

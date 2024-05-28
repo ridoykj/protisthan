@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.accounts.AccountDao;
-import com.itbd.application.db.dto.accounts.AccountDto;
-import com.itbd.application.db.repos.AccountRepository;
+import com.itbd.application.db.dao.purchases.PurchaseTaxesAndChargesDao;
+import com.itbd.application.db.dto.purchases.PurchaseTaxesAndChargesDto;
+import com.itbd.application.db.repos.PurchaseTaxesAndChargesRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class AccountDtoCrudService implements CrudService<AccountDto, String> {
+public class PurchaseTaxesAndChargesDtoCrudService implements CrudService<PurchaseTaxesAndChargesDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final AccountRepository accountRepo;
+    private final PurchaseTaxesAndChargesRepository purchaseTaxesAndChargesRepo;
 
-    public AccountDtoCrudService(AccountRepository accountRepo, JpaFilterConverter jpaFilterConverter) {
-        this.accountRepo = accountRepo;
+    public PurchaseTaxesAndChargesDtoCrudService(PurchaseTaxesAndChargesRepository purchaseTaxesAndChargesRepo, JpaFilterConverter jpaFilterConverter) {
+        this.purchaseTaxesAndChargesRepo = purchaseTaxesAndChargesRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull AccountDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PurchaseTaxesAndChargesDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<AccountDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, AccountDao.class)
+        Specification<PurchaseTaxesAndChargesDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PurchaseTaxesAndChargesDao.class)
                 : Specification.anyOf();
-        Page<AccountDao> persons = accountRepo.findAll(spec, pageable);
-        return persons.stream().map(AccountDto::fromEntity).toList();
+        Page<PurchaseTaxesAndChargesDao> persons = purchaseTaxesAndChargesRepo.findAll(spec, pageable);
+        return persons.stream().map(PurchaseTaxesAndChargesDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable AccountDto save(AccountDto value) {
+    public @Nullable PurchaseTaxesAndChargesDto save(PurchaseTaxesAndChargesDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        AccountDao person = check
-                ? accountRepo.getReferenceById(value.name())
-                : new AccountDao();
+        PurchaseTaxesAndChargesDao person = check
+                ? purchaseTaxesAndChargesRepo.getReferenceById(value.name())
+                : new PurchaseTaxesAndChargesDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        AccountDto.fromDTO(value, person);
-        return AccountDto.fromEntity(accountRepo.save(person));
+        PurchaseTaxesAndChargesDto.fromDTO(value, person);
+        return PurchaseTaxesAndChargesDto.fromEntity(purchaseTaxesAndChargesRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        accountRepo.deleteById(id);
+        purchaseTaxesAndChargesRepo.deleteById(id);
     }
 }

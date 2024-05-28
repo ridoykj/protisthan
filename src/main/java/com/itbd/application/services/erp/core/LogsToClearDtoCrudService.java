@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.LanguageDao;
-import com.itbd.application.db.dto.LanguageDto;
-import com.itbd.application.db.repos.LanguageRepository;
+import com.itbd.application.db.dao.LogsToClearDao;
+import com.itbd.application.db.dto.LogsToClearDto;
+import com.itbd.application.db.repos.LogsToClearRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class LanguageDtoCrudService implements CrudService<LanguageDto, String> {
+public class LogsToClearDtoCrudService implements CrudService<LogsToClearDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final LanguageRepository languageRepo;
+    private final LogsToClearRepository logsToClearRepo;
 
-    public LanguageDtoCrudService(LanguageRepository languageRepo, JpaFilterConverter jpaFilterConverter) {
-        this.languageRepo = languageRepo;
+    public LogsToClearDtoCrudService(LogsToClearRepository logsToClearRepo, JpaFilterConverter jpaFilterConverter) {
+        this.logsToClearRepo = logsToClearRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull LanguageDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull LogsToClearDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<LanguageDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, LanguageDao.class)
+        Specification<LogsToClearDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, LogsToClearDao.class)
                 : Specification.anyOf();
-        Page<LanguageDao> persons = languageRepo.findAll(spec, pageable);
-        return persons.stream().map(LanguageDto::fromEntity).toList();
+        Page<LogsToClearDao> persons = logsToClearRepo.findAll(spec, pageable);
+        return persons.stream().map(LogsToClearDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable LanguageDto save(LanguageDto value) {
+    public @Nullable LogsToClearDto save(LogsToClearDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        LanguageDao person = check
-                ? languageRepo.getReferenceById(value.name())
-                : new LanguageDao();
+        LogsToClearDao person = check
+                ? logsToClearRepo.getReferenceById(value.name())
+                : new LogsToClearDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        LanguageDto.fromDTO(value, person);
-        return LanguageDto.fromEntity(languageRepo.save(person));
+        LogsToClearDto.fromDTO(value, person);
+        return LogsToClearDto.fromEntity(logsToClearRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        languageRepo.deleteById(id);
+        logsToClearRepo.deleteById(id);
     }
 }

@@ -1,8 +1,8 @@
 package com.itbd.application.services.erp.custom;
 
-import com.itbd.application.db.dao.CustomFieldDao;
-import com.itbd.application.db.dto.CustomFieldDto;
-import com.itbd.application.db.repos.CustomFieldRepository;
+import com.itbd.application.db.dao.PropertySetterDao;
+import com.itbd.application.db.dto.PropertySetterDto;
+import com.itbd.application.db.repos.PropertySetterRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;
@@ -19,42 +19,42 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class CustomFieldDtoCrudService implements CrudService<CustomFieldDto, String> {
+public class PropertySetterDtoCrudService implements CrudService<PropertySetterDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
-    private final CustomFieldRepository customFieldRepo;
+    private final PropertySetterRepository propertySetterRepo;
 
-    public CustomFieldDtoCrudService(CustomFieldRepository customFieldRepo, JpaFilterConverter jpaFilterConverter) {
-        this.customFieldRepo = customFieldRepo;
+    public PropertySetterDtoCrudService(PropertySetterRepository propertySetterRepo, JpaFilterConverter jpaFilterConverter) {
+        this.propertySetterRepo = propertySetterRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
     @Override
     @Nonnull
-    public List<@Nonnull CustomFieldDto> list(Pageable pageable, @Nullable Filter filter) {
+    public List<@Nonnull PropertySetterDto> list(Pageable pageable, @Nullable Filter filter) {
         // Basic list implementation that only covers pagination,
         // but not sorting or filtering
-        Specification<CustomFieldDao> spec = filter != null
-                ? jpaFilterConverter.toSpec(filter, CustomFieldDao.class)
+        Specification<PropertySetterDao> spec = filter != null
+                ? jpaFilterConverter.toSpec(filter, PropertySetterDao.class)
                 : Specification.anyOf();
-        Page<CustomFieldDao> persons = customFieldRepo.findAll(spec, pageable);
-        return persons.stream().map(CustomFieldDto::fromEntity).toList();
+        Page<PropertySetterDao> persons = propertySetterRepo.findAll(spec, pageable);
+        return persons.stream().map(PropertySetterDto::fromEntity).toList();
     }
 
     @Override
     @Transactional
-    public @Nullable CustomFieldDto save(CustomFieldDto value) {
+    public @Nullable PropertySetterDto save(PropertySetterDto value) {
         boolean check = value.name() != null && !value.name().isEmpty();
-        CustomFieldDao person = check
-                ? customFieldRepo.getReferenceById(value.name())
-                : new CustomFieldDao();
+        PropertySetterDao person = check
+                ? propertySetterRepo.getReferenceById(value.name())
+                : new PropertySetterDao();
 
         // person.setRecordComment(check ? "UPDATE" : "NEW");
-        CustomFieldDto.fromDTO(value, person);
-        return CustomFieldDto.fromEntity(customFieldRepo.save(person));
+        PropertySetterDto.fromDTO(value, person);
+        return PropertySetterDto.fromEntity(propertySetterRepo.save(person));
     }
 
     @Override
     public void delete(String id) {
-        customFieldRepo.deleteById(id);
+        propertySetterRepo.deleteById(id);
     }
 }

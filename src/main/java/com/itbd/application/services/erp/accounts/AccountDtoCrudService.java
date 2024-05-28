@@ -1,4 +1,4 @@
-package com.itbd.application.services.erp.accounting;
+package com.itbd.application.services.erp.accounts;
 
 import com.itbd.application.db.dao.accounts.AccountDao;
 import com.itbd.application.db.dto.accounts.AccountDto;
