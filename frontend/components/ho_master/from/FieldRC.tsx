@@ -125,6 +125,16 @@ function FieldRC({
           {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
         />
       );
+    case 'Long Text':
+      return (
+        <TextArea
+          label={item.label}
+          helperText={item.description}
+          required={item.reqd ?? false}
+          className={className}
+          {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
+        />
+      );
     case 'Password':
       return (
         <PasswordField
@@ -136,6 +146,16 @@ function FieldRC({
         />
       );
     case 'Int':
+      return (
+        <NumberField
+          label={item.label}
+          helperText={item.description}
+          required={item.reqd ?? false}
+          className={className}
+          {...field(resolvePropertyModel(model, toCamelCase(item.fieldName)))}
+        />
+      );
+    case 'Float':
       return (
         <NumberField
           label={item.label}
