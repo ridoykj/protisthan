@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.maintenance;
+package com.itbd.application.db.dao.aaa.maintenance;
 
 
 import jakarta.persistence.*;
