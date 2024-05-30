@@ -24,7 +24,7 @@ function GlobalSearchRC() {
       pageNumber: page,
       pageSize,
       sort: {
-        orders: [{ property: 'idx', direction: Direction.ASC, ignoreCase: false }],
+        orders: [{ property: 'name', direction: Direction.ASC, ignoreCase: false }],
       },
     };
 
