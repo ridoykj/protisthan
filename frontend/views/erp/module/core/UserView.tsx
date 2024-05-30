@@ -73,7 +73,7 @@ function filterGenerator(type: string, property: string, filter: string | undefi
   return filters;
 }
 
-function UsersView() {
+function UserView() {
   const { queryId } = useParams();
   const navigate = useNavigate();
   const [uiField, setUiField] = useState<DocFieldDto[]>([]);
@@ -649,4 +649,4 @@ function UsersView() {
   );
 }
 
-export default UsersView;
+export default UserView;

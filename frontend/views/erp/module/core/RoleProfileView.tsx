@@ -3,18 +3,17 @@ import { TextField } from '@hilla/react-components/TextField';
 import { useForm } from '@hilla/react-form';
 import SpeedDialRC from 'Frontend/components/fab/SpeedDialRC';
 import { AutoGrid, AutoGridRef } from 'Frontend/components/grid/autogrid';
-import { ColumnOptions } from 'Frontend/components/grid/autogrid-columns';
 import ButtonRC from 'Frontend/components/ho_master/button/ButtonRC';
 import ActionTopBtnRC from 'Frontend/components/ho_master/from/ActionTopBtnRC';
 import DialogFromRC from 'Frontend/components/ho_master/from/DialogFromRC';
 import FromBuilderRC from 'Frontend/components/ho_master/from/FromBuilderRC';
-import RoleDto from 'Frontend/generated/com/itbd/application/db/dto/RoleDto';
-import RoleDtoModel from 'Frontend/generated/com/itbd/application/db/dto/RoleDtoModel';
+import RoleProfileDto from 'Frontend/generated/com/itbd/application/db/dto/RoleProfileDto';
+import RoleProfileDtoModel from 'Frontend/generated/com/itbd/application/db/dto/RoleProfileDtoModel';
 import DocFieldDto from 'Frontend/generated/com/itbd/application/db/dto/doctypes/DocFieldDto';
 import Filter from 'Frontend/generated/dev/hilla/crud/filter/Filter';
 import Matcher from 'Frontend/generated/dev/hilla/crud/filter/PropertyStringFilter/Matcher';
 import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
-import { DocFieldDtoCrudService, RoleDtoCrudService } from 'Frontend/generated/endpoints';
+import { DocFieldDtoCrudService, RoleProfileDtoCrudService } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
 import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
@@ -25,10 +24,6 @@ const responsiveSteps = [
   { minWidth: '0', columns: 1 },
   { minWidth: '500px', columns: 2 },
 ];
-
-function toCamelCase(str: string | undefined): string {
-  return str?.replace(/(_\w)/g, (match) => match.toUpperCase().replace('_', '')) ?? '';
-}
 
 const pagination: Pageable = {
   pageNumber: 0,
@@ -52,7 +47,7 @@ function filterGenerator(type: string, property: string, filter: string | undefi
   return filters;
 }
 
-function RolesView() {
+function RoleProfileView() {
   const { queryId } = useParams();
   const navigate = useNavigate();
 
@@ -65,12 +60,11 @@ function RolesView() {
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   const autoGridRef = React.useRef<AutoGridRef>(null);
-  const [selectedUserItems, setSelectedUserItems] = useState<RoleDto[]>([]);
+  const [selectedUserItems, setSelectedUserItems] = useState<RoleProfileDto[]>([]);
 
-  const [selectedRole, setSelectedRole] = useState<RoleDto>({} as RoleDto);
+  const [selectedRole, setSelectedRole] = useState<RoleProfileDto>({} as RoleProfileDto);
   const [tabChange, setTabChange] = useState<number>(0);
   const [uiField, setUiField] = useState<DocFieldDto[]>([]);
-  const [girdField, setGirdField] = useState<Record<string, ColumnOptions>>();
 
   const {
     model,
@@ -86,9 +80,9 @@ function RolesView() {
     submitting,
     validate,
     addValidator,
-  } = useForm(RoleDtoModel, {
+  } = useForm(RoleProfileDtoModel, {
     onSubmit: async (roleE) => {
-      await RoleDtoCrudService.save(roleE)
+      await RoleProfileDtoCrudService.save(roleE)
         .then((result) => {
           clear();
           setSuccessNotification(true);
@@ -104,8 +98,15 @@ function RolesView() {
   useEffect(() => {
     autoGridRef.current?.refresh();
   }, [gridRefresh]);
+  useEffect(() => {
+    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Role Profile')).then(
+      (result) => {
+        setUiField(result);
+      }
+    );
+  }, []);
 
-  function ChildRedirect({ item }: { item: RoleDto }) {
+  function ChildRedirect({ item }: { item: RoleProfileDto }) {
     const { name } = item;
     return (
       <button
@@ -114,14 +115,15 @@ function RolesView() {
         onClick={(e) => {
           setSelectedRole(item);
           read(item);
-          navigate(`/m/role/${name}`);
+          navigate(`/m/role-profile/${name}`);
         }}
       >
         {name}
       </button>
     );
   }
-  function deleteRander({ item }: { item: RoleDto }) {
+
+  function deleteRander({ item }: { item: RoleProfileDto }) {
     const { name } = item;
     return (
       <button
@@ -129,7 +131,7 @@ function RolesView() {
         className="text-red-500 hover:underline"
         title="Delete"
         onClick={(e) => {
-          RoleDtoCrudService.delete(item.name).then((result) => {
+          RoleProfileDtoCrudService.delete(item.name).then((result) => {
             setGridRefresh(!gridRefresh);
           });
         }}
@@ -138,46 +140,6 @@ function RolesView() {
       </button>
     );
   }
-
-  useEffect(() => {
-    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Role')).then(
-      (result) => {
-        setUiField(result);
-
-        let gridColumn = {};
-        result.forEach((it) => {
-          if (
-            it.fieldName &&
-            (it.inListView || it.inGlobalSearch || it.inStandardFilter || it.unique)
-          ) {
-            const mapField = {
-              [toCamelCase(it.fieldName)]: {
-                header: it.label,
-                resizable: true,
-                renderer: Object.keys(gridColumn).length === 0 ? ChildRedirect : undefined,
-              },
-            };
-            gridColumn = { ...gridColumn, ...mapField };
-          }
-        });
-        gridColumn = {
-          ...gridColumn,
-          ...{
-            idx: {
-              header: 'Action',
-              filterable: false,
-              sortable: false,
-              resizable: true,
-              renderer: deleteRander,
-            },
-          },
-        };
-
-        setGirdField(gridColumn);
-      }
-    );
-  }, []);
-
   const actionBtn = [
     {
       children: <FaArrowsRotate size={15} />,
@@ -249,7 +211,7 @@ function RolesView() {
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
-        setSelectedRole({} as RoleDto);
+        setSelectedRole({} as RoleProfileDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
@@ -263,44 +225,42 @@ function RolesView() {
           <ActionTopBtnRC actions={actionBtn} />
           <div className="h-full mx-2 mb-2 bg-white p-3 rounded-xl border">
             <AutoGrid
-              service={RoleDtoCrudService}
-              model={RoleDtoModel}
+              service={RoleProfileDtoCrudService}
+              model={RoleProfileDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              // visibleColumns={['name', 'deskAccess', 'isCustom', 'email', 'creation', 'idx']}
-              visibleColumns={Object.keys(girdField ?? {})}
+              visibleColumns={['name', 'roleProfile', 'idx']}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
               multiSelect
-              columnOptions={girdField}
-              // columnOptions={{
-              //   name: {
-              //     header: 'ID',
-              //     resizable: true,
-              //     renderer: ChildRedirect,
-              //   },
-              //   deskAccess: {
-              //     header: 'Status',
-              //     resizable: true,
-              //   },
-              //   isCustom: {
-              //     header: 'Is Custom',
-              //     resizable: true,
-              //   },
-              //   creation: {
-              //     header: 'Created At',
-              //     resizable: true,
-              //     filterable: false,
-              //   },
-              //   idx: {
-              //     header: 'Action',
-              //     filterable: false,
-              //     sortable: false,
-              //     resizable: true,
-              //     renderer: deleteRander,
-              //   },
-              // }}
+              columnOptions={{
+                roleProfile: {
+                  header: 'Role Name',
+                  resizable: true,
+                },
+                name: {
+                  header: 'ID',
+                  resizable: true,
+                  renderer: ChildRedirect,
+                },
+                isCustom: {
+                  header: 'Is Custom',
+                  resizable: true,
+                },
+                creation: {
+                  header: 'Created At',
+                  resizable: true,
+                  filterable: false,
+                },
+                idx: {
+                  header: 'Action',
+                  filterable: false,
+                  sortable: false,
+                  resizable: true,
+                  renderer: deleteRander,
+                },
+              }}
               onActiveItemChanged={(e) => {
                 const item = e.detail.value;
                 // console.log('item', item);
@@ -315,6 +275,7 @@ function RolesView() {
       </>
     );
   }
+
   useEffect(() => {
     read(value);
   }, [tabChange]);
@@ -368,11 +329,11 @@ function RolesView() {
         }}
       >
         <FormLayout responsiveSteps={responsiveSteps} className="w-fit h-fit p-2">
-          <TextField label="Email" {...{ colspan: 1 }} {...field(model.roleName)} />
+          <TextField label="Email" {...{ colspan: 1 }} {...field(model.roleProfile)} />
         </FormLayout>
       </DialogFromRC>
     </>
   );
 }
 
-export default RolesView;
+export default RoleProfileView;
