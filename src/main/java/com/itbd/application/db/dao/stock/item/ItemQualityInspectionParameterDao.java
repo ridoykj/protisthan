@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.aaa.crm;
+package com.itbd.application.db.dao.stock.item;
 
 
 import jakarta.persistence.*;
@@ -6,16 +6,17 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
 @Entity
 @Getter
 @Setter
-@Table(name = "t_opportunity_lost_reason_detail", indexes = {
+@Table(name = "t_item_quality_inspection_parameter", indexes = {
         @Index(name = "idx_parent", columnList = "tx_parent")
 })
-public class OpportunityLostReasonDetailDao {
+public class ItemQualityInspectionParameterDao {
 
     @Id
     @Column(name = "tx_name", nullable = false, updatable = false, length = 140)
@@ -41,8 +42,33 @@ public class OpportunityLostReasonDetailDao {
     @ColumnDefault("0")
     private Integer idx;
 
-    @Column(name = "tx_lost_reason", length = 140)
-    private String lostReason;
+    @Column(name = "tx_specification", length = 140)
+    private String specification;
+
+    @Column(name = "tx_parameter_group", length = 140)
+    private String parameterGroup;
+
+    @Column(name = "tx_value", length = 140)
+    private String value;
+
+    @Column(name = "is_numeric", nullable = false)
+    @ColumnDefault("1")
+    private Boolean numeric;
+
+    @Column(name = "flt_min_value", nullable = false, precision = 21, scale = 9)
+    @ColumnDefault("0.0")
+    private BigDecimal minValue;
+
+    @Column(name = "flt_max_value", nullable = false, precision = 21, scale = 9)
+    @ColumnDefault("0.0")
+    private BigDecimal maxValue;
+
+    @Column(name = "is_formula_based_criteria", nullable = false)
+    @ColumnDefault("0")
+    private Boolean formulaBasedCriteria;
+
+    @Column(name = "tx_acceptance_formula", columnDefinition = "longtext")
+    private String acceptanceFormula;
 
     @Column(name = "tx_parent", length = 140)
     private String parent;

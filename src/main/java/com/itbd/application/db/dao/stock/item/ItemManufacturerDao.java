@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.aaa.crm;
+package com.itbd.application.db.dao.stock.item;
 
 
 import jakarta.persistence.*;
@@ -12,12 +12,10 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "t_opportunity_lost_reason", indexes = {
+@Table(name = "t_item_manufacturer", indexes = {
         @Index(name = "idx_modified", columnList = "dtt_modified")
-}, uniqueConstraints = {
-        @UniqueConstraint(name = "uk_lost_reason", columnNames = {"tx_lost_reason"})
 })
-public class OpportunityLostReasonDao {
+public class ItemManufacturerDao {
 
     @Id
     @Column(name = "tx_name", nullable = false, updatable = false, length = 140)
@@ -43,8 +41,24 @@ public class OpportunityLostReasonDao {
     @ColumnDefault("0")
     private Integer idx;
 
-    @Column(name = "tx_lost_reason", unique = true, length = 140)
-    private String lostReason;
+    @Column(name = "tx_item_code", length = 140)
+    private String itemCode;
+
+    @Column(name = "tx_manufacturer", length = 140)
+    private String manufacturer;
+
+    @Column(name = "tx_manufacturer_part_no", length = 140)
+    private String manufacturerPartNo;
+
+    @Column(name = "tx_item_name", length = 140)
+    private String itemName;
+
+    @Column(name = "tx_description", columnDefinition = "text")
+    private String description;
+
+    @Column(name = "is_default", nullable = false)
+    @ColumnDefault("0")
+    private Boolean isDefault;
 
     @Column(name = "_user_tags", columnDefinition = "text")
     private String userTags;

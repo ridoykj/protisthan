@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.aaa.crm;
+package com.itbd.application.db.dao.stock.landed;
 
 
 import jakarta.persistence.*;
@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "t_opportunity_item", indexes = {
+@Table(name = "t_landed_cost_taxes_and_charges", indexes = {
         @Index(name = "idx_parent", columnList = "tx_parent")
 })
-public class OpportunityItemDao {
+public class LandedCostTaxesAndChargesDao {
 
     @Id
     @Column(name = "tx_name", nullable = false, updatable = false, length = 140)
@@ -42,46 +42,26 @@ public class OpportunityItemDao {
     @ColumnDefault("0")
     private Integer idx;
 
-    @Column(name = "tx_item_code", length = 140)
-    private String itemCode;
+    @Column(name = "tx_expense_account", length = 140)
+    private String expenseAccount;
 
-    @Column(name = "tx_item_name", length = 140)
-    private String itemName;
+    @Column(name = "tx_account_currency", length = 140)
+    private String accountCurrency;
 
-    @Column(name = "tx_uom", length = 140)
-    private String uom;
+    @Column(name = "flt_exchange_rate", nullable = false, precision = 21, scale = 9)
+    @ColumnDefault("0.0")
+    private BigDecimal exchangeRate;
 
-    @Column(name = "flt_qty", nullable = false, precision = 21, scale = 9)
-    @ColumnDefault("1.0")
-    private BigDecimal qty;
-
-    @Column(name = "tx_brand", length = 140)
-    private String brand;
-
-    @Column(name = "tx_item_group", length = 140)
-    private String itemGroup;
-
-    @Column(name = "tx_description", columnDefinition = "longtext")
+    @Column(name = "tx_description", columnDefinition = "text")
     private String description;
-
-    @Column(name = "tx_image", columnDefinition = "text")
-    private String image;
-
-    @Column(name = "flt_base_rate", nullable = false, precision = 21, scale = 9)
-    @ColumnDefault("0.0")
-    private BigDecimal baseRate;
-
-    @Column(name = "flt_base_amount", nullable = false, precision = 21, scale = 9)
-    @ColumnDefault("0.0")
-    private BigDecimal baseAmount;
-
-    @Column(name = "flt_rate", nullable = false, precision = 21, scale = 9)
-    @ColumnDefault("0.0")
-    private BigDecimal rate;
 
     @Column(name = "flt_amount", nullable = false, precision = 21, scale = 9)
     @ColumnDefault("0.0")
     private BigDecimal amount;
+
+    @Column(name = "flt_base_amount", nullable = false, precision = 21, scale = 9)
+    @ColumnDefault("0.0")
+    private BigDecimal baseAmount;
 
     @Column(name = "tx_parent", length = 140)
     private String parent;

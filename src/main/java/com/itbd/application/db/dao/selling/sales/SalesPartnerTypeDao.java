@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.aaa.crm;
+package com.itbd.application.db.dao.selling.sales;
 
 
 import jakarta.persistence.*;
@@ -12,10 +12,12 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "t_opportunity_type", indexes = {
+@Table(name = "t_sales_partner_type", indexes = {
         @Index(name = "idx_modified", columnList = "dtt_modified")
+}, uniqueConstraints = {
+        @UniqueConstraint(name = "uk_sales_partner_type", columnNames = {"tx_sales_partner_type"})
 })
-public class OpportunityTypeDao {
+public class SalesPartnerTypeDao {
 
     @Id
     @Column(name = "tx_name", nullable = false, updatable = false, length = 140)
@@ -41,8 +43,8 @@ public class OpportunityTypeDao {
     @ColumnDefault("0")
     private Integer idx;
 
-    @Column(name = "tx_description", columnDefinition = "text")
-    private String description;
+    @Column(name = "tx_sales_partner_type", unique = true, length = 140)
+    private String salesPartnerType;
 
     @Column(name = "_user_tags", columnDefinition = "text")
     private String userTags;
