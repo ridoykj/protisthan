@@ -3,6 +3,7 @@ import { AiOutlineLogout } from 'react-icons/ai';
 import { FaRegBell, FaRegUserCircle } from 'react-icons/fa';
 import { FaGear } from 'react-icons/fa6';
 import { NavLink } from 'react-router-dom';
+import GlobalSearchRC from './GlobalSearchRC';
 
 const userNavigation = [
   { name: 'Your Profile', icon: <FaRegUserCircle />, href: 'm/user-profile' },
@@ -41,10 +42,11 @@ export default function AvatarControlRC() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
-    <div className="absolute inset-y right-5 flex flex-row items-center md:ml-6 space-x-4">
+    <div className="flex justify-end items-center md:ml-6 gap-4">
+      <GlobalSearchRC />
       <button
         type="button"
-        className="relative flex items-center justify-center rounded-full size-8 bg-gray-200 p-1 text-gray-400 hover:text-indigo-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-indigo-50"
+        className="flex items-center justify-center rounded-full size-8 bg-gray-200 p-1 text-gray-400 hover:text-indigo-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-indigo-50"
       >
         <span className="sr-only">View notifications</span>
         <FaRegBell className="size-5" aria-hidden="true" />
