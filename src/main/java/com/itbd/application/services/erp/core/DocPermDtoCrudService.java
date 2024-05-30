@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.doctypes.DocPermDao;
+import com.itbd.application.db.dao.core.doc.DocPermDao;
 import com.itbd.application.db.dto.doctypes.DocPermDto;
 import com.itbd.application.db.repos.DocPermRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

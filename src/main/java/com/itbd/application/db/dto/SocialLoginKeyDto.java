@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.SocialLoginKeyDao;
+import com.itbd.application.db.dao.integrations.SocialLoginKeyDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

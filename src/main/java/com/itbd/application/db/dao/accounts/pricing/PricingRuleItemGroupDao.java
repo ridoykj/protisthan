@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.accounts;
+package com.itbd.application.db.dao.accounts.pricing;
 
 
 import jakarta.persistence.*;

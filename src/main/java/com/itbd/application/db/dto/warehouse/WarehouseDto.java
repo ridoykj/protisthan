@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.warehouse;
 
-import com.itbd.application.db.dao.warehouse.WarehouseDao;
+import com.itbd.application.db.dao.stock.warehouse.WarehouseDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

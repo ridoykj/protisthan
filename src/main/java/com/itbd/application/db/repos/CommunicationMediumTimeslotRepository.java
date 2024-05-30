@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.cummunication.CommunicationMediumTimeslotDao;
+import com.itbd.application.db.dao.communication.CommunicationMediumTimeslotDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

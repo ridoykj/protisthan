@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.payments;
 
-import com.itbd.application.db.dao.payments.PaymentEntryReferenceDao;
+import com.itbd.application.db.dao.accounts.payment.PaymentEntryReferenceDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

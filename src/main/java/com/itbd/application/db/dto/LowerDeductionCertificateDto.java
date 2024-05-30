@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.LowerDeductionCertificateDao;
+import com.itbd.application.db.dao.regional.LowerDeductionCertificateDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.journals;
 
-import com.itbd.application.db.dao.journals.JournalEntryTemplateAccountDao;
+import com.itbd.application.db.dao.accounts.journal.JournalEntryTemplateAccountDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

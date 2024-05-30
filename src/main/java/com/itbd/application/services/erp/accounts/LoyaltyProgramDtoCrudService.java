@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.loyaltys.LoyaltyProgramDao;
+import com.itbd.application.db.dao.accounts.loyalty.LoyaltyProgramDao;
 import com.itbd.application.db.dto.loyaltys.LoyaltyProgramDto;
 import com.itbd.application.db.repos.LoyaltyProgramRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

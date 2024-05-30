@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.SuccessActionDao;
+import com.itbd.application.db.dao.core.SuccessActionDao;
 import com.itbd.application.db.dto.SuccessActionDto;
 import com.itbd.application.db.repos.SuccessActionRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

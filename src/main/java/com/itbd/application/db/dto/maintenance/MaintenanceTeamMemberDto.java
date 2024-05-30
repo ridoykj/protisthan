@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.maintenance;
 
-import com.itbd.application.db.dao.maintenance.MaintenanceTeamMemberDao;
+import com.itbd.application.db.dao.assets.MaintenanceTeamMemberDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

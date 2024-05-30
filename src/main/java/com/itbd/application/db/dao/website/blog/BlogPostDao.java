@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.website;
+package com.itbd.application.db.dao.website.blog;
 
 
 import jakarta.persistence.*;

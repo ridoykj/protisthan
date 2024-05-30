@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.manufacturing;
+package com.itbd.application.db.dao.manufacturing.bom;
 
 
 import jakarta.persistence.*;

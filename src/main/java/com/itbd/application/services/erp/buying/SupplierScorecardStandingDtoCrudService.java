@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.buying;
 
-import com.itbd.application.db.dao.supplier.SupplierScorecardStandingDao;
+import com.itbd.application.db.dao.buying.supplier.SupplierScorecardStandingDao;
 import com.itbd.application.db.dto.supplier.SupplierScorecardStandingDto;
 import com.itbd.application.db.repos.SupplierScorecardStandingRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

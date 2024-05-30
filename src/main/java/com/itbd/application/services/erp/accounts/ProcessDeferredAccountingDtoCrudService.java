@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.ProcessDeferredAccountingDao;
+import com.itbd.application.db.dao.accounts.process.ProcessDeferredAccountingDao;
 import com.itbd.application.db.dto.ProcessDeferredAccountingDto;
 import com.itbd.application.db.repos.ProcessDeferredAccountingRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

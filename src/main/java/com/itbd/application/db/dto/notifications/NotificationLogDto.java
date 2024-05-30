@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.notifications;
 
-import com.itbd.application.db.dao.notifications.NotificationLogDao;
+import com.itbd.application.db.dao.desk.NotificationLogDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

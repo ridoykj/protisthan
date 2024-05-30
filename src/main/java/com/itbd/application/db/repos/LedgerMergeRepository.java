@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.ledgers.LedgerMergeDao;
+import com.itbd.application.db.dao.accounts.LedgerMergeDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

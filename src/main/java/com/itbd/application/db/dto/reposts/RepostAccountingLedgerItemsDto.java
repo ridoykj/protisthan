@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.reposts;
 
-import com.itbd.application.db.dao.reposts.RepostAccountingLedgerItemsDao;
+import com.itbd.application.db.dao.accounts.repost.RepostAccountingLedgerItemsDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

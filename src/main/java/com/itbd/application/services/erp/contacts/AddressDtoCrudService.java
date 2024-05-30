@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.contacts;
 
-import com.itbd.application.db.dao.address.AddressDao;
+import com.itbd.application.db.dao.contacts.AddressDao;
 import com.itbd.application.db.dto.address.AddressDto;
 import com.itbd.application.db.repos.AddressRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

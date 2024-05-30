@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.emails.EmailFlagQueueDao;
+import com.itbd.application.db.dao.email.EmailFlagQueueDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

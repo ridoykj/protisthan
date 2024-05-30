@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.OpeningInvoiceCreationToolItemDao;
+import com.itbd.application.db.dao.accounts.OpeningInvoiceCreationToolItemDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

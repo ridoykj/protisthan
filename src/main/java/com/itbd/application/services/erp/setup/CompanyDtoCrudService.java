@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.CompanyDao;
+import com.itbd.application.db.dao.setup.CompanyDao;
 import com.itbd.application.db.dto.CompanyDto;
 import com.itbd.application.db.repos.CompanyRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.crm;
 
-import com.itbd.application.db.dao.opportunity.OpportunityTypeDao;
+import com.itbd.application.db.dao.crm.opportunity.OpportunityTypeDao;
 import com.itbd.application.db.dto.opportunity.OpportunityTypeDto;
 import com.itbd.application.db.repos.OpportunityTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

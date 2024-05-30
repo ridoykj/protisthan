@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.aaa.integrations.webhook;
+package com.itbd.application.db.dao.integrations.webhook;
 
 
 import jakarta.persistence.*;

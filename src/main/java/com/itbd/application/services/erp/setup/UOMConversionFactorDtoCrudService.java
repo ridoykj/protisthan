@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.uoms.UomConversionFactorDao;
+import com.itbd.application.db.dao.setup.UomConversionFactorDao;
 import com.itbd.application.db.dto.uoms.UomConversionFactorDto;
 import com.itbd.application.db.repos.UomConversionFactorRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

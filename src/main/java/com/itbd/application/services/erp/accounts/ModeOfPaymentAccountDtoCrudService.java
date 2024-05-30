@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.ModeOfPaymentAccountDao;
+import com.itbd.application.db.dao.accounts.ModeOfPaymentAccountDao;
 import com.itbd.application.db.dto.ModeOfPaymentAccountDto;
 import com.itbd.application.db.repos.ModeOfPaymentAccountRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

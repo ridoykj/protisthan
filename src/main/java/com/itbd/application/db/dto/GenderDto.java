@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.GenderDao;
+import com.itbd.application.db.dao.contacts.GenderDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

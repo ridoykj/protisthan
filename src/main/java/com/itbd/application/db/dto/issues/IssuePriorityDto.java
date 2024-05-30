@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.issues;
 
-import com.itbd.application.db.dao.issues.IssuePriorityDao;
+import com.itbd.application.db.dao.support.issue.IssuePriorityDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

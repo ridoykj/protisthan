@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.NonConformanceDao;
+import com.itbd.application.db.dao.quality_management.NonConformanceDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

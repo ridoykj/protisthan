@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.RoleProfileDao;
+import com.itbd.application.db.dao.core.RoleProfileDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

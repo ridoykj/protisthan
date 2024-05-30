@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.CallLogDao;
+import com.itbd.application.db.dao.telephony.CallLogDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

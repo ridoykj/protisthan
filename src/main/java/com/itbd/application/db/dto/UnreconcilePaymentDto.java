@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.UnreconcilePaymentDao;
+import com.itbd.application.db.dao.accounts.UnreconcilePaymentDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

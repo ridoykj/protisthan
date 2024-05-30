@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.website.webhook.WebhookRequestLogDao;
+import com.itbd.application.db.dao.integrations.webhook.WebhookRequestLogDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

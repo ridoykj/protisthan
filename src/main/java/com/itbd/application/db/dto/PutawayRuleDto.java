@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.PutawayRuleDao;
+import com.itbd.application.db.dao.stock.PutawayRuleDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.aaa.website.component;
+package com.itbd.application.db.dao.website.component;
 
 import jakarta.persistence.*;
 import lombok.Getter;

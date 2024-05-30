@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.DynamicLinkDao;
+import com.itbd.application.db.dao.core.DynamicLinkDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

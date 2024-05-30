@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.BulkTransactionLogDetailDao;
+import com.itbd.application.db.dao.bulk_transaction.BulkTransactionLogDetailDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

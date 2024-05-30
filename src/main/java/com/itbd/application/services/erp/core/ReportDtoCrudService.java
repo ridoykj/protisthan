@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.reports.ReportDao;
+import com.itbd.application.db.dao.core.ReportDao;
 import com.itbd.application.db.dto.reports.ReportDto;
 import com.itbd.application.db.repos.ReportRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

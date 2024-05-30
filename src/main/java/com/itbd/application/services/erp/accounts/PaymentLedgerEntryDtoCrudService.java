@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.payments.PaymentLedgerEntryDao;
+import com.itbd.application.db.dao.accounts.payment.PaymentLedgerEntryDao;
 import com.itbd.application.db.dto.payments.PaymentLedgerEntryDto;
 import com.itbd.application.db.repos.PaymentLedgerEntryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

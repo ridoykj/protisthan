@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.projects;
 
-import com.itbd.application.db.dao.projects.ProjectTemplateTaskDao;
+import com.itbd.application.db.dao.projects.project.ProjectTemplateTaskDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

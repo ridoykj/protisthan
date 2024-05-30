@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.KanbanBoardColumnDao;
+import com.itbd.application.db.dao.desk.KanbanBoardColumnDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

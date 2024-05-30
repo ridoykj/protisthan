@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.currencys;
 
-import com.itbd.application.db.dao.currencys.CurrencyExchangeSettingsResultDao;
+import com.itbd.application.db.dao.accounts.CurrencyExchangeSettingsResultDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

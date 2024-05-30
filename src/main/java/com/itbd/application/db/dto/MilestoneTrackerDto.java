@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.MilestoneTrackerDao;
+import com.itbd.application.db.dao.automation.MilestoneTrackerDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

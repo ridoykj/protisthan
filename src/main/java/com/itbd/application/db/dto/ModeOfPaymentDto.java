@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.ModeOfPaymentDao;
+import com.itbd.application.db.dao.accounts.ModeOfPaymentDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

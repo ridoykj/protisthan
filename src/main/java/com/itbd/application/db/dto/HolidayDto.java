@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.HolidayDao;
+import com.itbd.application.db.dao.setup.holiday.HolidayDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.repos;
 
-import com.itbd.application.db.dao.IncomingCallHandlingScheduleDao;
+import com.itbd.application.db.dao.telephony.IncomingCallHandlingScheduleDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

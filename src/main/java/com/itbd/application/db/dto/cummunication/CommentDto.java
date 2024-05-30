@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.cummunication;
 
-import com.itbd.application.db.dao.cummunication.CommentDao;
+import com.itbd.application.db.dao.core.CommentDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

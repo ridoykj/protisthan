@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.print;
 
-import com.itbd.application.db.dao.print.PrintStyleDao;
+import com.itbd.application.db.dao.printing.PrintStyleDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

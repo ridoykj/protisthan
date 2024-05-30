@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.desk;
+package com.itbd.application.db.dao.desk.onboarding;
 
 
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.aaa.quality_management;
+package com.itbd.application.db.dao.quality_management;
 
 
 import jakarta.persistence.*;

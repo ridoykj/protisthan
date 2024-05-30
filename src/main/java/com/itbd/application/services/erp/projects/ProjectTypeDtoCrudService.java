@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.projects;
 
-import com.itbd.application.db.dao.projects.ProjectTypeDao;
+import com.itbd.application.db.dao.projects.project.ProjectTypeDao;
 import com.itbd.application.db.dto.projects.ProjectTypeDto;
 import com.itbd.application.db.repos.ProjectTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

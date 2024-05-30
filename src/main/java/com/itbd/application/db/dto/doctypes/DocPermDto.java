@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.doctypes;
 
-import com.itbd.application.db.dao.doctypes.DocPermDao;
+import com.itbd.application.db.dao.core.doc.DocPermDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

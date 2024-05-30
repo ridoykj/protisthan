@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.PickListItemDao;
+import com.itbd.application.db.dao.stock.PickListItemDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

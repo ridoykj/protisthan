@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.purchases.PurchaseReceiptItemSuppliedDao;
+import com.itbd.application.db.dao.buying.purchase.PurchaseReceiptItemSuppliedDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.ledgers;
 
-import com.itbd.application.db.dao.ledgers.LedgerMergeAccountsDao;
+import com.itbd.application.db.dao.accounts.LedgerMergeAccountsDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

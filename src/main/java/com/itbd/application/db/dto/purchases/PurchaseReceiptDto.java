@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.purchases;
 
-import com.itbd.application.db.dao.purchases.PurchaseReceiptDao;
+import com.itbd.application.db.dao.stock.PurchaseReceiptDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

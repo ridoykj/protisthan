@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.PsoaProjectDao;
+import com.itbd.application.db.dao.accounts.PsoaProjectDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

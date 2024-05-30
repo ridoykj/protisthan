@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.contracts;
 
-import com.itbd.application.db.dao.contracts.ContractTemplateDao;
+import com.itbd.application.db.dao.crm.contract.ContractTemplateDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

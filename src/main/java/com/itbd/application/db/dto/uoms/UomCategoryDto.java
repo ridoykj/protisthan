@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.uoms;
 
-import com.itbd.application.db.dao.uoms.UomCategoryDao;
+import com.itbd.application.db.dao.stock.UomCategoryDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

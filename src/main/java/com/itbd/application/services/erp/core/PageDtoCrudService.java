@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.website.PageDao;
+import com.itbd.application.db.dao.core.PageDao;
 import com.itbd.application.db.dto.website.PageDto;
 import com.itbd.application.db.repos.PageRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

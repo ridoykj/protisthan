@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.SmsLogDao;
+import com.itbd.application.db.dao.utilities.SmsLogDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.VariantFieldDao;
+import com.itbd.application.db.dao.stock.VariantFieldDao;
 import com.itbd.application.db.dto.VariantFieldDto;
 import com.itbd.application.db.repos.VariantFieldRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

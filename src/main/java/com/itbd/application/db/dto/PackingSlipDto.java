@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.PackingSlipDao;
+import com.itbd.application.db.dao.stock.PackingSlipDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

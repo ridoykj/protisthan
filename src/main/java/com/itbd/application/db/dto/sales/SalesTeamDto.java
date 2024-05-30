@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.sales;
 
-import com.itbd.application.db.dao.sales.SalesTeamDao;
+import com.itbd.application.db.dao.selling.sales.SalesTeamDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

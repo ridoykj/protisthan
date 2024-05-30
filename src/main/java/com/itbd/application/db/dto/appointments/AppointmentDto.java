@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.appointments;
 
-import com.itbd.application.db.dao.appointments.AppointmentDao;
+import com.itbd.application.db.dao.crm.AppointmentDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

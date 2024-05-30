@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.onboarding;
 
-import com.itbd.application.db.dao.onboarding.OnboardingStepMapDao;
+import com.itbd.application.db.dao.desk.onboarding.OnboardingStepMapDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

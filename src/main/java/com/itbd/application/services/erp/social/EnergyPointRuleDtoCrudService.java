@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.social;
 
-import com.itbd.application.db.dao.EnergyPointRuleDao;
+import com.itbd.application.db.dao.social.EnergyPointRuleDao;
 import com.itbd.application.db.dto.EnergyPointRuleDto;
 import com.itbd.application.db.repos.EnergyPointRuleRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

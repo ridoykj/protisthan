@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.CouponCodeDao;
+import com.itbd.application.db.dao.accounts.CouponCodeDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

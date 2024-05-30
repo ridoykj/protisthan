@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.LanguageDao;
+import com.itbd.application.db.dao.core.LanguageDao;
 import com.itbd.application.db.dto.LanguageDto;
 import com.itbd.application.db.repos.LanguageRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

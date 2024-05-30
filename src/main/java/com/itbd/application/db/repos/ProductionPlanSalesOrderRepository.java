@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.production.ProductionPlanSalesOrderDao;
+import com.itbd.application.db.dao.manufacturing.production.ProductionPlanSalesOrderDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

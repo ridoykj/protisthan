@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.stocks.StockEntryTypeDao;
+import com.itbd.application.db.dao.stock.stock.StockEntryTypeDao;
 import com.itbd.application.db.dto.stocks.StockEntryTypeDto;
 import com.itbd.application.db.repos.StockEntryTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

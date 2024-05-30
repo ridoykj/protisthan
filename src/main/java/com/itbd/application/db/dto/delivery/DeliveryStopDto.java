@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.delivery;
 
-import com.itbd.application.db.dao.delivery.DeliveryStopDao;
+import com.itbd.application.db.dao.stock.delivery.DeliveryStopDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.quotations;
 
-import com.itbd.application.db.dao.quotations.QuotationLostReasonDao;
+import com.itbd.application.db.dao.setup.QuotationLostReasonDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

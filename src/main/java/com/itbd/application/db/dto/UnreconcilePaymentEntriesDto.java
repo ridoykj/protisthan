@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.UnreconcilePaymentEntriesDao;
+import com.itbd.application.db.dao.accounts.UnreconcilePaymentEntriesDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

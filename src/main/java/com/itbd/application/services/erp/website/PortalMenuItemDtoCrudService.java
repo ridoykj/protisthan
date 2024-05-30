@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.website;
 
-import com.itbd.application.db.dao.PortalMenuItemDao;
+import com.itbd.application.db.dao.website.PortalMenuItemDao;
 import com.itbd.application.db.dto.PortalMenuItemDto;
 import com.itbd.application.db.repos.PortalMenuItemRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

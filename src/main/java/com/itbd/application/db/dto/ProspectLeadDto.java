@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.ProspectLeadDao;
+import com.itbd.application.db.dao.crm.ProspectLeadDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

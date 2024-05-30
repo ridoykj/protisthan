@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.users;
 
-import com.itbd.application.db.dao.users.UserGroupMemberDao;
+import com.itbd.application.db.dao.core.user.UserGroupMemberDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

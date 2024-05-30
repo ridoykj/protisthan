@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.SocialLinkSettingsDao;
+import com.itbd.application.db.dao.website.SocialLinkSettingsDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

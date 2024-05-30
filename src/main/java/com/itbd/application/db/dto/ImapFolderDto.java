@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.ImapFolderDao;
+import com.itbd.application.db.dao.email.ImapFolderDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

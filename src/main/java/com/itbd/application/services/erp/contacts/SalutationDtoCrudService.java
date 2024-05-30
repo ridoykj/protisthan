@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.contacts;
 
-import com.itbd.application.db.dao.SalutationDao;
+import com.itbd.application.db.dao.contacts.SalutationDao;
 import com.itbd.application.db.dto.SalutationDto;
 import com.itbd.application.db.repos.SalutationRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

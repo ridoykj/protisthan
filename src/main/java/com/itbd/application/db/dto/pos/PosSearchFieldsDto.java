@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.pos;
 
-import com.itbd.application.db.dao.pos.PosSearchFieldsDao;
+import com.itbd.application.db.dao.accounts.pos.PosSearchFieldsDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

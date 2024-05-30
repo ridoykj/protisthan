@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.SlackWebhookUrlDao;
+import com.itbd.application.db.dao.integrations.SlackWebhookUrlDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

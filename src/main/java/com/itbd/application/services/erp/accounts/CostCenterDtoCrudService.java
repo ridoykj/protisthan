@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.CostCenterDao;
+import com.itbd.application.db.dao.accounts.CostCenterDao;
 import com.itbd.application.db.dto.CostCenterDto;
 import com.itbd.application.db.repos.CostCenterRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

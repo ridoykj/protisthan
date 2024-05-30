@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.loyaltys;
 
-import com.itbd.application.db.dao.loyaltys.LoyaltyPointEntryDao;
+import com.itbd.application.db.dao.accounts.loyalty.LoyaltyPointEntryDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

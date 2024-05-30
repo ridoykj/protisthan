@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.LogsToClearDao;
+import com.itbd.application.db.dao.core.LogsToClearDao;
 import com.itbd.application.db.dto.LogsToClearDto;
 import com.itbd.application.db.repos.LogsToClearRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

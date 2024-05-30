@@ -1,8 +1,7 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.warehouse.WarehouseDao;
+import com.itbd.application.db.dao.stock.warehouse.WarehouseDao;
 import com.itbd.application.db.dto.warehouse.WarehouseDto;
-import com.itbd.application.db.repos.CompanyRepository;
 import com.itbd.application.db.repos.WarehouseRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;

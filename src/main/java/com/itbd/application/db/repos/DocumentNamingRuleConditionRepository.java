@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.documents.DocumentNamingRuleConditionDao;
+import com.itbd.application.db.dao.core.DocumentNamingRuleConditionDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

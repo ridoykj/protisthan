@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.DeletedDocumentDao;
+import com.itbd.application.db.dao.core.DeletedDocumentDao;
 import com.itbd.application.db.dto.DeletedDocumentDto;
 import com.itbd.application.db.repos.DeletedDocumentRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

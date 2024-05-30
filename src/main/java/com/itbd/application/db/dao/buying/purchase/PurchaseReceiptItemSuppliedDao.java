@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.buying;
+package com.itbd.application.db.dao.buying.purchase;
 
 
 import jakarta.persistence.*;

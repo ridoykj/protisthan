@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.RequestForQuotationSupplierDao;
+import com.itbd.application.db.dao.buying.request.RequestForQuotationSupplierDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

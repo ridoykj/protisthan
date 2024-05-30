@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.journals;
 
-import com.itbd.application.db.dao.journals.JournalEntryDao;
+import com.itbd.application.db.dao.accounts.journal.JournalEntryDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

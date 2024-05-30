@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.AuthorizationRuleDao;
+import com.itbd.application.db.dao.setup.AuthorizationRuleDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

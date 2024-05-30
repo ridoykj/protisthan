@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.shares;
 
-import com.itbd.application.db.dao.shares.ShareholderDao;
+import com.itbd.application.db.dao.accounts.ShareholderDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

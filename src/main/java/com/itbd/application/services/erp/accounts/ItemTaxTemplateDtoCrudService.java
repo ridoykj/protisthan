@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.items.ItemTaxTemplateDao;
+import com.itbd.application.db.dao.accounts.ItemTaxTemplateDao;
 import com.itbd.application.db.dto.items.ItemTaxTemplateDto;
 import com.itbd.application.db.repos.ItemTaxTemplateRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

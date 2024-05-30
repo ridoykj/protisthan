@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.PersonalDataDeletionRequestDao;
+import com.itbd.application.db.dao.website.personal_data.PersonalDataDeletionRequestDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

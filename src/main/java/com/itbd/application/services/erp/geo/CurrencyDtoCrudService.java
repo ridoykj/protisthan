@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.geo;
 
-import com.itbd.application.db.dao.currencys.CurrencyDao;
+import com.itbd.application.db.dao.geo.CurrencyDao;
 import com.itbd.application.db.dto.currencys.CurrencyDto;
 import com.itbd.application.db.repos.CurrencyRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.selling;
 
-import com.itbd.application.db.dao.quotations.QuotationDao;
+import com.itbd.application.db.dao.selling.quotation.QuotationDao;
 import com.itbd.application.db.dto.quotations.QuotationDto;
 import com.itbd.application.db.repos.QuotationRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

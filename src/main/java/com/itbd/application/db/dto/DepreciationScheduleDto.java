@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.DepreciationScheduleDao;
+import com.itbd.application.db.dao.assets.DepreciationScheduleDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

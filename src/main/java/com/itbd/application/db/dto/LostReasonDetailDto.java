@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.LostReasonDetailDao;
+import com.itbd.application.db.dao.crm.LostReasonDetailDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

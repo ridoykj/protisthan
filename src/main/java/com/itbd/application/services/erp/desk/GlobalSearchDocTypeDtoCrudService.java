@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.GlobalSearchDocTypeDao;
+import com.itbd.application.db.dao.desk.GlobalSearchDocTypeDao;
 import com.itbd.application.db.dto.GlobalSearchDocTypeDto;
 import com.itbd.application.db.repos.GlobalSearchDocTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

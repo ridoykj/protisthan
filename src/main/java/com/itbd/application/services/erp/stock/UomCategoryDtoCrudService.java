@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.uoms.UomCategoryDao;
+import com.itbd.application.db.dao.stock.UomCategoryDao;
 import com.itbd.application.db.dto.uoms.UomCategoryDto;
 import com.itbd.application.db.repos.UomCategoryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

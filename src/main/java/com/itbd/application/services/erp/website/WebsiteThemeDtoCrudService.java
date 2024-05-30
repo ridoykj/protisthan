@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.website;
 
-import com.itbd.application.db.dao.website.WebsiteThemeDao;
+import com.itbd.application.db.dao.website.website.WebsiteThemeDao;
 import com.itbd.application.db.dto.website.WebsiteThemeDto;
 import com.itbd.application.db.repos.WebsiteThemeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.stocks.StockReconciliationDao;
+import com.itbd.application.db.dao.stock.stock.StockReconciliationDao;
 import com.itbd.application.db.dto.stocks.StockReconciliationDto;
 import com.itbd.application.db.repos.StockReconciliationRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

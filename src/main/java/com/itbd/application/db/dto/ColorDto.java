@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.ColorDao;
+import com.itbd.application.db.dao.website.ColorDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.PortalMenuItemDao;
+import com.itbd.application.db.dao.website.PortalMenuItemDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

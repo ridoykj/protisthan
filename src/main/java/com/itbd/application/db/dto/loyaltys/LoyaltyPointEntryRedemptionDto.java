@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.loyaltys;
 
-import com.itbd.application.db.dao.loyaltys.LoyaltyPointEntryRedemptionDao;
+import com.itbd.application.db.dao.accounts.loyalty.LoyaltyPointEntryRedemptionDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

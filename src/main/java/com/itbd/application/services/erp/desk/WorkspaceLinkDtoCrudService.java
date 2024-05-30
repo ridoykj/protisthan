@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.workspace.WorkspaceLinkDao;
+import com.itbd.application.db.dao.desk.workspace.WorkspaceLinkDao;
 import com.itbd.application.db.dto.workspace.WorkspaceLinkDto;
 import com.itbd.application.db.repos.WorkspaceLinkRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

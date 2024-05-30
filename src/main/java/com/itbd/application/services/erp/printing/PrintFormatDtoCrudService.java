@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.printing;
 
-import com.itbd.application.db.dao.print.PrintFormatDao;
+import com.itbd.application.db.dao.printing.PrintFormatDao;
 import com.itbd.application.db.dto.print.PrintFormatDto;
 import com.itbd.application.db.repos.PrintFormatRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.supplier;
 
-import com.itbd.application.db.dao.supplier.SupplierScorecardDao;
+import com.itbd.application.db.dao.buying.supplier.SupplierScorecardDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

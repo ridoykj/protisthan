@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.qualitys;
 
-import com.itbd.application.db.dao.qualitys.QualityFeedbackDao;
+import com.itbd.application.db.dao.quality_management.QualityFeedbackDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

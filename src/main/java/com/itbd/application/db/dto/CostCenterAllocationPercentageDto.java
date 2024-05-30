@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.CostCenterAllocationPercentageDao;
+import com.itbd.application.db.dao.accounts.CostCenterAllocationPercentageDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

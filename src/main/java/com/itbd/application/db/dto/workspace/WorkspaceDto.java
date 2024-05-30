@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.workspace;
 
-import com.itbd.application.db.dao.workspace.WorkspaceDao;
+import com.itbd.application.db.dao.desk.workspace.WorkspaceDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

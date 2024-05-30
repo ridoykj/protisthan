@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.price;
 
-import com.itbd.application.db.dao.price.PriceListCountryDao;
+import com.itbd.application.db.dao.stock.PriceListCountryDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

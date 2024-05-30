@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.oauths;
 
-import com.itbd.application.db.dao.oauths.OauthAuthorizationCodeDao;
+import com.itbd.application.db.dao.integrations.oauth.OauthAuthorizationCodeDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

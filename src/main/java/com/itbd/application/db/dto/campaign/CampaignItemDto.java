@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.campaign;
 
-import com.itbd.application.db.dao.campaign.CampaignItemDao;
+import com.itbd.application.db.dao.accounts.CampaignItemDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

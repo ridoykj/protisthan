@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.reposts;
 
-import com.itbd.application.db.dao.reposts.RepostAllowedTypesDao;
+import com.itbd.application.db.dao.accounts.repost.RepostAllowedTypesDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.doctypes;
 
-import com.itbd.application.db.dao.doctypes.DocTypeLayoutFieldDao;
+import com.itbd.application.db.dao.custom.DocTypeLayoutFieldDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

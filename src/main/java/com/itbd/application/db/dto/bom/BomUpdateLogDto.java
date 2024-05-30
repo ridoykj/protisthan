@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.bom;
 
-import com.itbd.application.db.dao.bom.BomUpdateLogDao;
+import com.itbd.application.db.dao.manufacturing.bom.BomUpdateLogDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

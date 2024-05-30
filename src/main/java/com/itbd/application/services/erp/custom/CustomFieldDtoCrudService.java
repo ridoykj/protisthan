@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.custom;
 
-import com.itbd.application.db.dao.CustomFieldDao;
+import com.itbd.application.db.dao.custom.CustomFieldDao;
 import com.itbd.application.db.dto.CustomFieldDto;
 import com.itbd.application.db.repos.CustomFieldRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

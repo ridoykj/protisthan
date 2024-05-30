@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.TimesheetDao;
+import com.itbd.application.db.dao.projects.timesheet.TimesheetDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.contracts;
 
-import com.itbd.application.db.dao.contracts.ContractFulfilmentChecklistDao;
+import com.itbd.application.db.dao.crm.contract.ContractFulfilmentChecklistDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

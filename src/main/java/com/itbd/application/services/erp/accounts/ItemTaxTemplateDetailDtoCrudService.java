@@ -1,9 +1,8 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.items.ItemTaxTemplateDetailDao;
+import com.itbd.application.db.dao.accounts.ItemTaxTemplateDetailDao;
 import com.itbd.application.db.dto.items.ItemTaxTemplateDetailDto;
 import com.itbd.application.db.repos.ItemTaxTemplateDetailRepository;
-import com.itbd.application.db.repos.ItemTaxTemplateRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nonnull;

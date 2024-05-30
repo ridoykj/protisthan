@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.buying;
 
-import com.itbd.application.db.dao.supplier.SupplierDao;
+import com.itbd.application.db.dao.buying.supplier.SupplierDao;
 import com.itbd.application.db.dto.supplier.SupplierDto;
 import com.itbd.application.db.repos.SupplierRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

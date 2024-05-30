@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.supplier;
 
-import com.itbd.application.db.dao.supplier.SupplierScorecardScoringVariableDao;
+import com.itbd.application.db.dao.buying.supplier.SupplierScorecardScoringVariableDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

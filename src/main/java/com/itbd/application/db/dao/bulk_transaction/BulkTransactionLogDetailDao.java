@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao;
+package com.itbd.application.db.dao.bulk_transaction;
 
 
 import jakarta.persistence.*;

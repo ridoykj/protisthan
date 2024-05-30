@@ -1,6 +1,6 @@
 package com.itbd.application.db.repos;
 
-import com.itbd.application.db.dao.InstallationNoteItemDao;
+import com.itbd.application.db.dao.selling.InstallationNoteItemDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

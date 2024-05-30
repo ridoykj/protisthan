@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.emails;
 
-import com.itbd.application.db.dao.emails.EmailAccountDao;
+import com.itbd.application.db.dao.email.EmailAccountDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.CalendarViewDao;
+import com.itbd.application.db.dao.desk.CalendarViewDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

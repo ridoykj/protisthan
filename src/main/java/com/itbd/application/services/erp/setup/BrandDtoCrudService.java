@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.BrandDao;
+import com.itbd.application.db.dao.setup.BrandDao;
 import com.itbd.application.db.dto.BrandDto;
 import com.itbd.application.db.repos.BrandRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

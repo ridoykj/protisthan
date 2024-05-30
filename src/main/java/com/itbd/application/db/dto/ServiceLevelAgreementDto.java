@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.ServiceLevelAgreementDao;
+import com.itbd.application.db.dao.support.service.ServiceLevelAgreementDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

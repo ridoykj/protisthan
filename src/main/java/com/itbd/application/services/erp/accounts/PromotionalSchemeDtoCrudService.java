@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.PromotionalSchemeDao;
+import com.itbd.application.db.dao.accounts.promotional_scheme.PromotionalSchemeDao;
 import com.itbd.application.db.dto.PromotionalSchemeDto;
 import com.itbd.application.db.repos.PromotionalSchemeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

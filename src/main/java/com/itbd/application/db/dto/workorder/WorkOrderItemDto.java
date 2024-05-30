@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.workorder;
 
-import com.itbd.application.db.dao.workorder.WorkOrderItemDao;
+import com.itbd.application.db.dao.manufacturing.workorder.WorkOrderItemDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

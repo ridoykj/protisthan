@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.website;
 
-import com.itbd.application.db.dao.website.WebsiteSlideshowDao;
+import com.itbd.application.db.dao.website.website.WebsiteSlideshowDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

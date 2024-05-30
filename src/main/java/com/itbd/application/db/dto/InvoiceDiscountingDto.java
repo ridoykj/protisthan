@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.InvoiceDiscountingDao;
+import com.itbd.application.db.dao.accounts.InvoiceDiscountingDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

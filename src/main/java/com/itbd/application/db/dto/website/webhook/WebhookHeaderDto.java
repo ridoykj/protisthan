@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.website.webhook;
 
-import com.itbd.application.db.dao.website.webhook.WebhookHeaderDao;
+import com.itbd.application.db.dao.integrations.webhook.WebhookHeaderDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.ChequePrintTemplateDao;
+import com.itbd.application.db.dao.accounts.ChequePrintTemplateDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

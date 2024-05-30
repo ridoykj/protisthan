@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.crm;
 
-import com.itbd.application.db.dao.MarketSegmentDao;
+import com.itbd.application.db.dao.crm.MarketSegmentDao;
 import com.itbd.application.db.dto.MarketSegmentDto;
 import com.itbd.application.db.repos.MarketSegmentRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

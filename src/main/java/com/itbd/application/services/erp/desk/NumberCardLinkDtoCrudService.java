@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.NumberCardLinkDao;
+import com.itbd.application.db.dao.desk.NumberCardLinkDao;
 import com.itbd.application.db.dto.NumberCardLinkDto;
 import com.itbd.application.db.repos.NumberCardLinkRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

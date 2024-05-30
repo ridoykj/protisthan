@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.EnergyPointRuleDao;
+import com.itbd.application.db.dao.social.EnergyPointRuleDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

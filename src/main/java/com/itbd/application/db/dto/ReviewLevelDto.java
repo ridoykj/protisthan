@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.ReviewLevelDao;
+import com.itbd.application.db.dao.social.ReviewLevelDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

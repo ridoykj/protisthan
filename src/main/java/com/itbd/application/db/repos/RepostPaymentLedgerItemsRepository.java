@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.reposts.RepostPaymentLedgerItemsDao;
+import com.itbd.application.db.dao.accounts.repost.RepostPaymentLedgerItemsDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

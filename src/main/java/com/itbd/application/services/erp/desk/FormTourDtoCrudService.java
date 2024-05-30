@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.FormTourDao;
+import com.itbd.application.db.dao.desk.FormTourDao;
 import com.itbd.application.db.dto.FormTourDto;
 import com.itbd.application.db.repos.FormTourRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

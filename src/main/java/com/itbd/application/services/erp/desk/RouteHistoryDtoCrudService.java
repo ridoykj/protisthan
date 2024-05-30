@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.RouteHistoryDao;
+import com.itbd.application.db.dao.desk.RouteHistoryDao;
 import com.itbd.application.db.dto.RouteHistoryDto;
 import com.itbd.application.db.repos.RouteHistoryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.ExchangeRateRevaluationAccountDao;
+import com.itbd.application.db.dao.accounts.ExchangeRateRevaluationAccountDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

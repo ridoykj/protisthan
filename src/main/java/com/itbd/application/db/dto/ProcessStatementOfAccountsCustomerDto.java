@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.ProcessStatementOfAccountsCustomerDao;
+import com.itbd.application.db.dao.accounts.process.ProcessStatementOfAccountsCustomerDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

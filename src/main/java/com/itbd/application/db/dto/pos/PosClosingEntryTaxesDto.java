@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.pos;
 
-import com.itbd.application.db.dao.pos.PosClosingEntryTaxesDao;
+import com.itbd.application.db.dao.accounts.pos.PosClosingEntryTaxesDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

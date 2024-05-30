@@ -1,7 +1,7 @@
 
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.cummunication.CommentDao;
+import com.itbd.application.db.dao.core.CommentDao;
 import com.itbd.application.db.dto.cummunication.CommentDto;
 import com.itbd.application.db.repos.CommentRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

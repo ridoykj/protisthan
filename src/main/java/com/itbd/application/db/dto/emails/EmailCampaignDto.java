@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.emails;
 
-import com.itbd.application.db.dao.emails.EmailCampaignDao;
+import com.itbd.application.db.dao.crm.EmailCampaignDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

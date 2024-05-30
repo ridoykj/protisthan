@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.workspace;
 
-import com.itbd.application.db.dao.workspace.WorkspaceQuickListDao;
+import com.itbd.application.db.dao.desk.workspace.WorkspaceQuickListDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

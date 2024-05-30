@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.subscription;
 
-import com.itbd.application.db.dao.subscription.SubscriptionPlanDetailDao;
+import com.itbd.application.db.dao.accounts.subscription.SubscriptionPlanDetailDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

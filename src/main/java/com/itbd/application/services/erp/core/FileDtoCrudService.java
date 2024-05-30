@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.FileDao;
+import com.itbd.application.db.dao.core.FileDao;
 import com.itbd.application.db.dto.FileDto;
 import com.itbd.application.db.repos.FileRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

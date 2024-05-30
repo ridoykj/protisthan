@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.doctypes.DocTypeActionDao;
+import com.itbd.application.db.dao.core.doc.DocTypeActionDao;
 import com.itbd.application.db.dto.doctypes.DocTypeActionDto;
 import com.itbd.application.db.repos.DocTypeActionRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

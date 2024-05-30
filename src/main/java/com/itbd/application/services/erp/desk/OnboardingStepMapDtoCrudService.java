@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.onboarding.OnboardingStepMapDao;
+import com.itbd.application.db.dao.desk.onboarding.OnboardingStepMapDao;
 import com.itbd.application.db.dto.onboarding.OnboardingStepMapDto;
 import com.itbd.application.db.repos.OnboardingStepMapRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

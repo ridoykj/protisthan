@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.PatchLogDao;
+import com.itbd.application.db.dao.core.PatchLogDao;
 import com.itbd.application.db.dto.PatchLogDto;
 import com.itbd.application.db.repos.PatchLogRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

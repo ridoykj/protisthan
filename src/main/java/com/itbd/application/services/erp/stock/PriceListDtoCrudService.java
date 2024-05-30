@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.price.PriceListDao;
+import com.itbd.application.db.dao.stock.PriceListDao;
 import com.itbd.application.db.dto.price.PriceListDto;
 import com.itbd.application.db.repos.PriceListRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

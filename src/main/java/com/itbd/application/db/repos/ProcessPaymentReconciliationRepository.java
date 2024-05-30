@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.ProcessPaymentReconciliationDao;
+import com.itbd.application.db.dao.accounts.process.ProcessPaymentReconciliationDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

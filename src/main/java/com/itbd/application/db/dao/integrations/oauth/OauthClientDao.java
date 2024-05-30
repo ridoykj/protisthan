@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.integrations;
+package com.itbd.application.db.dao.integrations.oauth;
 
 
 import jakarta.persistence.*;

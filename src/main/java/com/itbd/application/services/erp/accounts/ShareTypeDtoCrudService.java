@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.shares.ShareTypeDao;
+import com.itbd.application.db.dao.accounts.ShareTypeDao;
 import com.itbd.application.db.dto.shares.ShareTypeDto;
 import com.itbd.application.db.repos.ShareTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.supplier;
 
-import com.itbd.application.db.dao.supplier.SupplierGroupDao;
+import com.itbd.application.db.dao.setup.SupplierGroupDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

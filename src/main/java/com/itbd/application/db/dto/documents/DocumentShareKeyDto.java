@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.documents;
 
-import com.itbd.application.db.dao.documents.DocumentShareKeyDao;
+import com.itbd.application.db.dao.core.DocumentShareKeyDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

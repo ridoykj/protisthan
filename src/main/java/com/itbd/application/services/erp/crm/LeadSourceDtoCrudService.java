@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.crm;
 
-import com.itbd.application.db.dao.LeadSourceDao;
+import com.itbd.application.db.dao.crm.LeadSourceDao;
 import com.itbd.application.db.dto.LeadSourceDto;
 import com.itbd.application.db.repos.LeadSourceRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

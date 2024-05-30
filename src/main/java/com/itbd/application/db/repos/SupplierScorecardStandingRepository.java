@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.supplier.SupplierScorecardStandingDao;
+import com.itbd.application.db.dao.buying.supplier.SupplierScorecardStandingDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

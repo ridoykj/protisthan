@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.DeletedDocumentDao;
+import com.itbd.application.db.dao.core.DeletedDocumentDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

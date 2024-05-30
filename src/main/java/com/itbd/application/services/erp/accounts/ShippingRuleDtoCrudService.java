@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.shipments.ShippingRuleDao;
+import com.itbd.application.db.dao.accounts.shipping.ShippingRuleDao;
 import com.itbd.application.db.dto.shipments.ShippingRuleDto;
 import com.itbd.application.db.repos.ShippingRuleRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.TerritoryDao;
+import com.itbd.application.db.dao.setup.TerritoryDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

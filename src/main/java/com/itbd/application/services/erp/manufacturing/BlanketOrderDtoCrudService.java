@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.manufacturing;
 
-import com.itbd.application.db.dao.BlanketOrderDao;
+import com.itbd.application.db.dao.manufacturing.BlanketOrderDao;
 import com.itbd.application.db.dto.BlanketOrderDto;
 import com.itbd.application.db.repos.BlanketOrderRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

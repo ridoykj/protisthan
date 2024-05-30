@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.contacts;
 
-import com.itbd.application.db.dao.GenderDao;
+import com.itbd.application.db.dao.contacts.GenderDao;
 import com.itbd.application.db.dto.GenderDto;
 import com.itbd.application.db.repos.GenderRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

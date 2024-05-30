@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.items.ItemWebsiteSpecificationDao;
+import com.itbd.application.db.dao.stock.item.ItemWebsiteSpecificationDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

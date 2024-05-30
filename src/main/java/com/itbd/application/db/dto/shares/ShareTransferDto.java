@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.shares;
 
-import com.itbd.application.db.dao.shares.ShareTransferDao;
+import com.itbd.application.db.dao.accounts.ShareTransferDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

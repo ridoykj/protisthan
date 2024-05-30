@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.documents;
 
-import com.itbd.application.db.dao.documents.DocumentNamingRuleDao;
+import com.itbd.application.db.dao.core.DocumentNamingRuleDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

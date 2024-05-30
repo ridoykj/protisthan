@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.CrmNoteDao;
+import com.itbd.application.db.dao.crm.CrmNoteDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

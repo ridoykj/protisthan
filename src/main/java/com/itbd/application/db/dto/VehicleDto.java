@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.VehicleDao;
+import com.itbd.application.db.dao.setup.VehicleDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

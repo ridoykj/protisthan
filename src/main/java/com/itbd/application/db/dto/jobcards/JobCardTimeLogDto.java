@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.jobcards;
 
-import com.itbd.application.db.dao.jobcards.JobCardTimeLogDao;
+import com.itbd.application.db.dao.manufacturing.jobcard.JobCardTimeLogDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

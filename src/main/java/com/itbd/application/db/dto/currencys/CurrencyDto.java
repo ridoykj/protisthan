@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.currencys;
 
-import com.itbd.application.db.dao.currencys.CurrencyDao;
+import com.itbd.application.db.dao.geo.CurrencyDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

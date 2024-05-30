@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.PromotionalSchemePriceDiscountDao;
+import com.itbd.application.db.dao.accounts.promotional_scheme.PromotionalSchemePriceDiscountDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

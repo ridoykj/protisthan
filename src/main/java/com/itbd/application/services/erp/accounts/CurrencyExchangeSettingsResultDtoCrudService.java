@@ -1,8 +1,7 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.currencys.CurrencyExchangeSettingsResultDao;
+import com.itbd.application.db.dao.accounts.CurrencyExchangeSettingsResultDao;
 import com.itbd.application.db.dto.currencys.CurrencyExchangeSettingsResultDto;
-import com.itbd.application.db.repos.CurrencyExchangeSettingsDetailsRepository;
 import com.itbd.application.db.repos.CurrencyExchangeSettingsResultRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;

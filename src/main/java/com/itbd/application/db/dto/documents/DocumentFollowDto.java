@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.documents;
 
-import com.itbd.application.db.dao.documents.DocumentFollowDao;
+import com.itbd.application.db.dao.email.DocumentFollowDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

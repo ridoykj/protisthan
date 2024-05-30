@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.selling;
 
-import com.itbd.application.db.dao.customers.CustomerDao;
+import com.itbd.application.db.dao.selling.CustomerDao;
 import com.itbd.application.db.dto.customers.CustomerDto;
 import com.itbd.application.db.repos.CustomerRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

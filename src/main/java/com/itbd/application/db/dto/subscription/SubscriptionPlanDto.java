@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.subscription;
 
-import com.itbd.application.db.dao.subscription.SubscriptionPlanDao;
+import com.itbd.application.db.dao.accounts.subscription.SubscriptionPlanDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

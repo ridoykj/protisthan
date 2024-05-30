@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.FormTourDao;
+import com.itbd.application.db.dao.desk.FormTourDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

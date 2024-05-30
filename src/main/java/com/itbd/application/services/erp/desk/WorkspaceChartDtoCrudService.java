@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.workspace.WorkspaceChartDao;
+import com.itbd.application.db.dao.desk.workspace.WorkspaceChartDao;
 import com.itbd.application.db.dto.workspace.WorkspaceChartDto;
 import com.itbd.application.db.repos.WorkspaceChartRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.WarrantyClaimDao;
+import com.itbd.application.db.dao.support.WarrantyClaimDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

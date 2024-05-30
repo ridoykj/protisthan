@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.crm;
+package com.itbd.application.db.dao.crm.contract;
 
 
 import jakarta.persistence.*;

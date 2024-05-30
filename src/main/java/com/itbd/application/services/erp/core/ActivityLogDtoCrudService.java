@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.activitys.ActivityLogDao;
+import com.itbd.application.db.dao.core.ActivityLogDao;
 import com.itbd.application.db.dto.activitys.ActivityLogDto;
 import com.itbd.application.db.repos.ActivityLogRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

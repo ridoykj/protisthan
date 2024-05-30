@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.VideoDao;
+import com.itbd.application.db.dao.utilities.VideoDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

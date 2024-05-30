@@ -1,6 +1,6 @@
 package com.itbd.application.db.repos;
 
-import com.itbd.application.db.dao.ImapFolderDao;
+import com.itbd.application.db.dao.email.ImapFolderDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

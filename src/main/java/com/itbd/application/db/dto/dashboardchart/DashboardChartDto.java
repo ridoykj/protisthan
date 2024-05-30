@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.dashboardchart;
 
-import com.itbd.application.db.dao.dashboardchart.DashboardChartDao;
+import com.itbd.application.db.dao.desk.deshboard.DashboardChartDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

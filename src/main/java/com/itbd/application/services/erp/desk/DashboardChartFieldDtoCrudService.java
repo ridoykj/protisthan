@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.dashboardchart.DashboardChartFieldDao;
+import com.itbd.application.db.dao.desk.deshboard.DashboardChartFieldDao;
 import com.itbd.application.db.dto.dashboardchart.DashboardChartFieldDto;
 import com.itbd.application.db.repos.DashboardChartFieldRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.tasks;
 
-import com.itbd.application.db.dao.tasks.TaxWithheldVouchersDao;
+import com.itbd.application.db.dao.accounts.tax.TaxWithheldVouchersDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

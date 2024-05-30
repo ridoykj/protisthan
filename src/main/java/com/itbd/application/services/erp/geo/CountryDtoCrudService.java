@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.geo;
 
-import com.itbd.application.db.dao.CountryDao;
+import com.itbd.application.db.dao.geo.CountryDao;
 import com.itbd.application.db.dto.CountryDto;
 import com.itbd.application.db.repos.CountryRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

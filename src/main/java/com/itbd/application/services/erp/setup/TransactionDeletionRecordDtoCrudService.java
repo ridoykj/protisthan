@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.transactions.TransactionDeletionRecordDao;
+import com.itbd.application.db.dao.setup.TransactionDeletionRecordDao;
 import com.itbd.application.db.dto.transactions.TransactionDeletionRecordDto;
 import com.itbd.application.db.repos.TransactionDeletionRecordRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

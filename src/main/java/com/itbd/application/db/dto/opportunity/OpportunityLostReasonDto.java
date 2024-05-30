@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.opportunity;
 
-import com.itbd.application.db.dao.opportunity.OpportunityLostReasonDao;
+import com.itbd.application.db.dao.crm.opportunity.OpportunityLostReasonDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.qualitys;
 
-import com.itbd.application.db.dao.qualitys.QualityInspectionParameterGroupDao;
+import com.itbd.application.db.dao.stock.quality_inspection.QualityInspectionParameterGroupDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

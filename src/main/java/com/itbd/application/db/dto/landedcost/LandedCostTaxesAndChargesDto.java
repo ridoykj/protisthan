@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.landedcost;
 
-import com.itbd.application.db.dao.landedcost.LandedCostTaxesAndChargesDao;
+import com.itbd.application.db.dao.stock.landed.LandedCostTaxesAndChargesDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

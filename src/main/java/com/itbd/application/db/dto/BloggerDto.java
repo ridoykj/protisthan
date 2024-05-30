@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.BloggerDao;
+import com.itbd.application.db.dao.website.blog.BloggerDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.newsletter;
 
-import com.itbd.application.db.dao.newsletter.NewsletterEmailGroupDao;
+import com.itbd.application.db.dao.email.NewsletterEmailGroupDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

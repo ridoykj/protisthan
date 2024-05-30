@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.employee;
 
-import com.itbd.application.db.dao.employee.EmployeeExternalWorkHistoryDao;
+import com.itbd.application.db.dao.setup.employee.EmployeeExternalWorkHistoryDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

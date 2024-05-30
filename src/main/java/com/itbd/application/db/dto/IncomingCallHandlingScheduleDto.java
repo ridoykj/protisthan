@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.IncomingCallHandlingScheduleDao;
+import com.itbd.application.db.dao.telephony.IncomingCallHandlingScheduleDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

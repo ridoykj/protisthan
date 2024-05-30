@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.email;
 
-import com.itbd.application.db.dao.notifications.NotificationRecipientDao;
+import com.itbd.application.db.dao.email.NotificationRecipientDao;
 import com.itbd.application.db.dto.notifications.NotificationRecipientDto;
 import com.itbd.application.db.repos.NotificationRecipientRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.DriverDao;
+import com.itbd.application.db.dao.setup.DriverDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

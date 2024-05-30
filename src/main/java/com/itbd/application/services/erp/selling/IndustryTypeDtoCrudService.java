@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.selling;
 
-import com.itbd.application.db.dao.IndustryTypeDao;
+import com.itbd.application.db.dao.selling.IndustryTypeDao;
 import com.itbd.application.db.dto.IndustryTypeDto;
 import com.itbd.application.db.repos.IndustryTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

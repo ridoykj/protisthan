@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.TermsAndConditionsDao;
+import com.itbd.application.db.dao.setup.TermsAndConditionsDao;
 import com.itbd.application.db.dto.TermsAndConditionsDto;
 import com.itbd.application.db.repos.TermsAndConditionsRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

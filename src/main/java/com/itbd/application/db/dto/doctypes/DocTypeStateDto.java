@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.doctypes;
 
-import com.itbd.application.db.dao.doctypes.DocTypeStateDao;
+import com.itbd.application.db.dao.core.doc.DocTypeStateDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.shipments;
 
-import com.itbd.application.db.dao.shipments.ShipmentParcelTemplateDao;
+import com.itbd.application.db.dao.stock.shipment.ShipmentParcelTemplateDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

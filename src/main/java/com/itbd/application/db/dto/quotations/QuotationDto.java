@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.quotations;
 
-import com.itbd.application.db.dao.quotations.QuotationDao;
+import com.itbd.application.db.dao.selling.quotation.QuotationDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

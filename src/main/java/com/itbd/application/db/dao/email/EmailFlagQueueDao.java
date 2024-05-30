@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.aaa.email;
+package com.itbd.application.db.dao.email;
 
 
 import jakarta.persistence.*;

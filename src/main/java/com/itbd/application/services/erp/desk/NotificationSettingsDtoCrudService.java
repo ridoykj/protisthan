@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.notifications.NotificationSettingsDao;
+import com.itbd.application.db.dao.desk.NotificationSettingsDao;
 import com.itbd.application.db.dto.notifications.NotificationSettingsDto;
 import com.itbd.application.db.repos.NotificationSettingsRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.tasks;
 
-import com.itbd.application.db.dao.tasks.TaxWithholdingCategoryDao;
+import com.itbd.application.db.dao.accounts.tax.TaxWithholdingCategoryDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

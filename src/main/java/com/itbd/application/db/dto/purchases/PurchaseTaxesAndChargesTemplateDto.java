@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.purchases;
 
-import com.itbd.application.db.dao.purchases.PurchaseTaxesAndChargesTemplateDao;
+import com.itbd.application.db.dao.accounts.purchase.PurchaseTaxesAndChargesTemplateDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

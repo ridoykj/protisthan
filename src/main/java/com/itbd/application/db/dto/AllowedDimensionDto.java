@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.AllowedDimensionDao;
+import com.itbd.application.db.dao.accounts.AllowedDimensionDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

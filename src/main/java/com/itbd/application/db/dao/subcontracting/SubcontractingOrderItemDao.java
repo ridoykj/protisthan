@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.aaa.subcontracting;
+package com.itbd.application.db.dao.subcontracting;
 
 
 import jakarta.persistence.*;

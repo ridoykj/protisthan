@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.crm;
 
-import com.itbd.application.db.dao.campaign.CampaignDao;
+import com.itbd.application.db.dao.crm.CampaignDao;
 import com.itbd.application.db.dto.campaign.CampaignDto;
 import com.itbd.application.db.repos.CampaignRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

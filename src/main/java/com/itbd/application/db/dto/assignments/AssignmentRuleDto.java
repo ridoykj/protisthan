@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.assignments;
 
-import com.itbd.application.db.dao.assignments.AssignmentRuleDao;
+import com.itbd.application.db.dao.automation.AssignmentRuleDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

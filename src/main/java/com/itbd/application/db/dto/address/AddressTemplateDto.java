@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.address;
 
-import com.itbd.application.db.dao.address.AddressTemplateDao;
+import com.itbd.application.db.dao.contacts.AddressTemplateDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

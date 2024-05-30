@@ -1,6 +1,6 @@
 package com.itbd.application.db.repos;
 
-import com.itbd.application.db.dao.IncomingCallSettingsDao;
+import com.itbd.application.db.dao.telephony.IncomingCallSettingsDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

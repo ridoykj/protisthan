@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.custom;
 
-import com.itbd.application.db.dao.PropertySetterDao;
+import com.itbd.application.db.dao.custom.PropertySetterDao;
 import com.itbd.application.db.dto.PropertySetterDto;
 import com.itbd.application.db.repos.PropertySetterRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

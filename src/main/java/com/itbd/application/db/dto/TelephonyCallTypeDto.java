@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.TelephonyCallTypeDao;
+import com.itbd.application.db.dao.telephony.TelephonyCallTypeDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

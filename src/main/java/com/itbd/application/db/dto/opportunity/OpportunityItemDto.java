@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.opportunity;
 
-import com.itbd.application.db.dao.opportunity.OpportunityItemDao;
+import com.itbd.application.db.dao.crm.opportunity.OpportunityItemDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

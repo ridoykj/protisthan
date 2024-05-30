@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.PauseSlaOnStatusDao;
+import com.itbd.application.db.dao.support.PauseSlaOnStatusDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

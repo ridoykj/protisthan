@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.price.PricingRuleDao;
+import com.itbd.application.db.dao.accounts.pricing.PricingRuleDao;
 import com.itbd.application.db.dto.price.PricingRuleDto;
 import com.itbd.application.db.repos.PricingRuleRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

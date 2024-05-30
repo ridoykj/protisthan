@@ -1,7 +1,7 @@
 package com.itbd.application.db.repos;
 
 
-import com.itbd.application.db.dao.purchases.PurchaseTaxesAndChargesTemplateDao;
+import com.itbd.application.db.dao.accounts.purchase.PurchaseTaxesAndChargesTemplateDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

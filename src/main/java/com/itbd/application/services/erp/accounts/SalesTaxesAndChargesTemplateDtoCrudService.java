@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.sales.SalesTaxesAndChargesTemplateDao;
+import com.itbd.application.db.dao.accounts.sales.SalesTaxesAndChargesTemplateDao;
 import com.itbd.application.db.dto.sales.SalesTaxesAndChargesTemplateDto;
 import com.itbd.application.db.repos.SalesTaxesAndChargesTemplateRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

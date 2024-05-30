@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.ServiceLevelPriorityDao;
+import com.itbd.application.db.dao.support.service.ServiceLevelPriorityDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

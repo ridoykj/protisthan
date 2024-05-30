@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.print.PrintHeadingDao;
+import com.itbd.application.db.dao.setup.PrintHeadingDao;
 import com.itbd.application.db.dto.print.PrintHeadingDto;
 import com.itbd.application.db.repos.PrintHeadingRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

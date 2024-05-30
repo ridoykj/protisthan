@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.activitys;
 
-import com.itbd.application.db.dao.activitys.ActivityTypeDao;
+import com.itbd.application.db.dao.projects.ActivityTypeDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

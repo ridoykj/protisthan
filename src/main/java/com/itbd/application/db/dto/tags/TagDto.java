@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.tags;
 
-import com.itbd.application.db.dao.tags.TagDao;
+import com.itbd.application.db.dao.desk.TagDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

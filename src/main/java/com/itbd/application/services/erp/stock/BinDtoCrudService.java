@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.stock;
 
-import com.itbd.application.db.dao.BinDao;
+import com.itbd.application.db.dao.stock.BinDao;
 import com.itbd.application.db.dto.BinDto;
 import com.itbd.application.db.repos.BinRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

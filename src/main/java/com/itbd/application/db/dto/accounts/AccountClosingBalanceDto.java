@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.accounts;
 
-import com.itbd.application.db.dao.accounts.AccountClosingBalanceDao;
+import com.itbd.application.db.dao.accounts.account.AccountClosingBalanceDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

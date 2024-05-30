@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.employee;
 
-import com.itbd.application.db.dao.employee.EmployeeEducationDao;
+import com.itbd.application.db.dao.setup.employee.EmployeeEducationDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

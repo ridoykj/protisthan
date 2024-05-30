@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.uoms;
 
-import com.itbd.application.db.dao.uoms.UomConversionFactorDao;
+import com.itbd.application.db.dao.setup.UomConversionFactorDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

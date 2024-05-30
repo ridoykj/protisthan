@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.email;
 
-import com.itbd.application.db.dao.emails.EmailUnsubscribeDao;
+import com.itbd.application.db.dao.email.EmailUnsubscribeDao;
 import com.itbd.application.db.dto.emails.EmailUnsubscribeDto;
 import com.itbd.application.db.repos.EmailUnsubscribeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

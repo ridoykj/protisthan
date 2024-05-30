@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.purchases.PurchaseTaxesAndChargesTemplateDao;
+import com.itbd.application.db.dao.accounts.purchase.PurchaseTaxesAndChargesTemplateDao;
 import com.itbd.application.db.dto.purchases.PurchaseTaxesAndChargesTemplateDto;
 import com.itbd.application.db.repos.PurchaseTaxesAndChargesTemplateRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

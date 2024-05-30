@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.modules.ModuleProfileDao;
+import com.itbd.application.db.dao.core.ModuleProfileDao;
 import com.itbd.application.db.dto.modules.ModuleProfileDto;
 import com.itbd.application.db.repos.ModuleProfileRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.crm;
 
-import com.itbd.application.db.dao.sales.SalesStageDao;
+import com.itbd.application.db.dao.crm.SalesStageDao;
 import com.itbd.application.db.dto.sales.SalesStageDto;
 import com.itbd.application.db.repos.SalesStageRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.BlanketOrderDao;
+import com.itbd.application.db.dao.manufacturing.BlanketOrderDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

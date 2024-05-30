@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.DunningDao;
+import com.itbd.application.db.dao.accounts.dunning.DunningDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

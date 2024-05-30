@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.currencys.CurrencyExchangeSettingsDetailsDao;
+import com.itbd.application.db.dao.accounts.CurrencyExchangeSettingsDetailsDao;
 import com.itbd.application.db.dto.currencys.CurrencyExchangeSettingsDetailsDto;
 import com.itbd.application.db.repos.CurrencyExchangeSettingsDetailsRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

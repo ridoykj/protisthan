@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.qualitys;
 
-import com.itbd.application.db.dao.qualitys.QualityInspectionReadingDao;
+import com.itbd.application.db.dao.stock.quality_inspection.QualityInspectionReadingDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

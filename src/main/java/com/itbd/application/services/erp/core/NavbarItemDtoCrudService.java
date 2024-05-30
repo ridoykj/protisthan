@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.NavbarItemDao;
+import com.itbd.application.db.dao.core.NavbarItemDao;
 import com.itbd.application.db.dto.NavbarItemDto;
 import com.itbd.application.db.repos.NavbarItemRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

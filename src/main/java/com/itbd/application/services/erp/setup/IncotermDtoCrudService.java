@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.setup;
 
-import com.itbd.application.db.dao.IncotermDao;
+import com.itbd.application.db.dao.setup.IncotermDao;
 import com.itbd.application.db.dto.IncotermDto;
 import com.itbd.application.db.repos.IncotermRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

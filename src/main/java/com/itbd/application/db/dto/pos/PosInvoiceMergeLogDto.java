@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.pos;
 
-import com.itbd.application.db.dao.pos.PosInvoiceMergeLogDao;
+import com.itbd.application.db.dao.accounts.pos.PosInvoiceMergeLogDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

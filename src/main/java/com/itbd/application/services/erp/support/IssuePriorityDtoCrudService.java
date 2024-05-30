@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.support;
 
-import com.itbd.application.db.dao.issues.IssuePriorityDao;
+import com.itbd.application.db.dao.support.issue.IssuePriorityDao;
 import com.itbd.application.db.dto.issues.IssuePriorityDto;
 import com.itbd.application.db.repos.IssuePriorityRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

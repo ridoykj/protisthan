@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.desk;
 
-import com.itbd.application.db.dao.workspace.WorkspaceNumberCardDao;
+import com.itbd.application.db.dao.desk.workspace.WorkspaceNumberCardDao;
 import com.itbd.application.db.dto.workspace.WorkspaceNumberCardDto;
 import com.itbd.application.db.repos.WorkspaceNumberCardRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

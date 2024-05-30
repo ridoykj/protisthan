@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.production;
 
-import com.itbd.application.db.dao.production.ProductionPlanSubAssemblyItemDao;
+import com.itbd.application.db.dao.manufacturing.production.ProductionPlanSubAssemblyItemDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

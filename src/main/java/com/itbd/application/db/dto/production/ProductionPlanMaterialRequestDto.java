@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.production;
 
-import com.itbd.application.db.dao.production.ProductionPlanMaterialRequestDao;
+import com.itbd.application.db.dao.manufacturing.production.ProductionPlanMaterialRequestDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

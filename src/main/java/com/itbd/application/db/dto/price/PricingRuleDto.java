@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.price;
 
-import com.itbd.application.db.dao.price.PricingRuleDao;
+import com.itbd.application.db.dao.accounts.pricing.PricingRuleDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

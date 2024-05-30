@@ -1,4 +1,4 @@
-package com.itbd.application.db.dao.aaa.custom;
+package com.itbd.application.db.dao.custom;
 
 
 import jakarta.persistence.*;

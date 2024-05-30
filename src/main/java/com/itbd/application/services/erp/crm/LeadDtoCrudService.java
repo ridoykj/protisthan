@@ -1,8 +1,7 @@
 package com.itbd.application.services.erp.crm;
 
-import com.itbd.application.db.dao.LeadDao;
+import com.itbd.application.db.dao.crm.LeadDao;
 import com.itbd.application.db.dto.LeadDto;
-import com.itbd.application.db.repos.BrandRepository;
 import com.itbd.application.db.repos.LeadRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;

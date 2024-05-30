@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.PeriodClosingVoucherDao;
+import com.itbd.application.db.dao.accounts.PeriodClosingVoucherDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;

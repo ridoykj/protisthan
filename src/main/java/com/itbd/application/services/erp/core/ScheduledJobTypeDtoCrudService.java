@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.ScheduledJobTypeDao;
+import com.itbd.application.db.dao.core.ScheduledJobTypeDao;
 import com.itbd.application.db.dto.ScheduledJobTypeDto;
 import com.itbd.application.db.repos.ScheduledJobTypeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

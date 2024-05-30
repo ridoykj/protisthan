@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.CouponCodeDao;
+import com.itbd.application.db.dao.accounts.CouponCodeDao;
 import com.itbd.application.db.dto.CouponCodeDto;
 import com.itbd.application.db.repos.CouponCodeRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

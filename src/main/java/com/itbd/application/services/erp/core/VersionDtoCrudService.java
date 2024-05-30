@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.core;
 
-import com.itbd.application.db.dao.VersionDao;
+import com.itbd.application.db.dao.core.VersionDao;
 import com.itbd.application.db.dto.VersionDto;
 import com.itbd.application.db.repos.VersionRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;

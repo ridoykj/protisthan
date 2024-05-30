@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto;
 
-import com.itbd.application.db.dao.CompetitorDao;
+import com.itbd.application.db.dao.crm.CompetitorDao;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;

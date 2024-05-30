@@ -1,6 +1,6 @@
 package com.itbd.application.db.dto.bom;
 
-import com.itbd.application.db.dao.bom.BomCreatorItemDao;
+import com.itbd.application.db.dao.manufacturing.bom.BomCreatorItemDao;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;

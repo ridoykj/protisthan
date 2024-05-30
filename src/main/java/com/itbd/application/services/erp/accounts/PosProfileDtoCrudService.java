@@ -1,6 +1,6 @@
 package com.itbd.application.services.erp.accounts;
 
-import com.itbd.application.db.dao.pos.PosProfileDao;
+import com.itbd.application.db.dao.accounts.pos.PosProfileDao;
 import com.itbd.application.db.dto.pos.PosProfileDto;
 import com.itbd.application.db.repos.PosProfileRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
