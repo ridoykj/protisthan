@@ -15,7 +15,7 @@ function AppHeader({ openSideBar }: AppHeaderProps) {
   const [iconState, setIconState] = useState(false);
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row items-center">
       <button
         type="button"
         className="text-white px-4"
@@ -26,9 +26,11 @@ function AppHeader({ openSideBar }: AppHeaderProps) {
       >
         {iconState ? <FaXmark /> : <FaBars />}
       </button>
-      <div className="flex flex-row">
-        <h1 className="text-white text-xl">{workspace ?? currentTitle}</h1>
-        <AvatarControlRC />
+      <div className="flex flex-row grow items-center">
+        <h1 className="text-white text-xl text-center">{workspace ?? currentTitle}</h1>
+        <div className="grow">
+          <AvatarControlRC />
+        </div>
       </div>
     </div>
   );
