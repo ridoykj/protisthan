@@ -2,16 +2,30 @@ import MainLayout from 'Frontend/views/MainLayout.js';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import ErrorView from './views/default/ErrorView';
 import AccountView from './views/erp/module/accounts/AccountView';
+import CostCenterView from './views/erp/module/accounts/CostCenterView';
 import CouponCodeView from './views/erp/module/accounts/CouponCodeView';
+import CurrencyExchangeSettingsDetailsView from './views/erp/module/accounts/CurrencyExchangeSettingsDetailsView';
+import CurrencyExchangeSettingsResultView from './views/erp/module/accounts/CurrencyExchangeSettingsResultView';
+import ItemTaxTemplateDetailView from './views/erp/module/accounts/ItemTaxTemplateDetailView';
+import ItemTaxTemplateView from './views/erp/module/accounts/ItemTaxTemplateView';
 import LoyaltyPointEntryView from './views/erp/module/accounts/LoyaltyPointEntryView';
 import LoyaltyProgramView from './views/erp/module/accounts/LoyaltyProgramView';
+import ModeofPaymentAccountView from './views/erp/module/accounts/ModeofPaymentAccountView';
+import ModeofPaymentView from './views/erp/module/accounts/ModeofPaymentView';
+import PaymentLedgerEntryView from './views/erp/module/accounts/PaymentLedgerEntryView';
 import PosClosingEntryView from './views/erp/module/accounts/PosClosingEntryView';
 import PosOpeningEntryView from './views/erp/module/accounts/PosOpeningEntryView';
 import PosProfileView from './views/erp/module/accounts/PosProfileView';
 import PricingRuleView from './views/erp/module/accounts/PricingRuleView';
+import ProcessDeferredAccountingView from './views/erp/module/accounts/ProcessDeferredAccountingView';
 import PromotionalSchemeView from './views/erp/module/accounts/PromotionalSchemeView';
+import PurchaseTaxesAndChargesTemplateView from './views/erp/module/accounts/PurchaseTaxesAndChargesTemplateView';
+import PurchaseTaxesandChargesView from './views/erp/module/accounts/PurchaseTaxesandChargesView';
+import SalesInvoiceItemView from './views/erp/module/accounts/SalesInvoiceItemView';
 import SalesInvoiceView from './views/erp/module/accounts/SalesInvoiceView';
+import SalesTaxesAndChargesTemplateView from './views/erp/module/accounts/SalesTaxesandChargesTemplateView';
 import SalesTaxesAndChargesView from './views/erp/module/accounts/SalesTaxesAndChargesView';
+import ShareTypeView from './views/erp/module/accounts/ShareTypeView';
 import ShippingRuleView from './views/erp/module/accounts/ShippingRuleView';
 import SupplierView from './views/erp/module/buying/SupplierView';
 import AddressView from './views/erp/module/contacts/AddressView';
@@ -173,6 +187,160 @@ export const routes: RouteObject[] = [
         path: 'm/shipping-rule/:queryId',
         element: <ShippingRuleView />,
         handle: { title: 'Shipping Rule' },
+      },
+
+      {
+        path: 'm/cost-center',
+        element: <CostCenterView />,
+        handle: { title: 'Cost Center' },
+      },
+      {
+        path: 'm/cost-center/:queryId',
+        element: <CostCenterView />,
+        handle: { title: 'Cost Center' },
+      },
+
+      {
+        path: 'm/currency-exchange-settings-details',
+        element: <CurrencyExchangeSettingsDetailsView />,
+        handle: { title: 'Currency Exchange Settings Details' },
+      },
+      {
+        path: 'm/currency-exchange-settings-details/:queryId',
+        element: <CurrencyExchangeSettingsDetailsView />,
+        handle: { title: 'Currency Exchange Settings Details' },
+      },
+
+      {
+        path: 'm/currency-exchange-settings-result',
+        element: <CurrencyExchangeSettingsResultView />,
+        handle: { title: 'Currency Exchange Settings Result' },
+      },
+      {
+        path: 'm/currency-exchange-settings-result/:queryId',
+        element: <CurrencyExchangeSettingsResultView />,
+        handle: { title: 'Currency Exchange Settings Result' },
+      },
+
+      {
+        path: 'm/item-tax-template',
+        element: <ItemTaxTemplateView />,
+        handle: { title: 'Item Tax Template' },
+      },
+      {
+        path: 'm/item-tax-template/:queryId',
+        element: <ItemTaxTemplateView />,
+        handle: { title: 'Item Tax Template' },
+      },
+
+      {
+        path: 'm/item-tax-template-detail',
+        element: <ItemTaxTemplateDetailView />,
+        handle: { title: 'Item Tax Template Detail' },
+      },
+      {
+        path: 'm/item-tax-template-detail/:queryId',
+        element: <ItemTaxTemplateDetailView />,
+        handle: { title: 'Item Tax Template Detail' },
+      },
+
+      {
+        path: 'm/mode-of-payment',
+        element: <ModeofPaymentView />,
+        handle: { title: 'Mode of Payment' },
+      },
+      {
+        path: 'm/mode-of-payment/:queryId',
+        element: <ModeofPaymentView />,
+        handle: { title: 'Mode of Payment' },
+      },
+
+      {
+        path: 'm/mode-of-payment-account',
+        element: <ModeofPaymentAccountView />,
+        handle: { title: 'Mode of Payment Account' },
+      },
+      {
+        path: 'm/mode-of-payment-account/:queryId',
+        element: <ModeofPaymentAccountView />,
+        handle: { title: 'Mode of Payment Account' },
+      },
+
+      {
+        path: 'm/payment-ledger-entry',
+        element: <PaymentLedgerEntryView />,
+        handle: { title: 'Payment Ledger Entry' },
+      },
+      {
+        path: 'm/payment-ledger-entry/:queryId',
+        element: <PaymentLedgerEntryView />,
+        handle: { title: 'Payment Ledger Entry' },
+      },
+
+      {
+        path: 'm/process-deferred-accounting',
+        element: <ProcessDeferredAccountingView />,
+        handle: { title: 'Process Deferred Accounting' },
+      },
+      {
+        path: 'm/process-deferred-accounting/:queryId',
+        element: <ProcessDeferredAccountingView />,
+        handle: { title: 'Process Deferred Accounting' },
+      },
+
+      {
+        path: 'm/purchase-taxes-and-charges',
+        element: <PurchaseTaxesandChargesView />,
+        handle: { title: 'Purchase Taxes and Charges' },
+      },
+      {
+        path: 'm/purchase-taxes-and-charges/:queryId',
+        element: <PurchaseTaxesandChargesView />,
+        handle: { title: 'Purchase Taxes and Charges' },
+      },
+
+      {
+        path: 'm/purchase-taxes-and-charges-template',
+        element: <PurchaseTaxesAndChargesTemplateView />,
+        handle: { title: 'Purchase Taxes and Charges Template' },
+      },
+      {
+        path: 'm/purchase-taxes-and-charges-template/:queryId',
+        element: <PurchaseTaxesAndChargesTemplateView />,
+        handle: { title: 'Purchase Taxes and Charges Template' },
+      },
+
+      {
+        path: 'm/sales-invoice-item',
+        element: <SalesInvoiceItemView />,
+        handle: { title: 'Sales Invoice Item' },
+      },
+      {
+        path: 'm/sales-invoice-item/:queryId',
+        element: <SalesInvoiceItemView />,
+        handle: { title: 'Sales Invoice Item' },
+      },
+
+      {
+        path: 'm/sales-taxes-and-charges-template',
+        element: <SalesTaxesAndChargesTemplateView />,
+        handle: { title: 'Sales Taxes and Charges Template' },
+      },
+      {
+        path: 'm/sales-taxes-and-charges-template/:queryId',
+        element: <SalesTaxesAndChargesTemplateView />,
+        handle: { title: 'Sales Taxes and Charges Template' },
+      },
+
+      {
+        path: 'm/share-type',
+        element: <ShareTypeView />,
+        handle: { title: 'Share Type' },
+      },
+      {
+        path: 'm/share-type/:queryId',
+        element: <ShareTypeView />,
+        handle: { title: 'Share Type' },
       },
 
       // ## Buying
