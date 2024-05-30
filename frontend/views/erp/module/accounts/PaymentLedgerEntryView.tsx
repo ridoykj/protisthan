@@ -1,6 +1,6 @@
-/* eslint-disable react/no-unused-prop-types */
 import { Avatar } from '@hilla/react-components/Avatar';
 import { FormLayout } from '@hilla/react-components/FormLayout';
+import { TextField } from '@hilla/react-components/TextField';
 import { useForm } from '@hilla/react-form';
 import SpeedDialRC from 'Frontend/components/fab/SpeedDialRC';
 import { AutoGrid, AutoGridRef } from 'Frontend/components/grid/autogrid';
@@ -9,14 +9,14 @@ import ActionTopBtnRC from 'Frontend/components/ho_master/from/ActionTopBtnRC';
 import DialogFromRC from 'Frontend/components/ho_master/from/DialogFromRC';
 import FromBuilderRC from 'Frontend/components/ho_master/from/FromBuilderRC';
 import DocFieldDto from 'Frontend/generated/com/itbd/application/db/dto/doctypes/DocFieldDto';
-import SalesTaxesAndChargesDto from 'Frontend/generated/com/itbd/application/db/dto/sales/SalesTaxesAndChargesDto';
-import SalesTaxesAndChargesDtoModel from 'Frontend/generated/com/itbd/application/db/dto/sales/SalesTaxesAndChargesDtoModel';
+import PaymentLedgerEntryDto from 'Frontend/generated/com/itbd/application/db/dto/payments/PaymentLedgerEntryDto';
+import PaymentLedgerEntryDtoModel from 'Frontend/generated/com/itbd/application/db/dto/payments/PaymentLedgerEntryDtoModel';
 import Filter from 'Frontend/generated/dev/hilla/crud/filter/Filter';
 import Matcher from 'Frontend/generated/dev/hilla/crud/filter/PropertyStringFilter/Matcher';
 import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
 import {
   DocFieldDtoCrudService,
-  SalesTaxesAndChargesDtoCrudService,
+  PaymentLedgerEntryDtoCrudService,
 } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
@@ -51,7 +51,7 @@ function filterGenerator(type: string, property: string, filter: string | undefi
   return filters;
 }
 
-function SalesTaxesAndChargesView() {
+function PaymentLedgerEntryView() {
   const { queryId } = useParams();
   const navigate = useNavigate();
   const [uiField, setUiField] = useState<DocFieldDto[]>([]);
@@ -62,8 +62,8 @@ function SalesTaxesAndChargesView() {
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   const autoGridRef = React.useRef<AutoGridRef>(null);
-  const [user, setUser] = useState<SalesTaxesAndChargesDto>({} as SalesTaxesAndChargesDto);
-  const [selectedUserItems, setSelectedUserItems] = useState<SalesTaxesAndChargesDto[]>([]);
+  const [user, setUser] = useState<PaymentLedgerEntryDto>({} as PaymentLedgerEntryDto);
+  const [selectedUserItems, setSelectedUserItems] = useState<PaymentLedgerEntryDto[]>([]);
   const [tabChange, setTabChange] = useState<number>(0);
 
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
@@ -82,9 +82,9 @@ function SalesTaxesAndChargesView() {
     submitting,
     validate,
     addValidator,
-  } = useForm(SalesTaxesAndChargesDtoModel, {
+  } = useForm(PaymentLedgerEntryDtoModel, {
     onSubmit: async (userE) => {
-      await SalesTaxesAndChargesDtoCrudService.save(userE)
+      await PaymentLedgerEntryDtoCrudService.save(userE)
         .then((result) => {
           clear();
           setSuccessNotification(true);
@@ -100,46 +100,10 @@ function SalesTaxesAndChargesView() {
   useEffect(() => {
     autoGridRef.current?.refresh();
   }, [gridRefresh]);
-
-  function ChildRedirect({ item }: { item: SalesTaxesAndChargesDto }) {
-    const { name } = item;
-    return (
-      <button
-        type="button"
-        className="text-blue-500 hover:underline"
-        onClick={(e) => {
-          setUser(item);
-          read(item);
-          navigate(`/m/sales-invoice/${name}`);
-        }}
-      >
-        {name}
-      </button>
-    );
-  }
-
-  function deleteRander({ item }: { item: SalesTaxesAndChargesDto }) {
-    const { name } = item;
-    return (
-      <button
-        type="button"
-        className="text-red-500 hover:underline"
-        title="Delete"
-        onClick={() => {
-          SalesTaxesAndChargesDtoCrudService.delete(name).then(() => {
-            setGridRefresh(!gridRefresh);
-          });
-        }}
-      >
-        <FaTrash />
-      </button>
-    );
-  }
-
   useEffect(() => {
     DocFieldDtoCrudService.list(
       pagination,
-      filterGenerator('and', 'parent', 'Sales Taxes and Charges')
+      filterGenerator('and', 'parent', 'Payment Ledger Entry')
     ).then((result) => {
       setUiField(result);
     });
@@ -212,17 +176,51 @@ function SalesTaxesAndChargesView() {
       },
     },
     {
-      name: 'Add User',
+      name: 'Add Account',
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
-        setUser({} as SalesTaxesAndChargesDto);
+        setUser({} as PaymentLedgerEntryDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
     },
   ];
 
+  function ChildRedirect({ item }: { item: PaymentLedgerEntryDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-blue-500 hover:underline"
+        onClick={(e) => {
+          setUser(item);
+          read(item);
+          navigate(`/m/payment-ledger-entry/${name}`);
+        }}
+      >
+        {name}
+      </button>
+    );
+  }
+
+  function deleteRander({ item }: { item: PaymentLedgerEntryDto }) {
+    const { name } = item;
+    return (
+      <button
+        type="button"
+        className="text-red-500 hover:underline"
+        title="Delete"
+        onClick={(e) => {
+          PaymentLedgerEntryDtoCrudService.delete(item.name).then((result) => {
+            setGridRefresh(!gridRefresh);
+          });
+        }}
+      >
+        <FaTrash />
+      </button>
+    );
+  }
   function parentComponent() {
     return (
       <>
@@ -230,18 +228,18 @@ function SalesTaxesAndChargesView() {
           <ActionTopBtnRC actions={actionBtn} />
           <div className="h-full mx-2 mb-2 bg-white p-3 rounded-xl border">
             <AutoGrid
-              service={SalesTaxesAndChargesDtoCrudService}
-              model={SalesTaxesAndChargesDtoModel}
+              service={PaymentLedgerEntryDtoCrudService}
+              model={PaymentLedgerEntryDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
               visibleColumns={[
                 'name',
-                'chargeType',
-                'accountHead',
-                'rate',
-                'taxAmount',
-                'itemWiseTaxDetail',
-                'dontRecomputeTax',
+                'voucherType',
+                'voucherNo',
+                'againstVoucherType',
+                'againstVoucherNo',
+                'amount',
+                'delinked',
                 'idx',
               ]}
               selectedItems={selectedUserItems}
@@ -254,32 +252,28 @@ function SalesTaxesAndChargesView() {
                   resizable: true,
                   renderer: ChildRedirect,
                 },
-                chargeType: {
-                  header: 'Type',
+                voucherType: {
+                  header: 'Voucher Type',
                   resizable: true,
                 },
-                accountHead: {
-                  header: 'Account Head',
+                voucherNo: {
+                  header: 'Voucher No',
                   resizable: true,
                 },
-                rate: {
-                  header: 'Tax Rate',
+                againstVoucherType: {
+                  header: 'Against Voucher Type',
                   resizable: true,
                 },
-                taxAmount: {
+                againstVoucherNo: {
+                  header: 'Against Voucher No',
+                  resizable: true,
+                },
+                amount: {
                   header: 'Amount',
                   resizable: true,
                 },
-                total: {
-                  header: 'Total',
-                  resizable: true,
-                },
-                itemWiseTaxDetail: {
-                  header: 'Item Wise Tax Detail',
-                  resizable: true,
-                },
-                dontRecomputeTax: {
-                  header: 'Dont Recompute tax',
+                delinked: {
+                  header: 'DeLinked',
                   resizable: true,
                 },
                 idx: {
@@ -305,6 +299,7 @@ function SalesTaxesAndChargesView() {
       </>
     );
   }
+
   useEffect(() => {
     read(value);
   }, [tabChange]);
@@ -332,11 +327,11 @@ function SalesTaxesAndChargesView() {
           <span className="font-bold text-lg">Comments</span>
           <div className="inline-flex space-x-4 p-2 items-center">
             <Avatar />
-            {/* <TextField
+            <TextField
               placeholder="Type a reply / comment"
               {...field(model.comments)}
               className="w-full"
-            /> */}
+            />
           </div>
           <span className="font-bold text-lg">Activity</span>
         </div>
@@ -351,6 +346,7 @@ function SalesTaxesAndChargesView() {
     }
     return parentComponent();
   }
+
   return (
     <>
       {switchComponent()}
@@ -367,24 +363,18 @@ function SalesTaxesAndChargesView() {
         onNavigate={() => {
           setIsOpen(false);
           clear();
-          navigate(`/m/sales-invoice/_`);
+          navigate(`/m/payment-ledger-entry/_`);
         }}
       >
         <FormLayout responsiveSteps={responsiveSteps} className="w-fit h-fit p-2">
-          {/* <TextField
-            label="Naming Series"
-            {...{ colspan: 1 }}
-            required
-            {...field(model.namingSeries)}
-          />
-          <TextField label="Company" {...{ colspan: 1 }} required {...field(model.company)} />
-          <TextField label="Customer Name" {...{ colspan: 1 }} {...field(model.customerName)} />
-
-          <DatePicker label="Email Id" {...{ colspan: 1 }} required {...field(model.poDate)} /> */}
+          {/* <TextField label="Customer Name" {...{ colspan: 1 }} {...field(model.accountName)} />
+          <TextField label="Customer Type" {...{ colspan: 1 }} {...field(model.parentAccount)} />
+          <TextField label="Email Id" {...{ colspan: 1 }} {...field(model.accountType)} />
+          <Checkbox label="Mobile Number" {...{ colspan: 1 }} {...field(model.isGroup)} /> */}
         </FormLayout>
       </DialogFromRC>
     </>
   );
 }
 
-export default SalesTaxesAndChargesView;
+export default PaymentLedgerEntryView;
