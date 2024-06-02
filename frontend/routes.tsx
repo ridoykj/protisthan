@@ -23,25 +23,51 @@ import PurchaseTaxesAndChargesTemplateView from './views/erp/module/accounts/Pur
 import PurchaseTaxesandChargesView from './views/erp/module/accounts/PurchaseTaxesandChargesView';
 import SalesInvoiceItemView from './views/erp/module/accounts/SalesInvoiceItemView';
 import SalesInvoiceView from './views/erp/module/accounts/SalesInvoiceView';
-import SalesTaxesAndChargesTemplateView from './views/erp/module/accounts/SalesTaxesandChargesTemplateView';
+import SalesTaxesAndChargesTemplateView from './views/erp/module/accounts/SalesTaxesAndChargesTemplateView';
 import SalesTaxesAndChargesView from './views/erp/module/accounts/SalesTaxesAndChargesView';
 import ShareTypeView from './views/erp/module/accounts/ShareTypeView';
 import ShippingRuleView from './views/erp/module/accounts/ShippingRuleView';
+import SupplierScorecardStandingView from './views/erp/module/buying/SupplierScorecardStandingView';
+import SupplierScorecardVariableView from './views/erp/module/buying/SupplierScorecardVariableView';
 import SupplierView from './views/erp/module/buying/SupplierView';
 import AddressView from './views/erp/module/contacts/AddressView';
 import ContactView from './views/erp/module/contacts/ContactView';
+import GenderView from './views/erp/module/contacts/GenderView';
+import SalutationView from './views/erp/module/contacts/SalutationView';
 import AccessLogView from './views/erp/module/core/AccessLogView';
 import ActivityLogView from './views/erp/module/core/ActivityLogView';
+import CommentView from './views/erp/module/core/CommentView';
+import DefaultValueView from './views/erp/module/core/DefaultValueView';
+import DeletedDocumentView from './views/erp/module/core/DeletedDocumentView';
+import DocShareView from './views/erp/module/core/DocShareView';
+import DocTypeActionView from './views/erp/module/core/DocTypeActionView';
+import DocTypeLinkView from './views/erp/module/core/DocTypeLinkView';
+import DocTypeStateView from './views/erp/module/core/DocTypeStateView';
+import DomainView from './views/erp/module/core/DomainView';
+import FileView from './views/erp/module/core/FileView';
+import LanguageView from './views/erp/module/core/LanguageView';
+import LogsToClearView from './views/erp/module/core/LogsToClearView';
 import ModuleProfileView from './views/erp/module/core/ModuleProfileView';
+import NavbarItemView from './views/erp/module/core/NavbarItemView';
+import PageView from './views/erp/module/core/PageView';
+import PatchLogView from './views/erp/module/core/PatchLogView';
+import ReportView from './views/erp/module/core/ReportView';
 import RolePermissionView from './views/erp/module/core/RolePermissionView';
 import RoleProfileView from './views/erp/module/core/RoleProfileView';
 import RoleView from './views/erp/module/core/RoleView';
+import ScheduledJobLogView from './views/erp/module/core/ScheduledJobLogView';
+import ScheduledJobTypeView from './views/erp/module/core/ScheduledJobTypeView';
+import SuccessActionView from './views/erp/module/core/SuccessActionView';
 import UserProfileView from './views/erp/module/core/UserProfileView';
 import UserTypeView from './views/erp/module/core/UserTypeView';
 import UserView from './views/erp/module/core/UserView';
+import VersionView from './views/erp/module/core/VersionView';
 import CampaignView from './views/erp/module/crm/CampaignView';
 import LeadSourceView from './views/erp/module/crm/LeadSourceView';
 import LeadView from './views/erp/module/crm/LeadView';
+import MarketSegmentView from './views/erp/module/crm/MarketSegmentView';
+import OpportunityTypeView from './views/erp/module/crm/OpportunityTypeView';
+import SalesStageView from './views/erp/module/crm/SalesStageView';
 import BlanketOrderView from './views/erp/module/manufacturing/BlanketOrderView';
 import CustomerView from './views/erp/module/selling/CustomerView';
 import ProductBundleView from './views/erp/module/selling/ProductBundleView';
@@ -348,6 +374,28 @@ export const routes: RouteObject[] = [
       { path: 'm/supplier', element: <SupplierView />, handle: { title: 'Supplier' } },
       { path: 'm/supplier/:queryId', element: <SupplierView />, handle: { title: 'Supplier' } },
 
+      {
+        path: 'm/supplier-scorecard-standing',
+        element: <SupplierScorecardStandingView />,
+        handle: { title: 'Supplier' },
+      },
+      {
+        path: 'm/supplier-scorecard-standing/:queryId',
+        element: <SupplierScorecardStandingView />,
+        handle: { title: 'Supplier Scorecard Standing' },
+      },
+
+      {
+        path: 'm/supplier-scorecard-variable',
+        element: <SupplierScorecardVariableView />,
+        handle: { title: 'Supplier' },
+      },
+      {
+        path: 'm/supplier-scorecard-variable/:queryId',
+        element: <SupplierScorecardVariableView />,
+        handle: { title: 'Supplier Scorecard Variable' },
+      },
+
       // ## Contacts
 
       { path: 'm/address', element: <AddressView />, handle: { title: 'Address' } },
@@ -355,6 +403,16 @@ export const routes: RouteObject[] = [
 
       { path: 'm/contact', element: <ContactView />, handle: { title: 'Contact' } },
       { path: 'm/contact/:queryId', element: <ContactView />, handle: { title: 'Contact' } },
+
+      { path: 'm/gender', element: <GenderView />, handle: { title: 'Gender' } },
+      { path: 'm/gender/:queryId', element: <GenderView />, handle: { title: 'Gender' } },
+
+      { path: 'm/salutation', element: <SalutationView />, handle: { title: 'Salutation' } },
+      {
+        path: 'm/salutation/:queryId',
+        element: <SalutationView />,
+        handle: { title: 'Salutation' },
+      },
 
       // ## Core
 
@@ -407,6 +465,127 @@ export const routes: RouteObject[] = [
       { path: 'm/user-type', element: <UserTypeView />, handle: { title: 'User Type' } },
       { path: 'm/user-type/:queryId', element: <UserTypeView />, handle: { title: 'User Type' } },
 
+      { path: 'm/comment', element: <CommentView />, handle: { title: 'Comment' } },
+      { path: 'm/comment/:queryId', element: <CommentView />, handle: { title: 'Comment' } },
+
+      { path: 'm/defaultvalue', element: <DefaultValueView />, handle: { title: 'DefaultValue' } },
+      {
+        path: 'm/defaultvalue/:queryId',
+        element: <DefaultValueView />,
+        handle: { title: 'DefaultValue' },
+      },
+
+      {
+        path: 'm/deleted-document',
+        element: <DeletedDocumentView />,
+        handle: { title: 'Deleted Document' },
+      },
+      {
+        path: 'm/deleted-document/:queryId',
+        element: <DeletedDocumentView />,
+        handle: { title: 'Deleted Document' },
+      },
+
+      { path: 'm/docshare', element: <DocShareView />, handle: { title: 'DocShare' } },
+      { path: 'm/docshare/:queryId', element: <DocShareView />, handle: { title: 'DocShare' } },
+
+      {
+        path: 'm/doctype-action',
+        element: <DocTypeActionView />,
+        handle: { title: 'DocType Action' },
+      },
+      {
+        path: 'm/doctype-action/:queryId',
+        element: <DocTypeActionView />,
+        handle: { title: 'DocType Action' },
+      },
+
+      { path: 'm/doctype-link', element: <DocTypeLinkView />, handle: { title: 'DocType Link' } },
+      {
+        path: 'm/doctype-link/:queryId',
+        element: <DocTypeLinkView />,
+        handle: { title: 'DocType Link' },
+      },
+
+      {
+        path: 'm/doctype-state',
+        element: <DocTypeStateView />,
+        handle: { title: 'DocType State' },
+      },
+      {
+        path: 'm/doctype-state/:queryId',
+        element: <DocTypeStateView />,
+        handle: { title: 'DocType State' },
+      },
+
+      { path: 'm/domain', element: <DomainView />, handle: { title: 'Domain' } },
+      { path: 'm/domain/:queryId', element: <DomainView />, handle: { title: 'Domain' } },
+
+      { path: 'm/file', element: <FileView />, handle: { title: 'File' } },
+      { path: 'm/file/:queryId', element: <FileView />, handle: { title: 'File' } },
+
+      { path: 'm/language', element: <LanguageView />, handle: { title: 'Language' } },
+      { path: 'm/language/:queryId', element: <LanguageView />, handle: { title: 'Language' } },
+
+      { path: 'm/logs-to-clear', element: <LogsToClearView />, handle: { title: 'Logs To Clear' } },
+      {
+        path: 'm/logs-to-clear/:queryId',
+        element: <LogsToClearView />,
+        handle: { title: 'Logs To Clear' },
+      },
+
+      { path: 'm/navbar-item', element: <NavbarItemView />, handle: { title: 'Navbar Item' } },
+      {
+        path: 'm/navbar-item/:queryId',
+        element: <NavbarItemView />,
+        handle: { title: 'Navbar Item' },
+      },
+
+      { path: 'm/page', element: <PageView />, handle: { title: 'Page' } },
+      { path: 'm/page/:queryId', element: <PageView />, handle: { title: 'Page' } },
+
+      { path: 'm/patch-log', element: <PatchLogView />, handle: { title: 'Patch Log' } },
+      { path: 'm/patch-log/:queryId', element: <PatchLogView />, handle: { title: 'Patch Log' } },
+
+      { path: 'm/report', element: <ReportView />, handle: { title: 'Report' } },
+      { path: 'm/report/:queryId', element: <ReportView />, handle: { title: 'Report' } },
+
+      {
+        path: 'm/scheduled-job-log',
+        element: <ScheduledJobLogView />,
+        handle: { title: 'Scheduled Job Log' },
+      },
+      {
+        path: 'm/scheduled-job-log/:queryId',
+        element: <ScheduledJobLogView />,
+        handle: { title: 'Scheduled Job Log' },
+      },
+
+      {
+        path: 'm/scheduled-job-type',
+        element: <ScheduledJobTypeView />,
+        handle: { title: 'Scheduled Job Type' },
+      },
+      {
+        path: 'm/scheduled-job-type/:queryId',
+        element: <ScheduledJobTypeView />,
+        handle: { title: 'Scheduled Job Type' },
+      },
+
+      {
+        path: 'm/success-action',
+        element: <SuccessActionView />,
+        handle: { title: 'Success Action' },
+      },
+      {
+        path: 'm/success-action/:queryId',
+        element: <SuccessActionView />,
+        handle: { title: 'Success Action' },
+      },
+
+      { path: 'm/version', element: <VersionView />, handle: { title: 'Version' } },
+      { path: 'm/version/:queryId', element: <VersionView />, handle: { title: 'Version' } },
+
       // ## Crm
 
       { path: 'm/campaign', element: <CampaignView />, handle: { title: 'Campaign' } },
@@ -422,6 +601,34 @@ export const routes: RouteObject[] = [
       { path: 'm/lead', element: <LeadView />, handle: { title: 'Lead' } },
       { path: 'm/lead/:queryId', element: <LeadView />, handle: { title: 'Lead' } },
 
+      {
+        path: 'm/market-segment',
+        element: <MarketSegmentView />,
+        handle: { title: 'Market Segment' },
+      },
+      {
+        path: 'm/market-segment/:queryId',
+        element: <MarketSegmentView />,
+        handle: { title: 'Market Segment' },
+      },
+
+      {
+        path: 'm/opportunity-type',
+        element: <OpportunityTypeView />,
+        handle: { title: 'Opportunity Type' },
+      },
+      {
+        path: 'm/opportunity-type/:queryId',
+        element: <OpportunityTypeView />,
+        handle: { title: 'Opportunity Type' },
+      },
+
+      { path: 'm/sales-stage', element: <SalesStageView />, handle: { title: 'Sales Stage' } },
+      {
+        path: 'm/sales-stage/:queryId',
+        element: <SalesStageView />,
+        handle: { title: 'Sales Stage' },
+      },
       // ## Manufacturing
 
       {
