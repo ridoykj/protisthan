@@ -232,7 +232,7 @@ function OpportunityTypeView() {
               model={OpportunityTypeDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['name', 'disabled', 'accountName', 'accountNumber', 'idx']}
+              visibleColumns={['name', 'description', 'idx']}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
@@ -243,16 +243,8 @@ function OpportunityTypeView() {
                   resizable: true,
                   renderer: ChildRedirect,
                 },
-                disabled: {
-                  header: 'Status',
-                  resizable: true,
-                },
-                accountName: {
-                  header: 'Account Name',
-                  resizable: true,
-                },
-                accountNumber: {
-                  header: 'Account Number',
+                description: {
+                  header: 'Description',
                   resizable: true,
                 },
                 idx: {
