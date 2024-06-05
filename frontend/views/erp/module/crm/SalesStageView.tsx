@@ -228,7 +228,7 @@ function SalesStageView() {
               model={SalesStageDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['name', 'disabled', 'accountName', 'accountNumber', 'idx']}
+              visibleColumns={['name', 'stageName', 'idx']}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
@@ -239,16 +239,8 @@ function SalesStageView() {
                   resizable: true,
                   renderer: ChildRedirect,
                 },
-                disabled: {
-                  header: 'Status',
-                  resizable: true,
-                },
-                accountName: {
-                  header: 'Account Name',
-                  resizable: true,
-                },
-                accountNumber: {
-                  header: 'Account Number',
+                stageName: {
+                  header: 'Stage Name',
                   resizable: true,
                 },
                 idx: {
