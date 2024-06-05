@@ -8,17 +8,17 @@ import ButtonRC from 'Frontend/components/ho_master/button/ButtonRC';
 import ActionTopBtnRC from 'Frontend/components/ho_master/from/ActionTopBtnRC';
 import DialogFromRC from 'Frontend/components/ho_master/from/DialogFromRC';
 import FromBuilderRC from 'Frontend/components/ho_master/from/FromBuilderRC';
+import EnergyPointRuleDto from 'Frontend/generated/com/itbd/application/db/dto/EnergyPointRuleDto';
+import EnergyPointRuleDtoModel from 'Frontend/generated/com/itbd/application/db/dto/EnergyPointRuleDtoModel';
 import DocFieldDto from 'Frontend/generated/com/itbd/application/db/dto/doctypes/DocFieldDto';
-import UomDto from 'Frontend/generated/com/itbd/application/db/dto/uoms/UomDto';
-import UomDtoModel from 'Frontend/generated/com/itbd/application/db/dto/uoms/UomDtoModel';
 import Filter from 'Frontend/generated/dev/hilla/crud/filter/Filter';
 import Matcher from 'Frontend/generated/dev/hilla/crud/filter/PropertyStringFilter/Matcher';
 import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
-import { CustomerDtoCrudService, DocFieldDtoCrudService, UomDtoCrudService } from 'Frontend/generated/endpoints';
+import { DocFieldDtoCrudService, EnergyPointRuleDtoCrudService } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
 import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
-import { FaArrowsRotate, FaFilter } from 'react-icons/fa6';
+import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const responsiveSteps = [
@@ -48,7 +48,7 @@ function filterGenerator(type: string, property: string, filter: string | undefi
   return filters;
 }
 
-function UomView() {
+function EnergyPointRuleView() {
   const { queryId } = useParams();
   const navigate = useNavigate();
   const [uiField, setUiField] = useState<DocFieldDto[]>([]);
@@ -59,10 +59,10 @@ function UomView() {
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   const autoGridRef = React.useRef<AutoGridRef>(null);
-  const [user, setUser] = useState<UomDto>({} as UomDto);
-  const [selectedUserItems, setSelectedUserItems] = useState<UomDto[]>([]);
-
+  const [user, setUser] = useState<EnergyPointRuleDto>({} as EnergyPointRuleDto);
+  const [selectedUserItems, setSelectedUserItems] = useState<EnergyPointRuleDto[]>([]);
   const [tabChange, setTabChange] = useState<number>(0);
+
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
 
   const {
@@ -79,9 +79,9 @@ function UomView() {
     submitting,
     validate,
     addValidator,
-  } = useForm(UomDtoModel, {
+  } = useForm(EnergyPointRuleDtoModel, {
     onSubmit: async (userE) => {
-      await UomDtoCrudService.save(userE)
+      await EnergyPointRuleDtoCrudService.save(userE)
         .then((result) => {
           clear();
           setSuccessNotification(true);
@@ -98,7 +98,7 @@ function UomView() {
     autoGridRef.current?.refresh();
   }, [gridRefresh]);
   useEffect(() => {
-    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'uom')).then((result) => {
+    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Energy Point Rule')).then((result) => {
       setUiField(result);
     });
   }, []);
@@ -128,27 +128,69 @@ function UomView() {
 
   const speedDial = [
     {
-      name: 'Add Customer',
+      name: 'Import',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'User Permissions',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Role Permissions Manager',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Customize',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Toggle Sidebar',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'List Settings',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Add Account',
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
-        setUser({} as UomDto);
+        setUser({} as EnergyPointRuleDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
     },
   ];
 
-  function ChildRedirect({ item }: { item: UomDto }) {
+  function ChildRedirect({ item }: { item: EnergyPointRuleDto }) {
     const { name } = item;
     return (
       <button
         type="button"
-        className="text-blue-500 hover:underline inline-flex items-center gap-2"
+        className="text-blue-500 hover:underline"
         onClick={(e) => {
           setUser(item);
           read(item);
-          navigate(`/m/uom/${name}`);
+          navigate(`/m/energy-point-rule/${name}`);
         }}
       >
         {name}
@@ -156,14 +198,15 @@ function UomView() {
     );
   }
 
-  function deleteRander({ item }: { item: UomDto }) {
+  function deleteRander({ item }: { item: EnergyPointRuleDto }) {
+    const { name } = item;
     return (
       <button
         type="button"
         className="text-red-500 hover:underline"
         title="Delete"
         onClick={(e) => {
-          CustomerDtoCrudService.delete(item.name).then((result) => {
+          EnergyPointRuleDtoCrudService.delete(item.name).then((result) => {
             setGridRefresh(!gridRefresh);
           });
         }}
@@ -172,7 +215,6 @@ function UomView() {
       </button>
     );
   }
-
   function parentComponent() {
     return (
       <>
@@ -180,11 +222,11 @@ function UomView() {
           <ActionTopBtnRC actions={actionBtn} />
           <div className="h-full mx-2 mb-2 bg-white p-3 rounded-xl border">
             <AutoGrid
-              service={UomDtoCrudService}
-              model={UomDtoModel}
+              service={EnergyPointRuleDtoCrudService}
+              model={EnergyPointRuleDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['name', 'enabled', 'uomName', 'idx']}
+              visibleColumns={['name', 'enabled', 'ruleName', 'referenceDoctype', 'condition', 'idx']}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
@@ -196,11 +238,19 @@ function UomView() {
                   renderer: ChildRedirect,
                 },
                 enabled: {
-                  header: 'Status',
+                  header: 'Enabled',
                   resizable: true,
                 },
-                uomName: {
-                  header: 'UOM Name',
+                ruleName: {
+                  header: 'Rule Name',
+                  resizable: true,
+                },
+                referenceDoctype: {
+                  header: 'Reference Document Type',
+                  resizable: true,
+                },
+                condition: {
+                  header: 'Condition',
                   resizable: true,
                 },
                 idx: {
@@ -230,6 +280,7 @@ function UomView() {
   useEffect(() => {
     read(value);
   }, [tabChange]);
+
   function childComponent() {
     return (
       <div className="w-full md:px-10 sm:px-0 ">
@@ -285,15 +336,18 @@ function UomView() {
         onNavigate={() => {
           setIsOpen(false);
           clear();
-          navigate(`/m/uom/_`);
+          navigate(`/m/energy-point-rule/_`);
         }}
       >
         <FormLayout responsiveSteps={responsiveSteps} className="w-fit h-fit p-2">
-          <TextField label="Warehouse Name" required {...{ colspan: 1 }} {...field(model.name)} />
+          {/* <TextField label="Customer Name" {...{ colspan: 1 }} {...field(model.accountName)} />
+          <TextField label="Customer Type" {...{ colspan: 1 }} {...field(model.parentAccount)} />
+          <TextField label="Email Id" {...{ colspan: 1 }} {...field(model.accountType)} />
+          <Checkbox label="Mobile Number" {...{ colspan: 1 }} {...field(model.isGroup)} /> */}
         </FormLayout>
       </DialogFromRC>
     </>
   );
 }
 
-export default UomView;
+export default EnergyPointRuleView;

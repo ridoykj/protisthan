@@ -9,16 +9,16 @@ import ActionTopBtnRC from 'Frontend/components/ho_master/from/ActionTopBtnRC';
 import DialogFromRC from 'Frontend/components/ho_master/from/DialogFromRC';
 import FromBuilderRC from 'Frontend/components/ho_master/from/FromBuilderRC';
 import DocFieldDto from 'Frontend/generated/com/itbd/application/db/dto/doctypes/DocFieldDto';
-import UomDto from 'Frontend/generated/com/itbd/application/db/dto/uoms/UomDto';
-import UomDtoModel from 'Frontend/generated/com/itbd/application/db/dto/uoms/UomDtoModel';
+import EmailAccountDto from 'Frontend/generated/com/itbd/application/db/dto/emails/EmailAccountDto';
+import EmailAccountDtoModel from 'Frontend/generated/com/itbd/application/db/dto/emails/EmailAccountDtoModel';
 import Filter from 'Frontend/generated/dev/hilla/crud/filter/Filter';
 import Matcher from 'Frontend/generated/dev/hilla/crud/filter/PropertyStringFilter/Matcher';
 import Pageable from 'Frontend/generated/dev/hilla/mappedtypes/Pageable';
-import { CustomerDtoCrudService, DocFieldDtoCrudService, UomDtoCrudService } from 'Frontend/generated/endpoints';
+import { DocFieldDtoCrudService, EmailAccountDtoCrudService } from 'Frontend/generated/endpoints';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import React, { useEffect, useState } from 'react';
 import { FaSortAmountDown, FaTrash, FaUserPlus } from 'react-icons/fa';
-import { FaArrowsRotate, FaFilter } from 'react-icons/fa6';
+import { FaArrowsRotate, FaFilter, FaLaptopCode } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const responsiveSteps = [
@@ -33,6 +33,7 @@ const pagination: Pageable = {
     orders: [{ property: 'idx', direction: Direction.ASC, ignoreCase: false }],
   },
 };
+
 function filterGenerator(type: string, property: string, filter: string | undefined) {
   const filters: Filter = {
     '@type': type,
@@ -48,7 +49,7 @@ function filterGenerator(type: string, property: string, filter: string | undefi
   return filters;
 }
 
-function UomView() {
+function EmailAccountView() {
   const { queryId } = useParams();
   const navigate = useNavigate();
   const [uiField, setUiField] = useState<DocFieldDto[]>([]);
@@ -59,10 +60,10 @@ function UomView() {
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   const autoGridRef = React.useRef<AutoGridRef>(null);
-  const [user, setUser] = useState<UomDto>({} as UomDto);
-  const [selectedUserItems, setSelectedUserItems] = useState<UomDto[]>([]);
-
+  const [user, setUser] = useState<EmailAccountDto>({} as EmailAccountDto);
+  const [selectedUserItems, setSelectedUserItems] = useState<EmailAccountDto[]>([]);
   const [tabChange, setTabChange] = useState<number>(0);
+
   const [gridRefresh, setGridRefresh] = useState<boolean>(false);
 
   const {
@@ -79,9 +80,9 @@ function UomView() {
     submitting,
     validate,
     addValidator,
-  } = useForm(UomDtoModel, {
+  } = useForm(EmailAccountDtoModel, {
     onSubmit: async (userE) => {
-      await UomDtoCrudService.save(userE)
+      await EmailAccountDtoCrudService.save(userE)
         .then((result) => {
           clear();
           setSuccessNotification(true);
@@ -98,7 +99,7 @@ function UomView() {
     autoGridRef.current?.refresh();
   }, [gridRefresh]);
   useEffect(() => {
-    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'uom')).then((result) => {
+    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Email Account')).then((result) => {
       setUiField(result);
     });
   }, []);
@@ -128,27 +129,69 @@ function UomView() {
 
   const speedDial = [
     {
-      name: 'Add Customer',
+      name: 'Import',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'User Permissions',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Role Permissions Manager',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Customize',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Toggle Sidebar',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'List Settings',
+      icon: <FaLaptopCode />,
+      onClick: () => {
+        setSelectedUserItems([]);
+      },
+    },
+    {
+      name: 'Add Account',
       icon: <FaUserPlus />,
       onClick: () => {
         clear();
-        setUser({} as UomDto);
+        setUser({} as EmailAccountDto);
         setSelectedUserItems([]);
         setIsOpen(true);
       },
     },
   ];
 
-  function ChildRedirect({ item }: { item: UomDto }) {
+  function ChildRedirect({ item }: { item: EmailAccountDto }) {
     const { name } = item;
     return (
       <button
         type="button"
-        className="text-blue-500 hover:underline inline-flex items-center gap-2"
+        className="text-blue-500 hover:underline"
         onClick={(e) => {
           setUser(item);
           read(item);
-          navigate(`/m/uom/${name}`);
+          navigate(`/m/email-account/${name}`);
         }}
       >
         {name}
@@ -156,14 +199,15 @@ function UomView() {
     );
   }
 
-  function deleteRander({ item }: { item: UomDto }) {
+  function DeleteRander({ item }: { item: EmailAccountDto }) {
+    const { name } = item;
     return (
       <button
         type="button"
         className="text-red-500 hover:underline"
         title="Delete"
         onClick={(e) => {
-          CustomerDtoCrudService.delete(item.name).then((result) => {
+          EmailAccountDtoCrudService.delete(name).then((result) => {
             setGridRefresh(!gridRefresh);
           });
         }}
@@ -172,7 +216,6 @@ function UomView() {
       </button>
     );
   }
-
   function parentComponent() {
     return (
       <>
@@ -180,11 +223,21 @@ function UomView() {
           <ActionTopBtnRC actions={actionBtn} />
           <div className="h-full mx-2 mb-2 bg-white p-3 rounded-xl border">
             <AutoGrid
-              service={UomDtoCrudService}
-              model={UomDtoModel}
+              service={EmailAccountDtoCrudService}
+              model={EmailAccountDtoModel}
               ref={autoGridRef}
               className="h-full w-full overflow-auto bg-white/40"
-              visibleColumns={['name', 'enabled', 'uomName', 'idx']}
+              visibleColumns={[
+                'name',
+                'emailId',
+                'emailAccountName',
+                'domain',
+                'appendTo',
+                'uidvalidity',
+                'uidnext',
+                'noFailed',
+                'idx',
+              ]}
               selectedItems={selectedUserItems}
               theme="row-stripes"
               // rowNumbers
@@ -195,12 +248,32 @@ function UomView() {
                   resizable: true,
                   renderer: ChildRedirect,
                 },
-                enabled: {
-                  header: 'Status',
+                emailId: {
+                  header: 'Email Address',
                   resizable: true,
                 },
-                uomName: {
-                  header: 'UOM Name',
+                emailAccountName: {
+                  header: 'Email Account Name',
+                  resizable: true,
+                },
+                domain: {
+                  header: 'Domain',
+                  resizable: true,
+                },
+                appendTo: {
+                  header: 'Append To',
+                  resizable: true,
+                },
+                uidvalidity: {
+                  header: 'UIDVALIDITY',
+                  resizable: true,
+                },
+                uidnext: {
+                  header: 'UIDNEXT',
+                  resizable: true,
+                },
+                noFailed: {
+                  header: 'no failed attempts',
                   resizable: true,
                 },
                 idx: {
@@ -208,7 +281,7 @@ function UomView() {
                   filterable: false,
                   sortable: false,
                   resizable: true,
-                  renderer: deleteRander,
+                  renderer: DeleteRander,
                 },
               }}
               onSelectedItemsChanged={(e) => {
@@ -230,6 +303,7 @@ function UomView() {
   useEffect(() => {
     read(value);
   }, [tabChange]);
+
   function childComponent() {
     return (
       <div className="w-full md:px-10 sm:px-0 ">
@@ -285,15 +359,18 @@ function UomView() {
         onNavigate={() => {
           setIsOpen(false);
           clear();
-          navigate(`/m/uom/_`);
+          navigate(`/m/email-account/_`);
         }}
       >
         <FormLayout responsiveSteps={responsiveSteps} className="w-fit h-fit p-2">
-          <TextField label="Warehouse Name" required {...{ colspan: 1 }} {...field(model.name)} />
+          {/* <TextField label="Customer Name" {...{ colspan: 1 }} {...field(model.accountName)} />
+          <TextField label="Customer Type" {...{ colspan: 1 }} {...field(model.parentAccount)} />
+          <TextField label="Email Id" {...{ colspan: 1 }} {...field(model.accountType)} />
+          <Checkbox label="Mobile Number" {...{ colspan: 1 }} {...field(model.isGroup)} /> */}
         </FormLayout>
       </DialogFromRC>
     </>
   );
 }
 
-export default UomView;
+export default EmailAccountView;
