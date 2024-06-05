@@ -68,25 +68,81 @@ import LeadView from './views/erp/module/crm/LeadView';
 import MarketSegmentView from './views/erp/module/crm/MarketSegmentView';
 import OpportunityTypeView from './views/erp/module/crm/OpportunityTypeView';
 import SalesStageView from './views/erp/module/crm/SalesStageView';
+import CustomFieldView from './views/erp/module/custom/CustomFieldView';
+import PropertySetterView from './views/erp/module/custom/PropertySetterView';
+import DashboardChartFieldView from './views/erp/module/desk/DashboardChartFieldView';
+import DashboardChartLinkView from './views/erp/module/desk/DashboardChartLinkView';
+import DashboardChartSourceView from './views/erp/module/desk/DashboardChartSourceView';
+import DashboardChartView from './views/erp/module/desk/DashboardChartView';
+import DashboardView from './views/erp/module/desk/DashboardView';
+import FormTourStepView from './views/erp/module/desk/FormTourStepView';
+import FormTourView from './views/erp/module/desk/FormTourView';
+import GlobalSearchDocTypeView from './views/erp/module/desk/GlobalSearchDocTypeView';
+import ModuleOnboardingView from './views/erp/module/desk/ModuleOnboardingView';
+import NotificationSettingsView from './views/erp/module/desk/NotificationSettingsView';
+import NumberCardLinkView from './views/erp/module/desk/NumberCardLinkView';
+import NumberCardView from './views/erp/module/desk/NumberCardView';
+import OnboardingPermissionView from './views/erp/module/desk/OnboardingPermissionView';
+import OnboardingStepMapView from './views/erp/module/desk/OnboardingStepMapView';
+import OnboardingStepView from './views/erp/module/desk/OnboardingStepView';
+import RouteHistoryView from './views/erp/module/desk/RouteHistoryView';
+import WorkspaceChartView from './views/erp/module/desk/WorkspaceChartView';
+import WorkspaceNumberCardView from './views/erp/module/desk/WorkspaceNumberCardView';
+import EmailAccountView from './views/erp/module/email/EmailAccountView';
+import EmailUnsubscribeView from './views/erp/module/email/EmailUnsubscribeView';
+import NotificationRecipientView from './views/erp/module/email/NotificationRecipientView';
+import NotificationView from './views/erp/module/email/NotificationView';
+import CountryView from './views/erp/module/geo/CountryView';
+import CurrencyView from './views/erp/module/geo/CurrencyView';
 import BlanketOrderView from './views/erp/module/manufacturing/BlanketOrderView';
+import PrintFormatView from './views/erp/module/printing/PrintFormatView';
+import PrintStyleView from './views/erp/module/printing/PrintStyleView';
+import ActivityTypeView from './views/erp/module/projects/ActivityTypeView';
+import ProjectTypeView from './views/erp/module/projects/ProjectTypeView';
 import CustomerView from './views/erp/module/selling/CustomerView';
+import IndustryTypeView from './views/erp/module/selling/IndustryTypeView';
 import ProductBundleView from './views/erp/module/selling/ProductBundleView';
 import QuotationView from './views/erp/module/selling/QuotationView';
 import SalesOrderView from './views/erp/module/selling/SalesOrderView';
 import BrandView from './views/erp/module/setup/BrandView';
 import CompanyView from './views/erp/module/setup/CompanyView';
 import CustomerGroupView from './views/erp/module/setup/CustomerGroupView';
+import DepartmentView from './views/erp/module/setup/DepartmentView';
+import DesignationView from './views/erp/module/setup/DesignationView';
+import IncotermView from './views/erp/module/setup/IncotermView';
 import ItemGroupView from './views/erp/module/setup/ItemGroupView';
+import PartyTypeView from './views/erp/module/setup/PartyTypeView';
+import PrintHeadingView from './views/erp/module/setup/PrintHeadingView';
 import SalesPartnerView from './views/erp/module/setup/SalesPartnerView';
 import SalesPersonView from './views/erp/module/setup/SalesPersonView';
+import SupplierGroupView from './views/erp/module/setup/SupplierGroupView';
 import TermsAndConditionsView from './views/erp/module/setup/TermsAndConditionsView';
 import TerritoryView from './views/erp/module/setup/TerritoryView';
+import TransactionDeletionRecordItemView from './views/erp/module/setup/TransactionDeletionRecordItemView';
+import TransactionDeletionRecordView from './views/erp/module/setup/TransactionDeletionRecordView';
+import UomConversionFactorView from './views/erp/module/setup/UomConversionFactorView';
 import UomView from './views/erp/module/setup/UomView';
+import EnergyPointRuleView from './views/erp/module/social/EnergyPointRuleView';
+import BinView from './views/erp/module/stock/BinView';
+import ItemAttributeValueView from './views/erp/module/stock/ItemAttributeValueView';
+import ItemAttributeView from './views/erp/module/stock/ItemAttributeView';
 import ItemPriceView from './views/erp/module/stock/ItemPriceView';
 import ItemsView from './views/erp/module/stock/ItemsView';
 import PriceListView from './views/erp/module/stock/PriceListView';
+import StockEntryTypeView from './views/erp/module/stock/StockEntryTypeView';
 import StockReconciliationView from './views/erp/module/stock/StockReconciliationView';
+import UomCategoryView from './views/erp/module/stock/UomCategoryView';
+import VariantFieldView from './views/erp/module/stock/VariantFieldView';
 import WarehouseView from './views/erp/module/stock/WarehouseView';
+import IssuePriorityView from './views/erp/module/support/IssuePriorityView';
+import PortalMenuItemView from './views/erp/module/website/PortalMenuItemView';
+import WebFormFieldView from './views/erp/module/website/WebFormFieldView';
+import WebFormView from './views/erp/module/website/WebFormView';
+import WebsiteThemeView from './views/erp/module/website/WebsiteThemeView';
+import WebTemplateFieldView from './views/erp/module/website/WebTemplateFieldView';
+import WebTemplateView from './views/erp/module/website/WebTemplateView';
+import WorkflowActionMasterView from './views/erp/module/workflow/WorkflowActionMasterView copy';
+import WorkflowStateView from './views/erp/module/workflow/WorkflowStateView';
 import CommonView from './views/erp/sidenav/CommonView';
 
 // const AboutView = lazy(async () => import('Frontend/views/about/AboutView'));
@@ -629,6 +685,176 @@ export const routes: RouteObject[] = [
         element: <SalesStageView />,
         handle: { title: 'Sales Stage' },
       },
+
+      // ## Custom
+
+      { path: 'm/custom-field', element: <CustomFieldView />, handle: { title: 'Custom Field' } },
+      {
+        path: 'm/custom-field/:queryId',
+        element: <CustomFieldView />,
+        handle: { title: 'Custom Field' },
+      },
+
+      {
+        path: 'm/property-setter',
+        element: <PropertySetterView />,
+        handle: { title: 'Property Setter' },
+      },
+      {
+        path: 'm/property-setter/:queryId',
+        element: <PropertySetterView />,
+        handle: { title: 'Property Setter' },
+      },
+
+      // ## Desk
+      { path: 'm/dashboard', element: <DashboardView />, handle: { title: 'Dashboard' } },
+      { path: 'm/dashboard/:queryid', element: <DashboardView />, handle: { title: 'Dashboard' } },
+
+      { path: 'm/dashboard-chart', element: <DashboardChartView />, handle: { title: 'Dashboard Chart' } },
+      { path: 'm/dashboard-chart/:queryid', element: <DashboardChartView />, handle: { title: 'Dashboard Chart' } },
+
+      {
+        path: 'm/dashboard-chart-field',
+        element: <DashboardChartFieldView />,
+        handle: { title: 'Dashboard Chart Field' },
+      },
+      {
+        path: 'm/dashboard-chart-field/:queryid',
+        element: <DashboardChartFieldView />,
+        handle: { title: 'Dashboard Chart Field' },
+      },
+
+      {
+        path: 'm/dashboard-chart-link',
+        element: <DashboardChartLinkView />,
+        handle: { title: 'Dashboard Chart Link' },
+      },
+      {
+        path: 'm/dashboard-chart-link/:queryid',
+        element: <DashboardChartLinkView />,
+        handle: { title: 'Dashboard Chart Link' },
+      },
+
+      {
+        path: 'm/dashboard-chart-source',
+        element: <DashboardChartSourceView />,
+        handle: { title: 'Dashboard Chart Source' },
+      },
+      {
+        path: 'm/dashboard-chart-source/:queryid',
+        element: <DashboardChartSourceView />,
+        handle: { title: 'Dashboard Chart Source' },
+      },
+
+      { path: 'm/form-tour', element: <FormTourView />, handle: { title: 'Form Tour' } },
+      { path: 'm/form-tour/:queryid', element: <FormTourView />, handle: { title: 'Form Tour' } },
+
+      { path: 'm/form-tour-step', element: <FormTourStepView />, handle: { title: 'Form Tour Step' } },
+      { path: 'm/form-tour-step/:queryid', element: <FormTourStepView />, handle: { title: 'Form Tour Step' } },
+
+      {
+        path: 'm/global-search-doctype',
+        element: <GlobalSearchDocTypeView />,
+        handle: { title: 'Global Search DocType' },
+      },
+      {
+        path: 'm/global-search-doctype/:queryid',
+        element: <GlobalSearchDocTypeView />,
+        handle: { title: 'Global Search DocType' },
+      },
+
+      { path: 'm/module-onboarding', element: <ModuleOnboardingView />, handle: { title: 'Module Onboarding' } },
+      {
+        path: 'm/module-onboarding/:queryid',
+        element: <ModuleOnboardingView />,
+        handle: { title: 'Module Onboarding' },
+      },
+
+      {
+        path: 'm/notification-settings',
+        element: <NotificationSettingsView />,
+        handle: { title: 'Notification Settings' },
+      },
+      {
+        path: 'm/notification-settings/:queryid',
+        element: <NotificationSettingsView />,
+        handle: { title: 'Notification Settings' },
+      },
+
+      { path: 'm/number-card', element: <NumberCardView />, handle: { title: 'Number Card' } },
+      { path: 'm/number-card/:queryid', element: <NumberCardView />, handle: { title: 'Number Card' } },
+
+      { path: 'm/number-card-link', element: <NumberCardLinkView />, handle: { title: 'Number Card Link' } },
+      { path: 'm/number-card-link/:queryid', element: <NumberCardLinkView />, handle: { title: 'Number Card Link' } },
+
+      {
+        path: 'm/onboarding-permission',
+        element: <OnboardingPermissionView />,
+        handle: { title: 'Onboarding Permission' },
+      },
+      {
+        path: 'm/onboarding-permission/:queryid',
+        element: <OnboardingPermissionView />,
+        handle: { title: 'Onboarding Permission' },
+      },
+
+      { path: 'm/onboarding-step', element: <OnboardingStepView />, handle: { title: 'Onboarding Step' } },
+      { path: 'm/onboarding-step/:queryid', element: <OnboardingStepView />, handle: { title: 'Onboarding Step' } },
+
+      { path: 'm/onboarding-step-map', element: <OnboardingStepMapView />, handle: { title: 'Onboarding Step Map' } },
+      {
+        path: 'm/onboarding-step-map/:queryid',
+        element: <OnboardingStepMapView />,
+        handle: { title: 'Onboarding Step Map' },
+      },
+
+      { path: 'm/route-history', element: <RouteHistoryView />, handle: { title: 'Route History' } },
+      { path: 'm/route-history/:queryid', element: <RouteHistoryView />, handle: { title: 'Route History' } },
+
+      { path: 'm/workspace-chart', element: <WorkspaceChartView />, handle: { title: 'Workspace Chart' } },
+      { path: 'm/workspace-chart/:queryid', element: <WorkspaceChartView />, handle: { title: 'Workspace Chart' } },
+
+      {
+        path: 'm/workspace-number-card',
+        element: <WorkspaceNumberCardView />,
+        handle: { title: 'Workspace Number Card' },
+      },
+      {
+        path: 'm/workspace-number-card/:queryid',
+        element: <WorkspaceNumberCardView />,
+        handle: { title: 'Workspace Number Card' },
+      },
+
+      // ## Email
+
+      { path: 'm/email-account', element: <EmailAccountView />, handle: { title: 'Email Account' } },
+      { path: 'm/email-account/:queryid', element: <EmailAccountView />, handle: { title: 'Email Account' } },
+
+      { path: 'm/email-unsubscribe', element: <EmailUnsubscribeView />, handle: { title: 'Email Unsubscribe' } },
+      { path: 'm/email-unsubscribe/:queryid', element: <EmailUnsubscribeView />, handle: { title: 'Customer' } },
+
+      { path: 'm/notification', element: <NotificationView />, handle: { title: 'Notification' } },
+      { path: 'm/notification/:queryid', element: <NotificationView />, handle: { title: 'Notification' } },
+
+      {
+        path: 'm/notification-recipient',
+        element: <NotificationRecipientView />,
+        handle: { title: 'Notification Recipient' },
+      },
+      {
+        path: 'm/notification-recipient/:queryid',
+        element: <NotificationRecipientView />,
+        handle: { title: 'Notification Recipient' },
+      },
+
+      // ## geo
+
+      { path: 'm/country', element: <CountryView />, handle: { title: 'Country' } },
+      { path: 'm/country/:queryid', element: <CountryView />, handle: { title: 'Country' } },
+
+      { path: 'm/currency', element: <CurrencyView />, handle: { title: 'Currency' } },
+      { path: 'm/currency/:queryid', element: <CurrencyView />, handle: { title: 'Currency' } },
+
       // ## Manufacturing
 
       {
@@ -642,10 +868,29 @@ export const routes: RouteObject[] = [
         handle: { title: 'Blanket Order' },
       },
 
+      // ## Printing
+
+      { path: 'm/print-format', element: <PrintFormatView />, handle: { title: 'Print Format' } },
+      { path: 'm/print-format/:queryid', element: <PrintFormatView />, handle: { title: 'Print Format' } },
+
+      { path: 'm/print-style', element: <PrintStyleView />, handle: { title: 'Print Style' } },
+      { path: 'm/print-style/:queryid', element: <PrintStyleView />, handle: { title: 'Print Style' } },
+
+      // ## project
+
+      { path: 'm/activity-type', element: <ActivityTypeView />, handle: { title: 'Activity Type' } },
+      { path: 'm/activity-type/:queryid', element: <ActivityTypeView />, handle: { title: 'Activity Type' } },
+
+      { path: 'm/project-type', element: <ProjectTypeView />, handle: { title: 'Project Type' } },
+      { path: 'm/project-type/:queryid', element: <ProjectTypeView />, handle: { title: 'Project Type' } },
+
       // ## Selling
 
       { path: 'm/customer', element: <CustomerView />, handle: { title: 'Customer' } },
       { path: 'm/customer/:queryId', element: <CustomerView />, handle: { title: 'Customer' } },
+
+      { path: 'm/industry-type', element: <IndustryTypeView />, handle: { title: 'Industry Type' } },
+      { path: 'm/industry-type/:queryId', element: <IndustryTypeView />, handle: { title: 'Industry Type' } },
 
       {
         path: 'm/product-bundle',
@@ -666,6 +911,9 @@ export const routes: RouteObject[] = [
         element: <SalesOrderView />,
         handle: { title: 'Sales Order' },
       },
+
+      { path: 'm/sales-partner-type', element: <SalesPartnerView />, handle: { title: 'Sales Partner Type' } },
+      { path: 'm/sales-partner-type/:queryId', element: <SalesPartnerView />, handle: { title: 'Sales Partner Type' } },
 
       // ## Setup
 
@@ -728,6 +976,65 @@ export const routes: RouteObject[] = [
       { path: 'm/uom', element: <UomView />, handle: { title: 'UOM' } },
       { path: 'm/uom/:queryId', element: <UomView />, handle: { title: 'UOM' } },
 
+      { path: 'm/department', element: <DepartmentView />, handle: { title: 'Department' } },
+      { path: 'm/department/:queryid', element: <DepartmentView />, handle: { title: 'Department' } },
+
+      { path: 'm/designation', element: <DesignationView />, handle: { title: 'Designation' } },
+      { path: 'm/designation/:queryid', element: <DesignationView />, handle: { title: 'Designation' } },
+
+      { path: 'm/incoterm', element: <IncotermView />, handle: { title: 'Incoterm' } },
+      { path: 'm/incoterm/:queryid', element: <IncotermView />, handle: { title: 'Incoterm' } },
+
+      { path: 'm/party-type', element: <PartyTypeView />, handle: { title: 'Party Type' } },
+      { path: 'm/party-type/:queryid', element: <PartyTypeView />, handle: { title: 'Party Type' } },
+
+      { path: 'm/print-heading', element: <PrintHeadingView />, handle: { title: 'Print Heading' } },
+      { path: 'm/print-heading/:queryid', element: <PrintHeadingView />, handle: { title: 'Print Heading' } },
+
+      { path: 'm/supplier-group', element: <SupplierGroupView />, handle: { title: 'Supplier Group' } },
+      { path: 'm/supplier-group/:queryid', element: <SupplierGroupView />, handle: { title: 'Supplier Group' } },
+
+      {
+        path: 'm/transaction-deletion-record',
+        element: <TransactionDeletionRecordView />,
+        handle: { title: 'Transaction Deletion Record' },
+      },
+      {
+        path: 'm/transaction-deletion-record/:queryid',
+        element: <TransactionDeletionRecordView />,
+        handle: { title: 'Transaction Deletion Record' },
+      },
+
+      {
+        path: 'm/transaction-deletion-record-item',
+        element: <TransactionDeletionRecordItemView />,
+        handle: { title: 'Transaction Deletion Record Item' },
+      },
+      {
+        path: 'm/transaction-deletion-record-item/:queryid',
+        element: <TransactionDeletionRecordItemView />,
+        handle: { title: 'Customer' },
+      },
+
+      {
+        path: 'm/uom-conversion-factor',
+        element: <UomConversionFactorView />,
+        handle: { title: 'UOM Conversion Factor' },
+      },
+      {
+        path: 'm/uom-conversion-factor/:queryid',
+        element: <UomConversionFactorView />,
+        handle: { title: 'UOM Conversion Factor' },
+      },
+
+      // ## Social
+      { path: 'm/energy-point-rule', element: <EnergyPointRuleView />, handle: { title: 'Energy Point Rule' } },
+      {
+        path: 'm/energy-point-rule/:queryid',
+        element: <EnergyPointRuleView />,
+        handle: { title: 'Energy Point Rule' },
+      },
+
       // ## Stock
 
       { path: 'm/item', element: <ItemsView />, handle: { title: 'Items' } },
@@ -761,7 +1068,76 @@ export const routes: RouteObject[] = [
       { path: 'm/warehouse', element: <WarehouseView />, handle: { title: 'Warehouse' } },
       { path: 'm/warehouse/:queryId', element: <WarehouseView />, handle: { title: 'Warehouse' } },
 
-      // ## End
+      { path: 'm/bin', element: <BinView />, handle: { title: 'Bin' } },
+      { path: 'm/bin/:queryId', element: <BinView />, handle: { title: 'Bin' } },
+
+      { path: 'm/item-attribute', element: <ItemAttributeView />, handle: { title: 'Item Attribute' } },
+      { path: 'm/item-attribute/:queryid', element: <ItemAttributeView />, handle: { title: 'Item Attribute' } },
+
+      {
+        path: 'm/item-attribute-value',
+        element: <ItemAttributeValueView />,
+        handle: { title: 'Item Attribute Value' },
+      },
+      {
+        path: 'm/item-attribute-value/:queryid',
+        element: <ItemAttributeValueView />,
+        handle: { title: 'Item Attribute Value' },
+      },
+
+      { path: 'm/stock-entry-type', element: <StockEntryTypeView />, handle: { title: 'Stock Entry Type' } },
+      { path: 'm/stock-entry-type/:queryid', element: <StockEntryTypeView />, handle: { title: 'Stock Entry Type' } },
+
+      { path: 'm/uom-category', element: <UomCategoryView />, handle: { title: 'UOM Category' } },
+      { path: 'm/uom-category/:queryid', element: <UomCategoryView />, handle: { title: 'UOM Category' } },
+
+      { path: 'm/variant-field', element: <VariantFieldView />, handle: { title: 'Variant Field' } },
+      { path: 'm/variant-field/:queryid', element: <VariantFieldView />, handle: { title: 'Variant Field' } },
+
+      // ## Support
+
+      { path: 'm/issue-priority', element: <IssuePriorityView />, handle: { title: 'Issue Priority' } },
+      { path: 'm/issue-priority/:queryid', element: <IssuePriorityView />, handle: { title: 'Issue Priority' } },
+
+      // ## Website
+
+      { path: 'm/portal-menu-item', element: <PortalMenuItemView />, handle: { title: 'Portal Menu Item' } },
+      { path: 'm/portal-menu-item/:queryid', element: <PortalMenuItemView />, handle: { title: 'Portal Menu Item' } },
+
+      { path: 'm/web-form', element: <WebFormView />, handle: { title: 'Web Form' } },
+      { path: 'm/web-form/:queryid', element: <WebFormView />, handle: { title: 'Web Form' } },
+
+      { path: 'm/web-form-field', element: <WebFormFieldView />, handle: { title: 'Web Form Field' } },
+      { path: 'm/web-form-field/:queryid', element: <WebFormFieldView />, handle: { title: 'Web Form Field' } },
+
+      { path: 'm/web-template', element: <WebTemplateView />, handle: { title: 'Web Template' } },
+      { path: 'm/web-template/:queryid', element: <WebTemplateView />, handle: { title: 'Web Template' } },
+
+      { path: 'm/web-template-field', element: <WebTemplateFieldView />, handle: { title: 'Web Template Field' } },
+      {
+        path: 'm/web-template-field/:queryid',
+        element: <WebTemplateFieldView />,
+        handle: { title: 'Web Template Field' },
+      },
+
+      { path: 'm/website-theme', element: <WebsiteThemeView />, handle: { title: 'Website Theme' } },
+      { path: 'm/website-theme/:queryid', element: <WebsiteThemeView />, handle: { title: 'Website Theme' } },
+
+      // ## Workflow
+
+      {
+        path: 'm/workflow-action-master',
+        element: <WorkflowActionMasterView />,
+        handle: { title: 'Workflow Action Master' },
+      },
+      {
+        path: 'm/workflow-action-master/:queryid',
+        element: <WorkflowActionMasterView />,
+        handle: { title: 'Workflow Action Master' },
+      },
+
+      { path: 'm/workflow-state', element: <WorkflowStateView />, handle: { title: 'Workflow State' } },
+      { path: 'm/workflow-state/:queryid', element: <WorkflowStateView />, handle: { title: 'Workflow State' } },
 
       // { path: 'm/lead', element: <LeadView />, handle: { title: 'Lead' } },
       // { path: 'm/lead/:queryId', element: <LeadView />, handle: { title: 'Lead' } },
