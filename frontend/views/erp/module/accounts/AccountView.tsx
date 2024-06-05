@@ -99,11 +99,9 @@ function AccountView() {
     autoGridRef.current?.refresh();
   }, [gridRefresh]);
   useEffect(() => {
-    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Account')).then(
-      (result) => {
-        setUiField(result);
-      }
-    );
+    DocFieldDtoCrudService.list(pagination, filterGenerator('and', 'parent', 'Account')).then((result) => {
+      setUiField(result);
+    });
   }, []);
 
   const actionBtn = [
@@ -303,11 +301,7 @@ function AccountView() {
           <span className="font-bold text-lg">Comments</span>
           <div className="inline-flex space-x-4 p-2 items-center">
             <Avatar />
-            <TextField
-              placeholder="Type a reply / comment"
-              {...field(model.comments)}
-              className="w-full"
-            />
+            <TextField placeholder="Type a reply / comment" {...field(model.comments)} className="w-full" />
           </div>
           <span className="font-bold text-lg">Activity</span>
         </div>
