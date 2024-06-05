@@ -19,11 +19,11 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class UOMConversionFactorDtoCrudService implements CrudService<UomConversionFactorDto, String> {
+public class UomConversionFactorDtoCrudService implements CrudService<UomConversionFactorDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
     private final UomConversionFactorRepository uomConversionFactorRepo;
 
-    public UOMConversionFactorDtoCrudService(UomConversionFactorRepository uomConversionFactorRepo, JpaFilterConverter jpaFilterConverter) {
+    public UomConversionFactorDtoCrudService(UomConversionFactorRepository uomConversionFactorRepo, JpaFilterConverter jpaFilterConverter) {
         this.uomConversionFactorRepo = uomConversionFactorRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }

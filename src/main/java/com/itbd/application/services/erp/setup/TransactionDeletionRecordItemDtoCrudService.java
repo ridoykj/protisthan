@@ -19,11 +19,11 @@ import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
-public class TransactionDeletionRecordItemCrudService implements CrudService<TransactionDeletionRecordItemDto, String> {
+public class TransactionDeletionRecordItemDtoCrudService implements CrudService<TransactionDeletionRecordItemDto, String> {
     private final JpaFilterConverter jpaFilterConverter;
     private final TransactionDeletionRecordItemRepository transactionDeletionRecordItemRepo;
 
-    public TransactionDeletionRecordItemCrudService(TransactionDeletionRecordItemRepository transactionDeletionRecordItemRepo, JpaFilterConverter jpaFilterConverter) {
+    public TransactionDeletionRecordItemDtoCrudService(TransactionDeletionRecordItemRepository transactionDeletionRecordItemRepo, JpaFilterConverter jpaFilterConverter) {
         this.transactionDeletionRecordItemRepo = transactionDeletionRecordItemRepo;
         this.jpaFilterConverter = jpaFilterConverter;
     }
