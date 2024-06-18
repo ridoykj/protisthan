@@ -1,0 +1,21 @@
+{
+  "configurations": [
+    {
+      "name": "Launch Edge",
+      "request": "launch",
+      "type": "msedge",
+      "url": "http://localhost:8088/",
+      "webRoot": "${workspaceFolder}/frontend"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Application<protisthan>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.itbd.application.Application",
+      "projectName": "protisthan",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
